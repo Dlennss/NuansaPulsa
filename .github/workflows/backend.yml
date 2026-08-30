@@ -109,7 +109,7 @@ jobs:
             exit 1
           fi
 
-          for key in DATABASE_URL PULSA24JAM_BASE_URL PULSA24JAM_API_KEY PULSA24JAM_PIN; do
+          for key in DATABASE_URL JWT_SECRET PULSA24JAM_BASE_URL PULSA24JAM_API_KEY PULSA24JAM_PIN; do
             if ! grep -Eq "^${key}=.+" "$APP_DIR/nuansapulsa-be/.env"; then
               echo "Missing required backend env: $key"
               exit 1
