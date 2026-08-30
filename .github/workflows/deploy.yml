@@ -1,0 +1,109 @@
+name: Deploy
+
+on:
+  push:
+    branches:
+      - main
+  workflow_dispatch:
+
+concurrency:
+  group: deploy-${{ github.ref }}
+  cancel-in-progress: true
+
+jobs:
+  deploy:
+    name: Deploy to server
+    runs-on: ubuntu-latest
+    if: github.ref == 'refs/heads/main'
+
+    env:
+      DEPLOY_HOST: ${{ secrets.HOST }}
+      DEPLOY_USER: ${{ secrets.USERNAME }}
+      DEPLOY_PORT: ${{ secrets.SSH_PORT }}
+      DEPLOY_KEY: ${{ secrets.SSH_PRIVATE_KEY }}
+      REMOTE_APP_DIR: ${{ secrets.REMOTE_APP_DIR }}
+      BACKEND_SERVICE: ${{ secrets.BACKEND_SERVICE }}
+      FRONTEND_SERVICE: ${{ secrets.FRONTEND_SERVICE }}
+
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Validate deployment secrets
+        shell: bash
+        run: |
+          set -euo pipefail
+          test -n "$DEPLOY_HOST" || { echo "Missing GitHub secret: HOST"; exit 1; }
+          test -n "$DEPLOY_USER" || { echo "Missing GitHub secret: USERNAME"; exit 1; }
+          test -n "$DEPLOY_KEY" || { echo "Missing GitHub secret: SSH_PRIVATE_KEY"; exit 1; }
+
+      - name: Create release archive
+        shell: bash
+        run: |
+          set -euo pipefail
+          git archive --format=tar.gz --output=nuansapulsa-release.tgz HEAD
+
+      - name: Configure SSH
+        shell: bash
+        run: |
+          set -euo pipefail
+          mkdir -p ~/.ssh
+          printf '%s\n' "$DEPLOY_KEY" > ~/.ssh/deploy_key
+          chmod 600 ~/.ssh/deploy_key
+          ssh-keyscan -p "${DEPLOY_PORT:-22}" "$DEPLOY_HOST" >> ~/.ssh/known_hosts
+
+      - name: Upload release archive
+        shell: bash
+        run: |
+          set -euo pipefail
+          scp -i ~/.ssh/deploy_key -P "${DEPLOY_PORT:-22}" nuansapulsa-release.tgz "$DEPLOY_USER@$DEPLOY_HOST:/tmp/nuansapulsa-release-${{ github.sha }}.tgz"
+
+      - name: Deploy and restart services
+        shell: bash
+        run: |
+          set -euo pipefail
+          ssh -i ~/.ssh/deploy_key -p "${DEPLOY_PORT:-22}" "$DEPLOY_USER@$DEPLOY_HOST" \
+            "REMOTE_APP_DIR='${REMOTE_APP_DIR:-/home/syarif/app/NuansaPulsa}' BACKEND_SERVICE='${BACKEND_SERVICE:-nuansapulsa-be.service}' FRONTEND_SERVICE='${FRONTEND_SERVICE:-nuansapulsa-fe.service}' RELEASE_SHA='${{ github.sha }}' bash -s" <<'REMOTE_SCRIPT'
+          set -euo pipefail
+
+          APP_DIR="$REMOTE_APP_DIR"
+          ARCHIVE="/tmp/nuansapulsa-release-$RELEASE_SHA.tgz"
+
+          mkdir -p "$APP_DIR"
+          tar -xzf "$ARCHIVE" -C "$APP_DIR"
+          rm -f "$ARCHIVE"
+
+          if [ ! -f "$APP_DIR/nuansapulsa-be/.env" ]; then
+            echo "Missing $APP_DIR/nuansapulsa-be/.env"
+            echo "Create it from nuansapulsa-be/.env.example and fill production values."
+            exit 1
+          fi
+
+          if [ ! -f "$APP_DIR/nuansapulsa-fe/.env.local" ]; then
+            echo "Missing $APP_DIR/nuansapulsa-fe/.env.local"
+            echo "Create it from nuansapulsa-fe/.env-example and fill production values."
+            exit 1
+          fi
+
+          for key in DATABASE_URL PULSA24JAM_BASE_URL PULSA24JAM_API_KEY PULSA24JAM_PIN; do
+            if ! grep -Eq "^${key}=.+" "$APP_DIR/nuansapulsa-be/.env"; then
+              echo "Missing required backend env: $key"
+              exit 1
+            fi
+          done
+
+          cd "$APP_DIR/nuansapulsa-be"
+          go mod download
+          go test ./...
+          go build -trimpath -ldflags="-s -w" -o nuansapulsa-be .
+
+          cd "$APP_DIR/nuansapulsa-fe"
+          npm ci
+          npm run lint
+          npm run build
+
+          sudo -n systemctl restart "$BACKEND_SERVICE"
+          sudo -n systemctl restart "$FRONTEND_SERVICE"
+          sudo -n systemctl status "$BACKEND_SERVICE" --no-pager -l || true
+          sudo -n systemctl status "$FRONTEND_SERVICE" --no-pager -l || true
+          REMOTE_SCRIPT
