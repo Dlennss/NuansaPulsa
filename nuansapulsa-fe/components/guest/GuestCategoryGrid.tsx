@@ -38,6 +38,13 @@ const PRIORITY: Record<string, number> = {
 
 const HOME_FALLBACK_ITEMS: UserCategoryItem[] = [
   { id: 1, nama: "Pulsa", aktif: true },
+  { id: 5, nama: "Game", aktif: true },
+  { id: 3, nama: "E-Wallet", aktif: true },
+  { id: 11, nama: "Listrik", aktif: true },
+  { id: 4, nama: "PLN", aktif: true },
+  { id: 7, nama: "TV", aktif: true },
+  { id: 17, nama: "PDAM", aktif: true },
+  { id: 19, nama: "BPJS", aktif: true },
 ];
 
 function normalizeName(name: string) {
@@ -90,13 +97,15 @@ export function GuestCategoryGrid({ items, showAll = false }: GuestCategoryGridP
   const sortedItems = useMemo(() => sortCategories(items), [items]);
   const homeItems = useMemo(() => {
     const activeItems = sortedItems.filter((item) => item.aktif);
-    return (activeItems.length > 0 ? activeItems : HOME_FALLBACK_ITEMS).slice(0, 9);
+    const activeKeys = new Set(activeItems.map((item) => normalizeName(item.nama)));
+    const fallbackItems = HOME_FALLBACK_ITEMS.filter((item) => !activeKeys.has(normalizeName(item.nama)));
+    return [...activeItems, ...fallbackItems].slice(0, 9);
   }, [sortedItems]);
 
   return (
     <section>
-      <div className="rounded-[22px] bg-white p-3 shadow-[0_16px_36px_rgba(99,24,34,0.10)] ring-1 ring-red-950/[0.04]">
-        <div className={showAll ? "grid grid-cols-4 gap-x-2 gap-y-3 sm:grid-cols-5" : "grid grid-cols-5 gap-x-2 gap-y-3"}>
+      <div className="rounded-[24px] bg-white px-3 pb-3 pt-4 shadow-[0_16px_36px_rgba(99,24,34,0.10)] ring-1 ring-red-950/[0.04]">
+        <div className={showAll ? "grid grid-cols-4 gap-x-3 gap-y-4 sm:grid-cols-5" : "grid grid-cols-5 gap-x-2 gap-y-3"}>
           {!showAll ? homeItems.map((item) => (
             <CategoryCard key={item.id} item={item} />
           )) : null}
@@ -108,18 +117,18 @@ export function GuestCategoryGrid({ items, showAll = false }: GuestCategoryGridP
               href="/kategori"
               prefetch={false}
               aria-label="Lainnya"
-              className="group flex min-h-[82px] flex-col items-center justify-start gap-1.5 rounded-xl bg-white px-1 py-2 text-center transition duration-200 hover:-translate-y-0.5 hover:shadow-[0_12px_26px_rgba(190,18,60,0.12)]"
+              className="group flex min-h-[88px] flex-col items-center justify-start gap-1.5 rounded-xl px-0.5 py-1 text-center transition duration-200 hover:-translate-y-0.5"
             >
-              <div className="relative h-11 w-11 transition-transform duration-200 group-hover:scale-105">
+              <div className="relative h-13 w-13 overflow-hidden rounded-2xl bg-white p-2 shadow-[0_10px_24px_rgba(15,23,42,0.10)] ring-1 ring-slate-950/[0.04] transition-transform duration-200 group-hover:scale-105">
                 <Image
                   src="/nuansapulsa-assets/layanan_lainnya.png"
                   alt=""
                   fill
-                  sizes="44px"
-                  className="object-contain"
+                  sizes="52px"
+                  className="object-contain p-2"
                 />
               </div>
-              <span className="line-clamp-2 px-0.5 text-[10px] font-bold leading-tight text-[#303544]">
+              <span className="line-clamp-2 px-0.5 text-[10px] font-black leading-tight text-slate-950">
                 Lainnya
               </span>
             </Link>

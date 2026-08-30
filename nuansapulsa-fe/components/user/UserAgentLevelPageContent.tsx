@@ -8,7 +8,7 @@ import { useRef, useState } from "react";
 const kilatLevels = [
   {
     code: "start",
-    name: "Kilat Start",
+    name: "Nuansa Start",
     short: "Start",
     image: "/agent-levels/kilat-start-badge.png",
     bg: "from-emerald-50 via-white to-lime-100",
@@ -17,14 +17,14 @@ const kilatLevels = [
     desc: "Level awal untuk agent baru. Limit dasar Rp 500.000 dan menjadi titik awal membangun riwayat pembayaran.",
     benefits: [
       ["Limit sampai Rp 500.000", "Agent baru mulai dari limit dasar NuansaPulsa", WalletCards],
-      ["3 pengajuan lunas untuk naik", "Setelah 3 pinjaman lunas tepat waktu, agent naik ke Kilat Plus", CheckCircle2],
+      ["3 pengajuan lunas untuk naik", "Setelah 3 pinjaman lunas tepat waktu, agent naik ke Nuansa Plus", CheckCircle2],
       ["Bayar tepat waktu", "Riwayat lunas tanpa telat menjadi syarat naik level", BadgeCheck],
       ["Target berikutnya Rp 1.000.000", "Limit berikutnya terbuka setelah pembayaran konsisten", TrendingUp],
     ],
   },
   {
     code: "plus",
-    name: "Kilat Plus",
+    name: "Nuansa Plus",
     short: "Plus",
     image: "/agent-levels/kilat-plus-badge.png",
     bg: "from-sky-50 via-white to-blue-100",
@@ -33,14 +33,14 @@ const kilatLevels = [
     desc: "Level untuk agent yang sudah menyelesaikan 3 pengajuan tepat waktu. Limit naik menjadi Rp 1.000.000.",
     benefits: [
       ["Limit sampai Rp 1.000.000", "Terbuka setelah 3 pinjaman lunas tepat waktu", WalletCards],
-      ["5 pengajuan lunas untuk maksimal", "Setelah total 5 pinjaman lunas tepat waktu, agent naik ke Kilat Elite", CheckCircle2],
+      ["5 pengajuan lunas untuk maksimal", "Setelah total 5 pinjaman lunas tepat waktu, agent naik ke Nuansa Elite", CheckCircle2],
       ["Tidak pernah jatuh tempo", "Pembayaran telat lebih dari 3 hari perlu perbaikan akun", BadgeCheck],
       ["Target berikutnya Rp 2.000.000", "Limit maksimal aktif setelah 5 pengajuan lunas", TrendingUp],
     ],
   },
   {
     code: "elite",
-    name: "Kilat Elite",
+    name: "Nuansa Elite",
     short: "Elite",
     image: "/agent-levels/kilat-elite-badge.png",
     bg: "from-purple-50 via-white to-yellow-100",
@@ -147,7 +147,7 @@ export function UserAgentLevelPageContent({ initialLevelCode = "start" }: { init
             <div className="relative mx-auto mb-2 h-14 w-14 rounded-2xl bg-slate-100 shadow-sm">
               <Image src={activeLevel.image} alt="" fill sizes="56px" className="object-contain p-0.5" />
             </div>
-            <h2 className="text-2xl font-semibold text-slate-700">{activeLevel.name.replace("Kilat ", "")}</h2>
+            <h2 className="text-2xl font-semibold text-slate-700">{activeLevel.name.replace("Nuansa ", "")}</h2>
             <p className="mx-auto mt-2 max-w-[280px] text-sm font-medium leading-5 text-slate-500">{activeLevel.desc}</p>
           </div>
 

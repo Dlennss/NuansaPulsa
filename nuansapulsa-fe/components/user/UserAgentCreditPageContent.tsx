@@ -468,9 +468,9 @@ export function UserAgentCreditPageContent({ name, email, phone, storeName = "",
   const canReapply = latestApplication?.status === "rejected" || latestApplication?.status === "analysis_rejected" || latestApplication?.status === "master_rejected" || creditCycleExhausted;
   const canRefill = Boolean(isPaidOff);
   const creditLevelCode = String(latestApplication?.credit_level_code || "start").trim().toLowerCase();
-  const creditLevelName = latestApplication?.credit_level_name || "Kilat Start";
+  const creditLevelName = latestApplication?.credit_level_name || "Nuansa Start";
   const creditLevelImage = levelBadgeByCode[creditLevelCode] || levelBadgeByCode.start;
-  const levelSubtitle = latestApplication?.credit_needs_repair ? "Perbaiki" : creditLevelName.replace("Kilat ", "");
+  const levelSubtitle = latestApplication?.credit_needs_repair ? "Perbaiki" : creditLevelName.replace(/^\S+\s+/, "");
   const surveyKeys = ["ktp", "store", "selfie_ktp", "selfie_marketing"];
   const requiredSurveyKeys = isDocumentRevision ? revisionDocuments : surveyKeys;
   const surveyDocumentsComplete = requiredSurveyKeys.every((key) => Boolean(surveyFiles[key]));

@@ -1,5 +1,6 @@
 import Link from "next/link";
-import { Headset, Zap } from "lucide-react";
+import Image from "next/image";
+import { Headset } from "lucide-react";
 
 type AppTopHeaderProps = {
   isLoggedIn?: boolean;
@@ -16,9 +17,7 @@ export function AppTopHeader({ isLoggedIn = false, userName, saldo, role }: AppT
   void saldo;
 
   return (
-    <header className="sticky top-0 z-30 overflow-hidden bg-[#052e26] px-3 pb-3 pt-2 text-white shadow-[0_16px_34px_rgba(5,46,38,0.22)]">
-      <div className="pointer-events-none absolute -right-10 -top-14 h-32 w-32 rounded-full bg-lime-300/25 blur-2xl" />
-      <div className="pointer-events-none absolute -bottom-10 left-20 h-20 w-40 rotate-[-10deg] bg-emerald-400/15 blur-2xl" />
+    <header className="sticky top-0 z-30 overflow-hidden bg-[#063c2d] px-3 pb-3 pt-2 text-white shadow-[0_16px_34px_rgba(5,46,38,0.22)]">
       <div className="pointer-events-none absolute inset-x-0 bottom-0 h-px bg-linear-to-r from-transparent via-lime-300/80 to-transparent" />
 
       <div className="relative flex h-14 items-center justify-between gap-3">
@@ -29,14 +28,27 @@ export function AppTopHeader({ isLoggedIn = false, userName, saldo, role }: AppT
             className="flex min-w-0 items-center gap-2.5"
             aria-label="NuansaPulsa"
           >
-            <span className="grid h-11 w-11 shrink-0 place-items-center rounded-2xl bg-white shadow-[0_10px_22px_rgba(163,230,53,0.22)] ring-1 ring-lime-200/80">
-              <Zap className="h-6 w-6 fill-[#facc15] text-[#047857]" />
+            <span className="relative h-11 w-11 shrink-0 overflow-hidden rounded-[15px] bg-white shadow-[0_10px_22px_rgba(255,255,255,0.14)] ring-1 ring-white/70">
+              <Image
+                src="/nuansapulsa-assets/logo_mark_lingkaran.png"
+                alt=""
+                fill
+                sizes="44px"
+                className="object-contain p-1.5"
+              />
             </span>
             <span className="min-w-0">
-              <span className="block text-[22px] font-black italic leading-5 tracking-tight">
-                Pulsa<span className="text-[#a3e635]">Kilat</span>
+              <span className="relative block h-6 w-[140px]">
+                <Image
+                  src="/nuansapulsa-assets/logo_wordmark_nuansapulsa.png"
+                  alt="NuansaPulsa"
+                  fill
+                  priority
+                  sizes="140px"
+                  className="object-contain object-left"
+                />
               </span>
-              <span className="mt-1 block text-[10px] font-bold uppercase tracking-[0.18em] text-lime-100/85">
+              <span className="mt-0.5 block text-[9px] font-black uppercase tracking-[0.16em] text-lime-100/85">
                 Cepat & hemat
               </span>
             </span>

@@ -128,7 +128,7 @@ export function MarketingReportCenter({ applications }: Props) {
         Toko: storeName(item),
         WhatsApp: applicantValue(item, "whatsapp", item.member_phone || "-"),
         Status: statusLabel(item),
-        Tier: item.credit_level_name || "Kilat Start",
+        Tier: item.credit_level_name || "Nuansa Start",
         Limit: formatIDR(Number(item.credit_limit_amount || item.approved_amount || 0)),
         "Modal Berjalan": formatIDR(Number(item.outstanding_amount || 0)),
       }));
@@ -149,7 +149,7 @@ export function MarketingReportCenter({ applications }: Props) {
       return filteredApplications.filter((item) => item.status === "approved").map((item) => ({
         Tanggal: formatDate(item.loan_approved_at || item.updated_at),
         Agent: agentName(item),
-        Tier: item.credit_level_name || "Kilat Start",
+        Tier: item.credit_level_name || "Nuansa Start",
         Limit: formatIDR(Number(item.credit_limit_amount || item.approved_amount || 0)),
         "Saldo Kredit": formatIDR(Number(item.credit_available_amount || 0)),
         "Modal Berjalan": formatIDR(Number(item.outstanding_amount || 0)),

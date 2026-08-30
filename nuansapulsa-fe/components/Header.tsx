@@ -1,6 +1,7 @@
 "use client";
 
 import React from "react";
+import Image from "next/image";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
 import { Menu, X, Zap } from "lucide-react";
@@ -20,18 +21,24 @@ export default function Header() {
 
   return (
     <header className="sticky top-0 z-50 overflow-hidden bg-[#052e26] text-white shadow-[0_16px_34px_rgba(5,46,38,0.22)]">
-      <div className="pointer-events-none absolute -right-16 -top-20 h-44 w-44 rounded-full bg-lime-300/25 blur-2xl" />
       <div className="pointer-events-none absolute inset-x-0 bottom-0 h-px bg-linear-to-r from-transparent via-lime-300/80 to-transparent" />
       <div className="mx-auto flex h-18 w-full max-w-7xl items-center justify-between gap-3 px-4">
         <Link href="/" className="flex items-center gap-3" aria-label="NuansaPulsa">
-          <span className="grid h-11 w-11 shrink-0 place-items-center rounded-2xl bg-white shadow-[0_10px_22px_rgba(163,230,53,0.22)] ring-1 ring-lime-200/80">
-            <Zap className="h-6 w-6 fill-[#facc15] text-[#047857]" />
+          <span className="relative h-11 w-11 shrink-0 overflow-hidden rounded-2xl bg-white shadow-[0_10px_22px_rgba(163,230,53,0.22)] ring-1 ring-lime-200/80">
+            <Image src="/nuansapulsa-assets/logo_mark_lingkaran.png" alt="" fill sizes="44px" className="object-contain p-1.5" />
           </span>
-          <span>
-            <span className="block text-2xl font-black italic leading-5 tracking-tight">
-              Pulsa<span className="text-[#a3e635]">Kilat</span>
+          <span className="min-w-0">
+            <span className="relative block h-7 w-[170px]">
+              <Image
+                src="/nuansapulsa-assets/logo_wordmark_nuansapulsa.png"
+                alt="NuansaPulsa"
+                fill
+                priority
+                sizes="170px"
+                className="object-contain object-left"
+              />
             </span>
-            <span className="mt-1 block text-[10px] font-bold uppercase tracking-[0.18em] text-lime-100/85">
+            <span className="mt-0.5 block text-[10px] font-black uppercase tracking-[0.18em] text-lime-100/85">
               Cepat & hemat
             </span>
           </span>

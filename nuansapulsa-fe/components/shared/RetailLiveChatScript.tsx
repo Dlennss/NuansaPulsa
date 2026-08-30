@@ -1,7 +1,8 @@
 "use client";
 
 import { useState, type FormEvent } from "react";
-import { Headset, MessageCircle, Minus, Send, Zap } from "lucide-react";
+import Image from "next/image";
+import { Headset, MessageCircle, Minus, Send } from "lucide-react";
 
 const WHATSAPP_NUMBER = "6282219107558";
 
@@ -32,16 +33,15 @@ export function RetailLiveChatScript() {
       {open ? (
         <section className="mb-2 overflow-hidden rounded-[18px] border border-lime-200/70 bg-white shadow-[0_22px_54px_rgba(5,46,38,0.20)]">
           <div className="relative overflow-hidden bg-[#052e26] px-3.5 py-3 text-white">
-            <div className="absolute -right-8 -top-8 h-24 w-24 rounded-full bg-lime-300/25 blur-2xl" />
             <div className="relative flex items-center justify-between gap-3">
               <div className="flex items-center gap-3">
-                <span className="grid h-9 w-9 place-items-center rounded-xl bg-white text-[#047857]">
-                  <Zap className="h-[18px] w-[18px] fill-[#facc15]" />
+                <span className="relative h-9 w-9 overflow-hidden rounded-xl bg-white">
+                  <Image src="/nuansapulsa-assets/logo_mark_lingkaran.png" alt="" fill sizes="36px" className="object-contain p-1" />
                 </span>
-                <div>
-                  <p className="text-sm font-black italic leading-5">
-                    Pulsa<span className="text-[#a3e635]">Kilat</span>
-                  </p>
+                <div className="min-w-0">
+                  <span className="relative block h-6 w-32">
+                    <Image src="/nuansapulsa-assets/logo_wordmark_nuansapulsa.png" alt="NuansaPulsa" fill sizes="128px" className="object-contain object-left" />
+                  </span>
                   <p className="text-[11px] font-semibold text-lime-100/80">Bantuan cepat</p>
                 </div>
               </div>

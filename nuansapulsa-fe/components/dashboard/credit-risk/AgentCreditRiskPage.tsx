@@ -90,7 +90,7 @@ function buildAgentSummaries(applications: AgentCreditApplication[]): AgentSumma
       store: applicantText(latest, "store_name", latest.store_name || applicantText(latest, "store_address", "Toko belum diisi")),
       phone: applicantText(latest, "whatsapp", latest.member_phone || "-"),
       email: applicantText(latest, "email", latest.member_email || latest.agent_email || "-"),
-      currentLevel: latest.credit_level_name || "Kilat Start",
+      currentLevel: latest.credit_level_name || "Nuansa Start",
       currentLimit: Number(latest.credit_limit_amount || active.approved_amount || active.requested_amount || 500000),
       approvedAmount: Number(active.approved_amount || latest.approved_amount || 0),
       available: Number(active.credit_available_amount || 0),
@@ -293,7 +293,7 @@ export function AgentCreditRiskPage({ applications, mode }: Props) {
                                 onChange={(event) => setNoteByMember((current) => ({ ...current, [agent.memberId]: event.target.value }))}
                                 rows={3}
                                 className="mt-2 w-full resize-none bg-transparent text-sm font-semibold text-slate-700 outline-none placeholder:text-slate-400"
-                                placeholder={mode === "operator" ? "Contoh: pembayaran lancar, naik ke Kilat Plus." : "Contoh: agent ramai dan layak diajukan naik limit."}
+                                placeholder={mode === "operator" ? "Contoh: pembayaran lancar, naik ke Nuansa Plus." : "Contoh: agent ramai dan layak diajukan naik limit."}
                               />
                             </label>
                             <div className="rounded-2xl border border-slate-200 bg-white p-3">

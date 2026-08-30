@@ -30,7 +30,7 @@ function authHeader(): Record<string, string> {
 
 function makePassword() {
   const seed = Math.random().toString(36).slice(2, 8).toUpperCase();
-  return `Kilat${seed}24`;
+  return `Nuansa${seed}24`;
 }
 
 function Field({

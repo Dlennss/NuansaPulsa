@@ -68,18 +68,18 @@ export function CategoryShortcutLink({ href, label, visualName }: CategoryShortc
       href={href}
       prefetch={false}
       aria-label={label}
-      className="group flex min-h-[82px] flex-col items-center justify-start gap-1.5 rounded-xl bg-white px-1 py-2 text-center transition duration-200 hover:-translate-y-0.5 hover:shadow-[0_12px_26px_rgba(190,18,60,0.12)]"
+      className="group flex min-h-[88px] flex-col items-center justify-start gap-1.5 rounded-xl px-0.5 py-1 text-center transition duration-200 hover:-translate-y-0.5"
     >
-      <div className="relative grid h-11 w-11 place-items-center overflow-hidden transition-transform duration-200 group-hover:scale-105">
+      <div className="relative grid h-13 w-13 place-items-center overflow-hidden rounded-2xl bg-white p-2 shadow-[0_10px_24px_rgba(15,23,42,0.10)] ring-1 ring-slate-950/[0.04] transition-transform duration-200 group-hover:scale-105">
         <Image
           src={visual.iconSrc}
           alt=""
           fill
-          sizes="48px"
-          className="object-contain"
+          sizes="52px"
+          className="object-contain p-2"
         />
       </div>
-      <span className="line-clamp-2 px-0.5 text-[10px] font-bold leading-tight text-[#303544]">
+      <span className="line-clamp-2 px-0.5 text-[10px] font-black leading-tight text-slate-950">
         {label}
       </span>
     </Link>
