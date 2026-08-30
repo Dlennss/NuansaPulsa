@@ -21,7 +21,7 @@ concurrency:
 
 jobs:
   test:
-    name: Test backend
+    name: Backend
     runs-on: ubuntu-latest
     defaults:
       run:
@@ -43,26 +43,13 @@ jobs:
       - name: Run tests
         run: go test ./...
 
-  deploy:
-    name: Deploy backend
-    runs-on: ubuntu-latest
-    needs: test
-    if: github.event_name != 'pull_request' && github.ref == 'refs/heads/main'
-
-    env:
-      DEPLOY_HOST: ${{ secrets.HOST }}
-      DEPLOY_USER: ${{ secrets.USERNAME }}
-      DEPLOY_PORT: ${{ secrets.SSH_PORT }}
-      DEPLOY_KEY: ${{ secrets.SSH_PRIVATE_KEY }}
-      REMOTE_APP_DIR: ${{ secrets.REMOTE_APP_DIR }}
-      BACKEND_SERVICE: ${{ secrets.BACKEND_SERVICE }}
-
-    steps:
-      - name: Checkout
-        uses: actions/checkout@v4
-
       - name: Validate deployment secrets
+        if: github.event_name != 'pull_request' && github.ref == 'refs/heads/main'
         shell: bash
+        env:
+          DEPLOY_HOST: ${{ secrets.HOST }}
+          DEPLOY_USER: ${{ secrets.USERNAME }}
+          DEPLOY_KEY: ${{ secrets.SSH_PRIVATE_KEY }}
         run: |
           set -euo pipefail
           test -n "$DEPLOY_HOST" || { echo "Missing GitHub secret: HOST"; exit 1; }
@@ -70,7 +57,12 @@ jobs:
           test -n "$DEPLOY_KEY" || { echo "Missing GitHub secret: SSH_PRIVATE_KEY"; exit 1; }
 
       - name: Configure SSH
+        if: github.event_name != 'pull_request' && github.ref == 'refs/heads/main'
         shell: bash
+        env:
+          DEPLOY_HOST: ${{ secrets.HOST }}
+          DEPLOY_PORT: ${{ secrets.SSH_PORT }}
+          DEPLOY_KEY: ${{ secrets.SSH_PRIVATE_KEY }}
         run: |
           set -euo pipefail
           mkdir -p ~/.ssh
@@ -79,7 +71,14 @@ jobs:
           ssh-keyscan -p "${DEPLOY_PORT:-22}" "$DEPLOY_HOST" >> ~/.ssh/known_hosts
 
       - name: Pull, build, and restart backend
+        if: github.event_name != 'pull_request' && github.ref == 'refs/heads/main'
         shell: bash
+        env:
+          DEPLOY_HOST: ${{ secrets.HOST }}
+          DEPLOY_USER: ${{ secrets.USERNAME }}
+          DEPLOY_PORT: ${{ secrets.SSH_PORT }}
+          REMOTE_APP_DIR: ${{ secrets.REMOTE_APP_DIR }}
+          BACKEND_SERVICE: ${{ secrets.BACKEND_SERVICE }}
         run: |
           set -euo pipefail
           ssh -i ~/.ssh/deploy_key -p "${DEPLOY_PORT:-22}" "$DEPLOY_USER@$DEPLOY_HOST" \
