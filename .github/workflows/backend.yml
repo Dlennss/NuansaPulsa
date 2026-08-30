@@ -47,41 +47,66 @@ jobs:
         if: github.event_name != 'pull_request' && github.ref == 'refs/heads/main'
         shell: bash
         env:
-          DEPLOY_HOST: ${{ secrets.HOST }}
-          DEPLOY_USER: ${{ secrets.USERNAME }}
+          DEPLOY_HOST: ${{ secrets.HOST || secrets.SERVER_HOST }}
+          DEPLOY_USER: ${{ secrets.USERNAME || secrets.SERVER_USER }}
           DEPLOY_KEY: ${{ secrets.SSH_PRIVATE_KEY }}
+          DEPLOY_PASSWORD: ${{ secrets.SERVER_PASSWORD }}
         run: |
           set -euo pipefail
-          test -n "$DEPLOY_HOST" || { echo "Missing GitHub secret: HOST"; exit 1; }
-          test -n "$DEPLOY_USER" || { echo "Missing GitHub secret: USERNAME"; exit 1; }
-          test -n "$DEPLOY_KEY" || { echo "Missing GitHub secret: SSH_PRIVATE_KEY"; exit 1; }
+          test -n "$DEPLOY_HOST" || { echo "Missing GitHub secret: HOST or SERVER_HOST"; exit 1; }
+          test -n "$DEPLOY_USER" || { echo "Missing GitHub secret: USERNAME or SERVER_USER"; exit 1; }
+          if [ -z "$DEPLOY_KEY" ] && [ -z "$DEPLOY_PASSWORD" ]; then
+            echo "Missing GitHub secret: SSH_PRIVATE_KEY or SERVER_PASSWORD"
+            exit 1
+          fi
+
+      - name: Install password SSH helper
+        if: github.event_name != 'pull_request' && github.ref == 'refs/heads/main'
+        shell: bash
+        run: |
+          set -euo pipefail
+          sudo apt-get update
+          sudo apt-get install -y sshpass
 
       - name: Configure SSH
         if: github.event_name != 'pull_request' && github.ref == 'refs/heads/main'
         shell: bash
         env:
-          DEPLOY_HOST: ${{ secrets.HOST }}
-          DEPLOY_PORT: ${{ secrets.SSH_PORT }}
+          DEPLOY_HOST: ${{ secrets.HOST || secrets.SERVER_HOST }}
+          DEPLOY_PORT: ${{ secrets.SSH_PORT || secrets.SERVER_PORT }}
           DEPLOY_KEY: ${{ secrets.SSH_PRIVATE_KEY }}
         run: |
           set -euo pipefail
           mkdir -p ~/.ssh
-          printf '%s\n' "$DEPLOY_KEY" > ~/.ssh/deploy_key
-          chmod 600 ~/.ssh/deploy_key
+          if [ -n "$DEPLOY_KEY" ]; then
+            printf '%s\n' "$DEPLOY_KEY" > ~/.ssh/deploy_key
+            chmod 600 ~/.ssh/deploy_key
+          fi
           ssh-keyscan -p "${DEPLOY_PORT:-22}" "$DEPLOY_HOST" >> ~/.ssh/known_hosts
 
       - name: Pull, build, and restart backend
         if: github.event_name != 'pull_request' && github.ref == 'refs/heads/main'
         shell: bash
         env:
-          DEPLOY_HOST: ${{ secrets.HOST }}
-          DEPLOY_USER: ${{ secrets.USERNAME }}
-          DEPLOY_PORT: ${{ secrets.SSH_PORT }}
+          DEPLOY_HOST: ${{ secrets.HOST || secrets.SERVER_HOST }}
+          DEPLOY_USER: ${{ secrets.USERNAME || secrets.SERVER_USER }}
+          DEPLOY_PORT: ${{ secrets.SSH_PORT || secrets.SERVER_PORT }}
+          DEPLOY_KEY: ${{ secrets.SSH_PRIVATE_KEY }}
+          DEPLOY_PASSWORD: ${{ secrets.SERVER_PASSWORD }}
           REMOTE_APP_DIR: ${{ secrets.REMOTE_APP_DIR }}
-          BACKEND_SERVICE: ${{ secrets.BACKEND_SERVICE }}
+          BACKEND_SERVICE: ${{ secrets.BACKEND_SERVICE || secrets.BACKEND_SERVICE_NAME }}
         run: |
           set -euo pipefail
-          ssh -i ~/.ssh/deploy_key -p "${DEPLOY_PORT:-22}" "$DEPLOY_USER@$DEPLOY_HOST" \
+          SSH_AUTH=()
+          SSH_PASSWORD=()
+          if [ -n "${DEPLOY_KEY:-}" ]; then
+            SSH_AUTH=(-i ~/.ssh/deploy_key)
+          else
+            export SSHPASS="$DEPLOY_PASSWORD"
+            SSH_PASSWORD=(sshpass -e)
+          fi
+
+          "${SSH_PASSWORD[@]}" ssh "${SSH_AUTH[@]}" -p "${DEPLOY_PORT:-22}" "$DEPLOY_USER@$DEPLOY_HOST" \
             "REMOTE_APP_DIR='${REMOTE_APP_DIR:-/home/syarif/app/NuansaPulsa}' BACKEND_SERVICE='${BACKEND_SERVICE:-nuansapulsa-be.service}' bash -s" <<'REMOTE_SCRIPT'
           set -euo pipefail
 
