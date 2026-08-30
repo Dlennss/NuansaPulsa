@@ -1,0 +1,126 @@
+name: Frontend
+
+on:
+  push:
+    branches:
+      - main
+    paths:
+      - "nuansapulsa-fe/**"
+      - ".github/workflows/frontend.yml"
+  pull_request:
+    branches:
+      - main
+    paths:
+      - "nuansapulsa-fe/**"
+      - ".github/workflows/frontend.yml"
+  workflow_dispatch:
+
+concurrency:
+  group: frontend-${{ github.ref }}
+  cancel-in-progress: true
+
+jobs:
+  check:
+    name: Check frontend
+    runs-on: ubuntu-latest
+    defaults:
+      run:
+        working-directory: nuansapulsa-fe
+
+    env:
+      NEXT_TELEMETRY_DISABLED: "1"
+
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Setup Node
+        uses: actions/setup-node@v4
+        with:
+          node-version: "20.11.1"
+          cache: npm
+          cache-dependency-path: nuansapulsa-fe/package-lock.json
+
+      - name: Install dependencies
+        run: npm ci
+
+      - name: Run lint
+        run: npm run lint
+
+      - name: Build
+        run: npm run build
+
+  deploy:
+    name: Deploy frontend
+    runs-on: ubuntu-latest
+    needs: check
+    if: github.event_name != 'pull_request' && github.ref == 'refs/heads/main'
+
+    env:
+      DEPLOY_HOST: ${{ secrets.HOST }}
+      DEPLOY_USER: ${{ secrets.USERNAME }}
+      DEPLOY_PORT: ${{ secrets.SSH_PORT }}
+      DEPLOY_KEY: ${{ secrets.SSH_PRIVATE_KEY }}
+      REMOTE_APP_DIR: ${{ secrets.REMOTE_APP_DIR }}
+      FRONTEND_SERVICE: ${{ secrets.FRONTEND_SERVICE }}
+
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Validate deployment secrets
+        shell: bash
+        run: |
+          set -euo pipefail
+          test -n "$DEPLOY_HOST" || { echo "Missing GitHub secret: HOST"; exit 1; }
+          test -n "$DEPLOY_USER" || { echo "Missing GitHub secret: USERNAME"; exit 1; }
+          test -n "$DEPLOY_KEY" || { echo "Missing GitHub secret: SSH_PRIVATE_KEY"; exit 1; }
+
+      - name: Create frontend archive
+        shell: bash
+        run: tar -czf frontend-release.tgz nuansapulsa-fe
+
+      - name: Configure SSH
+        shell: bash
+        run: |
+          set -euo pipefail
+          mkdir -p ~/.ssh
+          printf '%s\n' "$DEPLOY_KEY" > ~/.ssh/deploy_key
+          chmod 600 ~/.ssh/deploy_key
+          ssh-keyscan -p "${DEPLOY_PORT:-22}" "$DEPLOY_HOST" >> ~/.ssh/known_hosts
+
+      - name: Upload frontend archive
+        shell: bash
+        run: |
+          set -euo pipefail
+          scp -i ~/.ssh/deploy_key -P "${DEPLOY_PORT:-22}" frontend-release.tgz "$DEPLOY_USER@$DEPLOY_HOST:/tmp/nuansapulsa-frontend-${{ github.sha }}.tgz"
+
+      - name: Build and restart frontend
+        shell: bash
+        run: |
+          set -euo pipefail
+          ssh -i ~/.ssh/deploy_key -p "${DEPLOY_PORT:-22}" "$DEPLOY_USER@$DEPLOY_HOST" \
+            "REMOTE_APP_DIR='${REMOTE_APP_DIR:-/home/syarif/app/NuansaPulsa}' FRONTEND_SERVICE='${FRONTEND_SERVICE:-nuansapulsa-fe.service}' RELEASE_SHA='${{ github.sha }}' bash -s" <<'REMOTE_SCRIPT'
+          set -euo pipefail
+
+          APP_DIR="$REMOTE_APP_DIR"
+          ARCHIVE="/tmp/nuansapulsa-frontend-$RELEASE_SHA.tgz"
+
+          mkdir -p "$APP_DIR"
+          tar -xzf "$ARCHIVE" -C "$APP_DIR"
+          rm -f "$ARCHIVE"
+
+          if [ ! -f "$APP_DIR/nuansapulsa-fe/.env.local" ]; then
+            echo "Missing $APP_DIR/nuansapulsa-fe/.env.local"
+            echo "Create it from nuansapulsa-fe/.env-example and fill production values."
+            exit 1
+          fi
+
+          cd "$APP_DIR/nuansapulsa-fe"
+          npm ci
+          npm run lint
+          npm run build
+
+          sudo -n systemctl restart "$FRONTEND_SERVICE"
+          sudo -n systemctl status "$FRONTEND_SERVICE" --no-pager -l || true
+          REMOTE_SCRIPT
