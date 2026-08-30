@@ -109,32 +109,35 @@ jobs:
         run: |
           set -euo pipefail
           export SSHPASS="$SERVER_PASSWORD"
-          printf '%s\n' "$SERVER_PASSWORD" | sshpass -e ssh -p "$SSH_PORT" "$SERVER_USER@$SERVER_HOST" \
-            "sudo -S -p '' bash -c '
-              set -euo pipefail
-              RELEASE_ROOT=\"\$(dirname \"$FRONTEND_RELEASE_DIR\")\"
-              BUILD_DIR=\"\$RELEASE_ROOT/build-${GITHUB_SHA::7}-\$(date +%Y%m%d%H%M%S)\"
-              TMP_LINK=\"\$RELEASE_ROOT/.current-tmp\"
-              install -d \"\$BUILD_DIR\"
-              tar -xzf /tmp/nuansapulsa-fe-release.tar.gz -C \"\$BUILD_DIR\"
-              rm -f /tmp/nuansapulsa-fe-release.tar.gz
-              if [ ! -f \"\$BUILD_DIR/.env\" ] && [ -f \"$FRONTEND_RELEASE_DIR/.env\" ]; then
-                cp \"$FRONTEND_RELEASE_DIR/.env\" \"\$BUILD_DIR/.env\"
-              fi
-              if [ ! -f \"\$BUILD_DIR/server.js\" ]; then
-                SERVER_ENTRY=\"\$(find \"\$BUILD_DIR\" -maxdepth 4 -name server.js | head -n 1)\"
-                test -n \"\$SERVER_ENTRY\" || (echo \"server.js tidak ditemukan di artifact frontend\" >&2 && exit 1)
-                ln -s \"\${SERVER_ENTRY#\$BUILD_DIR/}\" \"\$BUILD_DIR/server.js\"
-              fi
-              chown -R \"$SERVER_USER:$SERVER_USER\" \"\$BUILD_DIR\" || true
-              ln -sfn \"\$BUILD_DIR\" \"\$TMP_LINK\"
-              mv -Tf \"\$TMP_LINK\" \"$FRONTEND_RELEASE_DIR\"
-              CURRENT_BUILD=\"\$(readlink -f \"$FRONTEND_RELEASE_DIR\")\"
-              find \"\$RELEASE_ROOT\" -maxdepth 1 -mindepth 1 -type d -name \"build-*\" -printf \"%T@ %p\\n\" | sort -nr | tail -n +4 | while IFS= read -r entry; do
-                build=\"\${entry#* }\"
-                [ \"\$build\" = \"\$CURRENT_BUILD\" ] || rm -rf -- \"\$build\"
-              done
-            '"
+          sshpass -e ssh -p "$SSH_PORT" "$SERVER_USER@$SERVER_HOST" \
+            "FRONTEND_RELEASE_DIR='$FRONTEND_RELEASE_DIR' GITHUB_SHA='$GITHUB_SHA' bash -s" <<'REMOTE'
+          set -euo pipefail
+          RELEASE_ROOT="$(dirname "$FRONTEND_RELEASE_DIR")"
+          BUILD_DIR="$RELEASE_ROOT/build-${GITHUB_SHA:0:7}-$(date +%Y%m%d%H%M%S)"
+          TMP_LINK="$RELEASE_ROOT/.current-tmp"
+
+          test -f /tmp/nuansapulsa-fe-release.tar.gz
+          install -d "$BUILD_DIR"
+          tar -xzf /tmp/nuansapulsa-fe-release.tar.gz -C "$BUILD_DIR"
+          rm -f /tmp/nuansapulsa-fe-release.tar.gz
+
+          if [ ! -f "$BUILD_DIR/.env" ] && [ -f "$FRONTEND_RELEASE_DIR/.env" ]; then
+            cp "$FRONTEND_RELEASE_DIR/.env" "$BUILD_DIR/.env"
+          fi
+          if [ ! -f "$BUILD_DIR/server.js" ]; then
+            SERVER_ENTRY="$(find "$BUILD_DIR" -maxdepth 4 -name server.js | head -n 1)"
+            test -n "$SERVER_ENTRY" || (echo "server.js tidak ditemukan di artifact frontend" >&2 && exit 1)
+            ln -s "${SERVER_ENTRY#$BUILD_DIR/}" "$BUILD_DIR/server.js"
+          fi
+
+          ln -sfn "$BUILD_DIR" "$TMP_LINK"
+          mv -Tf "$TMP_LINK" "$FRONTEND_RELEASE_DIR"
+          CURRENT_BUILD="$(readlink -f "$FRONTEND_RELEASE_DIR")"
+          find "$RELEASE_ROOT" -maxdepth 1 -mindepth 1 -type d -name "build-*" -printf "%T@ %p\n" | sort -nr | tail -n +4 | while IFS= read -r entry; do
+            build="${entry#* }"
+            [ "$build" = "$CURRENT_BUILD" ] || rm -rf -- "$build"
+          done
+          REMOTE
 
       - name: Restart NuansaPulsa frontend and Nginx
         shell: bash
