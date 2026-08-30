@@ -122,6 +122,9 @@ if [[ -f "$BUILD_DIR/.env" ]]; then
   cp "$BUILD_DIR/.env" "$SHARED_BIN/.env" 2>/dev/null || true
 fi
 
+if [ -e "$CURRENT_LINK" ] && [ ! -L "$CURRENT_LINK" ]; then
+  mv "$CURRENT_LINK" "$RELEASE_ROOT/current-backup-$BUILD_ID"
+fi
 ln -sfn "$BUILD_DIR" "$TMP_LINK"
 mv -Tf "$TMP_LINK" "$CURRENT_LINK"
 

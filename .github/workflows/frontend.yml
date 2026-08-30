@@ -112,6 +112,10 @@ jobs:
           sshpass -e ssh -p "$SSH_PORT" "$SERVER_USER@$SERVER_HOST" \
             "FRONTEND_RELEASE_DIR='$FRONTEND_RELEASE_DIR' GITHUB_SHA='$GITHUB_SHA' bash -s" <<'REMOTE'
           set -euo pipefail
+          if [ "$(basename "$FRONTEND_RELEASE_DIR")" != "current" ]; then
+            echo "FRONTEND_RELEASE_DIR harus berakhir dengan /current: $FRONTEND_RELEASE_DIR" >&2
+            exit 1
+          fi
           RELEASE_ROOT="$(dirname "$FRONTEND_RELEASE_DIR")"
           BUILD_DIR="$RELEASE_ROOT/build-${GITHUB_SHA:0:7}-$(date +%Y%m%d%H%M%S)"
           TMP_LINK="$RELEASE_ROOT/.current-tmp"
@@ -130,6 +134,9 @@ jobs:
             ln -s "${SERVER_ENTRY#$BUILD_DIR/}" "$BUILD_DIR/server.js"
           fi
 
+          if [ -e "$FRONTEND_RELEASE_DIR" ] && [ ! -L "$FRONTEND_RELEASE_DIR" ]; then
+            mv "$FRONTEND_RELEASE_DIR" "$RELEASE_ROOT/current-backup-$(date +%Y%m%d%H%M%S)"
+          fi
           ln -sfn "$BUILD_DIR" "$TMP_LINK"
           mv -Tf "$TMP_LINK" "$FRONTEND_RELEASE_DIR"
           CURRENT_BUILD="$(readlink -f "$FRONTEND_RELEASE_DIR")"
