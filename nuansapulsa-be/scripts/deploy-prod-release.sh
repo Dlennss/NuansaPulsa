@@ -69,6 +69,8 @@ require_source_file "internal/provider/adapter_rajabiller.go"
 rsync -a \
   --exclude '.git' \
   --exclude '.github' \
+  --exclude '.env' \
+  --exclude '.env.*' \
   --exclude 'releases' \
   --exclude 'nuansapulsa-be' \
   --exclude 'pulsa-be' \
