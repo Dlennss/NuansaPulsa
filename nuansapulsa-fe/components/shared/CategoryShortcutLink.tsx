@@ -24,19 +24,19 @@ function getCategoryVisual(name: string): CategoryVisual {
     case "pulsa":
     case "pulsa data":
     case "pulsa & data":
-      return { iconSrc: "/service-icons/pulsa.png" };
+      return { iconSrc: "/nuansapulsa-assets/layanan_pulsa.png" };
     case "e-money":
     case "e-wallet":
-      return { iconSrc: "/service-icons/ewallet.png" };
+      return { iconSrc: "/nuansapulsa-assets/layanan_e_wallet.png" };
     case "paket data":
-      return { iconSrc: "/service-icons/paket-data.png" };
+      return { iconSrc: "/nuansapulsa-assets/layanan_paket_data.png" };
     case "listrik":
     case "pln":
-      return { iconSrc: "/service-icons/token-pln.png" };
+      return { iconSrc: "/nuansapulsa-assets/layanan_listrik_pln.png" };
     case "game":
-      return { iconSrc: "/service-icons/voucher-game.png" };
+      return { iconSrc: "/nuansapulsa-assets/layanan_game.png" };
     case "tv":
-      return { iconSrc: "/service-icons/tv-kabel.png" };
+      return { iconSrc: "/nuansapulsa-assets/layanan_tv_streaming.png" };
     case "pdam":
       return { iconSrc: "/service-icons/pdam.png" };
     case "bpjs":
@@ -44,19 +44,19 @@ function getCategoryVisual(name: string): CategoryVisual {
     case "internet pascabayar":
       return { iconSrc: "/service-icons/internet-wifi.png" };
     case "hp pascabayar":
-      return { iconSrc: "/service-icons/hp-pascabayar.png" };
+      return { iconSrc: "/nuansapulsa-assets/layanan_telepon.png" };
     case "masa aktif":
-      return { iconSrc: "/service-icons/pulsa.png" };
+      return { iconSrc: "/nuansapulsa-assets/layanan_sms.png" };
     case "paket telepon":
-      return { iconSrc: "/service-icons/hp-pascabayar.png" };
+      return { iconSrc: "/nuansapulsa-assets/layanan_telepon.png" };
     case "aktivasi perdana":
       return { iconSrc: "/service-icons/esim-roaming.png" };
     case "gas negara":
       return { iconSrc: "/service-icons/gas-pgn.png" };
     case "lainnya":
-      return { iconSrc: "/service-icons/lainnya.png" };
+      return { iconSrc: "/nuansapulsa-assets/layanan_lainnya.png" };
     default:
-      return { iconSrc: "/service-icons/lainnya.png" };
+      return { iconSrc: "/nuansapulsa-assets/layanan_lainnya.png" };
   }
 }
 
@@ -68,9 +68,9 @@ export function CategoryShortcutLink({ href, label, visualName }: CategoryShortc
       href={href}
       prefetch={false}
       aria-label={label}
-      className="group flex min-h-[76px] flex-col items-center justify-center gap-2 rounded-2xl border border-white/70 bg-white/72 px-1.5 py-2 text-center shadow-[0_8px_22px_rgba(15,23,42,0.06)] ring-1 ring-emerald-950/[0.03] transition duration-300 hover:-translate-y-0.5 hover:bg-white hover:shadow-[0_14px_30px_rgba(6,78,59,0.13)]"
+      className="group flex min-h-[82px] flex-col items-center justify-start gap-1.5 rounded-xl bg-white px-1 py-2 text-center transition duration-200 hover:-translate-y-0.5 hover:shadow-[0_12px_26px_rgba(190,18,60,0.12)]"
     >
-      <div className="relative grid h-12 w-12 place-items-center overflow-hidden rounded-2xl bg-white shadow-[0_10px_22px_rgba(6,78,59,0.12)] ring-1 ring-slate-200/80 transition-transform duration-300 group-hover:scale-105">
+      <div className="relative grid h-11 w-11 place-items-center overflow-hidden transition-transform duration-200 group-hover:scale-105">
         <Image
           src={visual.iconSrc}
           alt=""
@@ -79,7 +79,7 @@ export function CategoryShortcutLink({ href, label, visualName }: CategoryShortc
           className="object-contain"
         />
       </div>
-      <span className="line-clamp-2 px-1 text-[10px] font-black leading-tight text-[#052e26]">
+      <span className="line-clamp-2 px-0.5 text-[10px] font-bold leading-tight text-[#303544]">
         {label}
       </span>
     </Link>

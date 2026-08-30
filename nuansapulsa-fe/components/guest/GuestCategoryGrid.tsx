@@ -2,9 +2,7 @@
 
 import Link from "next/link";
 import { useMemo } from "react";
-import {
-  LayoutGrid,
-} from "lucide-react";
+import Image from "next/image";
 import type { UserCategoryItem } from "@/components/user/types";
 import { getGuestCategoryPath } from "@/lib/category-routes";
 import { CategoryShortcutLink } from "@/components/shared/CategoryShortcutLink";
@@ -92,13 +90,13 @@ export function GuestCategoryGrid({ items, showAll = false }: GuestCategoryGridP
   const sortedItems = useMemo(() => sortCategories(items), [items]);
   const homeItems = useMemo(() => {
     const activeItems = sortedItems.filter((item) => item.aktif);
-    return (activeItems.length > 0 ? activeItems : HOME_FALLBACK_ITEMS).slice(0, 4);
+    return (activeItems.length > 0 ? activeItems : HOME_FALLBACK_ITEMS).slice(0, 9);
   }, [sortedItems]);
 
   return (
     <section>
-      <div className="rounded-[24px] border border-emerald-950/5 bg-linear-to-br from-white via-emerald-50/70 to-lime-50/80 p-2.5 shadow-[0_18px_38px_rgba(6,78,59,0.12)]">
-        <div className={showAll ? "grid grid-cols-3 gap-2.5" : "grid grid-cols-3 gap-2.5"}>
+      <div className="rounded-[22px] bg-white p-3 shadow-[0_16px_36px_rgba(99,24,34,0.10)] ring-1 ring-red-950/[0.04]">
+        <div className={showAll ? "grid grid-cols-4 gap-x-2 gap-y-3 sm:grid-cols-5" : "grid grid-cols-5 gap-x-2 gap-y-3"}>
           {!showAll ? homeItems.map((item) => (
             <CategoryCard key={item.id} item={item} />
           )) : null}
@@ -110,12 +108,18 @@ export function GuestCategoryGrid({ items, showAll = false }: GuestCategoryGridP
               href="/kategori"
               prefetch={false}
               aria-label="Lainnya"
-              className="group flex min-h-[76px] flex-col items-center justify-center gap-2 rounded-2xl border border-white/70 bg-white/72 px-1.5 py-2 text-center shadow-[0_8px_22px_rgba(15,23,42,0.06)] ring-1 ring-emerald-950/[0.03] transition duration-300 hover:-translate-y-0.5 hover:bg-white hover:shadow-[0_14px_30px_rgba(6,78,59,0.13)]"
+              className="group flex min-h-[82px] flex-col items-center justify-start gap-1.5 rounded-xl bg-white px-1 py-2 text-center transition duration-200 hover:-translate-y-0.5 hover:shadow-[0_12px_26px_rgba(190,18,60,0.12)]"
             >
-              <div className="grid h-11 w-11 place-items-center rounded-2xl bg-linear-to-br from-[#052e26] via-[#047857] to-[#a3e635] text-white shadow-[0_12px_26px_rgba(6,78,59,0.26)] ring-1 ring-white/40 transition-transform duration-300 group-hover:scale-105">
-                <LayoutGrid className="h-4.5 w-4.5" strokeWidth={2.2} />
+              <div className="relative h-11 w-11 transition-transform duration-200 group-hover:scale-105">
+                <Image
+                  src="/nuansapulsa-assets/layanan_lainnya.png"
+                  alt=""
+                  fill
+                  sizes="44px"
+                  className="object-contain"
+                />
               </div>
-              <span className="line-clamp-2 px-1 text-[10px] font-black leading-tight text-[#052e26]">
+              <span className="line-clamp-2 px-0.5 text-[10px] font-bold leading-tight text-[#303544]">
                 Lainnya
               </span>
             </Link>

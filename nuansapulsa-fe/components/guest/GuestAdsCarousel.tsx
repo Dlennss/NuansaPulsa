@@ -14,7 +14,7 @@ const fallbackAds: GuestAdItem[] = [
     id: -1,
     judul: "",
     keterangan: "",
-    image_url: "/images/guest-ads/banner-ewallet.png",
+    image_url: "/nuansapulsa-assets/banner_promo_lengkap.png",
     link_url: "/ewallet",
     urutan: 1,
     aktif: true,
@@ -127,7 +127,7 @@ export function GuestAdsCarousel({ items }: GuestAdsCarouselProps) {
   return (
     <section
       ref={viewportRef}
-      className="relative overflow-hidden rounded-[22px] border border-white/75 bg-white shadow-[0_16px_34px_rgba(6,78,59,0.12)] ring-1 ring-emerald-950/[0.04] [touch-action:pan-y]"
+      className="relative overflow-hidden rounded-[22px] bg-white shadow-[0_16px_34px_rgba(99,24,34,0.12)] ring-1 ring-red-950/[0.04] [touch-action:pan-y]"
       onTouchStart={handleTouchStart}
       onTouchMove={handleTouchMove}
       onTouchEnd={handleTouchEnd}
@@ -146,7 +146,7 @@ export function GuestAdsCarousel({ items }: GuestAdsCarouselProps) {
           const hasCaption = Boolean(item.judul || item.keterangan);
           const content = (
             <div
-              className="relative aspect-[19/9] shrink-0 overflow-hidden rounded-[18px] bg-emerald-50"
+              className="relative aspect-[19/9] shrink-0 overflow-hidden rounded-[18px] bg-red-50"
               style={{ width: slideWidth > 0 ? `${slideWidth}px` : "100%" }}
             >
               <img
