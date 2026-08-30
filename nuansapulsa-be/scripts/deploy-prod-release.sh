@@ -73,7 +73,6 @@ rsync -a \
   --exclude 'nuansapulsa-be' \
   --exclude 'pulsa-be' \
   --exclude 'nuansapulsa' \
-  --exclude 'scripts/deploy-prod-release.sh' \
   "$SOURCE_DIR/" "$BUILD_DIR/"
 
 if [[ -f "$SOURCE_DIR/.env" ]]; then

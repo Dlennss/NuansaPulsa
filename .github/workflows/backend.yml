@@ -69,6 +69,8 @@ jobs:
             --exclude 'nuansapulsa-be' \
             --exclude 'pulsa-be' \
             nuansapulsa-be/ "$SERVER_USER@$SERVER_HOST:$BACKEND_SOURCE_DIR/"
+          sshpass -e ssh -p "$SSH_PORT" "$SERVER_USER@$SERVER_HOST" \
+            "test -f '$BACKEND_SOURCE_DIR/chytron/client.go' && test -f '$BACKEND_SOURCE_DIR/scripts/deploy-prod-release.sh'"
 
       - name: Write backend environment
         shell: bash
@@ -90,7 +92,7 @@ jobs:
           set -euo pipefail
           export SSHPASS="$SERVER_PASSWORD"
           sshpass -e ssh -p "$SSH_PORT" "$SERVER_USER@$SERVER_HOST" \
-            "cd '$BACKEND_SOURCE_DIR' && SOURCE_DIR='$BACKEND_SOURCE_DIR' SKIP_SERVICE_RESTART=true bash scripts/deploy-prod-release.sh"
+            "cd '$BACKEND_SOURCE_DIR' && SOURCE_DIR='$BACKEND_SOURCE_DIR' RELEASE_ROOT=\"\$(dirname '$BACKEND_RELEASE_DIR')\" SHARED_LOG_DIR=\"\$(dirname \"\$(dirname '$BACKEND_RELEASE_DIR')\")/logs\" SKIP_SERVICE_RESTART=true bash scripts/deploy-prod-release.sh"
 
       - name: Restart NuansaPulsa services and Nginx
         shell: bash
