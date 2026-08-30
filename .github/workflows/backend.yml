@@ -47,7 +47,7 @@ jobs:
     name: Deploy backend
     runs-on: ubuntu-latest
     needs: test
-    if: github.event_name == 'workflow_dispatch' && github.ref == 'refs/heads/main'
+    if: github.event_name != 'pull_request' && github.ref == 'refs/heads/main'
 
     env:
       DEPLOY_HOST: ${{ secrets.HOST }}
@@ -69,10 +69,6 @@ jobs:
           test -n "$DEPLOY_USER" || { echo "Missing GitHub secret: USERNAME"; exit 1; }
           test -n "$DEPLOY_KEY" || { echo "Missing GitHub secret: SSH_PRIVATE_KEY"; exit 1; }
 
-      - name: Create backend archive
-        shell: bash
-        run: tar -czf backend-release.tgz nuansapulsa-be
-
       - name: Configure SSH
         shell: bash
         run: |
@@ -82,26 +78,18 @@ jobs:
           chmod 600 ~/.ssh/deploy_key
           ssh-keyscan -p "${DEPLOY_PORT:-22}" "$DEPLOY_HOST" >> ~/.ssh/known_hosts
 
-      - name: Upload backend archive
-        shell: bash
-        run: |
-          set -euo pipefail
-          scp -i ~/.ssh/deploy_key -P "${DEPLOY_PORT:-22}" backend-release.tgz "$DEPLOY_USER@$DEPLOY_HOST:/tmp/nuansapulsa-backend-${{ github.sha }}.tgz"
-
-      - name: Build and restart backend
+      - name: Pull, build, and restart backend
         shell: bash
         run: |
           set -euo pipefail
           ssh -i ~/.ssh/deploy_key -p "${DEPLOY_PORT:-22}" "$DEPLOY_USER@$DEPLOY_HOST" \
-            "REMOTE_APP_DIR='${REMOTE_APP_DIR:-/home/syarif/app/NuansaPulsa}' BACKEND_SERVICE='${BACKEND_SERVICE:-nuansapulsa-be.service}' RELEASE_SHA='${{ github.sha }}' bash -s" <<'REMOTE_SCRIPT'
+            "REMOTE_APP_DIR='${REMOTE_APP_DIR:-/home/syarif/app/NuansaPulsa}' BACKEND_SERVICE='${BACKEND_SERVICE:-nuansapulsa-be.service}' bash -s" <<'REMOTE_SCRIPT'
           set -euo pipefail
 
           APP_DIR="$REMOTE_APP_DIR"
-          ARCHIVE="/tmp/nuansapulsa-backend-$RELEASE_SHA.tgz"
 
-          mkdir -p "$APP_DIR"
-          tar -xzf "$ARCHIVE" -C "$APP_DIR"
-          rm -f "$ARCHIVE"
+          cd "$APP_DIR"
+          git pull --ff-only origin main
 
           if [ ! -f "$APP_DIR/nuansapulsa-be/.env" ]; then
             echo "Missing $APP_DIR/nuansapulsa-be/.env"
