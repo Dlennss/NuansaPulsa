@@ -259,10 +259,10 @@ func (s *AgentCreditService) SubmitApplication(ctx context.Context, auth helper.
 			return nil, errors.New("syarat dan ketentuan wajib disetujui")
 		}
 		in.ApplicantData["terms_accepted"] = in.TermsAccepted
-		in.ApplicantData["terms_version"] = "nuansapulsa-agent-credit-2026-07"
+		in.ApplicantData["terms_version"] = "NuansaPulsa-agent-credit-2026-07"
 	} else if in.TermsAccepted {
 		in.ApplicantData["terms_accepted"] = true
-		in.ApplicantData["terms_version"] = "nuansapulsa-agent-credit-2026-07"
+		in.ApplicantData["terms_version"] = "NuansaPulsa-agent-credit-2026-07"
 	}
 	if role == helper.RoleRetailAgent {
 		profile, err := s.repo.GetMemberCreditProfile(ctx, auth.MemberID)

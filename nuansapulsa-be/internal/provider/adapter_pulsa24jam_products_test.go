@@ -16,7 +16,7 @@ func TestPulsa24JamProducts(t *testing.T) {
 		if got := r.Header.Get("X-Api-Key"); got != "api-key" {
 			t.Fatalf("unexpected API key %q", got)
 		}
-		var payload nuansapulsa4JamPayRequest
+		var payload Pulsa24JamPayRequest
 		if err := json.NewDecoder(r.Body).Decode(&payload); err != nil {
 			t.Fatal(err)
 		}

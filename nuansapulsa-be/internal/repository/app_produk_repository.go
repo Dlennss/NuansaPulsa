@@ -119,7 +119,7 @@ JOIN LATERAL (
   FROM public.produk_app_pricing a
   WHERE a.produk_id = p.id
     AND a.aktif = true
-    AND LOWER(TRIM(a.provider)) = 'nuansapulsa4jam'
+    AND LOWER(TRIM(a.provider)) = 'pulsa24jam'
   ORDER BY
     a.harga ASC,
     a.id DESC

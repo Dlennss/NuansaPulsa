@@ -240,7 +240,7 @@ func main() {
 			Timeout:       cfg.Pulsa24JamTimeout,
 		})
 	} else {
-		log.Printf("nuansapulsa4jam client nonaktif: env PULSA24JAM_* belum lengkap")
+		log.Printf("Pulsa24Jam client nonaktif: env Pulsa24Jam_* belum lengkap")
 	}
 
 	handler := httpapi.Routes(httpapi.Deps{
@@ -269,7 +269,7 @@ func main() {
 		IdleTimeout:  60 * time.Second,
 	}
 
-	log.Printf("nuansapulsa running on :%s", cfg.Port)
+	log.Printf("NuansaPulsa running on :%s", cfg.Port)
 	if err := srv.ListenAndServe(); err != nil && err != http.ErrServerClosed {
 		log.Fatalf("server error: %v", err)
 	}

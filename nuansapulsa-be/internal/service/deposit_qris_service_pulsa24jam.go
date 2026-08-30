@@ -12,7 +12,7 @@ import (
 	"nuansapulsa/internal/repository"
 )
 
-const nuansapulsa4JamDepositNoteMarker = "provider=nuansapulsa4jam"
+const Pulsa24JamDepositNoteMarker = "provider=Pulsa24Jam"
 
 func (s *DepositService) CreateQrisRequest(ctx context.Context, memberID int64, role string, amount int64) (*DepositQrisCreateResult, error) {
 	if memberID <= 0 {
@@ -36,14 +36,14 @@ func (s *DepositService) CreateQrisRequest(ctx context.Context, memberID int64, 
 	if upstream.Amount > 0 && upstream.Amount != amount {
 		return nil, errors.New("nominal QRIS Pulsa24Jam tidak sesuai")
 	}
-	note := nuansapulsa4JamDepositNote(upstream)
+	note := Pulsa24JamDepositNote(upstream)
 	if err := s.repo.CreateQrisRequest(ctx, memberID, amount, depositQrisMethod, refID, note); err != nil {
 		return nil, err
 	}
 	if err := s.repo.UpdateQrisPending(ctx, refID, upstream.QRURL, note); err != nil {
 		return nil, err
 	}
-	return nuansapulsa4JamDepositResult(refID, amount, upstream), nil
+	return Pulsa24JamDepositResult(refID, amount, upstream), nil
 }
 
 func (s *DepositService) GetQrisStatusByRefID(ctx context.Context, memberID int64, role, refID string, refresh bool) (*DepositQrisCreateResult, *repository.DepositRequestRow, error) {
@@ -64,7 +64,7 @@ func (s *DepositService) GetQrisStatusByRefID(ctx context.Context, memberID int6
 	if row.MemberID != memberID {
 		return nil, nil, errors.New("deposit qris tidak ditemukan")
 	}
-	if !strings.Contains(strings.ToLower(row.Note), nuansapulsa4JamDepositNoteMarker) {
+	if !strings.Contains(strings.ToLower(row.Note), Pulsa24JamDepositNoteMarker) {
 		return nil, nil, errors.New("deposit QRIS bukan milik Pulsa24Jam")
 	}
 
@@ -81,7 +81,7 @@ func (s *DepositService) GetQrisStatusByRefID(ctx context.Context, memberID int6
 	}
 	result := buildDepositQrisResultFromRow(row)
 	if upstream != nil {
-		result = nuansapulsa4JamDepositResult(refID, row.Amount, upstream)
+		result = Pulsa24JamDepositResult(refID, row.Amount, upstream)
 		result.Status = row.Status
 	}
 	return result, row, nil
@@ -98,7 +98,7 @@ func (s *DepositService) syncPulsa24JamQrisStatus(ctx context.Context, row *repo
 	if err != nil {
 		return nil, err
 	}
-	note := nuansapulsa4JamDepositNote(upstream)
+	note := Pulsa24JamDepositNote(upstream)
 	if err := s.repo.UpdateQrisPending(ctx, row.RefID, upstream.QRURL, note); err != nil {
 		return nil, err
 	}
@@ -126,7 +126,7 @@ func (s *DepositService) ReconcilePulsa24JamQris(ctx context.Context, limit int)
 	processed := 0
 	for i := range rows {
 		row := &rows[i]
-		if !strings.EqualFold(strings.TrimSpace(row.Metode), depositQrisMethod) || !strings.Contains(strings.ToLower(row.Note), nuansapulsa4JamDepositNoteMarker) {
+		if !strings.EqualFold(strings.TrimSpace(row.Metode), depositQrisMethod) || !strings.Contains(strings.ToLower(row.Note), Pulsa24JamDepositNoteMarker) {
 			continue
 		}
 		if _, err := s.syncPulsa24JamQrisStatus(ctx, row); err != nil {
@@ -137,7 +137,7 @@ func (s *DepositService) ReconcilePulsa24JamQris(ctx context.Context, limit int)
 	return processed, nil
 }
 
-func nuansapulsa4JamDepositResult(refID string, amount int64, upstream *provider.Pulsa24JamDepositQRISResponse) *DepositQrisCreateResult {
+func Pulsa24JamDepositResult(refID string, amount int64, upstream *provider.Pulsa24JamDepositQRISResponse) *DepositQrisCreateResult {
 	return &DepositQrisCreateResult{
 		RefID:         refID,
 		Amount:        amount,
@@ -152,8 +152,8 @@ func nuansapulsa4JamDepositResult(refID string, amount int64, upstream *provider
 	}
 }
 
-func nuansapulsa4JamDepositNote(upstream *provider.Pulsa24JamDepositQRISResponse) string {
-	return fmt.Sprintf("%s provider_refid=%s status=%s", nuansapulsa4JamDepositNoteMarker, strings.TrimSpace(upstream.ProviderRefID), normalizePulsa24JamDepositStatus(upstream.Status))
+func Pulsa24JamDepositNote(upstream *provider.Pulsa24JamDepositQRISResponse) string {
+	return fmt.Sprintf("%s provider_refid=%s status=%s", Pulsa24JamDepositNoteMarker, strings.TrimSpace(upstream.ProviderRefID), normalizePulsa24JamDepositStatus(upstream.Status))
 }
 
 func normalizePulsa24JamDepositStatus(status string) string {

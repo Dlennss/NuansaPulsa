@@ -84,7 +84,7 @@ func BuildPaymentRawRequest(midtransReq any, walletDebit int64, qrisAmount int64
 
 func BuildBalancePaymentRawRequest(walletDebit, creditDebit, orderAmount int64) string {
 	payload := map[string]any{
-		"provider":       "nuansapulsa4jam",
+		"provider":       "Pulsa24Jam",
 		"wallet_debit":   walletDebit,
 		"credit_debit":   creditDebit,
 		"qris_amount":    0,

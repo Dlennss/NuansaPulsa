@@ -38,7 +38,7 @@ FROM public.produk_provider_map ppm
 JOIN public.produk p ON p.id = ppm.produk_id
 JOIN public.provider pr ON LOWER(TRIM(pr.nama)) = LOWER(TRIM(ppm.provider))
 WHERE UPPER(TRIM(p.sku)) = $1
-  AND LOWER(TRIM(ppm.provider)) = 'nuansapulsa4jam'
+  AND LOWER(TRIM(ppm.provider)) = 'pulsa24jam'
   AND pr.aktif = true
   AND ppm.aktif = true
   AND ($2 <= 0 OR (ppm.minimal_nominal IS NULL OR ppm.minimal_nominal <= $2))

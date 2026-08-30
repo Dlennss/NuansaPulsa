@@ -31,7 +31,7 @@ func TestAppOrderProviderImmediateRejectPulsa24Jam(t *testing.T) {
 
 	for _, tt := range tests {
 		t.Run(tt.name, func(t *testing.T) {
-			if got := appOrderProviderImmediateReject("nuansapulsa4jam", tt.body); got != tt.want {
+			if got := appOrderProviderImmediateReject("Pulsa24Jam", tt.body); got != tt.want {
 				t.Fatalf("appOrderProviderImmediateReject() = %v, want %v", got, tt.want)
 			}
 		})
@@ -39,10 +39,10 @@ func TestAppOrderProviderImmediateRejectPulsa24Jam(t *testing.T) {
 }
 
 func TestAppOrderProviderProductUnavailable(t *testing.T) {
-	if !appOrderProviderProductUnavailable("nuansapulsa4jam", `{"message":"Produk kehabisan stok","status":3}`) {
+	if !appOrderProviderProductUnavailable("Pulsa24Jam", `{"message":"Produk kehabisan stok","status":3}`) {
 		t.Fatal("out-of-stock response should quarantine the product")
 	}
-	if appOrderProviderProductUnavailable("nuansapulsa4jam", `{"message":"Nomor tujuan salah","status":3}`) {
+	if appOrderProviderProductUnavailable("Pulsa24Jam", `{"message":"Nomor tujuan salah","status":3}`) {
 		t.Fatal("business rejection unrelated to stock must not quarantine the product")
 	}
 	if appOrderProviderProductUnavailable("yuscom", `{"message":"Produk kehabisan stok","status":3}`) {

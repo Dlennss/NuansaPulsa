@@ -80,11 +80,11 @@ func DepositRouter(mux *http.ServeMux, wrap Middleware, db *sql.DB, lbClient *lo
 				n, err := svc.ReconcilePulsa24JamQris(ctx, 25)
 				cancel()
 				if err != nil {
-					log.Printf("[nuansapulsa4jam_qris_reconcile] error: %v", err)
+					log.Printf("[Pulsa24Jam_qris_reconcile] error: %v", err)
 					continue
 				}
 				if n > 0 {
-					log.Printf("[nuansapulsa4jam_qris_reconcile] %d deposit diperiksa", n)
+					log.Printf("[Pulsa24Jam_qris_reconcile] %d deposit diperiksa", n)
 				}
 			}
 		}()

@@ -1,8 +1,8 @@
 #!/usr/bin/env bash
 set -euo pipefail
 
-SOURCE_DIR="${SOURCE_DIR:-/var/lib/syslog-ng/NuansaPulsa/pulsa-fe}"
-RELEASE_ROOT="${RELEASE_ROOT:-/var/lib/syslog-ng/NuansaPulsa/releases/pulsa-fe}"
+SOURCE_DIR="${SOURCE_DIR:-/var/lib/syslog-ng/NuansaPulsa/nuansapulsa-fe}"
+RELEASE_ROOT="${RELEASE_ROOT:-/var/lib/syslog-ng/NuansaPulsa/releases/nuansapulsa-fe}"
 KEEP_RELEASES="${KEEP_RELEASES:-3}"
 BUILD_ID="$(date +%Y%m%d%H%M%S)"
 BUILD_DIR="$RELEASE_ROOT/build-$BUILD_ID"

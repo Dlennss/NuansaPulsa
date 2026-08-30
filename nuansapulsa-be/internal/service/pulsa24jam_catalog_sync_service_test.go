@@ -23,7 +23,7 @@ func TestPulsa24JamCatalogItemFromProductKeepsUpstreamCatalog(t *testing.T) {
 	}
 	for _, tt := range tests {
 		t.Run(tt.name, func(t *testing.T) {
-			got := nuansapulsa4JamCatalogItemFromProduct(tt.product)
+			got := Pulsa24JamCatalogItemFromProduct(tt.product)
 			if got.SKU != tt.product.SKU || got.Name != tt.product.Name || got.Price != price {
 				t.Fatalf("produk berubah saat dipetakan: %+v", got)
 			}
@@ -34,7 +34,7 @@ func TestPulsa24JamCatalogItemFromProductKeepsUpstreamCatalog(t *testing.T) {
 func TestPulsa24JamCatalogItemUsesAppBasePrice(t *testing.T) {
 	legacyPrice := int64(12500)
 	appBasePrice := int64(13000)
-	got := nuansapulsa4JamCatalogItemFromProduct(provider.Pulsa24JamProduct{
+	got := Pulsa24JamCatalogItemFromProduct(provider.Pulsa24JamProduct{
 		SKU: "ML10", Name: "Mobile Legend 10 Diamond", Price: &legacyPrice, AppBasePrice: &appBasePrice,
 	})
 	if got.Price != appBasePrice {

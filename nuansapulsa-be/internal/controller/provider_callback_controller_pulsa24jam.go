@@ -25,7 +25,7 @@ func (h *ProviderCallbackController) CallbackPulsa24Jam(w http.ResponseWriter, r
 	if r.Method == http.MethodPost {
 		raw = readProviderCallbackBody(r)
 	}
-	appendProviderLog("nuansapulsa4jam", r, raw)
+	appendProviderLog("Pulsa24Jam", r, raw)
 
 	payload := map[string]any{}
 	if len(raw) > 0 && strings.TrimSpace(string(raw)) != "" {
@@ -37,6 +37,9 @@ func (h *ProviderCallbackController) CallbackPulsa24Jam(w http.ResponseWriter, r
 
 func validPulsa24JamCallbackToken(r *http.Request) bool {
 	expected := strings.TrimSpace(os.Getenv("PULSA24JAM_CALLBACK_TOKEN"))
+	if expected == "" {
+		expected = strings.TrimSpace(os.Getenv("Pulsa24Jam_CALLBACK_TOKEN"))
+	}
 	if expected == "" {
 		return true
 	}

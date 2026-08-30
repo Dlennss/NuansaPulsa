@@ -1,14 +1,13 @@
 # secrets
 .env
 .env.*
-!.env.example
 *.key
 *.pem
 *.p12
 *.crt
 
 # build output
-pulsa2
+nuansapulsa
 *.exe
 *.out
 pulsa-be

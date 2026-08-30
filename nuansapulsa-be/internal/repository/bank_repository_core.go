@@ -4,7 +4,6 @@ import (
 	"context"
 	"database/sql"
 	"errors"
-	"os"
 	"strings"
 )
 
@@ -13,8 +12,11 @@ type BankRepository struct {
 }
 
 const (
-	systemQrisBankName = "QRIS"
-	systemQRTPBankName = "QRTP"
+	systemQrisBankName              = "QRIS"
+	systemQRTPBankName              = "QRTP"
+	NuansaPulsaDepositBankName      = "BNI"
+	NuansaPulsaDepositAccountNumber = "1955637480"
+	NuansaPulsaDepositAccountHolder = "M Sansan Irfanda"
 )
 
 func NewBankRepository(db *sql.DB) *BankRepository {
@@ -28,14 +30,24 @@ func (r *BankRepository) EnsureNuansaPulsaDepositBank(ctx context.Context) error
 		return errors.New("bank repository belum dikonfigurasi")
 	}
 
-	bankName := strings.TrimSpace(os.Getenv("NUANSAPULSA_DEPOSIT_BANK_NAME"))
-	accountNumber := strings.TrimSpace(os.Getenv("NUANSAPULSA_DEPOSIT_ACCOUNT_NUMBER"))
-	accountHolder := strings.TrimSpace(os.Getenv("NUANSAPULSA_DEPOSIT_ACCOUNT_HOLDER"))
-	if bankName == "" || accountNumber == "" || accountHolder == "" {
+	result, err := r.db.ExecContext(ctx, `
+UPDATE public.bank
+SET nama = $2,
+    nomor_rekening = $1,
+    atas_nama = $3,
+    aktif = true,
+    admin_staff_only = false,
+    diubah_pada = now()
+WHERE regexp_replace(COALESCE(nomor_rekening, ''), '[^0-9]', '', 'g') = $1
+`, NuansaPulsaDepositAccountNumber, NuansaPulsaDepositBankName, NuansaPulsaDepositAccountHolder)
+	if err != nil {
+		return err
+	}
+	if affected, _ := result.RowsAffected(); affected > 0 {
 		return nil
 	}
 
-	_, err := r.db.ExecContext(ctx, `
+	_, err = r.db.ExecContext(ctx, `
 INSERT INTO public.bank
   (nama, nomor_rekening, atas_nama, saldo, aktif, admin_staff_only, dibuat_pada, diubah_pada)
 VALUES
@@ -46,7 +58,7 @@ SET nomor_rekening = EXCLUDED.nomor_rekening,
     aktif = true,
     admin_staff_only = false,
     diubah_pada = now()
-`, bankName, accountNumber, accountHolder)
+`, NuansaPulsaDepositBankName, NuansaPulsaDepositAccountNumber, NuansaPulsaDepositAccountHolder)
 	return err
 }
 

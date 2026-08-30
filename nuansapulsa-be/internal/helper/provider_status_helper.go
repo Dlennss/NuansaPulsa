@@ -186,7 +186,7 @@ func ProviderResponseStateOf(provider, rc, msg string) ProviderResponseState {
 		case LooksLikeRajabillerImmediateReject(rc, msg):
 			return ProviderResponseFailed
 		}
-	case "nuansapulsa4jam":
+	case "pulsa24jam":
 		switch {
 		case upper == "SUCCESS" || upper == "SUKSES" || strings.Contains(upper, "TRANSAKSI BERHASIL") || (strings.Contains(upper, `"STATUS"`) && strings.Contains(upper, "SUCCESS")) || (strings.Contains(upper, `"STATUS"`) && strings.Contains(upper, "SUKSES")) || strings.Contains(upper, `"OK":TRUE`) || strings.Contains(upper, `"OK": TRUE`):
 			return ProviderResponseSuccess

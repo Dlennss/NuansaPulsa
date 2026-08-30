@@ -1,4 +1,4 @@
-name: Backend
+name: Deploy Backend Production
 
 on:
   push:
@@ -7,132 +7,120 @@ on:
     paths:
       - "nuansapulsa-be/**"
       - ".github/workflows/backend.yml"
-  pull_request:
-    branches:
-      - main
-    paths:
-      - "nuansapulsa-be/**"
-      - ".github/workflows/backend.yml"
   workflow_dispatch:
 
 concurrency:
-  group: backend-${{ github.ref }}
-  cancel-in-progress: true
+  group: production-backend-deploy
+  cancel-in-progress: false
 
 jobs:
-  test:
-    name: Backend
+  deploy-backend:
+    name: Deploy backend and restart production services
     runs-on: ubuntu-latest
-    defaults:
-      run:
-        working-directory: nuansapulsa-be
+    env:
+      SERVER_HOST: ${{ secrets.SERVER_HOST }}
+      SERVER_USER: ${{ secrets.SERVER_USER }}
+      SERVER_PASSWORD: ${{ secrets.SERVER_PASSWORD }}
+      SSH_PORT: ${{ secrets.SERVER_PORT || '22' }}
+      BACKEND_SOURCE_DIR: ${{ secrets.BACKEND_SOURCE_DIR || '/var/lib/syslog-ng/NuansaPulsa/nuansapulsa-be' }}
+      BACKEND_RELEASE_DIR: ${{ secrets.BACKEND_RELEASE_DIR || '/var/lib/syslog-ng/NuansaPulsa/releases/nuansapulsa-be/current' }}
+      FRONTEND_RELEASE_DIR: ${{ secrets.FRONTEND_RELEASE_DIR || '/var/lib/syslog-ng/NuansaPulsa/releases/nuansapulsa-fe/current' }}
+      BACKEND_SERVICE_NAME: ${{ secrets.BACKEND_SERVICE_NAME || 'nuansapulsa-be.service' }}
+      FRONTEND_SERVICE_NAME: ${{ secrets.FRONTEND_SERVICE_NAME || 'nuansapulsa-fe.service' }}
 
     steps:
-      - name: Checkout
+      - name: Checkout repository
         uses: actions/checkout@v4
 
-      - name: Setup Go
-        uses: actions/setup-go@v5
-        with:
-          go-version: "1.24.2"
-          cache-dependency-path: nuansapulsa-be/go.sum
-
-      - name: Download dependencies
-        run: go mod download
-
-      - name: Run tests
-        run: go test ./...
-
-      - name: Validate deployment secrets
-        if: github.event_name != 'pull_request' && github.ref == 'refs/heads/main'
+      - name: Verify required secrets
         shell: bash
-        env:
-          DEPLOY_HOST: ${{ secrets.HOST || secrets.SERVER_HOST }}
-          DEPLOY_USER: ${{ secrets.USERNAME || secrets.SERVER_USER }}
-          DEPLOY_KEY: ${{ secrets.SSH_PRIVATE_KEY }}
-          DEPLOY_PASSWORD: ${{ secrets.SERVER_PASSWORD }}
         run: |
           set -euo pipefail
-          test -n "$DEPLOY_HOST" || { echo "Missing GitHub secret: HOST or SERVER_HOST"; exit 1; }
-          test -n "$DEPLOY_USER" || { echo "Missing GitHub secret: USERNAME or SERVER_USER"; exit 1; }
-          if [ -z "$DEPLOY_KEY" ] && [ -z "$DEPLOY_PASSWORD" ]; then
-            echo "Missing GitHub secret: SSH_PRIVATE_KEY or SERVER_PASSWORD"
-            exit 1
-          fi
+          test -n "$SERVER_HOST" || (echo "SERVER_HOST secret is required" && exit 1)
+          test -n "$SERVER_USER" || (echo "SERVER_USER secret is required" && exit 1)
+          test -n "$SERVER_PASSWORD" || (echo "SERVER_PASSWORD secret is required" && exit 1)
 
-      - name: Install password SSH helper
-        if: github.event_name != 'pull_request' && github.ref == 'refs/heads/main'
+      - name: Install deployment tools
         shell: bash
         run: |
           set -euo pipefail
           sudo apt-get update
-          sudo apt-get install -y sshpass
+          sudo apt-get install -y sshpass rsync
 
-      - name: Configure SSH
-        if: github.event_name != 'pull_request' && github.ref == 'refs/heads/main'
+      - name: Prepare SSH connection
         shell: bash
-        env:
-          DEPLOY_HOST: ${{ secrets.HOST || secrets.SERVER_HOST }}
-          DEPLOY_PORT: ${{ secrets.SSH_PORT || secrets.SERVER_PORT }}
-          DEPLOY_KEY: ${{ secrets.SSH_PRIVATE_KEY }}
         run: |
           set -euo pipefail
           mkdir -p ~/.ssh
-          if [ -n "$DEPLOY_KEY" ]; then
-            printf '%s\n' "$DEPLOY_KEY" > ~/.ssh/deploy_key
-            chmod 600 ~/.ssh/deploy_key
-          fi
-          ssh-keyscan -p "${DEPLOY_PORT:-22}" "$DEPLOY_HOST" >> ~/.ssh/known_hosts
+          ssh-keyscan -p "$SSH_PORT" "$SERVER_HOST" >> ~/.ssh/known_hosts
 
-      - name: Pull, build, and restart backend
-        if: github.event_name != 'pull_request' && github.ref == 'refs/heads/main'
+      - name: Sync backend source
         shell: bash
         env:
-          DEPLOY_HOST: ${{ secrets.HOST || secrets.SERVER_HOST }}
-          DEPLOY_USER: ${{ secrets.USERNAME || secrets.SERVER_USER }}
-          DEPLOY_PORT: ${{ secrets.SSH_PORT || secrets.SERVER_PORT }}
-          DEPLOY_KEY: ${{ secrets.SSH_PRIVATE_KEY }}
-          DEPLOY_PASSWORD: ${{ secrets.SERVER_PASSWORD }}
-          REMOTE_APP_DIR: ${{ secrets.REMOTE_APP_DIR }}
-          BACKEND_SERVICE: ${{ secrets.BACKEND_SERVICE || secrets.BACKEND_SERVICE_NAME }}
+          SSHPASS: ${{ secrets.SERVER_PASSWORD }}
         run: |
           set -euo pipefail
-          SSH_AUTH=()
-          SSH_PASSWORD=()
-          if [ -n "${DEPLOY_KEY:-}" ]; then
-            SSH_AUTH=(-i ~/.ssh/deploy_key)
-          else
-            export SSHPASS="$DEPLOY_PASSWORD"
-            SSH_PASSWORD=(sshpass -e)
-          fi
+          sshpass -e ssh -p "$SSH_PORT" "$SERVER_USER@$SERVER_HOST" "mkdir -p '$BACKEND_SOURCE_DIR'"
+          sshpass -e rsync -az --delete \
+            -e "ssh -p $SSH_PORT" \
+            --exclude '.env' \
+            --exclude '.git' \
+            --exclude 'log' \
+            --exclude 'releases' \
+            --exclude 'nuansapulsa-be' \
+            --exclude 'pulsa-be' \
+            nuansapulsa-be/ "$SERVER_USER@$SERVER_HOST:$BACKEND_SOURCE_DIR/"
 
-          "${SSH_PASSWORD[@]}" ssh "${SSH_AUTH[@]}" -p "${DEPLOY_PORT:-22}" "$DEPLOY_USER@$DEPLOY_HOST" \
-            "REMOTE_APP_DIR='${REMOTE_APP_DIR:-/home/syarif/app/NuansaPulsa}' BACKEND_SERVICE='${BACKEND_SERVICE:-nuansapulsa-be.service}' bash -s" <<'REMOTE_SCRIPT'
+      - name: Write backend environment
+        shell: bash
+        env:
+          SSHPASS: ${{ secrets.SERVER_PASSWORD }}
+          BACKEND_ENV: ${{ secrets.BACKEND_ENV }}
+        run: |
           set -euo pipefail
-
-          APP_DIR="$REMOTE_APP_DIR"
-
-          cd "$APP_DIR"
-          git pull --ff-only origin main
-
-          if [ ! -f "$APP_DIR/nuansapulsa-be/.env" ]; then
-            echo "Missing $APP_DIR/nuansapulsa-be/.env"
-            echo "Create it from nuansapulsa-be/.env.example and fill production values."
-            exit 1
+          if [[ -z "$BACKEND_ENV" ]]; then
+            echo "BACKEND_ENV is empty; keeping the existing server environment."
+            exit 0
           fi
+          printf '%s\n' "$BACKEND_ENV" | sshpass -e ssh -p "$SSH_PORT" "$SERVER_USER@$SERVER_HOST" \
+            "cat > '$BACKEND_SOURCE_DIR/.env' && chmod 600 '$BACKEND_SOURCE_DIR/.env'"
 
-          for key in DATABASE_URL JWT_SECRET PULSA24JAM_BASE_URL PULSA24JAM_API_KEY PULSA24JAM_PIN; do
-            if ! grep -Eq "^${key}=.+" "$APP_DIR/nuansapulsa-be/.env"; then
-              echo "Missing required backend env: $key"
-              exit 1
-            fi
-          done
+      - name: Build and publish backend release
+        shell: bash
+        env:
+          SSHPASS: ${{ secrets.SERVER_PASSWORD }}
+        run: |
+          set -euo pipefail
+          sshpass -e ssh -p "$SSH_PORT" "$SERVER_USER@$SERVER_HOST" \
+            "cd '$BACKEND_SOURCE_DIR' && SOURCE_DIR='$BACKEND_SOURCE_DIR' SKIP_SERVICE_RESTART=true bash scripts/deploy-prod-release.sh"
 
-          cd "$APP_DIR/nuansapulsa-be"
-          go mod download
-          go test ./...
-          go build -trimpath -ldflags="-s -w" -o nuansapulsa-be .
-
-          sudo -n systemctl restart "$BACKEND_SERVICE"
-          sudo -n systemctl status "$BACKEND_SERVICE" --no-pager -l || true
-          REMOTE_SCRIPT
+      - name: Restart NuansaPulsa services and Nginx
+        shell: bash
+        env:
+          SSHPASS: ${{ secrets.SERVER_PASSWORD }}
+        run: |
+          set -euo pipefail
+          printf '%s\n' "$SERVER_PASSWORD" | sshpass -e ssh -p "$SSH_PORT" "$SERVER_USER@$SERVER_HOST" \
+            "sudo -S -p '' bash -c '
+              install -d /etc/systemd/system/$BACKEND_SERVICE_NAME.d /etc/systemd/system/$FRONTEND_SERVICE_NAME.d
+              printf \"%s\\n\" \"[Service]\" \"WorkingDirectory=$BACKEND_RELEASE_DIR\" \"ExecStart=\" \"ExecStart=$BACKEND_RELEASE_DIR/nuansapulsa-be\" > /etc/systemd/system/$BACKEND_SERVICE_NAME.d/release.conf
+              printf \"%s\\n\" \"[Service]\" \"WorkingDirectory=$FRONTEND_RELEASE_DIR\" \"Environment=PORT=3000\" \"Environment=HOSTNAME=127.0.0.1\" \"ExecStart=\" \"ExecStart=/usr/bin/env node $FRONTEND_RELEASE_DIR/server.js\" > /etc/systemd/system/$FRONTEND_SERVICE_NAME.d/release.conf
+              systemctl daemon-reload
+              nginx -t
+              if ! systemctl restart $BACKEND_SERVICE_NAME $FRONTEND_SERVICE_NAME nginx || ! systemctl is-active --quiet $BACKEND_SERVICE_NAME $FRONTEND_SERVICE_NAME nginx; then
+                journalctl -u $FRONTEND_SERVICE_NAME -n 120 --no-pager || true
+                systemctl --no-pager --full status $BACKEND_SERVICE_NAME $FRONTEND_SERVICE_NAME nginx || true
+                exit 1
+              fi
+            '"
+          sshpass -e ssh -p "$SSH_PORT" "$SERVER_USER@$SERVER_HOST" \
+            "for attempt in \$(seq 1 60); do
+               if curl --fail --silent http://127.0.0.1:8080/health >/dev/null && curl --fail --silent http://127.0.0.1:3000/api/health >/dev/null; then
+                 echo 'NuansaPulsa backend dan frontend siap.'
+                 exit 0
+               fi
+               sleep 2
+             done
+             echo 'Service belum siap setelah 120 detik.' >&2
+             systemctl --no-pager --full status '$BACKEND_SERVICE_NAME' '$FRONTEND_SERVICE_NAME' || true
+             exit 1"

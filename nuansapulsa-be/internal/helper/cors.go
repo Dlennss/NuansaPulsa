@@ -7,7 +7,7 @@ import (
 )
 
 // CORS adds Access-Control headers. Allowed origins from CORS_ORIGINS env (comma-separated).
-// If env is empty, defaults to allowing nuansapulsa.net and nuansapulsa.org.
+// If env is empty, defaults to allowing NuansaPulsa.net and NuansaPulsa.org.
 func CORS(next http.Handler) http.Handler {
 	return http.HandlerFunc(func(w http.ResponseWriter, r *http.Request) {
 		origin := r.Header.Get("Origin")
@@ -29,7 +29,7 @@ func CORS(next http.Handler) http.Handler {
 func isAllowedOrigin(origin string) bool {
 	envOrigins := os.Getenv("CORS_ORIGINS")
 	if envOrigins == "" {
-		envOrigins = "https://nuansapulsa.local,https://nuansapulsa.org,https://nuansapulsa.local,http://localhost:3000,http://localhost:3003"
+		envOrigins = "https://NuansaPulsa.local,https://NuansaPulsa.org,https://NuansaPulsa.local,http://localhost:3000,http://localhost:3003"
 	}
 	origin = strings.TrimRight(strings.ToLower(strings.TrimSpace(origin)), "/")
 	for _, allowed := range strings.Split(envOrigins, ",") {

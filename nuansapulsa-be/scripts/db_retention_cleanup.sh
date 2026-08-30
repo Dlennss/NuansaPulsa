@@ -4,7 +4,7 @@ set -euo pipefail
 MODE="${1:-dry-run}"
 RETENTION_INTERVAL="${RETENTION_INTERVAL:-3 months}"
 BATCH_SIZE="${BATCH_SIZE:-50000}"
-APP_DIR="${APP_DIR:-/home/syarif/app/pulsa-be}"
+APP_DIR="${APP_DIR:-/var/lib/syslog-ng/NuansaPulsa/releases/nuansapulsa-be/current}"
 ARCHIVE_ROOT="${ARCHIVE_ROOT:-/home/syarif/app/data/db-retention-archive}"
 LOG_FILE="${LOG_FILE:-/home/syarif/app/logs/db-retention-cleanup.log}"
 

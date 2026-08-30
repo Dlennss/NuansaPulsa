@@ -6,7 +6,7 @@ import (
 	"strings"
 )
 
-const nuansapulsa4JamUnavailableStatus = "PULSA24JAM_OUT_OF_STOCK"
+const Pulsa24JamUnavailableStatus = "Pulsa24Jam_OUT_OF_STOCK"
 
 func (r *ProdukAppPricingRepository) Create(ctx context.Context, in ProdukAppPricingUpsertInput) (int64, error) {
 	var id int64
@@ -96,7 +96,7 @@ SET aktif = false,
     diubah_pada = now()
 WHERE produk_id = $1
   AND LOWER(TRIM(provider)) = $2
-`, produkID, provider, nuansapulsa4JamUnavailableStatus)
+`, produkID, provider, Pulsa24JamUnavailableStatus)
 	if err != nil {
 		return err
 	}

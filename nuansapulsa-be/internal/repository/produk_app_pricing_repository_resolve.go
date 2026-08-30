@@ -118,7 +118,7 @@ JOIN public.produk p ON p.id = a.produk_id
 JOIN public.kategori k ON k.id = p.kategori_id
 WHERE a.produk_id = $1
   AND a.aktif = true
-  AND LOWER(TRIM(a.provider)) = 'nuansapulsa4jam'
+  AND LOWER(TRIM(a.provider)) = 'pulsa24jam'
 ORDER BY
   a.harga ASC,
   a.id DESC
@@ -163,5 +163,5 @@ LIMIT 1
 }
 
 func (r *ProdukAppPricingRepository) GetByProdukIDActive(ctx context.Context, produkID int64) (*ProdukAppPricingRow, error) {
-	return r.GetByProdukIDProviderActive(ctx, produkID, "nuansapulsa4jam")
+	return r.GetByProdukIDProviderActive(ctx, produkID, "Pulsa24Jam")
 }

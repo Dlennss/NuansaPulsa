@@ -27,12 +27,12 @@ func (s *Pulsa24JamCatalogSyncService) Sync(ctx context.Context) (*repository.Pu
 	}
 	items := make([]repository.Pulsa24JamCatalogItem, 0, len(products))
 	for _, product := range products {
-		items = append(items, nuansapulsa4JamCatalogItemFromProduct(product))
+		items = append(items, Pulsa24JamCatalogItemFromProduct(product))
 	}
 	return s.repo.Sync(ctx, items)
 }
 
-func nuansapulsa4JamCatalogItemFromProduct(product provider.Pulsa24JamProduct) repository.Pulsa24JamCatalogItem {
+func Pulsa24JamCatalogItemFromProduct(product provider.Pulsa24JamProduct) repository.Pulsa24JamCatalogItem {
 	price := int64(0)
 	if product.AppBasePrice != nil {
 		price = *product.AppBasePrice

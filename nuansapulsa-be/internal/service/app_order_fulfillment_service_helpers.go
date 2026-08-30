@@ -14,7 +14,7 @@ import (
 	"nuansapulsa/yuscom"
 )
 
-var nuansapulsa4JamFixedWalletAmountPattern = regexp.MustCompile(`([0-9]+)$`)
+var Pulsa24JamFixedWalletAmountPattern = regexp.MustCompile(`([0-9]+)$`)
 
 func (s *AppOrderFulfillmentService) handleFailedOrder(ctx context.Context, order *repository.AppOrderRow, providerTrxID int64, msg, reasonPrefix string) error {
 	if order == nil {
@@ -54,7 +54,7 @@ func appOrderProviderLooksLikeSystemIssue(provider, body string) bool {
 	switch strings.TrimSpace(strings.ToLower(provider)) {
 	case "gemilang":
 		return gemilang.LooksLikeSystemIssue(body)
-	case "nuansapulsa4jam":
+	case "pulsa24jam":
 		upper := strings.ToUpper(strings.TrimSpace(body))
 		return strings.Contains(upper, "TIMEOUT") || strings.Contains(upper, "SYSTEM ERROR") || strings.Contains(upper, "MAINTENANCE")
 	default:
@@ -66,7 +66,7 @@ func appOrderProviderImmediateReject(provider, body string) bool {
 	switch strings.TrimSpace(strings.ToLower(provider)) {
 	case "gemilang":
 		return helper.LooksLikeGemilangImmediateReject(body)
-	case "nuansapulsa4jam":
+	case "pulsa24jam":
 		upper := strings.ToUpper(strings.TrimSpace(body))
 		return strings.Contains(upper, "GAGAL") ||
 			strings.Contains(upper, "FAILED") ||
@@ -114,7 +114,7 @@ func resolvePulsa24JamAppRequest(providerProductCode string, order *repository.A
 		return providerProductCode, qty
 	}
 
-	match := nuansapulsa4JamFixedWalletAmountPattern.FindStringSubmatch(sku)
+	match := Pulsa24JamFixedWalletAmountPattern.FindStringSubmatch(sku)
 	if len(match) != 2 {
 		return providerProductCode, qty
 	}
@@ -133,7 +133,7 @@ func appOrderProviderLooksLikeAccepted(provider, body string) bool {
 	switch strings.TrimSpace(strings.ToLower(provider)) {
 	case "gemilang":
 		return helper.LooksLikeGemilangAccepted(body) || helper.LooksLikeGemilangSuccess(body)
-	case "nuansapulsa4jam":
+	case "pulsa24jam":
 		upper := strings.ToUpper(strings.TrimSpace(body))
 		return strings.Contains(upper, "SUKSES") ||
 			strings.Contains(upper, "SUCCESS") ||

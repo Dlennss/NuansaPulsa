@@ -122,7 +122,7 @@ VALUES ($1,$2,'DEBIT',$3,'APP_ORDER_WALLET_DEBIT','pembayaran produk melalui Pul
 INSERT INTO public.app_order_payment
   (app_order_id, order_id, transaction_id, gross_amount, payment_type, transaction_status, fraud_status, acquirer, qr_url, raw_request, raw_callback, paid_at, expired_at, settlement_time, dibuat_pada, diubah_pada)
 VALUES
-  ($1,$2,NULL,0,'balance','settlement','accept','nuansapulsa4jam',NULL,$3::jsonb,'{}'::jsonb,$4,NULL,$4,now(),now())
+  ($1,$2,NULL,0,'balance','settlement','accept','Pulsa24Jam',NULL,$3::jsonb,'{}'::jsonb,$4,NULL,$4,now(),now())
 RETURNING id
 `, in.AppOrderID, in.OrderID, in.RawRequest, in.PaidAt).Scan(&in.ID); err != nil {
 		return err

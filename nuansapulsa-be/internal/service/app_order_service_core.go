@@ -13,25 +13,25 @@ import (
 )
 
 type AppOrderService struct {
-	orderRepo             *repository.AppOrderRepository
-	paymentRepo           *repository.AppOrderPaymentRepository
-	produkRepo            *repository.ProdukRepository
-	pricingRepo           *repository.ProdukAppPricingRepository
-	kategoriFeeRepo       *repository.KategoriFeeAppRepository
-	appProviderRepo       *repository.AppOrderProviderTrxRepository
-	billingCheckRepo      *repository.AppBillingCheckRepository
-	nuansapulsa4JamClient *provider.Pulsa24JamAdapter
+	orderRepo        *repository.AppOrderRepository
+	paymentRepo      *repository.AppOrderPaymentRepository
+	produkRepo       *repository.ProdukRepository
+	pricingRepo      *repository.ProdukAppPricingRepository
+	kategoriFeeRepo  *repository.KategoriFeeAppRepository
+	appProviderRepo  *repository.AppOrderProviderTrxRepository
+	billingCheckRepo *repository.AppBillingCheckRepository
+	Pulsa24JamClient *provider.Pulsa24JamAdapter
 }
 
 func (s *AppOrderService) SetPulsa24JamClient(client *provider.Pulsa24JamAdapter) {
-	s.nuansapulsa4JamClient = client
+	s.Pulsa24JamClient = client
 }
 
 func (s *AppOrderService) validatePulsa24JamProduct(ctx context.Context, productCode string) (*provider.Pulsa24JamProduct, error) {
-	if s.nuansapulsa4JamClient == nil || !s.nuansapulsa4JamClient.Configured() {
+	if s.Pulsa24JamClient == nil || !s.Pulsa24JamClient.Configured() {
 		return nil, fmt.Errorf("koneksi katalog Pulsa24Jam belum dikonfigurasi")
 	}
-	items, err := s.nuansapulsa4JamClient.Products(ctx, productCode)
+	items, err := s.Pulsa24JamClient.Products(ctx, productCode)
 	if err != nil {
 		return nil, fmt.Errorf("gagal memeriksa produk Pulsa24Jam: %w", err)
 	}

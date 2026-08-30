@@ -241,10 +241,10 @@ func (s *AppOrderFulfillmentService) callAppOrderProvider(ctx context.Context, p
 		if strings.TrimSpace(sn) == "" {
 			sn = strings.TrimSpace(acc.Ticket)
 		}
-	case "nuansapulsa4jam":
-		client := s.providerClients["nuansapulsa4jam"]
+	case "Pulsa24Jam":
+		client := s.providerClients["Pulsa24Jam"]
 		if client == nil {
-			return 0, "", 0, "", fmt.Errorf("nuansapulsa4jam client belum tersedia")
+			return 0, "", 0, "", fmt.Errorf("Pulsa24Jam client belum tersedia")
 		}
 		resp, nextErr := client.Pay(ctx, providerpkg.PayRequest{
 			Command: "PAY",

@@ -24,9 +24,9 @@ type TrxMemberRow struct {
 }
 
 // fromStr/toStr:
-// - "" berarti tidak dipakai
-// - format disarankan: "YYYY-MM-DD"
-//   toStr diperlakukan inclusive (sampai akhir hari), implementasi pakai < (to+1 hari)
+//   - "" berarti tidak dipakai
+//   - format disarankan: "YYYY-MM-DD"
+//     toStr diperlakukan inclusive (sampai akhir hari), implementasi pakai < (to+1 hari)
 func (r *MemberRepo) ListTransaksi(
 	ctx context.Context,
 	memberID int64,

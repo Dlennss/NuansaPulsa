@@ -11,7 +11,7 @@ import (
 	"time"
 )
 
-const Pulsa24JamProviderName = "nuansapulsa4jam"
+const Pulsa24JamProviderName = "Pulsa24Jam"
 
 type Pulsa24JamAdapter struct {
 	BaseURL       string
@@ -58,7 +58,7 @@ func (a *Pulsa24JamAdapter) Configured() bool {
 
 func (a *Pulsa24JamAdapter) Name() string { return Pulsa24JamProviderName }
 
-type nuansapulsa4JamPayRequest struct {
+type Pulsa24JamPayRequest struct {
 	Commands string `json:"commands"`
 	Product  string `json:"product,omitempty"`
 	Dest     string `json:"dest,omitempty"`
@@ -67,7 +67,7 @@ type nuansapulsa4JamPayRequest struct {
 	PIN      string `json:"pin"`
 }
 
-type nuansapulsa4JamPayResponse struct {
+type Pulsa24JamPayResponse struct {
 	OK            bool                `json:"ok"`
 	Success       bool                `json:"success"`
 	RC            string              `json:"rc"`
@@ -127,7 +127,7 @@ type Pulsa24JamProduct struct {
 	UpdatedAt      *time.Time `json:"diubah_pada,omitempty"`
 }
 
-type nuansapulsa4JamProductsResponse struct {
+type Pulsa24JamProductsResponse struct {
 	OK       *bool           `json:"ok"`
 	Success  *bool           `json:"success"`
 	Commands string          `json:"commands"`
@@ -139,7 +139,7 @@ type nuansapulsa4JamProductsResponse struct {
 	Data     json.RawMessage `json:"data"`
 }
 
-type nuansapulsa4JamProductWire struct {
+type Pulsa24JamProductWire struct {
 	ID             int64           `json:"id"`
 	SKU            string          `json:"sku"`
 	Code           string          `json:"code"`
@@ -175,9 +175,9 @@ type nuansapulsa4JamProductWire struct {
 // Products meminta katalog H2H memakai command PRODUK. PIN hanya dikirim dari backend.
 func (a *Pulsa24JamAdapter) Products(ctx context.Context, product string) ([]Pulsa24JamProduct, error) {
 	if !a.Configured() {
-		return nil, fmt.Errorf("nuansapulsa4jam credential belum lengkap")
+		return nil, fmt.Errorf("Pulsa24Jam credential belum lengkap")
 	}
-	payload := nuansapulsa4JamPayRequest{
+	payload := Pulsa24JamPayRequest{
 		Commands: "PRODUK",
 		Product:  strings.TrimSpace(product),
 		PIN:      a.PIN,
@@ -203,7 +203,7 @@ func (a *Pulsa24JamAdapter) Products(ctx context.Context, product string) ([]Pul
 	if readErr != nil {
 		return nil, readErr
 	}
-	var out nuansapulsa4JamProductsResponse
+	var out Pulsa24JamProductsResponse
 	if err := json.Unmarshal(body, &out); err != nil {
 		return nil, fmt.Errorf("response produk Pulsa24Jam tidak valid: %w", err)
 	}
@@ -232,18 +232,18 @@ func (a *Pulsa24JamAdapter) Products(ctx context.Context, product string) ([]Pul
 	return items, nil
 }
 
-func decodePulsa24JamProductWires(out nuansapulsa4JamProductsResponse) ([]nuansapulsa4JamProductWire, error) {
+func decodePulsa24JamProductWires(out Pulsa24JamProductsResponse) ([]Pulsa24JamProductWire, error) {
 	for _, raw := range []json.RawMessage{out.Items, out.Products, out.Data} {
 		if len(raw) == 0 || string(raw) == "null" {
 			continue
 		}
-		var items []nuansapulsa4JamProductWire
+		var items []Pulsa24JamProductWire
 		if err := json.Unmarshal(raw, &items); err == nil {
 			return items, nil
 		}
 		var nested struct {
-			Items    []nuansapulsa4JamProductWire `json:"items"`
-			Products []nuansapulsa4JamProductWire `json:"products"`
+			Items    []Pulsa24JamProductWire `json:"items"`
+			Products []Pulsa24JamProductWire `json:"products"`
 		}
 		if err := json.Unmarshal(raw, &nested); err == nil {
 			if len(nested.Items) > 0 {
@@ -257,7 +257,7 @@ func decodePulsa24JamProductWires(out nuansapulsa4JamProductsResponse) ([]nuansa
 	return nil, fmt.Errorf("daftar produk tidak ditemukan")
 }
 
-func (w nuansapulsa4JamProductWire) product() Pulsa24JamProduct {
+func (w Pulsa24JamProductWire) product() Pulsa24JamProduct {
 	active := true
 	if w.Active != nil {
 		active = *w.Active
@@ -304,13 +304,13 @@ func firstInt64Pointer(values ...*int64) *int64 {
 
 func (a *Pulsa24JamAdapter) Pay(ctx context.Context, req PayRequest) (*PayResponse, error) {
 	if !a.Configured() {
-		return nil, fmt.Errorf("nuansapulsa4jam credential belum lengkap")
+		return nil, fmt.Errorf("Pulsa24Jam credential belum lengkap")
 	}
 	command := strings.ToUpper(strings.TrimSpace(req.Command))
 	if command == "" {
 		command = "PAY"
 	}
-	payload := nuansapulsa4JamPayRequest{
+	payload := Pulsa24JamPayRequest{
 		Commands: command,
 		Product:  strings.TrimSpace(req.Product),
 		Dest:     strings.TrimSpace(req.Dest),
@@ -341,7 +341,7 @@ func (a *Pulsa24JamAdapter) Pay(ctx context.Context, req PayRequest) (*PayRespon
 
 	bodyBytes, _ := io.ReadAll(res.Body)
 	body := string(bodyBytes)
-	var out nuansapulsa4JamPayResponse
+	var out Pulsa24JamPayResponse
 	_ = json.Unmarshal(bodyBytes, &out)
 
 	rc := firstNonEmpty(out.RC, out.Code)
@@ -391,13 +391,13 @@ func (a *Pulsa24JamAdapter) DepositQRISStatus(ctx context.Context, refID string)
 
 func (a *Pulsa24JamAdapter) depositQRIS(ctx context.Context, command, refID string, amount int64) (*Pulsa24JamDepositQRISResponse, error) {
 	if !a.Configured() {
-		return nil, fmt.Errorf("nuansapulsa4jam credential belum lengkap")
+		return nil, fmt.Errorf("Pulsa24Jam credential belum lengkap")
 	}
 	refID = strings.TrimSpace(refID)
 	if refID == "" {
 		return nil, fmt.Errorf("refid deposit QRIS wajib diisi")
 	}
-	payload := nuansapulsa4JamPayRequest{
+	payload := Pulsa24JamPayRequest{
 		Commands: strings.ToUpper(strings.TrimSpace(command)),
 		Qty:      amount,
 		RefID:    refID,
@@ -422,7 +422,7 @@ func (a *Pulsa24JamAdapter) depositQRIS(ctx context.Context, command, refID stri
 	if readErr != nil {
 		return nil, readErr
 	}
-	var out nuansapulsa4JamPayResponse
+	var out Pulsa24JamPayResponse
 	if err := json.Unmarshal(bodyBytes, &out); err != nil {
 		return nil, fmt.Errorf("response deposit QRIS Pulsa24Jam tidak valid: %w", err)
 	}
@@ -466,7 +466,7 @@ func firstNonEmpty(values ...string) string {
 	return ""
 }
 
-func redactPulsa24JamPayload(payload nuansapulsa4JamPayRequest) map[string]any {
+func redactPulsa24JamPayload(payload Pulsa24JamPayRequest) map[string]any {
 	out := map[string]any{
 		"commands": payload.Commands,
 		"product":  payload.Product,

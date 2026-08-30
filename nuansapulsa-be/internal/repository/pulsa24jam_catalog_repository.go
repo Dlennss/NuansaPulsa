@@ -45,15 +45,15 @@ func (r *Pulsa24JamCatalogRepository) Sync(ctx context.Context, items []Pulsa24J
 
 	if _, err := tx.ExecContext(ctx, `
 INSERT INTO public.provider (nama, aktif, dibuat_pada, diubah_pada)
-VALUES ('nuansapulsa4jam', true, now(), now())
+VALUES ('Pulsa24Jam', true, now(), now())
 ON CONFLICT (nama) DO UPDATE SET aktif = true, diubah_pada = now()
 `); err != nil {
 		return nil, err
 	}
-	if _, err := tx.ExecContext(ctx, `UPDATE public.produk_app_pricing SET aktif = false, updated_at = now() WHERE LOWER(TRIM(provider)) = 'nuansapulsa4jam'`); err != nil {
+	if _, err := tx.ExecContext(ctx, `UPDATE public.produk_app_pricing SET aktif = false, updated_at = now() WHERE LOWER(TRIM(provider)) = 'pulsa24jam'`); err != nil {
 		return nil, err
 	}
-	if _, err := tx.ExecContext(ctx, `UPDATE public.produk_provider_map SET aktif = false, diubah_pada = now() WHERE LOWER(TRIM(provider)) = 'nuansapulsa4jam'`); err != nil {
+	if _, err := tx.ExecContext(ctx, `UPDATE public.produk_provider_map SET aktif = false, diubah_pada = now() WHERE LOWER(TRIM(provider)) = 'pulsa24jam'`); err != nil {
 		return nil, err
 	}
 
@@ -104,9 +104,9 @@ RETURNING id
 		if err := tx.QueryRowContext(ctx, `
 INSERT INTO public.produk_app_pricing
   (produk_id, provider, harga, harga_dasar, yuscom_group, yuscom_category, yuscom_sku, yuscom_name, yuscom_status, yuscom_display_brand, aktif, fetched_at, created_at, updated_at, dibuat_pada, diubah_pada)
-VALUES ($1,'nuansapulsa4jam',$2,$2,$3,$4,$5,$6,'ACTIVE',$7,true,now(),now(),now(),now(),now())
+VALUES ($1,'Pulsa24Jam',$2,$2,$3,$4,$5,$6,'ACTIVE',$7,true,now(),now(),now(),now(),now())
 ON CONFLICT (produk_id) DO UPDATE SET
-  provider = 'nuansapulsa4jam',
+  provider = 'Pulsa24Jam',
   harga = EXCLUDED.harga,
   harga_dasar = EXCLUDED.harga_dasar,
   yuscom_group = EXCLUDED.yuscom_group,
@@ -131,7 +131,7 @@ RETURNING aktif
 		if _, err := tx.ExecContext(ctx, `
 INSERT INTO public.produk_provider_map
   (produk_id, provider, kode_provider, mode, aktif, prioritas, minimal_nominal, maksimal_nominal, fee_rp, dibuat_pada, diubah_pada)
-VALUES ($1,'nuansapulsa4jam',$2,'normal',$5,1,$3,$4,0,now(),now())
+VALUES ($1,'Pulsa24Jam',$2,'normal',$5,1,$3,$4,0,now(),now())
 ON CONFLICT (produk_id, provider, kode_provider) DO UPDATE SET
   mode = 'normal', aktif = EXCLUDED.aktif, prioritas = 1,
   minimal_nominal = EXCLUDED.minimal_nominal,

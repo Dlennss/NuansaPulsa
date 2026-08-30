@@ -1,8 +1,8 @@
 #!/usr/bin/env bash
 set -euo pipefail
 
-SOURCE_DIR="${SOURCE_DIR:-/var/lib/syslog-ng/NuansaPulsa/pulsa-be}"
-RELEASE_ROOT="${RELEASE_ROOT:-/var/lib/syslog-ng/NuansaPulsa/releases/pulsa-be}"
+SOURCE_DIR="${SOURCE_DIR:-/var/lib/syslog-ng/NuansaPulsa/nuansapulsa-be}"
+RELEASE_ROOT="${RELEASE_ROOT:-/var/lib/syslog-ng/NuansaPulsa/releases/nuansapulsa-be}"
 KEEP_RELEASES="${KEEP_RELEASES:-3}"
 BUILD_ID="$(date +%Y%m%d%H%M%S)"
 BUILD_DIR="$RELEASE_ROOT/build-$BUILD_ID"
@@ -70,6 +70,7 @@ rsync -a \
   --exclude '.git' \
   --exclude '.github' \
   --exclude 'releases' \
+  --exclude 'nuansapulsa-be' \
   --exclude 'pulsa-be' \
   --exclude 'nuansapulsa' \
   --exclude 'scripts/deploy-prod-release.sh' \
@@ -91,7 +92,7 @@ go run ./scripts/apply_sql_migration sql/20260821_add_marketing_agent_relation.s
 go run ./scripts/apply_sql_migration sql/20260824_agent_credit_flexible_limit.sql
 go run ./scripts/apply_sql_migration sql/20260828_add_member_store_name.sql
 go test ./internal/service ./internal/provider ./internal/helper ./chytron ./loketbayar ./smb ./rajabiller
-go build -buildvcs=false -o "$BUILD_DIR/pulsa-be" .
+go build -buildvcs=false -o "$BUILD_DIR/nuansapulsa-be" .
 
 # Build tools
 for tool_dir in scripts/recover_pending_ref scripts/reconcile_provider_truth scripts/repair_smb_pending; do

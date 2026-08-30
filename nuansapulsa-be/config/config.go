@@ -109,7 +109,7 @@ type Config struct {
 	RajabillerMerchantID string
 	RajabillerTimeout    time.Duration
 
-	// Primary H2H provider: PULSA24JAM
+	// Primary H2H provider: Pulsa24Jam
 	Pulsa24JamBaseURL       string
 	Pulsa24JamMemberID      string
 	Pulsa24JamAPIKey        string
@@ -128,6 +128,19 @@ func mustEnv(key string) string {
 		log.Fatalf("missing required env: %s", key)
 	}
 	return v
+}
+
+func mustEnvAny(keys ...string) string {
+	for _, key := range keys {
+		if v := strings.TrimSpace(os.Getenv(key)); v != "" {
+			return v
+		}
+	}
+	if len(keys) > 0 {
+		log.Fatalf("missing required env: %s", keys[0])
+	}
+	log.Fatal("missing required env")
+	return ""
 }
 
 func getEnv(key, def string) string {
@@ -204,7 +217,7 @@ func Load() Config {
 	if err != nil {
 		log.Fatalf("invalid RAJABILLER_TIMEOUT: %v", err)
 	}
-	p24to, err := time.ParseDuration(getEnv("PULSA24JAM_TIMEOUT", "30s"))
+	p24to, err := time.ParseDuration(getEnvAny("30s", "PULSA24JAM_TIMEOUT", "Pulsa24Jam_TIMEOUT"))
 	if err != nil {
 		log.Fatalf("invalid PULSA24JAM_TIMEOUT: %v", err)
 	}
@@ -295,13 +308,13 @@ func Load() Config {
 		RajabillerMerchantID: getEnv("RAJABILLER_MERCHANT_ID", ""),
 		RajabillerTimeout:    rjto,
 
-		Pulsa24JamBaseURL:       mustEnv("PULSA24JAM_BASE_URL"),
-		Pulsa24JamMemberID:      getEnvAny("", "PULSA24JAM_MEMBERID", "PULSA24JAM_MEMBER_ID"),
-		Pulsa24JamAPIKey:        mustEnv("PULSA24JAM_API_KEY"),
-		Pulsa24JamPIN:           mustEnv("PULSA24JAM_PIN"),
-		Pulsa24JamPassword:      getEnv("PULSA24JAM_PASSWORD", ""),
-		Pulsa24JamSecret:        getEnv("PULSA24JAM_SECRET", ""),
-		Pulsa24JamCallbackToken: getEnv("PULSA24JAM_CALLBACK_TOKEN", ""),
+		Pulsa24JamBaseURL:       mustEnvAny("PULSA24JAM_BASE_URL", "Pulsa24Jam_BASE_URL"),
+		Pulsa24JamMemberID:      getEnvAny("", "PULSA24JAM_MEMBERID", "PULSA24JAM_MEMBER_ID", "Pulsa24Jam_MEMBERID", "Pulsa24Jam_MEMBER_ID"),
+		Pulsa24JamAPIKey:        mustEnvAny("PULSA24JAM_API_KEY", "Pulsa24Jam_API_KEY"),
+		Pulsa24JamPIN:           mustEnvAny("PULSA24JAM_PIN", "Pulsa24Jam_PIN"),
+		Pulsa24JamPassword:      getEnvAny("", "PULSA24JAM_PASSWORD", "Pulsa24Jam_PASSWORD"),
+		Pulsa24JamSecret:        getEnvAny("", "PULSA24JAM_SECRET", "Pulsa24Jam_SECRET"),
+		Pulsa24JamCallbackToken: getEnvAny("", "PULSA24JAM_CALLBACK_TOKEN", "Pulsa24Jam_CALLBACK_TOKEN"),
 		Pulsa24JamTimeout:       p24to,
 
 		Port: getEnv("PORT", "8080"),

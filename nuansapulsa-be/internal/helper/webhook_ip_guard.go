@@ -18,20 +18,20 @@ func loadProviderIPMap() {
 	providerIPMap = make(map[string]string)
 
 	envMap := map[string]string{
-		"yuscom":          "YUSCOM_BASE_URL",
-		"javapay":         "JAVAPAY_BASE_URL",
-		"talentapay":      "TALENTA_BASE_URL",
-		"multikom":        "MULTIKOM_BASE_URL",
-		"sagaramobile":    "SAGARA_BASE_URL",
-		"minions":         "MINIONS_BASE_URL",
-		"trionik":         "TRIONIK_BASE_URL",
-		"ajs":             "AJS_BASE_URL",
-		"gemilang":        "GEMILANG_BASE_URL",
-		"smb":             "SMB_BASE_URL",
-		"loketbayar":      "LOKETBAYAR_BASE_URL",
-		"chytron":         "CHYTRON_BASE_URL",
-		"rajabiller":      "RAJABILLER_BASE_URL",
-		"nuansapulsa4jam": "PULSA24JAM_BASE_URL",
+		"yuscom":       "YUSCOM_BASE_URL",
+		"javapay":      "JAVAPAY_BASE_URL",
+		"talentapay":   "TALENTA_BASE_URL",
+		"multikom":     "MULTIKOM_BASE_URL",
+		"sagaramobile": "SAGARA_BASE_URL",
+		"minions":      "MINIONS_BASE_URL",
+		"trionik":      "TRIONIK_BASE_URL",
+		"ajs":          "AJS_BASE_URL",
+		"gemilang":     "GEMILANG_BASE_URL",
+		"smb":          "SMB_BASE_URL",
+		"loketbayar":   "LOKETBAYAR_BASE_URL",
+		"chytron":      "CHYTRON_BASE_URL",
+		"rajabiller":   "RAJABILLER_BASE_URL",
+		"pulsa24jam":   "PULSA24JAM_BASE_URL",
 	}
 
 	for provider, envKey := range envMap {
@@ -80,8 +80,12 @@ func loadProviderIPMap() {
 	} else {
 		providerIPMap["rajabiller"] = "34.128.119.54,34.128.94.169"
 	}
-	if p24 := os.Getenv("PULSA24JAM_CALLBACK_IP"); p24 != "" {
-		providerIPMap["nuansapulsa4jam"] = strings.TrimSpace(p24)
+	p24 := strings.TrimSpace(os.Getenv("PULSA24JAM_CALLBACK_IP"))
+	if p24 == "" {
+		p24 = strings.TrimSpace(os.Getenv("Pulsa24Jam_CALLBACK_IP"))
+	}
+	if p24 != "" {
+		providerIPMap["pulsa24jam"] = p24
 	}
 
 	// Extra IPs from env (comma-separated): PROVIDER_EXTRA_IPS=yuscom:1.2.3.4,javapay:5.6.7.8

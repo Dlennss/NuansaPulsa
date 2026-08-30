@@ -13,7 +13,7 @@ import (
 	"nuansapulsa/internal/repository"
 )
 
-type nuansapulsa4JamCallbackData struct {
+type Pulsa24JamCallbackData struct {
 	refid       string
 	status      string
 	rc          string
@@ -28,16 +28,16 @@ type nuansapulsa4JamCallbackData struct {
 func (s *ProviderCallbackService) ProcessPulsa24JamCallback(ctx context.Context, raw string, q url.Values, payload map[string]any) (int, map[string]any) {
 	data := parsePulsa24JamCallback(raw, q, payload)
 	if data.refid == "" {
-		helper.AppendProviderServiceLog("provider_anomali.log", "nuansapulsa4jam callback missing refid raw=%s", raw)
+		helper.AppendProviderServiceLog("provider_anomali.log", "Pulsa24Jam callback missing refid raw=%s", raw)
 		return 200, map[string]any{"ok": true, "ignored": true, "error": "missing refid"}
 	}
 
-	row, err := s.repo.GetLatestByRefIDProvider(ctx, data.refid, "nuansapulsa4jam")
+	row, err := s.repo.GetLatestByRefIDProvider(ctx, data.refid, "Pulsa24Jam")
 	if err != nil {
 		return 502, map[string]any{"ok": false, "error": err.Error()}
 	}
 	if row == nil {
-		appRow, appErr := s.appProviderRepo.GetByRefID(ctx, data.refid, "nuansapulsa4jam")
+		appRow, appErr := s.appProviderRepo.GetByRefID(ctx, data.refid, "Pulsa24Jam")
 		if appErr == nil && appRow != nil {
 			return s.processPulsa24JamAppCallback(ctx, data, appRow)
 		}
@@ -45,7 +45,7 @@ func (s *ProviderCallbackService) ProcessPulsa24JamCallback(ctx context.Context,
 			return 502, map[string]any{"ok": false, "error": appErr.Error()}
 		}
 		billingRow, billingErr := s.billingCheckRepo.GetByRefID(ctx, data.refid)
-		if billingErr == nil && billingRow != nil && strings.EqualFold(strings.TrimSpace(billingRow.Provider), "nuansapulsa4jam") {
+		if billingErr == nil && billingRow != nil && strings.EqualFold(strings.TrimSpace(billingRow.Provider), "Pulsa24Jam") {
 			return s.processPulsa24JamBillingCheckCallback(ctx, data, billingRow, raw)
 		}
 		if billingErr != nil && billingErr != sql.ErrNoRows {
@@ -60,7 +60,7 @@ func (s *ProviderCallbackService) ProcessPulsa24JamCallback(ctx context.Context,
 				return 502, map[string]any{"ok": false, "error": withdrawErr.Error()}
 			}
 		}
-		helper.AppendProviderServiceLog("provider_anomali.log", "nuansapulsa4jam callback unmatched refid=%s raw=%s", data.refid, raw)
+		helper.AppendProviderServiceLog("provider_anomali.log", "Pulsa24Jam callback unmatched refid=%s raw=%s", data.refid, raw)
 		return 200, map[string]any{"ok": true, "ignored": true, "refid": data.refid}
 	}
 
@@ -89,12 +89,12 @@ func (s *ProviderCallbackService) ProcessPulsa24JamCallback(ctx context.Context,
 		tmID := row.TransaksiMemberID
 		tpID := row.ID
 		_ = s.repo.InsertProviderSnapshot(ctx, repository.ProviderSnapshotIn{
-			Provider:            "nuansapulsa4jam",
+			Provider:            "Pulsa24Jam",
 			SaldoProvider:       data.balance,
 			RefID:               data.refid,
 			TransaksiMemberID:   &tmID,
 			TransaksiProviderID: &tpID,
-			Sumber:              "callback_nuansapulsa4jam",
+			Sumber:              "callback_Pulsa24Jam",
 			RawJSON:             rawJSON,
 		})
 	}
@@ -103,7 +103,7 @@ func (s *ProviderCallbackService) ProcessPulsa24JamCallback(ctx context.Context,
 	if err != nil || trx == nil {
 		return 200, map[string]any{"ok": true, "refid": data.refid}
 	}
-	finalStatus := nuansapulsa4JamFinalStatus(data)
+	finalStatus := Pulsa24JamFinalStatus(data)
 	if locked, _ := s.repo.AcquireCallbackLock(ctx, trx.ID); locked {
 		defer s.repo.ReleaseCallbackLock(ctx, trx.ID)
 		if fresh, _ := s.repo.GetTransaksiMemberByID(ctx, trx.ID); fresh != nil {
@@ -111,7 +111,7 @@ func (s *ProviderCallbackService) ProcessPulsa24JamCallback(ctx context.Context,
 		}
 	}
 	if shouldKeepExistingMemberFinalStatus(trx.Status, finalStatus) {
-		helper.AppendAlreadyFinalLog("callback already_final provider=nuansapulsa4jam refid=%s trx_member_id=%d status=%s callback_status=%s", data.refid, trx.ID, trx.Status, finalStatus)
+		helper.AppendAlreadyFinalLog("callback already_final provider=Pulsa24Jam refid=%s trx_member_id=%d status=%s callback_status=%s", data.refid, trx.ID, trx.Status, finalStatus)
 		return 200, map[string]any{"ok": true, "already_final": true, "refid": data.refid}
 	}
 
@@ -121,18 +121,18 @@ func (s *ProviderCallbackService) ProcessPulsa24JamCallback(ctx context.Context,
 
 	switch finalStatus {
 	case "success":
-		if err := s.prepareMemberTrxSuccessTransition(ctx, "nuansapulsa4jam", trx); err != nil {
+		if err := s.prepareMemberTrxSuccessTransition(ctx, "Pulsa24Jam", trx); err != nil {
 			return 200, map[string]any{"ok": false, "refid": data.refid, "error": err.Error(), "repair_needed": "member_refund_recovery"}
 		}
 		biayaAktual := trx.BiayaPerkiraan
 		if err := s.repo.UpdateTransaksiMemberSettle(ctx, trx.ID, "success", ketDB, biayaAktual, data.price, hargaMember); err != nil && err != sql.ErrNoRows {
-			helper.AppendProviderServiceLog("provider_callback_error.log", "settle failed provider=nuansapulsa4jam refid=%s trx_member_id=%d status=success err=%v", data.refid, trx.ID, err)
+			helper.AppendProviderServiceLog("provider_callback_error.log", "settle failed provider=Pulsa24Jam refid=%s trx_member_id=%d status=success err=%v", data.refid, trx.ID, err)
 			return 200, map[string]any{"ok": false, "error": err.Error(), "repair_needed": "member_settle_failed"}
 		}
 		s.applyH2HCommission(ctx, trx.ID, data.refid)
 	case "failed":
 		if err := s.repo.UpdateTransaksiMemberSettle(ctx, trx.ID, "failed", ketDB, 0, data.price, hargaMember); err != nil && err != sql.ErrNoRows {
-			helper.AppendProviderServiceLog("provider_callback_error.log", "settle failed provider=nuansapulsa4jam refid=%s trx_member_id=%d status=failed err=%v", data.refid, trx.ID, err)
+			helper.AppendProviderServiceLog("provider_callback_error.log", "settle failed provider=Pulsa24Jam refid=%s trx_member_id=%d status=failed err=%v", data.refid, trx.ID, err)
 			return 200, map[string]any{"ok": false, "error": err.Error(), "repair_needed": "member_settle_failed"}
 		}
 	default:
@@ -152,12 +152,12 @@ func (s *ProviderCallbackService) ProcessPulsa24JamCallback(ctx context.Context,
 	if finalStatus == "success" {
 		biayaAktualOut = trx.BiayaPerkiraan
 	}
-	return s.sendDirectMemberWebhook(ctx, "nuansapulsa4jam", trx, webhookURL, data.refid, finalStatus, ket, firstText(data.providerRef, data.sn), firstText(data.sn, data.providerRef), memberSaldo, biayaAktualOut, data.price)
+	return s.sendDirectMemberWebhook(ctx, "Pulsa24Jam", trx, webhookURL, data.refid, finalStatus, ket, firstText(data.providerRef, data.sn), firstText(data.sn, data.providerRef), memberSaldo, biayaAktualOut, data.price)
 }
 
-func (s *ProviderCallbackService) processPulsa24JamBillingCheckCallback(ctx context.Context, data nuansapulsa4JamCallbackData, row *repository.AppBillingCheckRow, raw string) (int, map[string]any) {
+func (s *ProviderCallbackService) processPulsa24JamBillingCheckCallback(ctx context.Context, data Pulsa24JamCallbackData, row *repository.AppBillingCheckRow, raw string) (int, map[string]any) {
 	status := "processing_provider"
-	switch nuansapulsa4JamFinalStatus(data) {
+	switch Pulsa24JamFinalStatus(data) {
 	case "success":
 		status = "success"
 	case "failed":
@@ -179,11 +179,11 @@ func (s *ProviderCallbackService) processPulsa24JamBillingCheckCallback(ctx cont
 	return 200, map[string]any{"ok": true, "refid": data.refid, "status": status}
 }
 
-func (s *ProviderCallbackService) processPulsa24JamRetailWithdrawCallback(ctx context.Context, data nuansapulsa4JamCallbackData, row *repository.RetailWithdrawRequestRow) (int, map[string]any) {
+func (s *ProviderCallbackService) processPulsa24JamRetailWithdrawCallback(ctx context.Context, data Pulsa24JamCallbackData, row *repository.RetailWithdrawRequestRow) (int, map[string]any) {
 	if row == nil {
 		return 200, map[string]any{"ok": true, "refid": data.refid, "ignored": true}
 	}
-	finalStatus := nuansapulsa4JamFinalStatus(data)
+	finalStatus := Pulsa24JamFinalStatus(data)
 	switch finalStatus {
 	case "success":
 		note := strings.TrimSpace(firstText(data.sn, data.providerRef, data.msg))
@@ -211,12 +211,12 @@ func (s *ProviderCallbackService) processPulsa24JamRetailWithdrawCallback(ctx co
 	}
 }
 
-func (s *ProviderCallbackService) processPulsa24JamAppCallback(ctx context.Context, data nuansapulsa4JamCallbackData, row *repository.AppOrderProviderTrxRow) (int, map[string]any) {
+func (s *ProviderCallbackService) processPulsa24JamAppCallback(ctx context.Context, data Pulsa24JamCallbackData, row *repository.AppOrderProviderTrxRow) (int, map[string]any) {
 	order, err := s.appOrderRepo.GetByID(ctx, row.AppOrderID)
 	if err != nil || order == nil {
 		return 200, map[string]any{"ok": true, "refid": data.refid, "ignored": true}
 	}
-	finalStatus := nuansapulsa4JamFinalStatus(data)
+	finalStatus := Pulsa24JamFinalStatus(data)
 	rawJSON, _ := json.Marshal(data.payload)
 	updateIn := repository.AppOrderProviderTrxUpdateInput{
 		ID:          row.ID,
@@ -230,11 +230,11 @@ func (s *ProviderCallbackService) processPulsa24JamAppCallback(ctx context.Conte
 		updateIn.HargaProvider = &data.price
 	}
 	if err := s.appProviderRepo.UpdateResult(ctx, updateIn); err != nil {
-		helper.AppendProviderServiceLog("provider_callback_service.log", "nuansapulsa4jam app callback update failed refid=%s app_provider_id=%d err=%v", data.refid, row.ID, err)
+		helper.AppendProviderServiceLog("provider_callback_service.log", "Pulsa24Jam app callback update failed refid=%s app_provider_id=%d err=%v", data.refid, row.ID, err)
 	}
 
 	if order.Status == "success" || order.Status == "failed" || order.Status == "refunded" {
-		helper.AppendAlreadyFinalLog("callback already_final provider=nuansapulsa4jam refid=%s app_order_id=%d status=%s callback_status=%s", data.refid, order.ID, order.Status, finalStatus)
+		helper.AppendAlreadyFinalLog("callback already_final provider=Pulsa24Jam refid=%s app_order_id=%d status=%s callback_status=%s", data.refid, order.ID, order.Status, finalStatus)
 		return 200, map[string]any{"ok": true, "already_final": true, "refid": data.refid}
 	}
 	if finalStatus == "pending" {
@@ -245,7 +245,7 @@ func (s *ProviderCallbackService) processPulsa24JamAppCallback(ctx context.Conte
 		if data.price > 0 {
 			appProviderID := row.ID
 			if _, _, err := s.repo.ApplyProviderWalletTx(ctx, repository.CallbackProviderWalletTxIn{
-				Provider:              "nuansapulsa4jam",
+				Provider:              "Pulsa24Jam",
 				RefID:                 data.refid,
 				Arah:                  "debit",
 				Jumlah:                data.price,
@@ -253,7 +253,7 @@ func (s *ProviderCallbackService) processPulsa24JamAppCallback(ctx context.Conte
 				Catatan:               "auto debit by callback (app success)",
 				AppOrderProviderTrxID: &appProviderID,
 			}); err != nil {
-				helper.AppendProviderServiceLog("provider_wallet.log", "provider wallet debit app failed provider=nuansapulsa4jam refid=%s app_provider_id=%d err=%v", data.refid, row.ID, err)
+				helper.AppendProviderServiceLog("provider_wallet.log", "provider wallet debit app failed provider=Pulsa24Jam refid=%s app_provider_id=%d err=%v", data.refid, row.ID, err)
 			}
 		}
 		_ = s.appOrderRepo.UpdateStatusByID(ctx, order.ID, "success")
@@ -264,11 +264,11 @@ func (s *ProviderCallbackService) processPulsa24JamAppCallback(ctx context.Conte
 		}
 		return 200, map[string]any{"ok": true, "refid": data.refid, "status": "success"}
 	}
-	if appOrderProviderProductUnavailable("nuansapulsa4jam", data.msg) && s.appPricingRepo != nil {
-		if markErr := s.appPricingRepo.MarkProviderProductUnavailable(ctx, order.ProdukID, "nuansapulsa4jam"); markErr != nil {
-			helper.AppendProviderServiceLog("provider_callback_service.log", "mark product unavailable from callback failed provider=nuansapulsa4jam product_id=%d sku=%s err=%v", order.ProdukID, order.ProdukSKUSnapshot, markErr)
+	if appOrderProviderProductUnavailable("Pulsa24Jam", data.msg) && s.appPricingRepo != nil {
+		if markErr := s.appPricingRepo.MarkProviderProductUnavailable(ctx, order.ProdukID, "Pulsa24Jam"); markErr != nil {
+			helper.AppendProviderServiceLog("provider_callback_service.log", "mark product unavailable from callback failed provider=Pulsa24Jam product_id=%d sku=%s err=%v", order.ProdukID, order.ProdukSKUSnapshot, markErr)
 		} else {
-			helper.AppendProviderServiceLog("provider_callback_service.log", "product unavailable from callback provider=nuansapulsa4jam product_id=%d sku=%s until=verified", order.ProdukID, order.ProdukSKUSnapshot)
+			helper.AppendProviderServiceLog("provider_callback_service.log", "product unavailable from callback provider=Pulsa24Jam product_id=%d sku=%s until=verified", order.ProdukID, order.ProdukSKUSnapshot)
 		}
 	}
 
@@ -291,7 +291,7 @@ func (s *ProviderCallbackService) processPulsa24JamAppCallback(ctx context.Conte
 	return 200, map[string]any{"ok": true, "refid": data.refid, "status": "failed"}
 }
 
-func parsePulsa24JamCallback(raw string, q url.Values, payload map[string]any) nuansapulsa4JamCallbackData {
+func parsePulsa24JamCallback(raw string, q url.Values, payload map[string]any) Pulsa24JamCallbackData {
 	if payload == nil {
 		payload = map[string]any{}
 	}
@@ -324,7 +324,7 @@ func parsePulsa24JamCallback(raw string, q url.Values, payload map[string]any) n
 	status := strings.ToLower(strings.TrimSpace(get("status")))
 	msg := firstText(get("msg"), get("message"), get("keterangan"), status)
 	rc := firstText(get("rc"), get("code"), status)
-	return nuansapulsa4JamCallbackData{
+	return Pulsa24JamCallbackData{
 		refid:       firstText(get("refid"), get("ref_id"), get("reffid")),
 		status:      status,
 		rc:          rc,
@@ -337,8 +337,8 @@ func parsePulsa24JamCallback(raw string, q url.Values, payload map[string]any) n
 	}
 }
 
-func nuansapulsa4JamFinalStatus(data nuansapulsa4JamCallbackData) string {
-	state := helper.ProviderResponseStateOf("nuansapulsa4jam", data.rc, firstText(data.status, data.msg))
+func Pulsa24JamFinalStatus(data Pulsa24JamCallbackData) string {
+	state := helper.ProviderResponseStateOf("Pulsa24Jam", data.rc, firstText(data.status, data.msg))
 	switch state {
 	case helper.ProviderResponseSuccess:
 		return "success"
