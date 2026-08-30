@@ -1,7 +1,7 @@
 #!/usr/bin/env bash
 set -euo pipefail
 
-APP_DIR="${P24_APP_DIR:-/var/lib/syslog-ng/NuansaPulsa/releases/nuansapulsa-be/current}"
+APP_DIR="${P24_APP_DIR:-/var/lib/syslog-ng/nuansapulsa/releases/nuansapulsa-be/current}"
 SQL_FILE="${P24_SUSPECT_CACHE_SQL:-$APP_DIR/scripts/refresh_provider_success_suspect_cache.sql}"
 LOCK_FILE="${P24_SUSPECT_CACHE_LOCK:-/tmp/p24_suspect_cache_refresh.lock}"
 DAYS_BACK="${P24_SUSPECT_CACHE_DAYS_BACK:-3}"

@@ -1,14 +1,14 @@
 #!/usr/bin/env bash
 set -euo pipefail
 
-SOURCE_DIR="${SOURCE_DIR:-/var/lib/syslog-ng/NuansaPulsa/nuansapulsa-be}"
-RELEASE_ROOT="${RELEASE_ROOT:-/var/lib/syslog-ng/NuansaPulsa/releases/nuansapulsa-be}"
+SOURCE_DIR="${SOURCE_DIR:-/var/lib/syslog-ng/nuansapulsa/nuansapulsa-be}"
+RELEASE_ROOT="${RELEASE_ROOT:-/var/lib/syslog-ng/nuansapulsa/releases/nuansapulsa-be}"
 KEEP_RELEASES="${KEEP_RELEASES:-3}"
 BUILD_ID="$(date +%Y%m%d%H%M%S)"
 BUILD_DIR="$RELEASE_ROOT/build-$BUILD_ID"
 CURRENT_LINK="$RELEASE_ROOT/current"
 TMP_LINK="$RELEASE_ROOT/.current-$BUILD_ID"
-SHARED_LOG_DIR="${SHARED_LOG_DIR:-/var/lib/syslog-ng/NuansaPulsa/logs}"
+SHARED_LOG_DIR="${SHARED_LOG_DIR:-/var/lib/syslog-ng/nuansapulsa/logs}"
 SERVICE_NAME="${BACKEND_SERVICE_NAME:-nuansapulsa-be.service}"
 
 restart_service() {
@@ -80,6 +80,13 @@ if [[ -f "$SOURCE_DIR/.env" ]]; then
   cp "$SOURCE_DIR/.env" "$BUILD_DIR/.env"
 fi
 
+if [[ -f "$BUILD_DIR/.env" ]]; then
+  set -a
+  # shellcheck disable=SC1091
+  source "$BUILD_DIR/.env"
+  set +a
+fi
+
 # Pastikan build dir log mengarah ke shared log dir
 if [ -L "$BUILD_DIR/log" ] || [ -e "$BUILD_DIR/log" ]; then
   rm -rf "$BUILD_DIR/log"
@@ -101,7 +108,7 @@ for tool_dir in scripts/recover_pending_ref scripts/reconcile_provider_truth scr
     mkdir -p "$BUILD_DIR/bin"
     go build -buildvcs=false -o "$BUILD_DIR/bin/$tool_name" "./$tool_dir/" 2>/dev/null || true
     # Copy ke shared bin dir (persistent, niet deleted by git clean)
-    SHARED_BIN="${SHARED_BIN:-/var/lib/syslog-ng/NuansaPulsa/shared-bin}"
+    SHARED_BIN="${SHARED_BIN:-/var/lib/syslog-ng/nuansapulsa/shared-bin}"
     mkdir -p "$SHARED_BIN"
     if [ -f "$BUILD_DIR/bin/$tool_name" ]; then
       cp "$BUILD_DIR/bin/$tool_name" "$SHARED_BIN/$tool_name" 2>/dev/null || true
@@ -111,7 +118,7 @@ done
 
 # Sync .env ke shared location untuk analisa-transaksi
 if [[ -f "$BUILD_DIR/.env" ]]; then
-  SHARED_BIN="${SHARED_BIN:-/var/lib/syslog-ng/NuansaPulsa/shared-bin}"
+  SHARED_BIN="${SHARED_BIN:-/var/lib/syslog-ng/nuansapulsa/shared-bin}"
   mkdir -p "$SHARED_BIN"
   cp "$BUILD_DIR/.env" "$SHARED_BIN/.env" 2>/dev/null || true
 fi

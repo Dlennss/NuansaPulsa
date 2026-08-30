@@ -7,7 +7,7 @@ Wants=network-online.target
 Type=oneshot
 User=nuansapulsa
 Group=deployers
-WorkingDirectory=/var/lib/syslog-ng/NuansaPulsa/releases/nuansapulsa-be/current
+WorkingDirectory=/var/lib/syslog-ng/nuansapulsa/releases/nuansapulsa-be/current
 Environment=P24_PROVIDER_ANALYTICS_CACHE_DAYS_BACK=1
-ExecStart=/var/lib/syslog-ng/NuansaPulsa/releases/nuansapulsa-be/current/scripts/refresh_admin_provider_analytics_cache.sh
+ExecStart=/var/lib/syslog-ng/nuansapulsa/releases/nuansapulsa-be/current/scripts/refresh_admin_provider_analytics_cache.sh
 Nice=5

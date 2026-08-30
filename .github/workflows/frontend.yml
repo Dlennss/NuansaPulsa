@@ -22,8 +22,8 @@ jobs:
       SERVER_USER: ${{ secrets.SERVER_USER || secrets.USERNAME }}
       SERVER_PASSWORD: ${{ secrets.SERVER_PASSWORD || secrets.PASSWORD }}
       SSH_PORT: ${{ secrets.SSH_PORT || secrets.SERVER_PORT || '22' }}
-      BACKEND_RELEASE_DIR: ${{ secrets.BACKEND_RELEASE_DIR || '/var/lib/syslog-ng/NuansaPulsa/releases/nuansapulsa-be/current' }}
-      FRONTEND_RELEASE_DIR: ${{ secrets.FRONTEND_RELEASE_DIR || '/var/lib/syslog-ng/NuansaPulsa/releases/nuansapulsa-fe/current' }}
+      BACKEND_RELEASE_DIR: ${{ secrets.BACKEND_RELEASE_DIR || '/var/lib/syslog-ng/nuansapulsa/releases/nuansapulsa-be/current' }}
+      FRONTEND_RELEASE_DIR: ${{ secrets.FRONTEND_RELEASE_DIR || '/var/lib/syslog-ng/nuansapulsa/releases/nuansapulsa-fe/current' }}
       BACKEND_SERVICE_NAME: ${{ secrets.BACKEND_SERVICE_NAME || 'nuansapulsa-be.service' }}
       FRONTEND_SERVICE_NAME: ${{ secrets.FRONTEND_SERVICE_NAME || 'nuansapulsa-fe.service' }}
       FRONTEND_ENV: ${{ secrets.FRONTEND_ENV }}
