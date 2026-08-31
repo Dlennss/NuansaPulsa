@@ -63,30 +63,31 @@ export const metadata: Metadata = {
 
 function HomeHero({ isLoggedIn }: { isLoggedIn: boolean }) {
   return (
-    <section className="relative isolate h-[300px] overflow-hidden rounded-b-[34px] bg-[#e50917] text-white shadow-[0_18px_42px_rgba(151,14,32,0.28)]">
-      <Image
-        src="/nuansapulsa-assets/header_hero_lengkap.png"
-        alt=""
-        fill
-        priority
-        sizes="(max-width: 480px) 100vw, 390px"
-        className="absolute inset-0 -z-20 h-full w-full object-cover object-[76%_center]"
-      />
-      <div className="absolute inset-0 -z-10 bg-linear-to-br from-[#ff2515]/95 via-[#e40718]/82 to-[#9f0f25]/88" />
-      <div className="absolute inset-x-0 bottom-0 -z-10 h-32 bg-[linear-gradient(166deg,transparent_24%,rgba(255,182,0,0.38)_25%,rgba(229,9,23,0.15)_53%,transparent_70%)]" />
+    <section className="relative isolate h-[280px] overflow-hidden rounded-b-[30px] bg-[#e50917] text-white shadow-[0_18px_42px_rgba(151,14,32,0.24)]">
+      <div className="absolute inset-0 -z-20 bg-[linear-gradient(140deg,#ff2115_0%,#ed0b18_48%,#aa0d23_100%)]" />
+      <div className="absolute inset-x-0 bottom-0 -z-10 h-32 bg-[linear-gradient(165deg,transparent_18%,rgba(255,166,0,0.54)_19%,rgba(255,111,0,0.32)_40%,rgba(179,10,28,0.12)_62%,transparent_76%)]" />
+      <div className="absolute right-2 top-2 -z-10 h-56 w-44 opacity-22">
+        <span className="absolute left-1/2 top-7 h-40 w-1 -translate-x-1/2 bg-white/45" />
+        <span className="absolute left-[calc(50%-22px)] top-18 h-34 w-1 -rotate-12 bg-white/30" />
+        <span className="absolute left-[calc(50%+20px)] top-18 h-34 w-1 rotate-12 bg-white/30" />
+        <span className="absolute left-[calc(50%-34px)] top-26 h-1 w-17 bg-white/28" />
+        <span className="absolute left-[calc(50%-24px)] top-38 h-1 w-12 bg-white/24" />
+        <span className="absolute left-1/2 top-3 h-14 w-14 -translate-x-1/2 rounded-full border-2 border-white/30" />
+        <span className="absolute left-1/2 top-7 h-6 w-6 -translate-x-1/2 rounded-full border border-white/30" />
+      </div>
 
       <Link
         href="/"
         prefetch={false}
         aria-label="NuansaPulsa"
-        className="absolute left-5 top-5 h-[50px] w-[clamp(200px,68vw,272px)] focus-visible:outline-none focus-visible:ring-4 focus-visible:ring-white/70"
+        className="absolute left-5 top-5 h-[46px] w-[clamp(190px,64vw,260px)] focus-visible:outline-none focus-visible:ring-4 focus-visible:ring-white/70"
       >
         <Image
           src="/nuansapulsa-assets/logo_full_dengan_tagline.png"
           alt="NuansaPulsa"
           fill
           priority
-          sizes="(max-width: 480px) 68vw, 272px"
+          sizes="(max-width: 480px) 64vw, 260px"
           className="object-contain object-left"
         />
       </Link>
@@ -95,7 +96,7 @@ function HomeHero({ isLoggedIn }: { isLoggedIn: boolean }) {
         href={isLoggedIn ? "/user/account/topup" : "/login"}
         prefetch={false}
         aria-label="Top Up"
-        className="absolute bottom-10 right-7 flex w-[clamp(190px,55vw,214px)] rounded-[18px] bg-white px-2.5 py-2.5 text-slate-700 shadow-[0_18px_40px_rgba(90,6,20,0.22)] ring-1 ring-white/70 focus-visible:outline-none focus-visible:ring-4 focus-visible:ring-white/70"
+        className="absolute bottom-9 right-7 flex w-[clamp(184px,54vw,206px)] rounded-[17px] bg-white px-2.5 py-2.5 text-slate-700 shadow-[0_18px_40px_rgba(90,6,20,0.2)] ring-1 ring-white/70 focus-visible:outline-none focus-visible:ring-4 focus-visible:ring-white/70"
       >
         <span className="relative mr-2.5 h-8 w-8 shrink-0 overflow-hidden rounded-full bg-[#fff1f2]">
           <Image src="/nuansapulsa-assets/icon_saldo_badge.png" alt="" fill sizes="32px" className="object-contain" />
