@@ -95,16 +95,16 @@ function HomeHero({ isLoggedIn }: { isLoggedIn: boolean }) {
         href={isLoggedIn ? "/user/account/topup" : "/login"}
         prefetch={false}
         aria-label="Top Up"
-        className="absolute bottom-10 right-4 flex w-[clamp(208px,60vw,232px)] rounded-[20px] bg-white px-3 py-3 text-slate-700 shadow-[0_18px_40px_rgba(90,6,20,0.22)] ring-1 ring-white/70 focus-visible:outline-none focus-visible:ring-4 focus-visible:ring-white/70"
+        className="absolute bottom-10 right-7 flex w-[clamp(190px,55vw,214px)] rounded-[18px] bg-white px-2.5 py-2.5 text-slate-700 shadow-[0_18px_40px_rgba(90,6,20,0.22)] ring-1 ring-white/70 focus-visible:outline-none focus-visible:ring-4 focus-visible:ring-white/70"
       >
-        <span className="relative mr-3 h-10 w-10 shrink-0 overflow-hidden rounded-full bg-[#fff1f2]">
-          <Image src="/nuansapulsa-assets/icon_saldo_badge.png" alt="" fill sizes="40px" className="object-contain" />
+        <span className="relative mr-2.5 h-8 w-8 shrink-0 overflow-hidden rounded-full bg-[#fff1f2]">
+          <Image src="/nuansapulsa-assets/icon_saldo_badge.png" alt="" fill sizes="32px" className="object-contain" />
         </span>
         <span className="min-w-0 flex-1">
-          <span className="block text-xs font-semibold leading-4 text-slate-500">Saldo Anda</span>
-          <span className="mt-0.5 block text-xl font-black leading-none text-[#d70717]">Rp 125.000</span>
-          <span className="mt-2 inline-flex h-8 w-full items-center justify-center gap-1.5 rounded-full bg-[#d70717] px-3 text-sm font-black text-white">
-            <span className="text-base leading-none">+</span>
+          <span className="block text-[11px] font-semibold leading-3 text-slate-500">Saldo Anda</span>
+          <span className="mt-1 block text-lg font-black leading-none text-[#d70717]">Rp 125.000</span>
+          <span className="mt-2 inline-flex h-7 w-full items-center justify-center gap-1 rounded-full bg-[#d70717] px-2.5 text-xs font-black text-white">
+            <span className="text-sm leading-none">+</span>
             Top Up
           </span>
         </span>
