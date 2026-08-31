@@ -21,27 +21,27 @@ type GameCategoryPickerProps = {
 
 function getTheme(name: string) {
   const value = name.toLowerCase();
-  if (value.includes("mobile")) return "from-[#251405] via-[#064e3b] to-[#16a34a]";
-  if (value.includes("free fire")) return "from-[#09090b] via-[#064e3b] to-[#f59e0b]";
-  if (value.includes("magic")) return "from-[#243c5a] via-[#047857] to-[#a3e635]";
-  if (value.includes("call of duty")) return "from-[#020617] via-[#064e3b] to-[#334155]";
-  if (value.includes("genshin")) return "from-[#1b1030] via-[#064e3b] to-[#16a34a]";
-  if (value.includes("pubg")) return "from-[#111827] via-[#064e3b] to-[#facc15]";
-  if (value.includes("roblox")) return "from-[#020617] via-[#052e26] to-[#10b981]";
-  if (value.includes("point")) return "from-[#020617] via-[#064e3b] to-[#0f766e]";
-  return "from-[#052e26] via-[#047857] to-[#22c55e]";
+  if (value.includes("mobile")) return "from-[#251405] via-[#b50718] to-[#ff6a00]";
+  if (value.includes("free fire")) return "from-[#09090b] via-[#b50718] to-[#f59e0b]";
+  if (value.includes("magic")) return "from-[#243c5a] via-[#d70717] to-[#ffb000]";
+  if (value.includes("call of duty")) return "from-[#020617] via-[#b50718] to-[#334155]";
+  if (value.includes("genshin")) return "from-[#1b1030] via-[#b50718] to-[#ff6a00]";
+  if (value.includes("pubg")) return "from-[#111827] via-[#b50718] to-[#facc15]";
+  if (value.includes("roblox")) return "from-[#020617] via-[#d70717] to-[#ff6a00]";
+  if (value.includes("point")) return "from-[#020617] via-[#b50718] to-[#0f766e]";
+  return "from-[#d70717] via-[#d70717] to-[#ffb000]";
 }
 
 export function GameCategoryPicker({ title, items }: GameCategoryPickerProps) {
   return (
     <div className="space-y-3 pb-28">
-      <section className="overflow-hidden rounded-[28px] border border-emerald-950/5 bg-linear-to-br from-white via-emerald-50/75 to-lime-50/70 p-3 shadow-[0_18px_42px_rgba(6,78,59,0.12)]">
+      <section className="overflow-hidden rounded-[28px] border border-rose-950/5 bg-linear-to-br from-white via-red-50/75 to-amber-50/70 p-3 shadow-[0_18px_42px_rgba(151,14,32,0.12)]">
         <div className="flex items-center justify-between gap-3 px-1 pb-3 pt-1">
           <div>
             <h2 className="text-base font-black tracking-tight text-slate-950">Pilih Game</h2>
             <p className="mt-0.5 text-xs font-semibold text-slate-500">{title} favorit kamu</p>
           </div>
-          <span className="grid h-9 w-9 shrink-0 place-items-center rounded-2xl bg-[#052e26] text-lime-200 shadow-[0_10px_22px_rgba(5,46,38,0.18)]">
+          <span className="grid h-9 w-9 shrink-0 place-items-center rounded-2xl bg-[#d70717] text-amber-200 shadow-[0_10px_22px_rgba(151,14,32,0.18)]">
             <Gamepad2 className="h-4.5 w-4.5" />
           </span>
         </div>
@@ -62,9 +62,9 @@ export function GameCategoryPicker({ title, items }: GameCategoryPickerProps) {
                   href={item.href}
                   prefetch={false}
                   aria-label={item.name}
-                  className={`group relative isolate min-h-[174px] overflow-hidden rounded-[24px] border border-white/65 bg-linear-to-br ${theme} p-3 text-left shadow-[0_16px_32px_rgba(6,78,59,0.16)] ring-1 ring-emerald-950/[0.03] transition duration-300 hover:-translate-y-1 hover:shadow-[0_22px_42px_rgba(6,78,59,0.23)] focus-visible:outline-none focus-visible:ring-4 focus-visible:ring-lime-200`}
+                  className={`group relative isolate min-h-[174px] overflow-hidden rounded-[24px] border border-white/65 bg-linear-to-br ${theme} p-3 text-left shadow-[0_16px_32px_rgba(151,14,32,0.16)] ring-1 ring-rose-950/[0.03] transition duration-300 hover:-translate-y-1 hover:shadow-[0_22px_42px_rgba(151,14,32,0.23)] focus-visible:outline-none focus-visible:ring-4 focus-visible:ring-amber-200`}
                 >
-                  <div className="absolute -right-10 -top-10 h-28 w-28 rounded-full bg-lime-300/30 blur-2xl transition duration-300 group-hover:bg-lime-200/45" />
+                  <div className="absolute -right-10 -top-10 h-28 w-28 rounded-full bg-amber-300/30 blur-2xl transition duration-300 group-hover:bg-amber-200/45" />
                   <div className="absolute -bottom-12 left-0 h-24 w-28 rounded-full bg-white/15 blur-2xl" />
                   <div className="absolute inset-0 bg-[radial-gradient(circle_at_18%_10%,rgba(255,255,255,0.22),transparent_28%),linear-gradient(180deg,rgba(255,255,255,0.08),rgba(255,255,255,0.02))]" />
                   <div className="absolute inset-0 opacity-[0.16] bg-[repeating-radial-gradient(circle_at_0_100%,rgba(255,255,255,0.72)_0,rgba(255,255,255,0.72)_1px,transparent_1px,transparent_11px)] bg-size-[150%_120%]" />
@@ -93,7 +93,7 @@ export function GameCategoryPicker({ title, items }: GameCategoryPickerProps) {
                         </div>
                       </>
                     ) : (
-                      <div className="grid h-full w-full place-items-center bg-linear-to-br from-[#052e26] to-[#10b981] text-white">
+                      <div className="grid h-full w-full place-items-center bg-linear-to-br from-[#d70717] to-[#ff6a00] text-white">
                         <UserRound className="h-8 w-8" />
                       </div>
                     )}
@@ -103,7 +103,7 @@ export function GameCategoryPicker({ title, items }: GameCategoryPickerProps) {
                     <p className="line-clamp-2 text-[11px] font-black uppercase leading-tight text-white drop-shadow-sm">
                       {item.name}
                     </p>
-                    <span className="grid h-7 w-7 shrink-0 place-items-center rounded-full bg-lime-300 text-[#052e26] shadow-[0_8px_16px_rgba(5,46,38,0.18)] transition duration-300 group-hover:translate-x-0.5">
+                    <span className="grid h-7 w-7 shrink-0 place-items-center rounded-full bg-amber-300 text-[#d70717] shadow-[0_8px_16px_rgba(151,14,32,0.18)] transition duration-300 group-hover:translate-x-0.5">
                       <ChevronRight className="h-4 w-4" strokeWidth={2.4} />
                     </span>
                   </div>

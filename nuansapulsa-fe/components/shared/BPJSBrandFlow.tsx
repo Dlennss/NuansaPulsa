@@ -460,7 +460,7 @@ export function BPJSBrandFlow({ items, authToken, buyerRole, initialMode = "kese
               ) : null}
 
               {isCheckFinal && billingInquiry ? (
-                <div className={`rounded-2xl px-4 py-4 text-sm ${billingInquiry.can_pay ? "border border-emerald-100 bg-emerald-50 text-emerald-900" : "border border-rose-100 bg-rose-50 text-rose-700"}`}>
+                <div className={`rounded-2xl px-4 py-4 text-sm ${billingInquiry.can_pay ? "border border-rose-100 bg-rose-50 text-rose-900" : "border border-rose-100 bg-rose-50 text-rose-700"}`}>
                   <p className="font-semibold">{billingInquiry.can_pay ? "Hasil cek tagihan sudah siap" : "Tagihan tidak dapat diproses"}</p>
                   {billingInquiry.can_pay ? (
                     <p className="mt-1 wrap-break-words text-sm opacity-90">{billingInquiry.provider_message}</p>
@@ -469,7 +469,7 @@ export function BPJSBrandFlow({ items, authToken, buyerRole, initialMode = "kese
                   ) : null}
 
                   {billingInquiry.can_pay ? (
-                    <div className="mt-4 space-y-2 rounded-2xl bg-white/80 px-4 py-3 text-slate-700 ring-1 ring-emerald-100">
+                    <div className="mt-4 space-y-2 rounded-2xl bg-white/80 px-4 py-3 text-slate-700 ring-1 ring-rose-100">
                       {billingInquiry.customer_name ? (
                         <div className="flex items-center justify-between gap-3">
                           <span>Nama</span>

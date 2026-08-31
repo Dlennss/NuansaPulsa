@@ -221,9 +221,9 @@ export function GuestElectricityEntryFlow({
 
   return (
     <div className="space-y-4">
-      <section className="overflow-hidden rounded-[28px] border border-emerald-950/5 bg-linear-to-br from-white via-emerald-50/80 to-lime-50/70 p-4 shadow-[0_18px_42px_rgba(6,78,59,0.12)]">
+      <section className="overflow-hidden rounded-[28px] border border-rose-950/5 bg-linear-to-br from-white via-red-50/80 to-amber-50/70 p-4 shadow-[0_18px_42px_rgba(151,14,32,0.12)]">
         <div className="flex items-center gap-3">
-          <div className="grid h-14 w-14 shrink-0 place-items-center rounded-[20px] bg-white p-2 shadow-[0_12px_24px_rgba(6,78,59,0.12)] ring-1 ring-emerald-100">
+          <div className="grid h-14 w-14 shrink-0 place-items-center rounded-[20px] bg-white p-2 shadow-[0_12px_24px_rgba(151,14,32,0.12)] ring-1 ring-rose-100">
             <Image
               src="/images/pln/logo_pln.png"
               alt="PLN"
@@ -233,7 +233,7 @@ export function GuestElectricityEntryFlow({
             />
           </div>
           <div className="min-w-0">
-            <p className="text-[10px] font-black uppercase tracking-[0.16em] text-emerald-700">NuansaPulsa PLN</p>
+            <p className="text-[10px] font-black uppercase tracking-[0.16em] text-rose-700">NuansaPulsa PLN</p>
             <h1 className="mt-0.5 text-lg font-black tracking-tight text-slate-950">{title}</h1>
             {description ? <p className="mt-1 text-sm text-slate-500">{description}</p> : null}
           </div>
@@ -257,7 +257,7 @@ export function GuestElectricityEntryFlow({
             className={`h-14 w-full rounded-2xl px-4 py-3 text-sm font-bold text-slate-900 placeholder:text-slate-400 focus:outline-none focus:ring-4 ${
               inputInvalid
                 ? "auth-shake border border-rose-300 bg-rose-50 focus:border-rose-400 focus:ring-rose-100"
-                : "border border-emerald-500/20 bg-white focus:border-emerald-500 focus:ring-emerald-100"
+                : "border border-rose-500/20 bg-white focus:border-rose-500 focus:ring-rose-100"
             }`}
           />
           {destinationLine ? <p className="text-xs text-slate-500">{destinationLine}</p> : null}
@@ -281,7 +281,7 @@ export function GuestElectricityEntryFlow({
                   onClick={() => setSelectedGroup(group.label)}
                   className={`shrink-0 snap-start whitespace-nowrap rounded-full px-2.5 py-2 text-[10px] font-semibold leading-tight transition ${
                     selectedGroup === group.label
-                      ? "bg-[#052e26] text-lime-100 shadow-[0_8px_18px_rgba(5,46,38,0.20)]"
+                      ? "bg-[#d70717] text-amber-100 shadow-[0_8px_18px_rgba(151,14,32,0.20)]"
                       : "bg-white text-slate-700 ring-1 ring-slate-200 hover:bg-slate-50"
                   }`}
                 >

@@ -11,7 +11,7 @@ function UserSkeletonScreen() {
   return (
     <div className="fixed inset-0 z-[2147483647] bg-sky-50 text-slate-950 md:grid md:place-items-start md:py-4">
       <div className="relative mx-auto min-h-dvh w-full max-w-md overflow-hidden bg-sky-50 md:w-97.5 md:max-w-none md:border md:border-slate-200 md:shadow-[0_24px_80px_rgba(15,23,42,0.18)]">
-        <div className="bg-[linear-gradient(135deg,#052e26,#047857_58%,#4ade80)] px-4 pb-5 pt-4 text-white">
+        <div className="bg-[linear-gradient(135deg,#d70717,#d70717_58%,#ffb000)] px-4 pb-5 pt-4 text-white">
           <div className="flex items-center justify-between gap-3">
             <SkeletonBlock className="h-10 w-10 rounded-full bg-white/25" />
             <div className="min-w-0 flex-1">
@@ -31,19 +31,19 @@ function UserSkeletonScreen() {
           <div className="grid grid-cols-4 gap-3">
             {[0, 1, 2, 3].map((item) => (
               <div key={item} className="rounded-[22px] bg-white p-3 shadow-[0_12px_28px_rgba(15,23,42,0.06)]">
-                <SkeletonBlock className="mx-auto h-10 w-10 rounded-2xl bg-emerald-100" />
+                <SkeletonBlock className="mx-auto h-10 w-10 rounded-2xl bg-rose-100" />
                 <SkeletonBlock className="mx-auto mt-2 h-3 w-10 bg-slate-200" />
               </div>
             ))}
           </div>
 
-          <section className="rounded-[28px] border border-emerald-100 bg-white p-4 shadow-[0_18px_42px_rgba(6,78,59,0.08)]">
+          <section className="rounded-[28px] border border-rose-100 bg-white p-4 shadow-[0_18px_42px_rgba(151,14,32,0.08)]">
             <div className="flex items-center justify-between gap-3">
               <div>
-                <SkeletonBlock className="h-4 w-24 bg-emerald-100" />
+                <SkeletonBlock className="h-4 w-24 bg-rose-100" />
                 <SkeletonBlock className="mt-2 h-6 w-44" />
               </div>
-              <SkeletonBlock className="h-10 w-10 rounded-2xl bg-emerald-100" />
+              <SkeletonBlock className="h-10 w-10 rounded-2xl bg-rose-100" />
             </div>
             <div className="mt-5 grid grid-cols-2 gap-3">
               {[0, 1, 2, 3].map((item) => (
@@ -96,8 +96,8 @@ function DashboardSkeletonScreen() {
             <SkeletonBlock className="h-9 w-9 rounded-full bg-white/18" />
           </div>
 
-          <section className="overflow-hidden rounded-[28px] border border-emerald-100 bg-white text-slate-950 shadow-[0_24px_60px_rgba(15,23,42,0.25)]">
-            <div className="bg-[radial-gradient(circle_at_90%_10%,rgba(163,230,53,0.55),transparent_28%),linear-gradient(135deg,#052e26_0%,#057a45_48%,#3bd64a_100%)] p-5 sm:p-7">
+          <section className="overflow-hidden rounded-[28px] border border-rose-100 bg-white text-slate-950 shadow-[0_24px_60px_rgba(15,23,42,0.25)]">
+            <div className="bg-[radial-gradient(circle_at_90%_10%,rgba(163,230,53,0.55),transparent_28%),linear-gradient(135deg,#d70717_0%,#e50917_48%,#ff6a00_100%)] p-5 sm:p-7">
               <SkeletonBlock className="h-5 w-28 bg-white/35" />
               <SkeletonBlock className="mt-4 h-9 w-64 max-w-full bg-white/35" />
               <SkeletonBlock className="mt-3 h-4 w-full max-w-md bg-white/25" />
@@ -125,7 +125,7 @@ function DashboardSkeletonScreen() {
                   </div>
                   <div className="mt-5 space-y-3">
                     {[0, 1, 2].map((item) => (
-                      <div key={item} className="rounded-3xl border border-emerald-100 bg-emerald-50/40 p-4">
+                      <div key={item} className="rounded-3xl border border-rose-100 bg-rose-50/40 p-4">
                         <div className="flex gap-3">
                           <SkeletonBlock className="h-14 w-14 shrink-0 rounded-[20px]" />
                           <div className="min-w-0 flex-1">
@@ -165,22 +165,22 @@ function SiteSkeletonScreen() {
     <div className="fixed inset-0 z-[2147483647] bg-[#f4fbf7] text-slate-950">
       <div className="mx-auto min-h-dvh w-full max-w-6xl px-4 py-5 sm:px-6 lg:px-8">
         <div className="flex items-center justify-between gap-4">
-          <SkeletonBlock className="h-8 w-32 bg-emerald-100" />
+          <SkeletonBlock className="h-8 w-32 bg-rose-100" />
           <div className="hidden gap-3 sm:flex">
             <SkeletonBlock className="h-9 w-20" />
             <SkeletonBlock className="h-9 w-20" />
             <SkeletonBlock className="h-9 w-24" />
           </div>
-          <SkeletonBlock className="h-10 w-24 bg-emerald-100" />
+          <SkeletonBlock className="h-10 w-24 bg-rose-100" />
         </div>
         <section className="mt-8 rounded-[32px] bg-white p-5 shadow-[0_24px_70px_rgba(15,23,42,0.08)] sm:p-8">
-          <SkeletonBlock className="h-5 w-32 bg-emerald-100" />
+          <SkeletonBlock className="h-5 w-32 bg-rose-100" />
           <SkeletonBlock className="mt-5 h-12 w-full max-w-xl" />
           <SkeletonBlock className="mt-4 h-4 w-full max-w-lg bg-slate-100" />
           <SkeletonBlock className="mt-2 h-4 w-2/3 bg-slate-100" />
           <div className="mt-7 grid gap-3 sm:grid-cols-3">
             {[0, 1, 2].map((item) => (
-              <SkeletonBlock key={item} className="h-28 rounded-[24px] bg-emerald-50" />
+              <SkeletonBlock key={item} className="h-28 rounded-[24px] bg-rose-50" />
             ))}
           </div>
         </section>

@@ -41,12 +41,12 @@ export function GuestProductGameCard({
         onBuy(item);
       }}
       disabled={!canBuy}
-      className="group relative min-h-[116px] w-full overflow-hidden rounded-[22px] border border-emerald-100/70 bg-linear-to-br from-[#052e26] via-[#047857] to-[#22c55e] p-3 text-left text-white shadow-[0_16px_34px_rgba(6,78,59,0.18)] transition duration-300 hover:-translate-y-0.5 hover:shadow-[0_20px_42px_rgba(6,78,59,0.24)] disabled:cursor-not-allowed disabled:opacity-60"
+      className="group relative min-h-[116px] w-full overflow-hidden rounded-[22px] border border-rose-100/70 bg-linear-to-br from-[#d70717] via-[#d70717] to-[#ffb000] p-3 text-left text-white shadow-[0_16px_34px_rgba(151,14,32,0.18)] transition duration-300 hover:-translate-y-0.5 hover:shadow-[0_20px_42px_rgba(151,14,32,0.24)] disabled:cursor-not-allowed disabled:opacity-60"
     >
-      <div className="absolute -right-10 -top-10 h-28 w-28 rounded-full bg-lime-300/35 blur-2xl transition duration-300 group-hover:bg-lime-200/45" />
+      <div className="absolute -right-10 -top-10 h-28 w-28 rounded-full bg-amber-300/35 blur-2xl transition duration-300 group-hover:bg-amber-200/45" />
       <div className="absolute -bottom-14 left-3 h-24 w-32 rounded-full bg-white/12 blur-2xl" />
       <div className="absolute inset-0 opacity-20 bg-[repeating-radial-gradient(circle_at_0_100%,rgba(255,255,255,0.55)_0,rgba(255,255,255,0.55)_1px,transparent_1px,transparent_11px)] bg-size-[150%_120%]" />
-      <div className="absolute right-3 top-3 grid h-8 w-8 place-items-center rounded-2xl bg-white/14 text-lime-100 ring-1 ring-white/20">
+      <div className="absolute right-3 top-3 grid h-8 w-8 place-items-center rounded-2xl bg-white/14 text-amber-100 ring-1 ring-white/20">
         <Gamepad2 className="h-4 w-4" />
       </div>
 

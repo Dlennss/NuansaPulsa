@@ -156,11 +156,11 @@ export default async function GameBrandPage({ params, searchParams }: PageProps)
       <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(faqJsonLd) }} />
       <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(breadcrumbJsonLd) }} />
       <div className="space-y-4 px-4 pt-4">
-        <section className="overflow-hidden rounded-[26px] border border-emerald-950/5 bg-linear-to-br from-[#052e26] via-[#047857] to-[#22c55e] p-4 text-white shadow-[0_18px_42px_rgba(6,78,59,0.22)]">
+        <section className="overflow-hidden rounded-[26px] border border-rose-950/5 bg-linear-to-br from-[#d70717] via-[#d70717] to-[#ffb000] p-4 text-white shadow-[0_18px_42px_rgba(151,14,32,0.22)]">
           <div className="relative">
-            <div className="absolute -right-12 -top-16 h-32 w-32 rounded-full bg-lime-300/30 blur-2xl" />
+            <div className="absolute -right-12 -top-16 h-32 w-32 rounded-full bg-amber-300/30 blur-2xl" />
             <div className="relative flex items-center gap-3">
-              <div className="grid h-16 w-24 shrink-0 place-items-center overflow-hidden rounded-2xl bg-white shadow-[0_14px_30px_rgba(5,46,38,0.20)]">
+              <div className="grid h-16 w-24 shrink-0 place-items-center overflow-hidden rounded-2xl bg-white shadow-[0_14px_30px_rgba(151,14,32,0.20)]">
                 {brandLogo?.src ? (
                   <Image
                     src={brandLogo.src}
@@ -170,11 +170,11 @@ export default async function GameBrandPage({ params, searchParams }: PageProps)
                     className="h-full w-full object-contain p-2"
                   />
                 ) : (
-                  <Gamepad2 className="h-8 w-8 text-[#047857]" />
+                  <Gamepad2 className="h-8 w-8 text-[#d70717]" />
                 )}
               </div>
               <div className="min-w-0 flex-1">
-                <p className="inline-flex items-center gap-1 rounded-full bg-white/12 px-2 py-1 text-[10px] font-black uppercase tracking-wide text-lime-100 ring-1 ring-white/15">
+                <p className="inline-flex items-center gap-1 rounded-full bg-white/12 px-2 py-1 text-[10px] font-black uppercase tracking-wide text-amber-100 ring-1 ring-white/15">
                   <Zap className="h-3 w-3" fill="currentColor" />
                   Top Up Game
                 </p>
@@ -183,7 +183,7 @@ export default async function GameBrandPage({ params, searchParams }: PageProps)
               </div>
             </div>
             <div className="relative mt-4 flex items-center gap-2 rounded-2xl bg-white/10 px-3 py-2 text-xs font-bold text-white/86 ring-1 ring-white/15">
-              <ShieldCheck className="h-4 w-4 text-lime-200" />
+              <ShieldCheck className="h-4 w-4 text-amber-200" />
               Produk aktif dan siap diproses otomatis.
             </div>
           </div>

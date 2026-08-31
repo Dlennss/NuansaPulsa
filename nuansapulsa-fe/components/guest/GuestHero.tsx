@@ -10,10 +10,10 @@ type GuestHeroProps = {
 
 export function GuestHero({ isLoggedIn = false }: GuestHeroProps) {
   return (
-    <section className="sticky top-0 z-30 border-b border-white/10 bg-linear-to-r from-[#052e26] via-[#047857] to-[#10b981] px-5 pb-2 pt-2 text-white shadow-[0_10px_24px_rgba(6,78,59,0.22)] backdrop-blur-sm">
+    <section className="sticky top-0 z-30 border-b border-white/10 bg-linear-to-r from-[#d70717] via-[#d70717] to-[#ff6a00] px-5 pb-2 pt-2 text-white shadow-[0_10px_24px_rgba(151,14,32,0.22)] backdrop-blur-sm">
       <div className="flex items-center justify-between gap-3">
         <div className="min-w-0 flex-1 pr-2">
-          <Link href="/" className="inline-flex h-12 max-w-[58vw] items-center rounded-lg bg-white px-2.5 shadow-[0_8px_18px_rgba(6,78,59,0.22)]">
+          <Link href="/" className="inline-flex h-12 max-w-[58vw] items-center rounded-lg bg-white px-2.5 shadow-[0_8px_18px_rgba(151,14,32,0.22)]">
             <Image
               src="/images/logo-nuansapulsa-header.svg"
               alt="NuansaPulsa"

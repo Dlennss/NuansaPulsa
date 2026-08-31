@@ -39,7 +39,7 @@ export function UserTransferBankPageContent({ backHref = "/user/kategori" }: Use
 
   return (
     <>
-      <section className="bg-[linear-gradient(135deg,#052e26_0%,#047857_72%,#65a30d_145%)] px-4 pb-6 pt-5 text-white shadow-[0_16px_36px_rgba(4,120,87,0.20)]">
+      <section className="bg-[linear-gradient(135deg,#d70717_0%,#d70717_72%,#65a30d_145%)] px-4 pb-6 pt-5 text-white shadow-[0_16px_36px_rgba(215,7,23,0.20)]">
         <div className="mx-auto flex w-full max-w-md items-center gap-3">
           {selectedBank ? (
             <button
@@ -61,7 +61,7 @@ export function UserTransferBankPageContent({ backHref = "/user/kategori" }: Use
           )}
 
           <div className="min-w-0 flex-1">
-            <p className="text-[10px] font-bold uppercase tracking-[0.16em] text-lime-200">
+            <p className="text-[10px] font-bold uppercase tracking-[0.16em] text-amber-200">
               {selectedBank ? "Langkah 2 dari 2" : "Langkah 1 dari 2"}
             </p>
             <h1 className="mt-0.5 truncate text-lg font-black tracking-tight">Transfer Bank</h1>
@@ -70,7 +70,7 @@ export function UserTransferBankPageContent({ backHref = "/user/kategori" }: Use
             </p>
           </div>
 
-          <span className="grid h-11 w-11 shrink-0 place-items-center rounded-md bg-white text-[#047857]">
+          <span className="grid h-11 w-11 shrink-0 place-items-center rounded-md bg-white text-[#d70717]">
             <Landmark className="h-5 w-5" strokeWidth={2.4} />
           </span>
         </div>
@@ -84,7 +84,7 @@ export function UserTransferBankPageContent({ backHref = "/user/kategori" }: Use
                 <h2 className="text-lg font-black text-slate-950">Pilih Bank</h2>
                 <p className="mt-1 text-xs font-medium text-slate-500">Ketuk salah satu bank untuk melanjutkan.</p>
               </div>
-              <span className="shrink-0 rounded-full bg-emerald-100 px-3 py-1 text-[10px] font-black text-emerald-700">
+              <span className="shrink-0 rounded-full bg-rose-100 px-3 py-1 text-[10px] font-black text-rose-700">
                 {banks.length} bank
               </span>
             </div>
@@ -95,7 +95,7 @@ export function UserTransferBankPageContent({ backHref = "/user/kategori" }: Use
                   key={bank.name}
                   type="button"
                   onClick={() => chooseBank(bank.name)}
-                  className="group relative grid aspect-[1/1.04] min-w-0 grid-rows-[1fr_auto] overflow-hidden rounded-md border border-slate-200 bg-white p-2.5 text-center shadow-[0_8px_20px_rgba(15,23,42,0.05)] transition hover:-translate-y-0.5 hover:border-emerald-400 hover:shadow-[0_14px_28px_rgba(6,78,59,0.12)] focus-visible:border-emerald-600 focus-visible:outline-none focus-visible:ring-4 focus-visible:ring-emerald-100"
+                  className="group relative grid aspect-[1/1.04] min-w-0 grid-rows-[1fr_auto] overflow-hidden rounded-md border border-slate-200 bg-white p-2.5 text-center shadow-[0_8px_20px_rgba(15,23,42,0.05)] transition hover:-translate-y-0.5 hover:border-rose-400 hover:shadow-[0_14px_28px_rgba(151,14,32,0.12)] focus-visible:border-rose-600 focus-visible:outline-none focus-visible:ring-4 focus-visible:ring-rose-100"
                 >
                   <span className="relative block min-h-0 w-full">
                     <Image
@@ -115,7 +115,7 @@ export function UserTransferBankPageContent({ backHref = "/user/kategori" }: Use
           </section>
         ) : (
           <section className="space-y-4">
-            <div className="rounded-md border border-emerald-200 bg-white p-4 shadow-[0_16px_34px_rgba(6,78,59,0.09)]">
+            <div className="rounded-md border border-rose-200 bg-white p-4 shadow-[0_16px_34px_rgba(151,14,32,0.09)]">
               <div className="flex items-center gap-3">
                 <span className="relative block h-16 w-24 shrink-0 overflow-hidden rounded-md border border-slate-100 bg-white">
                   <Image
@@ -127,16 +127,16 @@ export function UserTransferBankPageContent({ backHref = "/user/kategori" }: Use
                   />
                 </span>
                 <div className="min-w-0 flex-1">
-                  <p className="text-[10px] font-bold uppercase tracking-[0.14em] text-emerald-700">Bank tujuan</p>
+                  <p className="text-[10px] font-bold uppercase tracking-[0.14em] text-rose-700">Bank tujuan</p>
                   <h2 className="mt-1 text-base font-black leading-tight text-slate-950">{selectedBank.name}</h2>
                 </div>
-                <CheckCircle2 className="h-5 w-5 shrink-0 text-emerald-600" strokeWidth={2.4} />
+                <CheckCircle2 className="h-5 w-5 shrink-0 text-rose-600" strokeWidth={2.4} />
               </div>
 
               <button
                 type="button"
                 onClick={changeBank}
-                className="mt-3 inline-flex h-9 items-center gap-2 rounded-md border border-emerald-200 bg-emerald-50 px-3 text-[11px] font-black text-emerald-700"
+                className="mt-3 inline-flex h-9 items-center gap-2 rounded-md border border-rose-200 bg-rose-50 px-3 text-[11px] font-black text-rose-700"
               >
                 <ChevronLeft className="h-4 w-4" />
                 Ganti Bank
@@ -167,7 +167,7 @@ export function UserTransferBankPageContent({ backHref = "/user/kategori" }: Use
                 id="transfer-account-number"
                 value={accountNumber}
                 onChange={(event) => setAccountNumber(event.target.value.replace(/\D+/g, "").slice(0, 24))}
-                className="mt-4 h-13 w-full rounded-md border border-slate-200 bg-slate-50 px-4 text-base font-bold text-slate-950 outline-none placeholder:text-sm placeholder:font-medium placeholder:text-slate-400 focus:border-emerald-600 focus:bg-white focus:ring-4 focus:ring-emerald-100"
+                className="mt-4 h-13 w-full rounded-md border border-slate-200 bg-slate-50 px-4 text-base font-bold text-slate-950 outline-none placeholder:text-sm placeholder:font-medium placeholder:text-slate-400 focus:border-rose-600 focus:bg-white focus:ring-4 focus:ring-rose-100"
                 placeholder="Masukkan nomor rekening"
                 inputMode="numeric"
                 autoFocus
@@ -176,18 +176,18 @@ export function UserTransferBankPageContent({ backHref = "/user/kategori" }: Use
               <button
                 type="button"
                 disabled={!canContinue}
-                className="mt-4 flex h-13 w-full items-center justify-center gap-2 rounded-md bg-[linear-gradient(135deg,#052e26,#047857,#65a30d)] px-4 text-sm font-black text-white shadow-[0_14px_28px_rgba(4,120,87,0.20)] transition hover:brightness-105 disabled:bg-none disabled:bg-slate-200 disabled:text-slate-400 disabled:shadow-none"
+                className="mt-4 flex h-13 w-full items-center justify-center gap-2 rounded-md bg-[linear-gradient(135deg,#d70717,#d70717,#65a30d)] px-4 text-sm font-black text-white shadow-[0_14px_28px_rgba(215,7,23,0.20)] transition hover:brightness-105 disabled:bg-none disabled:bg-slate-200 disabled:text-slate-400 disabled:shadow-none"
               >
                 Lanjutkan
                 <ChevronRight className="h-4 w-4" strokeWidth={2.6} />
               </button>
             </div>
 
-            <div className="flex items-center gap-3 rounded-md border border-emerald-200 bg-emerald-50 px-4 py-3">
-              <span className="grid h-9 w-9 shrink-0 place-items-center rounded-md bg-white text-emerald-700">
+            <div className="flex items-center gap-3 rounded-md border border-rose-200 bg-rose-50 px-4 py-3">
+              <span className="grid h-9 w-9 shrink-0 place-items-center rounded-md bg-white text-rose-700">
                 <ShieldCheck className="h-4.5 w-4.5" strokeWidth={2.4} />
               </span>
-              <p className="text-[11px] font-semibold leading-4 text-emerald-800">
+              <p className="text-[11px] font-semibold leading-4 text-rose-800">
                 Nomor rekening akan diperiksa sebelum transaksi dilanjutkan.
               </p>
             </div>

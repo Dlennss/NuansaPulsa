@@ -38,15 +38,15 @@ export function GuestProductDefaultCard({
           onBuy(item);
         }}
         disabled={!canBuy}
-        className="group relative w-full overflow-hidden rounded-[24px] bg-[#052e26] px-4 py-4 text-left text-white shadow-[0_16px_32px_rgba(5,46,38,0.22)] ring-1 ring-lime-200/20 transition duration-300 hover:-translate-y-0.5 hover:shadow-[0_20px_40px_rgba(5,46,38,0.28)] disabled:cursor-not-allowed disabled:opacity-60"
+        className="group relative w-full overflow-hidden rounded-[24px] bg-[#d70717] px-4 py-4 text-left text-white shadow-[0_16px_32px_rgba(151,14,32,0.22)] ring-1 ring-amber-200/20 transition duration-300 hover:-translate-y-0.5 hover:shadow-[0_20px_40px_rgba(151,14,32,0.28)] disabled:cursor-not-allowed disabled:opacity-60"
       >
-        <div className="absolute -right-8 -top-10 h-26 w-26 rounded-full bg-lime-300/35 blur-2xl transition group-hover:bg-lime-200/45" />
+        <div className="absolute -right-8 -top-10 h-26 w-26 rounded-full bg-amber-300/35 blur-2xl transition group-hover:bg-amber-200/45" />
         <div className="absolute inset-0 bg-[radial-gradient(circle_at_15%_10%,rgba(255,255,255,0.16),transparent_28%),linear-gradient(135deg,rgba(16,185,129,0.22),rgba(163,230,53,0.06))]" />
         <div className="absolute inset-0 opacity-[0.16] bg-[repeating-radial-gradient(circle_at_0_100%,rgba(255,255,255,0.75)_0,rgba(255,255,255,0.75)_1px,transparent_1px,transparent_11px)] bg-size-[150%_120%]" />
 
         <div className="relative flex min-h-20 flex-col justify-between gap-4">
           <div className="min-w-0">
-            <p className="text-2xl font-black leading-none tracking-tight text-lime-200">
+            <p className="text-2xl font-black leading-none tracking-tight text-amber-200">
               {extractLargeNominalLabel(item)}
             </p>
             <p className="mt-1 text-[10px] font-black uppercase tracking-[0.14em] text-white/55">Token PLN</p>

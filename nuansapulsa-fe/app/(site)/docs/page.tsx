@@ -188,7 +188,7 @@ export default function DocsPage() {
         </Block>
 
         {copied ? (
-          <p className="rounded-xl border border-emerald-200 bg-emerald-50 px-3 py-2 text-xs text-emerald-700">
+          <p className="rounded-xl border border-rose-200 bg-rose-50 px-3 py-2 text-xs text-rose-700">
             {copied}
           </p>
         ) : null}

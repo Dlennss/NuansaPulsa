@@ -87,7 +87,7 @@ const serviceMap: Record<string, ServiceMeta> = {
     icon: ReceiptText,
     providers: ["Telkomsel Halo", "Indosat Postpaid", "XL Prioritas"],
     products: ["Cek Tagihan", "Bayar Tagihan", "Reminder Bulanan"],
-    accent: "from-cyan-500 to-sky-500",
+    accent: "from-[#ffb000] via-[#ff4d00] to-[#e50917]",
   },
   "esim-roaming": {
     title: "eSIM & Roaming",
@@ -97,7 +97,7 @@ const serviceMap: Record<string, ServiceMeta> = {
     icon: Smartphone,
     providers: ["Asia Roaming", "Global eSIM", "Umrah & Haji"],
     products: ["1 GB / 3 Hari", "3 GB / 7 Hari", "5 GB / 15 Hari"],
-    accent: "from-violet-500 to-indigo-500",
+    accent: "from-[#ffb000] via-[#ff4d00] to-[#e50917]",
   },
   qris: {
     title: "Pembayaran QRIS",
@@ -107,7 +107,7 @@ const serviceMap: Record<string, ServiceMeta> = {
     icon: QrCode,
     providers: ["QRIS Dinamis", "QRIS Statis", "Merchant Lokal"],
     products: ["Rp 25.000", "Rp 50.000", "Rp 100.000"],
-    accent: "from-purple-500 to-fuchsia-500",
+    accent: "from-[#ffb000] via-[#ff4d00] to-[#e50917]",
   },
   "uang-elektronik": {
     title: "Uang Elektronik",
@@ -117,7 +117,7 @@ const serviceMap: Record<string, ServiceMeta> = {
     icon: CreditCard,
     providers: ["E-Money", "TapCash", "Brizzi"],
     products: ["Rp 20.000", "Rp 50.000", "Rp 100.000"],
-    accent: "from-indigo-500 to-blue-500",
+    accent: "from-[#ffb000] via-[#ff4d00] to-[#e50917]",
   },
   "kartu-kredit": {
     title: "Kartu Kredit",
@@ -127,7 +127,7 @@ const serviceMap: Record<string, ServiceMeta> = {
     icon: CreditCard,
     providers: ["BCA Card", "Mandiri Card", "BRI Card"],
     products: ["Cek Tagihan", "Bayar Minimum", "Bayar Penuh"],
-    accent: "from-violet-500 to-indigo-500",
+    accent: "from-[#ffb000] via-[#ff4d00] to-[#e50917]",
   },
   asuransi: {
     title: "Asuransi",
@@ -137,7 +137,7 @@ const serviceMap: Record<string, ServiceMeta> = {
     icon: ShieldCheck,
     providers: ["Prudential", "Allianz", "AIA"],
     products: ["Premi Bulanan", "Premi Tahunan", "Cek Polis"],
-    accent: "from-emerald-500 to-teal-500",
+    accent: "from-[#ffb000] via-[#ff4d00] to-[#e50917]",
   },
   bpjs: {
     title: "BPJS",
@@ -147,7 +147,7 @@ const serviceMap: Record<string, ServiceMeta> = {
     icon: HeartPulse,
     providers: ["BPJS Kesehatan", "BPJS Ketenagakerjaan"],
     products: ["1 Bulan", "3 Bulan", "6 Bulan"],
-    accent: "from-rose-500 to-orange-500",
+    accent: "from-[#ffb000] via-[#ff4d00] to-[#e50917]",
   },
   pdam: {
     title: "PDAM",
@@ -157,7 +157,7 @@ const serviceMap: Record<string, ServiceMeta> = {
     icon: Waves,
     providers: ["PDAM Kota", "PDAM Kabupaten", "Perumda Air"],
     products: ["Cek Tagihan", "Bayar Tagihan", "Simpan ID"],
-    accent: "from-cyan-500 to-teal-500",
+    accent: "from-[#ffb000] via-[#ff4d00] to-[#e50917]",
   },
   "gas-pgn": {
     title: "Gas PGN",
@@ -167,7 +167,7 @@ const serviceMap: Record<string, ServiceMeta> = {
     icon: Home,
     providers: ["PGN Rumah", "PGN Bisnis", "Gas Pintar"],
     products: ["Cek Tagihan", "Bayar Tagihan", "Riwayat Meter"],
-    accent: "from-orange-500 to-amber-500",
+    accent: "from-[#ffb000] via-[#ff4d00] to-[#e50917]",
   },
   "internet-wifi": {
     title: "Internet & WiFi",
@@ -177,7 +177,7 @@ const serviceMap: Record<string, ServiceMeta> = {
     icon: Wifi,
     providers: ["IndiHome", "Iconnet", "Biznet"],
     products: ["Cek Tagihan", "Bayar Bulanan", "Perpanjang Paket"],
-    accent: "from-sky-500 to-blue-500",
+    accent: "from-[#ffb000] via-[#ff4d00] to-[#e50917]",
   },
   "tv-kabel": {
     title: "TV Kabel",
@@ -187,7 +187,7 @@ const serviceMap: Record<string, ServiceMeta> = {
     icon: Tv,
     providers: ["K-Vision", "Transvision", "MNC Vision"],
     products: ["Paket Dasar", "Paket Sport", "Paket Family"],
-    accent: "from-purple-500 to-violet-500",
+    accent: "from-[#ffb000] via-[#ff4d00] to-[#e50917]",
   },
   "voucher-game": {
     title: "Voucher Game",
@@ -197,7 +197,7 @@ const serviceMap: Record<string, ServiceMeta> = {
     icon: Gamepad2,
     providers: ["Mobile Legends", "Free Fire", "PUBG Mobile"],
     products: ["86 Diamonds", "172 Diamonds", "Weekly Pass"],
-    accent: "from-emerald-600 to-lime-500",
+    accent: "from-[#ffb000] via-[#ff4d00] to-[#e50917]",
   },
   "voucher-digital": {
     title: "Voucher Digital",
@@ -207,7 +207,7 @@ const serviceMap: Record<string, ServiceMeta> = {
     icon: BadgePercent,
     providers: ["Google Play", "Apple Gift", "Steam Wallet"],
     products: ["Rp 25.000", "Rp 50.000", "Rp 100.000"],
-    accent: "from-red-500 to-orange-500",
+    accent: "from-[#ffb000] via-[#ff4d00] to-[#e50917]",
   },
   "streaming-musik": {
     title: "Streaming & Musik",
@@ -217,7 +217,7 @@ const serviceMap: Record<string, ServiceMeta> = {
     icon: MonitorPlay,
     providers: ["Spotify", "Vidio", "Netflix"],
     products: ["7 Hari", "30 Hari", "90 Hari"],
-    accent: "from-fuchsia-500 to-pink-500",
+    accent: "from-[#ffb000] via-[#ff4d00] to-[#e50917]",
   },
   "klinik-kesehatan": {
     title: "Klinik & Kesehatan",
@@ -227,7 +227,7 @@ const serviceMap: Record<string, ServiceMeta> = {
     icon: HeartPulse,
     providers: ["Klinik Umum", "Apotek", "Telemedis"],
     products: ["Registrasi", "Tebus Obat", "Konsultasi"],
-    accent: "from-rose-500 to-pink-500",
+    accent: "from-[#ffb000] via-[#ff4d00] to-[#e50917]",
   },
   "uang-sekolah": {
     title: "Uang Sekolah",
@@ -237,7 +237,7 @@ const serviceMap: Record<string, ServiceMeta> = {
     icon: GraduationCap,
     providers: ["SD / SMP", "SMA / SMK", "Kampus"],
     products: ["SPP", "Uang Buku", "Daftar Ulang"],
-    accent: "from-blue-500 to-indigo-500",
+    accent: "from-[#ffb000] via-[#ff4d00] to-[#e50917]",
   },
   "cicilan-kendaraan": {
     title: "Cicilan Kendaraan",
@@ -247,7 +247,7 @@ const serviceMap: Record<string, ServiceMeta> = {
     icon: Car,
     providers: ["FIF", "Adira", "WOM Finance"],
     products: ["Cek Tagihan", "Bayar Cicilan", "Denda / Admin"],
-    accent: "from-sky-500 to-cyan-500",
+    accent: "from-[#ffb000] via-[#ff4d00] to-[#e50917]",
   },
   "cicilan-multifinance": {
     title: "Cicilan Multifinance",
@@ -257,7 +257,7 @@ const serviceMap: Record<string, ServiceMeta> = {
     icon: CircleDollarSign,
     providers: ["Home Credit", "Kredivo", "Akulaku"],
     products: ["Cek Tagihan", "Bayar Cicilan", "Pelunasan"],
-    accent: "from-amber-500 to-yellow-500",
+    accent: "from-[#ffb000] via-[#ff4d00] to-[#e50917]",
   },
   pbb: {
     title: "PBB",
@@ -267,7 +267,7 @@ const serviceMap: Record<string, ServiceMeta> = {
     icon: Home,
     providers: ["PBB Kota", "PBB Kabupaten", "Pajak Daerah"],
     products: ["Cek Tagihan", "Bayar Pajak", "Unduh Bukti"],
-    accent: "from-violet-500 to-purple-500",
+    accent: "from-[#ffb000] via-[#ff4d00] to-[#e50917]",
   },
   "pajak-negara": {
     title: "Pajak & Negara",
@@ -277,7 +277,7 @@ const serviceMap: Record<string, ServiceMeta> = {
     icon: Landmark,
     providers: ["MPN", "Samsat", "Pajak Daerah"],
     products: ["Cek Billing", "Bayar Billing", "Simpan Bukti"],
-    accent: "from-emerald-500 to-teal-500",
+    accent: "from-[#ffb000] via-[#ff4d00] to-[#e50917]",
   },
   "tiket-perjalanan": {
     title: "Tiket Perjalanan",
@@ -287,7 +287,7 @@ const serviceMap: Record<string, ServiceMeta> = {
     icon: BriefcaseBusiness,
     providers: ["Kereta", "Travel", "Pesawat"],
     products: ["Cek Booking", "Bayar Tiket", "Asuransi Trip"],
-    accent: "from-sky-500 to-blue-500",
+    accent: "from-[#ffb000] via-[#ff4d00] to-[#e50917]",
   },
   "saldo-kartu-tol": {
     title: "Saldo Kartu Tol",
@@ -297,7 +297,7 @@ const serviceMap: Record<string, ServiceMeta> = {
     icon: CreditCard,
     providers: ["E-Toll", "Flazz", "TapCash"],
     products: ["Rp 50.000", "Rp 100.000", "Rp 200.000"],
-    accent: "from-emerald-500 to-lime-500",
+    accent: "from-[#ffb000] via-[#ff4d00] to-[#e50917]",
   },
   "parkir-digital": {
     title: "Parkir Digital",
@@ -307,7 +307,7 @@ const serviceMap: Record<string, ServiceMeta> = {
     icon: Car,
     providers: ["Parkir Mall", "Parkir Kota", "Langganan"],
     products: ["1 Jam", "3 Jam", "Harian"],
-    accent: "from-blue-500 to-cyan-500",
+    accent: "from-[#ffb000] via-[#ff4d00] to-[#e50917]",
   },
   "kurir-pengiriman": {
     title: "Kurir & Pengiriman",
@@ -317,7 +317,7 @@ const serviceMap: Record<string, ServiceMeta> = {
     icon: BriefcaseBusiness,
     providers: ["JNE", "J&T", "SiCepat"],
     products: ["Cek Resi", "Bayar Ongkir", "Asuransi Paket"],
-    accent: "from-orange-500 to-amber-500",
+    accent: "from-[#ffb000] via-[#ff4d00] to-[#e50917]",
   },
   "zakat-donasi": {
     title: "Zakat & Donasi",
@@ -327,7 +327,7 @@ const serviceMap: Record<string, ServiceMeta> = {
     icon: HandHeart,
     providers: ["Zakat", "Donasi Sosial", "Sedekah"],
     products: ["Rp 25.000", "Rp 50.000", "Rp 100.000"],
-    accent: "from-rose-500 to-orange-500",
+    accent: "from-[#ffb000] via-[#ff4d00] to-[#e50917]",
   },
 };
 
@@ -339,7 +339,7 @@ const defaultService: ServiceMeta = {
   icon: WalletCards,
   providers: ["NuansaPulsa", "Instan", "Reguler"],
   products: ["Rp 25.000", "Rp 50.000", "Rp 100.000"],
-  accent: "from-emerald-600 to-lime-500",
+  accent: "from-[#ffb000] via-[#ff4d00] to-[#e50917]",
 };
 
 const hpPostpaidProviders = [
@@ -613,7 +613,7 @@ export function UserUniversalServicePageContent({ serviceSlug }: { serviceSlug: 
   if (isEsimRoaming && !completedOrder) {
     return (
       <main className="min-h-screen bg-[#f4fbf7] pb-36 text-[#07112e]">
-        <section className="relative overflow-hidden bg-[radial-gradient(circle_at_82%_2%,rgba(255,255,255,0.18),transparent_34%),linear-gradient(145deg,#006f38_0%,#009f4d_55%,#006934_100%)] px-5 pb-20 pt-8 text-white shadow-[0_18px_42px_rgba(0,105,54,0.22)]">
+        <section className="relative overflow-hidden bg-[radial-gradient(circle_at_82%_2%,rgba(255,255,255,0.18),transparent_34%),linear-gradient(145deg,#d70717_0%,#ff4d00_55%,#a20d22_100%)] px-5 pb-20 pt-8 text-white shadow-[0_18px_42px_rgba(151,14,32,0.22)]">
           <div className="mx-auto flex w-full max-w-md items-center justify-between">
             <Link href="/user/kategori" className="grid h-11 w-11 shrink-0 place-items-center rounded-full text-white transition hover:bg-white/12">
               <ArrowLeft className="h-8 w-8" strokeWidth={2.8} />
@@ -628,28 +628,30 @@ export function UserUniversalServicePageContent({ serviceSlug }: { serviceSlug: 
         </section>
 
         <div className="relative z-10 mx-auto -mt-12 w-full max-w-md space-y-5 px-4">
-          <section className="overflow-hidden rounded-[30px] border border-emerald-100 bg-white shadow-[0_18px_44px_rgba(15,23,42,0.12)]">
-            <div className="relative min-h-[220px] overflow-hidden bg-[radial-gradient(circle_at_78%_42%,rgba(0,122,61,0.16),transparent_28%),linear-gradient(135deg,#f8fffb,#e8f8ee)] px-5 py-6">
-              <div className="pointer-events-none absolute right-6 top-8 hidden h-28 w-44 rounded-full border border-emerald-200/80 min-[380px]:block" />
-              <div className="pointer-events-none absolute right-12 top-14 hidden h-20 w-32 rounded-full border border-emerald-200/70 min-[380px]:block" />
+          <section className="overflow-hidden rounded-[30px] border border-rose-100 bg-white shadow-[0_18px_44px_rgba(15,23,42,0.12)]">
+            <div className="relative min-h-[220px] overflow-hidden bg-[radial-gradient(circle_at_78%_42%,rgba(215,7,23,0.16),transparent_28%),linear-gradient(135deg,#f8fffb,#e8f8ee)] px-5 py-6">
+              <div className="pointer-events-none absolute right-6 top-8 hidden h-28 w-44 rounded-full border border-rose-200/80 min-[380px]:block" />
+              <div className="pointer-events-none absolute right-12 top-14 hidden h-20 w-32 rounded-full border border-rose-200/70 min-[380px]:block" />
               <div className="relative z-10 max-w-[210px]">
-                <h2 className="text-[30px] font-extrabold leading-tight text-[#063f2e]">
+                <h2 className="text-[30px] font-extrabold leading-tight text-[#d70717]">
                   eSIM Global, Internet di Mana Saja
                 </h2>
                 <p className="mt-4 text-base font-medium leading-relaxed text-slate-700">
                   Aktifkan eSIM instan, tanpa kartu fisik, praktis & terpercaya.
                 </p>
               </div>
-              <div className="absolute bottom-5 right-4 grid h-[132px] w-[118px] place-items-center rounded-[28px] border-[7px] border-[#063f2e] bg-white shadow-[0_18px_34px_rgba(6,78,59,0.20)]">
-                <Image src="/service-icons/esim-roaming.png" alt="eSIM" width={72} height={72} className="h-16 w-16 object-contain" />
-                <span className="absolute -right-3 -top-3 grid h-[52px] w-[52px] place-items-center rounded-full bg-[#009f4d] text-white shadow-lg">
+              <div className="absolute bottom-5 right-4 grid h-[132px] w-[118px] place-items-center rounded-[28px] border-[7px] border-[#d70717] bg-white shadow-[0_18px_34px_rgba(151,14,32,0.20)]">
+                <span className="grid h-16 w-16 place-items-center rounded-[22px] bg-[linear-gradient(135deg,#ffb000,#ff4d00_44%,#e50917)] text-white shadow-[0_14px_24px_rgba(215,7,23,0.22)]">
+                  <Smartphone className="h-9 w-9" strokeWidth={2.7} />
+                </span>
+                <span className="absolute -right-3 -top-3 grid h-[52px] w-[52px] place-items-center rounded-full bg-[#ff4d00] text-white shadow-lg">
                   <Plane className="h-7 w-7" strokeWidth={2.7} />
                 </span>
               </div>
             </div>
 
             <div className="space-y-5 p-4">
-              <div className="flex h-[58px] items-center overflow-hidden rounded-[20px] border border-slate-200 bg-white shadow-[0_6px_18px_rgba(15,23,42,0.04)] focus-within:border-[#008a42] focus-within:ring-4 focus-within:ring-emerald-100">
+              <div className="flex h-[58px] items-center overflow-hidden rounded-[20px] border border-slate-200 bg-white shadow-[0_6px_18px_rgba(15,23,42,0.04)] focus-within:border-[#e50917] focus-within:ring-4 focus-within:ring-rose-100">
                 <span className="grid h-full w-14 shrink-0 place-items-center text-slate-400">
                   <Search className="h-7 w-7" strokeWidth={2.3} />
                 </span>
@@ -670,7 +672,7 @@ export function UserUniversalServicePageContent({ serviceSlug }: { serviceSlug: 
                       setSelectedEsimRegion("Semua");
                       setEsimQuery("");
                     }}
-                    className="flex shrink-0 items-center gap-1 rounded-full px-2 py-1 text-sm font-black text-[#007a3d] transition hover:bg-emerald-50"
+                    className="flex shrink-0 items-center gap-1 rounded-full px-2 py-1 text-sm font-black text-[#d70717] transition hover:bg-rose-50"
                   >
                     Lihat Semua
                     <ChevronRight className="h-5 w-5" strokeWidth={2.8} />
@@ -689,10 +691,10 @@ export function UserUniversalServicePageContent({ serviceSlug }: { serviceSlug: 
                         }}
                         className={[
                           "flex min-h-[126px] w-[92px] shrink-0 snap-start flex-col items-center justify-center rounded-[20px] border bg-white px-2 py-3 text-center shadow-[0_10px_22px_rgba(15,23,42,0.06)] transition min-[420px]:w-[96px]",
-                          active ? "border-[#009f4d] bg-[#f2fff8] ring-2 ring-emerald-100" : "border-slate-200 hover:border-emerald-200",
+                          active ? "border-[#ff4d00] bg-[#f2fff8] ring-2 ring-rose-100" : "border-slate-200 hover:border-rose-200",
                         ].join(" ")}
                       >
-                        <span className="grid h-[54px] w-[66px] place-items-center overflow-hidden rounded-[16px] bg-[#f8fafc] text-sm font-black text-[#007a3d] shadow-[inset_0_0_0_1px_rgba(15,23,42,0.05),0_8px_18px_rgba(15,23,42,0.08)]">
+                        <span className="grid h-[54px] w-[66px] place-items-center overflow-hidden rounded-[16px] bg-[#f8fafc] text-sm font-black text-[#d70717] shadow-[inset_0_0_0_1px_rgba(15,23,42,0.05),0_8px_18px_rgba(15,23,42,0.08)]">
                           {country.flag ? (
                             <Image
                               src={country.flag}
@@ -702,11 +704,11 @@ export function UserUniversalServicePageContent({ serviceSlug }: { serviceSlug: 
                               className="h-full w-full object-cover"
                             />
                           ) : (
-                            <span className="grid h-11 w-11 grid-cols-2 place-items-center gap-1 rounded-full bg-emerald-50 p-2">
-                              <span className="h-3 w-3 rounded-full bg-[#008a42]" />
-                              <span className="h-3 w-3 rounded-full bg-[#008a42]" />
-                              <span className="h-3 w-3 rounded-full bg-[#008a42]" />
-                              <span className="h-3 w-3 rounded-full bg-[#008a42]" />
+                            <span className="grid h-11 w-11 grid-cols-2 place-items-center gap-1 rounded-full bg-rose-50 p-2">
+                              <span className="h-3 w-3 rounded-full bg-[#e50917]" />
+                              <span className="h-3 w-3 rounded-full bg-[#e50917]" />
+                              <span className="h-3 w-3 rounded-full bg-[#e50917]" />
+                              <span className="h-3 w-3 rounded-full bg-[#e50917]" />
                             </span>
                           )}
                         </span>
@@ -730,7 +732,7 @@ export function UserUniversalServicePageContent({ serviceSlug }: { serviceSlug: 
                       }}
                       className={[
                         "h-10 shrink-0 rounded-[15px] px-5 text-sm font-black transition",
-                        active ? "bg-[linear-gradient(135deg,#009f4d,#007a3d)] text-white shadow-[0_8px_16px_rgba(0,122,61,0.18)]" : "text-[#07112e] hover:bg-emerald-50",
+                        active ? "bg-[linear-gradient(135deg,#ff4d00,#d70717)] text-white shadow-[0_8px_16px_rgba(215,7,23,0.18)]" : "text-[#07112e] hover:bg-rose-50",
                       ].join(" ")}
                     >
                       {region}
@@ -757,50 +759,50 @@ export function UserUniversalServicePageContent({ serviceSlug }: { serviceSlug: 
                         onClick={() => setSelectedEsimPackage(pkg)}
                         className={[
                           "grid w-full grid-cols-[minmax(0,1fr)_auto] items-center gap-3 rounded-[22px] border bg-white p-4 text-left shadow-[0_10px_24px_rgba(15,23,42,0.06)] transition max-[360px]:grid-cols-1",
-                          active ? "border-[#009f4d] ring-2 ring-emerald-100" : "border-slate-200 hover:border-emerald-200",
+                          active ? "border-[#ff4d00] ring-2 ring-rose-100" : "border-slate-200 hover:border-rose-200",
                         ].join(" ")}
                       >
                         <span className="min-w-0">
                           <span className="flex items-center gap-2">
-                            <span className="rounded-xl bg-emerald-50 px-2.5 py-1 text-xs font-black text-[#007a3d]">{pkg.code}</span>
+                            <span className="rounded-xl bg-rose-50 px-2.5 py-1 text-xs font-black text-[#d70717]">{pkg.code}</span>
                             <span className="block text-lg font-extrabold leading-tight text-[#07112e]">{pkg.country}</span>
                           </span>
                           <span className="mt-3 flex flex-wrap items-center gap-x-3 gap-y-1 text-xs font-semibold text-[#07112e]">
-                            <span className="inline-flex items-center gap-1"><Wifi className="h-4 w-4 text-[#008a42]" />{pkg.quota}</span>
-                            <span className="inline-flex items-center gap-1"><CalendarDays className="h-4 w-4 text-[#008a42]" />{pkg.duration}</span>
-                            <span className="inline-flex items-center gap-1"><Signal className="h-4 w-4 text-[#008a42]" />{pkg.network}</span>
+                            <span className="inline-flex items-center gap-1"><Wifi className="h-4 w-4 text-[#e50917]" />{pkg.quota}</span>
+                            <span className="inline-flex items-center gap-1"><CalendarDays className="h-4 w-4 text-[#e50917]" />{pkg.duration}</span>
+                            <span className="inline-flex items-center gap-1"><Signal className="h-4 w-4 text-[#e50917]" />{pkg.network}</span>
                           </span>
-                          <span className="mt-2 inline-flex rounded-full bg-emerald-100 px-3 py-1 text-[11px] font-black text-[#007a3d]">{pkg.badge}</span>
+                          <span className="mt-2 inline-flex rounded-full bg-rose-100 px-3 py-1 text-[11px] font-black text-[#d70717]">{pkg.badge}</span>
                         </span>
                         <span className="text-right max-[360px]:flex max-[360px]:items-center max-[360px]:justify-between">
                           <span className="block text-xs font-semibold text-slate-500">Mulai dari</span>
-                          <span className="block text-xl font-extrabold text-[#007a3d]">{formatCurrency(pkg.price)}</span>
-                          <ChevronRight className="ml-auto mt-2 h-7 w-7 text-[#007a3d] max-[360px]:mt-0" strokeWidth={2.8} />
+                          <span className="block text-xl font-extrabold text-[#d70717]">{formatCurrency(pkg.price)}</span>
+                          <ChevronRight className="ml-auto mt-2 h-7 w-7 text-[#d70717] max-[360px]:mt-0" strokeWidth={2.8} />
                         </span>
                       </button>
                     );
                   })}
                   {filteredEsimPackages.length === 0 ? (
-                    <div className="rounded-[22px] border border-dashed border-emerald-200 bg-[#f7fffb] px-4 py-8 text-center text-sm font-semibold text-slate-500">
+                    <div className="rounded-[22px] border border-dashed border-rose-200 bg-[#f7fffb] px-4 py-8 text-center text-sm font-semibold text-slate-500">
                       Paket untuk negara ini belum tersedia.
                     </div>
                   ) : null}
                 </div>
               </div>
 
-              <section className="rounded-[24px] border border-emerald-100 bg-[linear-gradient(135deg,#f4fff8,#ffffff)] p-4 shadow-[0_12px_26px_rgba(0,122,61,0.08)]">
+              <section className="rounded-[24px] border border-rose-100 bg-[linear-gradient(135deg,#f4fff8,#ffffff)] p-4 shadow-[0_12px_26px_rgba(215,7,23,0.08)]">
                 <div className="flex items-start justify-between gap-3">
                   <div>
-                    <p className="text-[11px] font-black uppercase tracking-[0.18em] text-[#008a42]">Checkout eSIM</p>
+                    <p className="text-[11px] font-black uppercase tracking-[0.18em] text-[#e50917]">Checkout eSIM</p>
                     <h3 className="mt-1 text-xl font-extrabold text-[#07112e]">{selectedEsimPackage.country}</h3>
                     <p className="mt-1 text-sm font-semibold text-slate-500">
                       {selectedEsimPackage.quota} / {selectedEsimPackage.duration} / {selectedEsimPackage.network}
                     </p>
                   </div>
-                  <span className="text-right text-xl font-extrabold text-[#007a3d]">{formatCurrency(selectedEsimPackage.price)}</span>
+                  <span className="text-right text-xl font-extrabold text-[#d70717]">{formatCurrency(selectedEsimPackage.price)}</span>
                 </div>
-                <div className="mt-4 flex h-[56px] items-center overflow-hidden rounded-[18px] border border-slate-200 bg-white focus-within:border-[#008a42] focus-within:ring-4 focus-within:ring-emerald-100">
-                  <span className="grid h-full w-[52px] shrink-0 place-items-center text-[#008a42]">
+                <div className="mt-4 flex h-[56px] items-center overflow-hidden rounded-[18px] border border-slate-200 bg-white focus-within:border-[#e50917] focus-within:ring-4 focus-within:ring-rose-100">
+                  <span className="grid h-full w-[52px] shrink-0 place-items-center text-[#e50917]">
                     <Smartphone className="h-6 w-6" strokeWidth={2.5} />
                   </span>
                   <input
@@ -814,7 +816,7 @@ export function UserUniversalServicePageContent({ serviceSlug }: { serviceSlug: 
                   type="button"
                   disabled={isCreating}
                   onClick={buyEsimPackage}
-                  className="mt-4 flex h-[58px] w-full items-center justify-center gap-2 rounded-[18px] bg-[linear-gradient(135deg,#052e26,#008a42,#65c82f)] text-base font-extrabold text-white shadow-[0_16px_28px_rgba(0,122,61,0.24)] disabled:bg-none disabled:bg-slate-200 disabled:text-slate-500"
+                  className="mt-4 flex h-[58px] w-full items-center justify-center gap-2 rounded-[18px] bg-[linear-gradient(135deg,#d70717,#e50917,#ffb000)] text-base font-extrabold text-white shadow-[0_16px_28px_rgba(215,7,23,0.24)] disabled:bg-none disabled:bg-slate-200 disabled:text-slate-500"
                 >
                   <Rocket className="h-5 w-5" strokeWidth={2.5} />
                   {isCreating ? "MEMPROSES..." : "BELI PAKET eSIM"}
@@ -823,7 +825,7 @@ export function UserUniversalServicePageContent({ serviceSlug }: { serviceSlug: 
             </div>
           </section>
 
-          <section className="grid grid-cols-2 gap-2 rounded-[24px] border border-emerald-100 bg-white p-3 shadow-[0_12px_28px_rgba(15,23,42,0.06)] min-[390px]:grid-cols-4">
+          <section className="grid grid-cols-2 gap-2 rounded-[24px] border border-rose-100 bg-white p-3 shadow-[0_12px_28px_rgba(15,23,42,0.06)] min-[390px]:grid-cols-4">
             {[
               ["Instan", "Aktif setelah pembelian", Rocket],
               ["Aman", "Transaksi terlindungi", ShieldCheck],
@@ -831,11 +833,11 @@ export function UserUniversalServicePageContent({ serviceSlug }: { serviceSlug: 
               ["24/7", "Bantuan kapan saja", Headphones],
             ].map(([title, desc, BenefitIcon]) => (
               <div key={title as string} className="flex items-center gap-2 rounded-[18px] bg-[#f4fff8] p-2 min-[390px]:block min-[390px]:text-center">
-                <span className="grid h-10 w-10 shrink-0 place-items-center rounded-full bg-[#008a42] text-white min-[390px]:mx-auto">
+                <span className="grid h-10 w-10 shrink-0 place-items-center rounded-full bg-[#e50917] text-white min-[390px]:mx-auto">
                   <BenefitIcon className="h-5 w-5" strokeWidth={2.5} />
                 </span>
                 <span className="min-w-0">
-                  <span className="block text-sm font-black text-[#007a3d]">{title as string}</span>
+                  <span className="block text-sm font-black text-[#d70717]">{title as string}</span>
                   <span className="mt-0.5 block text-[11px] font-medium leading-snug text-[#07112e]">{desc as string}</span>
                 </span>
               </div>
@@ -849,7 +851,7 @@ export function UserUniversalServicePageContent({ serviceSlug }: { serviceSlug: 
   if (isHpPostpaid && !completedOrder) {
     return (
       <main className="min-h-screen overflow-x-hidden bg-[#edf7f2] pb-32 text-slate-950">
-        <header className="relative overflow-hidden bg-[linear-gradient(140deg,#052e26_0%,#047857_64%,#38b94d_115%)] px-4 pb-10 pt-5 text-white shadow-[0_16px_36px_rgba(5,46,38,0.22)]">
+        <header className="relative overflow-hidden bg-[linear-gradient(140deg,#d70717_0%,#d70717_64%,#ff6a00_115%)] px-4 pb-10 pt-5 text-white shadow-[0_16px_36px_rgba(151,14,32,0.22)]">
           <div className="mx-auto w-full max-w-md">
             <div className="grid grid-cols-[44px_minmax(0,1fr)_44px] items-center gap-2">
               <Link href="/user/kategori" aria-label="Kembali" className="grid h-11 w-11 place-items-center rounded-2xl bg-white/10 ring-1 ring-white/15 transition hover:bg-white/15">
@@ -862,26 +864,26 @@ export function UserUniversalServicePageContent({ serviceSlug }: { serviceSlug: 
             </div>
 
             <div className="mt-7 flex items-center gap-4">
-              <span className="grid h-14 w-14 shrink-0 place-items-center rounded-2xl bg-white text-[#047857] shadow-[0_12px_26px_rgba(0,0,0,0.16)]">
+              <span className="grid h-14 w-14 shrink-0 place-items-center rounded-2xl bg-white text-[#d70717] shadow-[0_12px_26px_rgba(0,0,0,0.16)]">
                 <ReceiptText className="h-7 w-7" strokeWidth={2.5} />
               </span>
               <div className="min-w-0">
-                <p className="text-[11px] font-black uppercase tracking-[0.18em] text-lime-100">Tagihan Seluler</p>
-                <p className="mt-1 text-sm font-semibold leading-5 text-emerald-50">Cek nomor pelanggan dan selesaikan tagihan dalam satu proses.</p>
+                <p className="text-[11px] font-black uppercase tracking-[0.18em] text-amber-100">Tagihan Seluler</p>
+                <p className="mt-1 text-sm font-semibold leading-5 text-rose-50">Cek nomor pelanggan dan selesaikan tagihan dalam satu proses.</p>
               </div>
             </div>
           </div>
         </header>
 
         <div className="relative z-10 mx-auto -mt-4 w-full max-w-md space-y-4 px-3 min-[390px]:px-4">
-          <section className="overflow-hidden rounded-[24px] border border-emerald-100 bg-white shadow-[0_16px_38px_rgba(15,23,42,0.09)]">
+          <section className="overflow-hidden rounded-[24px] border border-rose-100 bg-white shadow-[0_16px_38px_rgba(15,23,42,0.09)]">
             <div className="border-b border-slate-100 px-4 py-5">
               <div className="flex items-center justify-between gap-3">
                 <div>
-                  <p className="text-[10px] font-black uppercase tracking-[0.18em] text-[#047857]">Langkah 1</p>
+                  <p className="text-[10px] font-black uppercase tracking-[0.18em] text-[#d70717]">Langkah 1</p>
                   <h2 className="mt-1 text-lg font-black">Pilih operator</h2>
                 </div>
-                <span className="rounded-full bg-emerald-50 px-3 py-1.5 text-[10px] font-black text-[#047857]">{hpPostpaidProviders.length} tersedia</span>
+                <span className="rounded-full bg-rose-50 px-3 py-1.5 text-[10px] font-black text-[#d70717]">{hpPostpaidProviders.length} tersedia</span>
               </div>
 
               <div className="mt-4 grid grid-cols-3 gap-2">
@@ -899,11 +901,11 @@ export function UserUniversalServicePageContent({ serviceSlug }: { serviceSlug: 
                       className={[
                         "relative flex min-h-[88px] min-w-0 flex-col items-center justify-center rounded-[16px] border px-2 py-3 text-center transition",
                         active
-                          ? "border-[#047857] bg-emerald-50 shadow-[0_8px_18px_rgba(4,120,87,0.10)] ring-1 ring-[#047857]"
-                          : "border-slate-200 bg-white hover:border-emerald-300",
+                          ? "border-[#d70717] bg-rose-50 shadow-[0_8px_18px_rgba(215,7,23,0.10)] ring-1 ring-[#d70717]"
+                          : "border-slate-200 bg-white hover:border-rose-300",
                       ].join(" ")}
                     >
-                      {active ? <CheckCircle2 className="absolute right-2 top-2 h-4 w-4 text-[#047857]" strokeWidth={2.8} /> : null}
+                      {active ? <CheckCircle2 className="absolute right-2 top-2 h-4 w-4 text-[#d70717]" strokeWidth={2.8} /> : null}
                       <span className="grid h-9 w-full place-items-center overflow-hidden">
                         <Image src={provider.logo} alt={`Logo ${provider.label}`} width={60} height={36} className="max-h-8 max-w-[58px] object-contain" />
                       </span>
@@ -915,10 +917,10 @@ export function UserUniversalServicePageContent({ serviceSlug }: { serviceSlug: 
             </div>
 
             <div className="px-4 py-5">
-              <p className="text-[10px] font-black uppercase tracking-[0.18em] text-[#047857]">Langkah 2</p>
+              <p className="text-[10px] font-black uppercase tracking-[0.18em] text-[#d70717]">Langkah 2</p>
               <label htmlFor="hp-postpaid-number" className="mt-1 block text-lg font-black">Nomor pelanggan</label>
-              <div className="mt-3 flex min-h-14 items-center overflow-hidden rounded-[16px] border border-slate-200 bg-slate-50 transition focus-within:border-[#047857] focus-within:bg-white focus-within:ring-4 focus-within:ring-emerald-100">
-                <span className="grid h-14 w-12 shrink-0 place-items-center text-[#047857]">
+              <div className="mt-3 flex min-h-14 items-center overflow-hidden rounded-[16px] border border-slate-200 bg-slate-50 transition focus-within:border-[#d70717] focus-within:bg-white focus-within:ring-4 focus-within:ring-rose-100">
+                <span className="grid h-14 w-12 shrink-0 place-items-center text-[#d70717]">
                   <Smartphone className="h-5 w-5" strokeWidth={2.4} />
                 </span>
                 <input
@@ -947,7 +949,7 @@ export function UserUniversalServicePageContent({ serviceSlug }: { serviceSlug: 
                   onClick={() => setSaveNumber((value) => !value)}
                   className={[
                     "relative h-7 w-12 shrink-0 rounded-full transition",
-                    saveNumber ? "bg-[#047857]" : "bg-slate-300",
+                    saveNumber ? "bg-[#d70717]" : "bg-slate-300",
                   ].join(" ")}
                 >
                   <span className={["absolute top-1 h-5 w-5 rounded-full bg-white shadow-sm transition", saveNumber ? "left-6" : "left-1"].join(" ")} />
@@ -960,7 +962,7 @@ export function UserUniversalServicePageContent({ serviceSlug }: { serviceSlug: 
                 type="button"
                 disabled={!canContinue || isCreating}
                 onClick={checkHpPostpaidBill}
-                className="mt-5 flex h-14 w-full items-center justify-center gap-2 rounded-[16px] bg-[#047857] px-4 text-sm font-black text-white shadow-[0_12px_24px_rgba(4,120,87,0.20)] transition hover:bg-[#036b4e] disabled:bg-slate-200 disabled:text-slate-400 disabled:shadow-none"
+                className="mt-5 flex h-14 w-full items-center justify-center gap-2 rounded-[16px] bg-[#d70717] px-4 text-sm font-black text-white shadow-[0_12px_24px_rgba(215,7,23,0.20)] transition hover:bg-[#036b4e] disabled:bg-slate-200 disabled:text-slate-400 disabled:shadow-none"
               >
                 <Search className="h-4 w-4" strokeWidth={2.7} />
                 {isCreating ? "Memeriksa..." : "Cek Tagihan"}
@@ -969,14 +971,14 @@ export function UserUniversalServicePageContent({ serviceSlug }: { serviceSlug: 
           </section>
 
           {hpBill ? (
-            <section className="overflow-hidden rounded-[24px] border border-emerald-100 bg-white shadow-[0_16px_38px_rgba(15,23,42,0.09)]">
+            <section className="overflow-hidden rounded-[24px] border border-rose-100 bg-white shadow-[0_16px_38px_rgba(15,23,42,0.09)]">
               <div className="flex items-center justify-between gap-3 border-b border-slate-100 px-4 py-4">
                 <div className="min-w-0">
-                  <p className="text-[10px] font-black uppercase tracking-[0.18em] text-[#047857]">Tagihan Ditemukan</p>
+                  <p className="text-[10px] font-black uppercase tracking-[0.18em] text-[#d70717]">Tagihan Ditemukan</p>
                   <h2 className="mt-1 truncate text-lg font-black">{hpBill.provider}</h2>
                   <p className="mt-0.5 text-xs font-semibold text-slate-400">Periode {hpBill.period}</p>
                 </div>
-                <span className="grid h-11 w-11 shrink-0 place-items-center rounded-[14px] bg-emerald-50 text-[#047857]">
+                <span className="grid h-11 w-11 shrink-0 place-items-center rounded-[14px] bg-rose-50 text-[#d70717]">
                   <ReceiptText className="h-5 w-5" strokeWidth={2.5} />
                 </span>
               </div>
@@ -995,30 +997,30 @@ export function UserUniversalServicePageContent({ serviceSlug }: { serviceSlug: 
                 ))}
               </dl>
 
-              <div className="bg-[#052e26] px-4 py-4 text-white">
+              <div className="bg-[#d70717] px-4 py-4 text-white">
                 <div className="flex items-end justify-between gap-3">
-                  <span className="text-xs font-bold text-emerald-100">Total pembayaran</span>
+                  <span className="text-xs font-bold text-rose-100">Total pembayaran</span>
                   <span className="text-xl font-black text-white min-[390px]:text-2xl">{formatCurrency(hpBill.total)}</span>
                 </div>
               </div>
 
               <div className="p-4">
-                <div className="flex items-center gap-3 rounded-[16px] border border-emerald-200 bg-emerald-50 px-3 py-3">
-                  <span className="grid h-10 w-10 shrink-0 place-items-center rounded-[12px] bg-[#047857] text-white">
+                <div className="flex items-center gap-3 rounded-[16px] border border-rose-200 bg-rose-50 px-3 py-3">
+                  <span className="grid h-10 w-10 shrink-0 place-items-center rounded-[12px] bg-[#d70717] text-white">
                     <WalletCards className="h-5 w-5" strokeWidth={2.5} />
                   </span>
                   <div className="min-w-0 flex-1">
                     <p className="text-sm font-black text-slate-900">Saldo NuansaPulsa</p>
                     <p className="text-[10px] font-semibold text-slate-500">Pembayaran dari saldo utama</p>
                   </div>
-                  <CheckCircle2 className="h-5 w-5 shrink-0 text-[#047857]" strokeWidth={2.7} />
+                  <CheckCircle2 className="h-5 w-5 shrink-0 text-[#d70717]" strokeWidth={2.7} />
                 </div>
 
                 <button
                   type="button"
                   disabled={isCreating}
                   onClick={payHpPostpaidBill}
-                  className="mt-4 flex h-14 w-full items-center justify-center rounded-[16px] bg-[#047857] px-4 text-sm font-black text-white shadow-[0_12px_24px_rgba(4,120,87,0.20)] transition hover:bg-[#036b4e] disabled:bg-slate-200 disabled:text-slate-400 disabled:shadow-none"
+                  className="mt-4 flex h-14 w-full items-center justify-center rounded-[16px] bg-[#d70717] px-4 text-sm font-black text-white shadow-[0_12px_24px_rgba(215,7,23,0.20)] transition hover:bg-[#036b4e] disabled:bg-slate-200 disabled:text-slate-400 disabled:shadow-none"
                 >
                   {isCreating ? "Memproses..." : "Bayar Sekarang"}
                 </button>
@@ -1032,9 +1034,9 @@ export function UserUniversalServicePageContent({ serviceSlug }: { serviceSlug: 
 
   return (
     <main className="min-h-screen bg-[#eef8f3] pb-24">
-      <section className="relative overflow-hidden bg-[linear-gradient(135deg,#052e26_0%,#047857_58%,#a3e635_150%)] px-4 pb-9 pt-5 text-white">
-        <div className="pointer-events-none absolute -right-14 -top-16 h-44 w-44 rounded-full bg-lime-300/20 blur-2xl" />
-        <div className="pointer-events-none absolute -bottom-16 left-8 h-36 w-56 rounded-full bg-emerald-300/15 blur-2xl" />
+      <section className="relative overflow-hidden bg-[linear-gradient(135deg,#d70717_0%,#d70717_58%,#ffb000_150%)] px-4 pb-9 pt-5 text-white">
+        <div className="pointer-events-none absolute -right-14 -top-16 h-44 w-44 rounded-full bg-amber-300/20 blur-2xl" />
+        <div className="pointer-events-none absolute -bottom-16 left-8 h-36 w-56 rounded-full bg-rose-300/15 blur-2xl" />
         <div className="relative mx-auto flex w-full max-w-md items-center gap-3">
           <Link href="/user/kategori" className="grid h-10 w-10 shrink-0 place-items-center rounded-2xl bg-white/12 ring-1 ring-white/15">
             <ArrowLeft className="h-5 w-5" strokeWidth={2.4} />
@@ -1043,7 +1045,7 @@ export function UserUniversalServicePageContent({ serviceSlug }: { serviceSlug: 
             <h1 className="truncate text-lg font-black">{service.title}</h1>
             <p className="mt-0.5 truncate text-[11px] font-semibold text-white/75">{service.subtitle}</p>
           </div>
-          <span className="grid h-11 w-11 shrink-0 place-items-center rounded-2xl bg-white text-[#047857] shadow-[0_12px_26px_rgba(0,0,0,0.16)]">
+          <span className="grid h-11 w-11 shrink-0 place-items-center rounded-2xl bg-white text-[#d70717] shadow-[0_12px_26px_rgba(0,0,0,0.16)]">
             <Icon className="h-5 w-5" strokeWidth={2.5} />
           </span>
         </div>
@@ -1051,7 +1053,7 @@ export function UserUniversalServicePageContent({ serviceSlug }: { serviceSlug: 
         <div className="relative mx-auto mt-5 grid w-full max-w-md grid-cols-3 gap-2">
           {["Data", "Produk", "Bayar"].map((step, index) => (
             <div key={step} className="rounded-2xl bg-white/10 px-3 py-2 ring-1 ring-white/12">
-              <p className="text-[10px] font-black text-lime-100">0{index + 1}</p>
+              <p className="text-[10px] font-black text-amber-100">0{index + 1}</p>
               <p className="mt-0.5 text-xs font-black">{step}</p>
             </div>
           ))}
@@ -1060,9 +1062,9 @@ export function UserUniversalServicePageContent({ serviceSlug }: { serviceSlug: 
 
       <div className="mx-auto -mt-5 w-full max-w-md space-y-4 px-4">
         {completedOrder ? (
-          <section className="overflow-hidden rounded-[30px] border border-emerald-100 bg-white shadow-[0_22px_50px_rgba(6,78,59,0.14)]">
-            <div className="bg-[linear-gradient(135deg,#052e26,#047857,#84cc16)] px-5 py-6 text-center text-white">
-              <div className="mx-auto grid h-18 w-18 place-items-center rounded-full bg-white text-[#047857] shadow-lg">
+          <section className="overflow-hidden rounded-[30px] border border-rose-100 bg-white shadow-[0_22px_50px_rgba(151,14,32,0.14)]">
+            <div className="bg-[linear-gradient(135deg,#d70717,#d70717,#ffb000)] px-5 py-6 text-center text-white">
+              <div className="mx-auto grid h-18 w-18 place-items-center rounded-full bg-white text-[#d70717] shadow-lg">
                 <Check className="h-9 w-9" strokeWidth={3} />
               </div>
               <h2 className="mt-4 text-xl font-black">Transaksi Dibuat</h2>
@@ -1077,7 +1079,7 @@ export function UserUniversalServicePageContent({ serviceSlug }: { serviceSlug: 
                 ["Produk", completedOrder.product],
                 ["Total", formatCurrency(completedOrder.total)],
               ].map(([label, value]) => (
-                <div key={label} className="flex items-center justify-between gap-3 rounded-2xl bg-emerald-50 px-4 py-3">
+                <div key={label} className="flex items-center justify-between gap-3 rounded-2xl bg-rose-50 px-4 py-3">
                   <span className="text-[11px] font-bold text-slate-500">{label}</span>
                   <span className="max-w-[190px] truncate text-right text-sm font-black text-slate-950">{value}</span>
                 </div>
@@ -1085,15 +1087,15 @@ export function UserUniversalServicePageContent({ serviceSlug }: { serviceSlug: 
               <button
                 type="button"
                 onClick={() => navigator.clipboard?.writeText(completedOrder.invoiceId)}
-                className="flex h-12 w-full items-center justify-center gap-2 rounded-[18px] border-2 border-[#047857] bg-white text-sm font-black !text-[#047857] shadow-[0_10px_20px_rgba(6,78,59,0.08)]"
-                style={{ color: "#047857" }}
+                className="flex h-12 w-full items-center justify-center gap-2 rounded-[18px] border-2 border-[#d70717] bg-white text-sm font-black !text-[#d70717] shadow-[0_10px_20px_rgba(151,14,32,0.08)]"
+                style={{ color: "#d70717" }}
               >
                 <Copy className="h-4 w-4" />
                 Salin Invoice
               </button>
               <Link
                 href="/user/transaksi"
-                className="flex h-13 w-full items-center justify-center gap-2 rounded-[20px] border-2 border-[#052e26] bg-[linear-gradient(135deg,#064e3b_0%,#047857_72%,#55c72f_145%)] text-sm font-black !text-white shadow-[0_14px_28px_rgba(6,78,59,0.20)]"
+                className="flex h-13 w-full items-center justify-center gap-2 rounded-[20px] border-2 border-[#d70717] bg-[linear-gradient(135deg,#b50718_0%,#d70717_72%,#ffb000_145%)] text-sm font-black !text-white shadow-[0_14px_28px_rgba(151,14,32,0.20)]"
                 style={{ color: "#ffffff" }}
               >
                 <span className="!text-white" style={{ color: "#ffffff" }}>Lihat Riwayat</span>
@@ -1103,9 +1105,9 @@ export function UserUniversalServicePageContent({ serviceSlug }: { serviceSlug: 
           </section>
         ) : (
           <>
-            <section className="rounded-[28px] border border-emerald-950/5 bg-white p-4 shadow-[0_18px_42px_rgba(6,78,59,0.10)]">
+            <section className="rounded-[28px] border border-rose-950/5 bg-white p-4 shadow-[0_18px_42px_rgba(151,14,32,0.10)]">
               <div className="mb-3 flex items-center gap-3">
-                <span className={`grid h-12 w-12 place-items-center rounded-2xl bg-gradient-to-br ${service.accent} text-white shadow-[0_14px_28px_rgba(6,78,59,0.16)]`}>
+                <span className={`grid h-12 w-12 place-items-center rounded-2xl bg-gradient-to-br ${service.accent} text-white shadow-[0_14px_28px_rgba(151,14,32,0.16)]`}>
                   <Icon className="h-6 w-6" strokeWidth={2.5} />
                 </span>
                 <div>
@@ -1113,8 +1115,8 @@ export function UserUniversalServicePageContent({ serviceSlug }: { serviceSlug: 
                   <p className="text-[11px] font-semibold text-slate-400">Pastikan data tujuan sudah benar.</p>
                 </div>
               </div>
-              <div className="flex h-14 overflow-hidden rounded-[20px] border border-emerald-200 bg-[#fbfffd] focus-within:border-[#047857] focus-within:ring-4 focus-within:ring-emerald-100">
-                <span className="grid w-14 shrink-0 place-items-center border-r border-emerald-100 text-[#047857]">
+              <div className="flex h-14 overflow-hidden rounded-[20px] border border-rose-200 bg-[#fbfffd] focus-within:border-[#d70717] focus-within:ring-4 focus-within:ring-rose-100">
+                <span className="grid w-14 shrink-0 place-items-center border-r border-rose-100 text-[#d70717]">
                   ID
                 </span>
                 <input
@@ -1126,10 +1128,10 @@ export function UserUniversalServicePageContent({ serviceSlug }: { serviceSlug: 
               </div>
             </section>
 
-            <section className="rounded-[28px] border border-emerald-950/5 bg-white p-4 shadow-[0_18px_42px_rgba(6,78,59,0.10)]">
+            <section className="rounded-[28px] border border-rose-950/5 bg-white p-4 shadow-[0_18px_42px_rgba(151,14,32,0.10)]">
               <div className="mb-3 flex items-center justify-between">
                 <h2 className="text-base font-black text-slate-950">Pilih Penyedia</h2>
-                <span className="rounded-full bg-lime-100 px-3 py-1 text-[10px] font-black text-[#047857]">Tersedia</span>
+                <span className="rounded-full bg-amber-100 px-3 py-1 text-[10px] font-black text-[#d70717]">Tersedia</span>
               </div>
               <div className="grid grid-cols-3 gap-2.5">
                 {service.providers.map((provider) => {
@@ -1141,11 +1143,11 @@ export function UserUniversalServicePageContent({ serviceSlug }: { serviceSlug: 
                       onClick={() => setSelectedProvider(provider)}
                       className={
                         active
-                          ? "relative min-h-[104px] rounded-[24px] border border-[#047857] bg-emerald-50 p-2.5 text-center shadow-[0_16px_30px_rgba(4,120,87,0.15)]"
-                          : "min-h-[104px] rounded-[24px] border border-slate-200 bg-white p-2.5 text-center shadow-[0_10px_22px_rgba(15,23,42,0.04)] transition hover:border-emerald-200"
+                          ? "relative min-h-[104px] rounded-[24px] border border-[#d70717] bg-rose-50 p-2.5 text-center shadow-[0_16px_30px_rgba(215,7,23,0.15)]"
+                          : "min-h-[104px] rounded-[24px] border border-slate-200 bg-white p-2.5 text-center shadow-[0_10px_22px_rgba(15,23,42,0.04)] transition hover:border-rose-200"
                       }
                     >
-                      {active ? <CheckCircle2 className="absolute right-2 top-2 h-4 w-4 text-[#047857]" /> : null}
+                      {active ? <CheckCircle2 className="absolute right-2 top-2 h-4 w-4 text-[#d70717]" /> : null}
                       <span className={`mx-auto grid h-12 w-12 place-items-center rounded-2xl bg-gradient-to-br ${service.accent} text-white`}>
                         <Icon className="h-5 w-5" strokeWidth={2.4} />
                       </span>
@@ -1156,7 +1158,7 @@ export function UserUniversalServicePageContent({ serviceSlug }: { serviceSlug: 
               </div>
             </section>
 
-            <section className="rounded-[28px] border border-emerald-950/5 bg-white p-4 shadow-[0_18px_42px_rgba(6,78,59,0.10)]">
+            <section className="rounded-[28px] border border-rose-950/5 bg-white p-4 shadow-[0_18px_42px_rgba(151,14,32,0.10)]">
               <h2 className="text-base font-black text-slate-950">Pilih Produk</h2>
               <div className="mt-3 grid grid-cols-2 gap-3">
                 {service.products.map((product, index) => {
@@ -1168,20 +1170,20 @@ export function UserUniversalServicePageContent({ serviceSlug }: { serviceSlug: 
                       onClick={() => setSelectedProduct(product)}
                       className={
                         active
-                          ? "relative overflow-hidden rounded-[22px] border border-[#047857] bg-[#ecfdf5] px-3 py-4 text-left shadow-[0_14px_26px_rgba(4,120,87,0.13)]"
+                          ? "relative overflow-hidden rounded-[22px] border border-[#d70717] bg-[#ecfdf5] px-3 py-4 text-left shadow-[0_14px_26px_rgba(215,7,23,0.13)]"
                           : "rounded-[22px] border border-slate-200 bg-white px-3 py-4 text-left shadow-sm"
                       }
                     >
-                      {active ? <Sparkles className="absolute right-3 top-3 h-4 w-4 text-[#047857]" /> : null}
+                      {active ? <Sparkles className="absolute right-3 top-3 h-4 w-4 text-[#d70717]" /> : null}
                       <span className="block pr-5 text-sm font-black text-slate-950">{product}</span>
-                      <span className="mt-2 block text-xs font-black text-[#047857]">{formatCurrency(productPrice(product, index))}</span>
+                      <span className="mt-2 block text-xs font-black text-[#d70717]">{formatCurrency(productPrice(product, index))}</span>
                     </button>
                   );
                 })}
               </div>
             </section>
 
-            <section className="rounded-[28px] border border-emerald-950/5 bg-white p-4 shadow-[0_18px_42px_rgba(6,78,59,0.10)]">
+            <section className="rounded-[28px] border border-rose-950/5 bg-white p-4 shadow-[0_18px_42px_rgba(151,14,32,0.10)]">
               <h2 className="text-base font-black text-slate-950">Ringkasan</h2>
               <div className="mt-3 space-y-2">
                 <div className="flex justify-between text-sm">
@@ -1195,7 +1197,7 @@ export function UserUniversalServicePageContent({ serviceSlug }: { serviceSlug: 
                 <div className="h-px bg-slate-100" />
                 <div className="flex justify-between">
                   <span className="text-sm font-black text-slate-950">Total bayar</span>
-                  <span className="text-lg font-black text-[#047857]">{formatCurrency(total)}</span>
+                  <span className="text-lg font-black text-[#d70717]">{formatCurrency(total)}</span>
                 </div>
               </div>
             </section>
@@ -1203,7 +1205,7 @@ export function UserUniversalServicePageContent({ serviceSlug }: { serviceSlug: 
             <button
               type="button"
               disabled={!canContinue || isCreating}
-              className="flex h-14 w-full items-center justify-center gap-2 rounded-[22px] bg-[linear-gradient(135deg,#052e26,#047857,#84cc16)] text-sm font-black text-white shadow-[0_18px_34px_rgba(4,120,87,0.22)] transition hover:brightness-105 disabled:bg-none disabled:bg-slate-200 disabled:text-slate-400 disabled:shadow-none"
+              className="flex h-14 w-full items-center justify-center gap-2 rounded-[22px] bg-[linear-gradient(135deg,#d70717,#d70717,#ffb000)] text-sm font-black text-white shadow-[0_18px_34px_rgba(215,7,23,0.22)] transition hover:brightness-105 disabled:bg-none disabled:bg-slate-200 disabled:text-slate-400 disabled:shadow-none"
               onClick={() => createOrder()}
             >
               {isCreating ? "Menyimpan..." : "Buat Transaksi"}

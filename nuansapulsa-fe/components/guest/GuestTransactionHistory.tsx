@@ -51,7 +51,7 @@ function statusLabel(status: string) {
 function statusStyle(status: string) {
   const s = status.trim().toLowerCase();
   if (s === 'success')
-    return { bg: 'bg-emerald-50', text: 'text-emerald-600', border: 'border-emerald-100', Icon: CircleCheck };
+    return { bg: 'bg-rose-50', text: 'text-rose-600', border: 'border-rose-100', Icon: CircleCheck };
   if (s === 'paid')
     return { bg: 'bg-sky-50', text: 'text-sky-600', border: 'border-sky-100', Icon: CircleCheck };
   if (s === 'pending_payment' || s === 'processing_provider')
@@ -201,7 +201,7 @@ export function GuestTransactionHistory() {
             }}
             className={
               selectedRange === label
-                ? 'h-9 shrink-0 rounded-full bg-[#047857] px-4 text-xs font-black text-white shadow-[0_10px_20px_rgba(4,120,87,0.20)]'
+                ? 'h-9 shrink-0 rounded-full bg-[#d70717] px-4 text-xs font-black text-white shadow-[0_10px_20px_rgba(215,7,23,0.20)]'
                 : 'h-9 shrink-0 rounded-full border border-slate-200 bg-white px-4 text-xs font-black text-slate-500'
             }
           >
@@ -211,7 +211,7 @@ export function GuestTransactionHistory() {
       </div>
 
       <label className="relative flex h-13 cursor-pointer items-center gap-3 rounded-[16px] border border-slate-200 bg-white px-4 text-slate-500 shadow-[0_10px_24px_rgba(15,23,42,0.04)]">
-        <CalendarDays className="h-4.5 w-4.5 text-[#047857]" strokeWidth={2.1} />
+        <CalendarDays className="h-4.5 w-4.5 text-[#d70717]" strokeWidth={2.1} />
         <span className="text-xs font-bold text-slate-500">Pilih tanggal</span>
         <span className={selectedDate ? 'ml-auto text-xs font-black text-slate-700' : 'ml-auto text-xs font-bold text-slate-400'}>
           {formatDateDisplay(selectedDate)}

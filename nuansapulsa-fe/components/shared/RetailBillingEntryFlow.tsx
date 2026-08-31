@@ -389,9 +389,9 @@ export function RetailBillingEntryFlow({
 
   return (
     <div className="space-y-4">
-      <section className={`${isPLNFlow ? "overflow-hidden rounded-[28px] border border-emerald-950/5 bg-linear-to-br from-white via-emerald-50/80 to-lime-50/70 p-4 shadow-[0_18px_42px_rgba(6,78,59,0.12)]" : "rounded-md bg-white p-4 shadow-[0_14px_34px_rgba(15,23,42,0.12)] ring-1 ring-slate-100"} ${inputInvalid ? "auth-shake" : ""}`}>
+      <section className={`${isPLNFlow ? "overflow-hidden rounded-[28px] border border-rose-950/5 bg-linear-to-br from-white via-red-50/80 to-amber-50/70 p-4 shadow-[0_18px_42px_rgba(151,14,32,0.12)]" : "rounded-md bg-white p-4 shadow-[0_14px_34px_rgba(15,23,42,0.12)] ring-1 ring-slate-100"} ${inputInvalid ? "auth-shake" : ""}`}>
         <div className="flex items-center gap-3">
-          <div className={isPLNFlow ? "grid h-14 w-14 shrink-0 place-items-center rounded-[20px] bg-white p-2 shadow-[0_12px_24px_rgba(6,78,59,0.12)] ring-1 ring-emerald-100" : "shrink-0"}>
+          <div className={isPLNFlow ? "grid h-14 w-14 shrink-0 place-items-center rounded-[20px] bg-white p-2 shadow-[0_12px_24px_rgba(151,14,32,0.12)] ring-1 ring-rose-100" : "shrink-0"}>
             <Image
               src={billingLogo.src}
               alt={billingLogo.alt}
@@ -401,7 +401,7 @@ export function RetailBillingEntryFlow({
             />
           </div>
           <div className="min-w-0">
-            {isPLNFlow ? <p className="text-[10px] font-black uppercase tracking-[0.16em] text-emerald-700">NuansaPulsa PLN</p> : null}
+            {isPLNFlow ? <p className="text-[10px] font-black uppercase tracking-[0.16em] text-rose-700">NuansaPulsa PLN</p> : null}
             <h2 className={isPLNFlow ? "mt-0.5 text-lg font-black tracking-tight text-slate-950" : "text-lg font-bold text-slate-900"}>{title}</h2>
             {description ? <p className="mt-1 text-sm text-slate-500">{description}</p> : null}
           </div>
@@ -423,13 +423,13 @@ export function RetailBillingEntryFlow({
             }}
             maxLength={maxDestLength}
             placeholder={placeholder}
-            className={`w-full border px-4 py-3 text-sm text-slate-900 placeholder:text-slate-400 focus:outline-none ${isPLNFlow ? "h-14 rounded-2xl font-bold focus:ring-4" : "rounded-md focus:ring-1"} ${inputInvalid ? "border-rose-300 bg-rose-50/60 focus:border-rose-400 focus:ring-rose-200" : isPLNFlow ? "border-emerald-500/20 bg-white focus:border-emerald-500 focus:ring-emerald-100" : "border-slate-200 focus:border-sky-500 focus:ring-sky-500"}`}
+            className={`w-full border px-4 py-3 text-sm text-slate-900 placeholder:text-slate-400 focus:outline-none ${isPLNFlow ? "h-14 rounded-2xl font-bold focus:ring-4" : "rounded-md focus:ring-1"} ${inputInvalid ? "border-rose-300 bg-rose-50/60 focus:border-rose-400 focus:ring-rose-200" : isPLNFlow ? "border-rose-500/20 bg-white focus:border-rose-500 focus:ring-rose-100" : "border-slate-200 focus:border-sky-500 focus:ring-sky-500"}`}
           />
           <button
             type="button"
             onClick={handleCheck}
             disabled={checking}
-            className={isPLNFlow ? "inline-flex h-12 w-full items-center justify-center gap-2 rounded-2xl bg-[#052e26] px-4 text-sm font-black text-white shadow-[0_14px_28px_rgba(5,46,38,0.22)] ring-1 ring-lime-200/20 transition hover:opacity-95" : "inline-flex h-11 w-full items-center justify-center gap-2 rounded-2xl bg-linear-to-r from-sky-500 to-cyan-500 px-4 text-sm font-semibold text-white shadow-[0_8px_20px_rgba(15,111,203,0.24)] transition hover:opacity-95"}
+            className={isPLNFlow ? "inline-flex h-12 w-full items-center justify-center gap-2 rounded-2xl bg-[#d70717] px-4 text-sm font-black text-white shadow-[0_14px_28px_rgba(151,14,32,0.22)] ring-1 ring-amber-200/20 transition hover:opacity-95" : "inline-flex h-11 w-full items-center justify-center gap-2 rounded-2xl bg-linear-to-r from-sky-500 to-cyan-500 px-4 text-sm font-semibold text-white shadow-[0_8px_20px_rgba(15,111,203,0.24)] transition hover:opacity-95"}
           >
             <FileSearch className="h-4 w-4" />
             {checking ? (
@@ -537,14 +537,14 @@ export function RetailBillingEntryFlow({
               ) : null}
 
               {isCheckFinal && billingInquiry ? (
-                <div className={`rounded-2xl px-4 py-4 text-sm ${billingInquiry.can_pay ? "border border-emerald-100 bg-emerald-50 text-emerald-900" : "border border-rose-100 bg-rose-50 text-rose-700"}`}>
+                <div className={`rounded-2xl px-4 py-4 text-sm ${billingInquiry.can_pay ? "border border-rose-100 bg-rose-50 text-rose-900" : "border border-rose-100 bg-rose-50 text-rose-700"}`}>
                   <p className="font-semibold">{billingInquiry.can_pay ? "Hasil cek tagihan sudah siap" : (billingInquiry.display_message || "Cek gagal")}</p>
                   {!billingInquiry.can_pay ? null : (
                     <p className="mt-1 wrap-break-word text-sm opacity-90">{billingInquiry.display_message || billingInquiry.provider_message}</p>
                   )}
 
                   {billingInquiry.can_pay ? (
-                    <div className="mt-4 space-y-2 rounded-2xl bg-white/80 px-4 py-3 text-slate-700 ring-1 ring-emerald-100">
+                    <div className="mt-4 space-y-2 rounded-2xl bg-white/80 px-4 py-3 text-slate-700 ring-1 ring-rose-100">
                       {billingInquiry.customer_name ? (
                         <div className="flex items-center justify-between gap-3">
                           <span>Nama</span>

@@ -161,9 +161,9 @@ export function EMoneyBrandFlow({ items, isLoggedIn, authToken, buyerRole, initi
   return (
     <div className="mt-2 space-y-4">
       {brandName ? (
-        <section className="overflow-hidden rounded-[26px] border border-emerald-950/10 bg-linear-to-br from-[#052e26] via-[#047857] to-[#b8f138] p-4 text-white shadow-[0_18px_42px_rgba(5,46,38,0.22)]">
+        <section className="overflow-hidden rounded-[26px] border border-rose-950/10 bg-linear-to-br from-[#d70717] via-[#d70717] to-[#ffb000] p-4 text-white shadow-[0_18px_42px_rgba(151,14,32,0.22)]">
           <div className="flex items-center gap-4">
-            <div className="grid h-18 w-18 shrink-0 place-items-center rounded-[24px] bg-white p-3 shadow-[0_14px_30px_rgba(5,46,38,0.18)]">
+            <div className="grid h-18 w-18 shrink-0 place-items-center rounded-[24px] bg-white p-3 shadow-[0_14px_30px_rgba(151,14,32,0.18)]">
               {brandLogo?.src ? (
                 <Image
                   src={brandLogo.src}
@@ -173,15 +173,15 @@ export function EMoneyBrandFlow({ items, isLoggedIn, authToken, buyerRole, initi
                   className="h-full w-full object-contain"
                 />
               ) : (
-                <Wallet className="h-8 w-8 text-[#047857]" />
+                <Wallet className="h-8 w-8 text-[#d70717]" />
               )}
             </div>
             <div className="min-w-0 flex-1">
-              <p className="text-[10px] font-black uppercase tracking-[0.2em] text-lime-200">NuansaPulsa E-Wallet</p>
+              <p className="text-[10px] font-black uppercase tracking-[0.2em] text-amber-200">NuansaPulsa E-Wallet</p>
               <h1 className="mt-1 text-2xl font-black tracking-tight">{brandName}</h1>
               <p className="mt-1 text-xs font-semibold text-white/78">Pilih nominal top up, lalu masukkan nomor e-wallet saat checkout.</p>
             </div>
-            <div className="hidden h-12 w-12 shrink-0 place-items-center rounded-2xl bg-white/18 text-lime-100 ring-1 ring-white/20 min-[380px]:grid">
+            <div className="hidden h-12 w-12 shrink-0 place-items-center rounded-2xl bg-white/18 text-amber-100 ring-1 ring-white/20 min-[380px]:grid">
               <Sparkles className="h-5 w-5" />
             </div>
           </div>
@@ -199,8 +199,8 @@ export function EMoneyBrandFlow({ items, isLoggedIn, authToken, buyerRole, initi
                 onClick={() => setSelectedKey(bucket.key)}
                 className={`h-9 shrink-0 snap-start whitespace-nowrap rounded-full px-3 text-[10px] font-black leading-tight transition ${
                   active
-                    ? "bg-[#052e26] text-white shadow-[0_10px_20px_rgba(5,46,38,0.22)]"
-                    : "bg-white text-slate-700 ring-1 ring-emerald-950/10 hover:bg-emerald-50"
+                    ? "bg-[#d70717] text-white shadow-[0_10px_20px_rgba(151,14,32,0.22)]"
+                    : "bg-white text-slate-700 ring-1 ring-rose-950/10 hover:bg-rose-50"
                 }`}
               >
                 {bucket.label}

@@ -175,7 +175,7 @@ function HomeRecentActivity() {
               <span className="mt-1 block text-xs font-medium text-slate-500">{item.time}</span>
             </span>
             <span className="shrink-0 text-right">
-              <span className="inline-flex rounded-full bg-emerald-100 px-3 py-1 text-xs font-black text-emerald-700">Berhasil</span>
+              <span className="inline-flex rounded-full bg-rose-100 px-3 py-1 text-xs font-black text-rose-700">Berhasil</span>
               <span className="mt-1 block text-xs font-semibold text-slate-700">{item.amount}</span>
             </span>
             <ChevronRight className="h-5 w-5 shrink-0 text-slate-400" strokeWidth={2.4} />
