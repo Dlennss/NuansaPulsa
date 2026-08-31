@@ -63,7 +63,7 @@ export const metadata: Metadata = {
 
 function HomeHero({ isLoggedIn }: { isLoggedIn: boolean }) {
   return (
-    <section className="relative isolate h-[318px] overflow-hidden rounded-b-[34px] bg-[#e50917] text-white shadow-[0_18px_42px_rgba(151,14,32,0.28)]">
+    <section className="relative isolate h-[300px] overflow-hidden rounded-b-[34px] bg-[#e50917] text-white shadow-[0_18px_42px_rgba(151,14,32,0.28)]">
       <Image
         src="/nuansapulsa-assets/header_hero_lengkap.png"
         alt=""
@@ -76,25 +76,36 @@ function HomeHero({ isLoggedIn }: { isLoggedIn: boolean }) {
       <div className="absolute inset-x-0 bottom-0 -z-10 h-32 bg-[linear-gradient(166deg,transparent_24%,rgba(255,182,0,0.38)_25%,rgba(229,9,23,0.15)_53%,transparent_70%)]" />
 
       <Link
+        href="/"
+        prefetch={false}
+        aria-label="NuansaPulsa"
+        className="absolute left-6 top-18 h-[62px] w-[clamp(220px,78vw,308px)] focus-visible:outline-none focus-visible:ring-4 focus-visible:ring-white/70"
+      >
+        <Image
+          src="/nuansapulsa-assets/logo_full_dengan_tagline.png"
+          alt="NuansaPulsa"
+          fill
+          priority
+          sizes="(max-width: 480px) 78vw, 308px"
+          className="object-contain object-left"
+        />
+      </Link>
+
+      <Link
         href={isLoggedIn ? "/user/account/topup" : "/login"}
         prefetch={false}
         aria-label="Top Up"
-        className="absolute left-1/2 top-[88px] flex w-[min(82vw,322px)] -translate-x-1/2 flex-col items-center focus-visible:outline-none"
+        className="absolute bottom-11 right-4 flex w-[clamp(214px,62vw,238px)] rounded-[20px] bg-white px-3 py-3 text-slate-700 shadow-[0_18px_40px_rgba(90,6,20,0.22)] ring-1 ring-white/70 focus-visible:outline-none focus-visible:ring-4 focus-visible:ring-white/70"
       >
-        <span className="relative mb-2 block h-[62px] w-full">
-          <Image src="/nuansapulsa-assets/logo_full_dengan_tagline.png" alt="NuansaPulsa" fill priority sizes="322px" className="object-contain object-left" />
+        <span className="relative mr-3 h-10 w-10 shrink-0 overflow-hidden rounded-full bg-[#fff1f2]">
+          <Image src="/nuansapulsa-assets/icon_saldo_badge.png" alt="" fill sizes="40px" className="object-contain" />
         </span>
-        <span className="flex w-[min(64vw,238px)] self-end rounded-[20px] bg-white px-3 py-3 text-slate-700 shadow-[0_18px_40px_rgba(90,6,20,0.22)] ring-1 ring-white/70 focus-visible:ring-4 focus-visible:ring-white/70">
-          <span className="relative mr-3 h-10 w-10 shrink-0 overflow-hidden rounded-full bg-[#fff1f2]">
-            <Image src="/nuansapulsa-assets/icon_saldo_badge.png" alt="" fill sizes="40px" className="object-contain" />
-          </span>
-          <span className="min-w-0 flex-1">
-            <span className="block text-xs font-semibold leading-4 text-slate-500">Saldo Anda</span>
-            <span className="mt-0.5 block text-xl font-black leading-none text-[#d70717]">Rp 125.000</span>
-            <span className="mt-2 inline-flex h-8 w-full items-center justify-center gap-1.5 rounded-full bg-[#d70717] px-3 text-sm font-black text-white">
-              <span className="text-base leading-none">+</span>
-              Top Up
-            </span>
+        <span className="min-w-0 flex-1">
+          <span className="block text-xs font-semibold leading-4 text-slate-500">Saldo Anda</span>
+          <span className="mt-0.5 block text-xl font-black leading-none text-[#d70717]">Rp 125.000</span>
+          <span className="mt-2 inline-flex h-8 w-full items-center justify-center gap-1.5 rounded-full bg-[#d70717] px-3 text-sm font-black text-white">
+            <span className="text-base leading-none">+</span>
+            Top Up
           </span>
         </span>
       </Link>
