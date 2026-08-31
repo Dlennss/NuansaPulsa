@@ -63,7 +63,7 @@ export default async function GuestPulsaDataPage({
   ]);
 
   return (
-    <main className="bg-sky-50">
+    <main className="bg-[#fff6f4]">
       <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(collectionJsonLd) }} />
       <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(breadcrumbJsonLd) }} />
       <UserPulsaDataExplorer

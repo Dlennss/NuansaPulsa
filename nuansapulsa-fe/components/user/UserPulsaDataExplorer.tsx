@@ -187,9 +187,8 @@ export function UserPulsaDataExplorer({
 
   return (
     <div className="pb-24">
-      <section className="relative overflow-hidden rounded-b-[30px] bg-linear-to-br from-[#052e26] via-[#047857] to-[#22c55e] px-4 pb-7 pt-4 text-white shadow-[0_18px_42px_rgba(6,78,59,0.20)]">
-        <div className="pointer-events-none absolute -right-14 -top-16 h-40 w-40 rounded-full bg-lime-300/30 blur-2xl" />
-        <div className="pointer-events-none absolute -bottom-12 left-12 h-28 w-44 rotate-[-10deg] bg-emerald-200/15 blur-2xl" />
+      <section className="relative overflow-hidden rounded-b-[30px] bg-[linear-gradient(135deg,#e50917_0%,#d70717_55%,#ff6a00_120%)] px-4 pb-7 pt-4 text-white shadow-[0_18px_42px_rgba(151,14,32,0.22)]">
+        <div className="pointer-events-none absolute inset-x-0 bottom-0 h-24 bg-[linear-gradient(160deg,transparent_20%,rgba(255,176,0,0.34)_21%,rgba(255,106,0,0.16)_62%,transparent_76%)]" />
 
         <div className="relative flex h-10 items-center justify-center">
           {showBackLink ? (
@@ -204,9 +203,9 @@ export function UserPulsaDataExplorer({
           <h1 className="text-lg font-black tracking-tight">{title}</h1>
         </div>
 
-        <div className="relative mt-4 rounded-[22px] bg-white p-2 text-slate-900 shadow-[0_16px_34px_rgba(5,46,38,0.18)]">
+        <div className="relative mt-4 rounded-[22px] bg-white p-2 text-slate-900 shadow-[0_16px_34px_rgba(151,14,32,0.18)]">
           <div className="flex items-center gap-2">
-            <div className={`grid h-11 w-11 shrink-0 place-items-center overflow-hidden rounded-2xl ${detectedOperator ? "bg-white ring-1 ring-slate-200" : "bg-emerald-50 text-[#047857]"}`}>
+            <div className={`grid h-11 w-11 shrink-0 place-items-center overflow-hidden rounded-2xl ${detectedOperator ? "bg-white ring-1 ring-slate-200" : "bg-rose-50 text-[#d70717]"}`}>
               {detectedOperator && operatorVisual.logo ? (
                 <Image src={operatorVisual.logo} alt={`Logo ${detectedOperator.label}`} width={44} height={44} className="h-full w-full object-contain p-1.5" />
               ) : detectedOperator ? (
@@ -235,7 +234,7 @@ export function UserPulsaDataExplorer({
             ) : null}
           </div>
           {detectedOperator ? (
-            <div className="mt-2 inline-flex rounded-full bg-emerald-50 px-3 py-1 text-xs font-black text-[#047857]">
+            <div className="mt-2 inline-flex rounded-full bg-rose-50 px-3 py-1 text-xs font-black text-[#d70717]">
               {detectedOperator.label}
             </div>
           ) : phone.length >= 4 ? (
@@ -246,7 +245,7 @@ export function UserPulsaDataExplorer({
         </div>
 
         {showTabs ? (
-          <div className="relative mt-4 grid grid-cols-2 gap-1 rounded-2xl bg-[#052e26]/28 p-1 ring-1 ring-white/15">
+          <div className="relative mt-4 grid grid-cols-2 gap-1 rounded-2xl bg-red-950/18 p-1 ring-1 ring-white/18">
             {(["pulsa", "data"] as TabKey[]).map((tab) => {
               const enabled = Boolean(tabs[tab]);
               const active = activeTab === tab;
@@ -256,7 +255,7 @@ export function UserPulsaDataExplorer({
                   type="button"
                   disabled={!enabled}
                   onClick={() => enabled && setActiveTab(tab)}
-                  className={`inline-flex h-10 items-center justify-center gap-2 rounded-xl text-sm font-black transition ${active ? "bg-white text-[#047857] shadow-[0_10px_20px_rgba(5,46,38,0.16)]" : "text-white/80"} ${!enabled ? "cursor-not-allowed opacity-40" : ""}`}
+                  className={`inline-flex h-10 items-center justify-center gap-2 rounded-xl text-sm font-black transition ${active ? "bg-white text-[#d70717] shadow-[0_10px_20px_rgba(151,14,32,0.16)]" : "text-white/80"} ${!enabled ? "cursor-not-allowed opacity-40" : ""}`}
                 >
                   {tab === "pulsa" ? <Signal className="h-4 w-4" /> : <Wifi className="h-4 w-4" />}
                   {tab === "pulsa" ? "Pulsa" : "Paket Data"}
@@ -268,9 +267,9 @@ export function UserPulsaDataExplorer({
 
       </section>
 
-      <section className="-mt-4 space-y-3 rounded-t-[28px] bg-[#f8fafc] px-4 pt-5">
+      <section className="-mt-4 space-y-3 rounded-t-[28px] bg-[#fff6f4] px-4 pt-5">
         {!phone.trim() ? (
-          <div className="rounded-2xl border border-emerald-100 bg-white px-4 py-5 text-center shadow-[0_10px_28px_rgba(15,23,42,0.08)]">
+          <div className="rounded-2xl border border-rose-100 bg-white px-4 py-5 text-center shadow-[0_10px_28px_rgba(151,14,32,0.08)]">
             <p className="text-sm font-black text-slate-900">Masukkan nomor HP</p>
             <p className="mt-1 text-xs font-semibold leading-5 text-slate-500">
               Produk akan muncul otomatis sesuai operator nomor.
