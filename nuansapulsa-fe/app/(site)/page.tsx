@@ -63,7 +63,7 @@ export const metadata: Metadata = {
 
 function HomeHero({ isLoggedIn }: { isLoggedIn: boolean }) {
   return (
-    <section className="relative isolate h-[352px] overflow-hidden rounded-b-[34px] bg-[#e50917] text-white shadow-[0_18px_42px_rgba(151,14,32,0.28)]">
+    <section className="relative isolate h-[318px] overflow-hidden rounded-b-[34px] bg-[#e50917] text-white shadow-[0_18px_42px_rgba(151,14,32,0.28)]">
       <Image
         src="/nuansapulsa-assets/header_hero_lengkap.png"
         alt=""
@@ -75,35 +75,27 @@ function HomeHero({ isLoggedIn }: { isLoggedIn: boolean }) {
       <div className="absolute inset-0 -z-10 bg-linear-to-br from-[#ff2515]/95 via-[#e40718]/82 to-[#9f0f25]/88" />
       <div className="absolute inset-x-0 bottom-0 -z-10 h-32 bg-[linear-gradient(166deg,transparent_24%,rgba(255,182,0,0.38)_25%,rgba(229,9,23,0.15)_53%,transparent_70%)]" />
 
-      <div className="mx-auto flex max-w-md items-start justify-between px-5 pt-5">
-        <button
-          type="button"
-          aria-label="Menu"
-          className="relative h-12 w-12 overflow-hidden rounded-full bg-white/12 shadow-[0_10px_24px_rgba(99,15,28,0.18)] focus-visible:outline-none focus-visible:ring-4 focus-visible:ring-white/70"
-        >
-          <Image src="/nuansapulsa-assets/icon_menu_hamburger.png" alt="" fill sizes="48px" className="object-contain p-3.5" />
-        </button>
-        <Link
-          href={isLoggedIn ? "/user/notifikasi" : "/login"}
-          prefetch={false}
-          aria-label="Notifikasi"
-          className="relative h-12 w-12 overflow-hidden rounded-full bg-white/12 shadow-[0_10px_24px_rgba(99,15,28,0.18)] focus-visible:outline-none focus-visible:ring-4 focus-visible:ring-white/70"
-        >
-          <Image src="/nuansapulsa-assets/icon_notifikasi_badge_3.png" alt="" fill sizes="48px" className="object-contain p-2.5" />
-        </Link>
-      </div>
-
       <Link
         href={isLoggedIn ? "/user/account/topup" : "/login"}
         prefetch={false}
         aria-label="Top Up"
-        className="absolute left-1/2 top-[92px] flex w-[min(86vw,340px)] -translate-x-1/2 flex-col items-center focus-visible:outline-none"
+        className="absolute left-1/2 top-[88px] flex w-[min(82vw,322px)] -translate-x-1/2 flex-col items-center focus-visible:outline-none"
       >
-        <span className="relative mb-3 block h-[76px] w-full">
-          <Image src="/nuansapulsa-assets/logo_full_dengan_tagline.png" alt="NuansaPulsa" fill priority sizes="340px" className="object-contain object-left" />
+        <span className="relative mb-2 block h-[62px] w-full">
+          <Image src="/nuansapulsa-assets/logo_full_dengan_tagline.png" alt="NuansaPulsa" fill priority sizes="322px" className="object-contain object-left" />
         </span>
-        <span className="relative block h-[132px] w-[min(78vw,288px)] self-end rounded-[22px] focus-visible:ring-4 focus-visible:ring-white/70">
-          <Image src="/nuansapulsa-assets/kartu_saldo.png" alt="Saldo Anda Rp 125.000, Top Up" fill sizes="288px" className="object-contain drop-shadow-[0_18px_40px_rgba(90,6,20,0.22)]" />
+        <span className="flex w-[min(64vw,238px)] self-end rounded-[20px] bg-white px-3 py-3 text-slate-700 shadow-[0_18px_40px_rgba(90,6,20,0.22)] ring-1 ring-white/70 focus-visible:ring-4 focus-visible:ring-white/70">
+          <span className="relative mr-3 h-10 w-10 shrink-0 overflow-hidden rounded-full bg-[#fff1f2]">
+            <Image src="/nuansapulsa-assets/icon_saldo_badge.png" alt="" fill sizes="40px" className="object-contain" />
+          </span>
+          <span className="min-w-0 flex-1">
+            <span className="block text-xs font-semibold leading-4 text-slate-500">Saldo Anda</span>
+            <span className="mt-0.5 block text-xl font-black leading-none text-[#d70717]">Rp 125.000</span>
+            <span className="mt-2 inline-flex h-8 w-full items-center justify-center gap-1.5 rounded-full bg-[#d70717] px-3 text-sm font-black text-white">
+              <span className="text-base leading-none">+</span>
+              Top Up
+            </span>
+          </span>
         </span>
       </Link>
     </section>
@@ -112,22 +104,22 @@ function HomeHero({ isLoggedIn }: { isLoggedIn: boolean }) {
 
 function HomeInfoStrip() {
   return (
-    <section className="relative z-10 overflow-hidden rounded-[20px] bg-white px-4 py-4 shadow-[0_16px_34px_rgba(99,24,34,0.11)] ring-1 ring-red-950/[0.04]">
-      <div className="flex items-center gap-3">
-        <span className="relative h-12 w-12 shrink-0">
-          <Image src="/nuansapulsa-assets/icon_flash_info.png" alt="" fill sizes="48px" className="object-contain" />
+    <section className="relative z-10 overflow-hidden rounded-[18px] bg-white px-3.5 py-3 shadow-[0_16px_34px_rgba(99,24,34,0.11)] ring-1 ring-red-950/[0.04]">
+      <div className="flex items-center gap-2.5">
+        <span className="relative h-10 w-10 shrink-0">
+          <Image src="/nuansapulsa-assets/icon_flash_info.png" alt="" fill sizes="40px" className="object-contain" />
         </span>
         <span className="min-w-0 flex-1">
-          <span className="block text-sm font-medium leading-5 text-slate-600">Transaksi Cepat, Harga Bersahabat</span>
-          <span className="mt-0.5 block text-base font-black leading-5 text-slate-950">Koneksi Lancar, Hidup Makin Mudah!</span>
+          <span className="block text-xs font-medium leading-4 text-slate-600">Transaksi Cepat, Harga Bersahabat</span>
+          <span className="mt-0.5 block text-sm font-black leading-4 text-slate-950">Koneksi Lancar, Hidup Makin Mudah!</span>
         </span>
         <Link
           href="/kategori"
           prefetch={false}
           aria-label="Lihat layanan"
-          className="grid h-14 w-14 shrink-0 place-items-center rounded-[16px] bg-linear-to-br from-[#ffb000] to-[#ff6a00] text-white shadow-[0_16px_34px_rgba(255,106,0,0.24)]"
+          className="grid h-12 w-12 shrink-0 place-items-center rounded-[14px] bg-linear-to-br from-[#ffb000] to-[#ff6a00] text-white shadow-[0_16px_34px_rgba(255,106,0,0.24)]"
         >
-          <ChevronRight className="h-7 w-7" strokeWidth={3} />
+          <ChevronRight className="h-6 w-6" strokeWidth={3} />
         </Link>
       </div>
     </section>
@@ -273,7 +265,7 @@ export default async function GuestHomePage() {
         {JSON.stringify(faqJsonLd)}
       </Script>
       <HomeHero isLoggedIn={!!session?.backendToken} />
-      <div className="mx-auto -mt-[58px] max-w-md space-y-4 px-4">
+      <div className="mx-auto -mt-8 max-w-md space-y-4 px-4">
         <HomeInfoStrip />
         <GuestCategoryGrid items={categories} />
         <Suspense fallback={<GuestAdsCarouselSkeleton />}>
