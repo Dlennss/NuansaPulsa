@@ -23,8 +23,9 @@ export function AppTopHeader({ isLoggedIn = false, userName, saldo, role }: AppT
   if (pathname === "/") return null;
 
   return (
-    <header className="sticky top-0 z-30 overflow-hidden bg-[#063c2d] px-3 pb-3 pt-2 text-white shadow-[0_16px_34px_rgba(5,46,38,0.22)]">
-      <div className="pointer-events-none absolute inset-x-0 bottom-0 h-px bg-linear-to-r from-transparent via-lime-300/80 to-transparent" />
+    <header className="sticky top-0 z-30 overflow-hidden bg-[#e50917] px-3 pb-3 pt-2 text-white shadow-[0_16px_34px_rgba(151,14,32,0.22)]">
+      <div className="pointer-events-none absolute inset-0 bg-[linear-gradient(135deg,#ff2115_0%,#e50917_52%,#a20d22_100%)]" />
+      <div className="pointer-events-none absolute inset-x-0 bottom-0 h-px bg-linear-to-r from-transparent via-amber-300/80 to-transparent" />
 
       <div className="relative flex h-14 items-center justify-between gap-3">
         <div className="flex min-w-0 flex-1 items-center">
@@ -54,9 +55,6 @@ export function AppTopHeader({ isLoggedIn = false, userName, saldo, role }: AppT
                   className="object-contain object-left"
                 />
               </span>
-              <span className="mt-0.5 block text-[9px] font-black uppercase tracking-[0.16em] text-lime-100/85">
-                Cepat & hemat
-              </span>
             </span>
           </Link>
         </div>
@@ -66,7 +64,7 @@ export function AppTopHeader({ isLoggedIn = false, userName, saldo, role }: AppT
             href="#"
             target="_blank"
             rel="noreferrer"
-            className="grid h-10 w-10 shrink-0 place-items-center rounded-2xl border border-white/15 bg-white/10 text-lime-100 shadow-sm transition hover:bg-white/18"
+            className="grid h-10 w-10 shrink-0 place-items-center rounded-2xl border border-white/20 bg-white/12 text-white shadow-sm transition hover:bg-white/18"
             aria-label="Hubungi bantuan via WhatsApp"
           >
             <Headset className="h-4 w-4" />

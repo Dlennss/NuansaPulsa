@@ -76,24 +76,24 @@ function isAgentRole(role?: string | null) {
 }
 
 const iconPath = {
-  pulsa: "/service-icons/pulsa.png",
-  paketData: "/service-icons/paket-data.png",
-  hpPascabayar: "/service-icons/hp-pascabayar.png",
+  pulsa: "/nuansapulsa-assets/layanan_pulsa.png",
+  paketData: "/nuansapulsa-assets/layanan_paket_data.png",
+  hpPascabayar: "/nuansapulsa-assets/layanan_telepon.png",
   esimRoaming: "/service-icons/esim-roaming.png",
-  ewallet: "/service-icons/ewallet.png",
+  ewallet: "/nuansapulsa-assets/layanan_e_wallet.png",
   transferBank: "/service-icons/transfer-bank.png",
   qris: "/service-icons/qris.png",
   uangElektronik: "/service-icons/uang-elektronik.png",
   kartuKredit: "/service-icons/kartu-kredit.png",
   asuransi: "/service-icons/asuransi.png",
   bpjs: "/service-icons/bpjs.png",
-  tokenPln: "/service-icons/token-pln.png",
+  tokenPln: "/nuansapulsa-assets/layanan_listrik_pln.png",
   pdam: "/service-icons/pdam.png",
   gasPgn: "/service-icons/gas-pgn.png",
   internetWifi: "/service-icons/internet-wifi.png",
-  tvKabel: "/service-icons/tv-kabel.png",
-  voucherGame: "/service-icons/voucher-game.png",
-  voucherDigital: "/service-icons/voucher-digital.png",
+  tvKabel: "/nuansapulsa-assets/layanan_tv_streaming.png",
+  voucherGame: "/nuansapulsa-assets/layanan_game.png",
+  voucherDigital: "/nuansapulsa-assets/layanan_voucher.png",
   streamingMusik: "/service-icons/streaming-musik.png",
   klinikKesehatan: "/service-icons/klinik-kesehatan.png",
   uangSekolah: "/service-icons/uang-sekolah.png",
@@ -241,9 +241,9 @@ export function ServiceDirectory({ mode = "guest", role }: ServiceDirectoryProps
 
   return (
     <section className="space-y-3 pb-24">
-      <div className="sticky top-0 z-20 -mx-4 bg-[#f7fbf8]/92 px-4 pb-3 pt-3 backdrop-blur-xl">
-        <label className="flex h-13 items-center gap-3 rounded-[22px] border border-emerald-950/10 bg-white px-4 shadow-[0_12px_30px_rgba(6,78,59,0.08)]">
-          <Search className="h-5 w-5 shrink-0 text-[#047857]" />
+      <div className="sticky top-0 z-20 -mx-4 bg-[#fff6f4]/92 px-4 pb-3 pt-3 backdrop-blur-xl">
+        <label className="flex h-13 items-center gap-3 rounded-[22px] border border-red-950/10 bg-white px-4 shadow-[0_12px_30px_rgba(151,14,32,0.08)]">
+          <Search className="h-5 w-5 shrink-0 text-[#d70717]" />
           <input
             value={query}
             onChange={(event) => setQuery(event.target.value)}
@@ -260,8 +260,8 @@ export function ServiceDirectory({ mode = "guest", role }: ServiceDirectoryProps
               className={cn(
                 "h-9 rounded-full px-4 text-xs font-black transition",
                 activeGroup === "semua"
-                  ? "bg-[#052e26] text-white shadow-[0_10px_20px_rgba(5,46,38,0.22)]"
-                  : "border border-emerald-950/10 bg-white text-slate-600"
+                  ? "bg-[#d70717] text-white shadow-[0_10px_20px_rgba(215,7,23,0.22)]"
+                  : "border border-red-950/10 bg-white text-slate-600"
               )}
             >
               Semua
@@ -274,8 +274,8 @@ export function ServiceDirectory({ mode = "guest", role }: ServiceDirectoryProps
                 className={cn(
                   "h-9 rounded-full px-4 text-xs font-black transition",
                   activeGroup === group.id
-                    ? "bg-[#052e26] text-white shadow-[0_10px_20px_rgba(5,46,38,0.22)]"
-                    : "border border-emerald-950/10 bg-white text-slate-600"
+                    ? "bg-[#d70717] text-white shadow-[0_10px_20px_rgba(215,7,23,0.22)]"
+                    : "border border-red-950/10 bg-white text-slate-600"
                 )}
               >
                 {group.title}
@@ -285,13 +285,13 @@ export function ServiceDirectory({ mode = "guest", role }: ServiceDirectoryProps
         </div>
       </div>
 
-      <div className="overflow-hidden rounded-[24px] border border-lime-200/70 bg-linear-to-r from-[#fff8e7] via-white to-[#f3fce7] px-4 py-3 shadow-[0_12px_28px_rgba(6,78,59,0.08)]">
+      <div className="overflow-hidden rounded-[24px] border border-amber-200/70 bg-linear-to-r from-[#fff4e7] via-white to-[#fff1f2] px-4 py-3 shadow-[0_12px_28px_rgba(151,14,32,0.08)]">
         <div className="flex items-center gap-3">
           <div className="grid h-10 w-10 shrink-0 place-items-center rounded-2xl bg-orange-100 text-orange-500">
             <Zap className="h-5 w-5" />
           </div>
           <div>
-            <p className="text-sm font-black text-[#052e26]">Transaksi makin praktis</p>
+            <p className="text-sm font-black text-[#d70717]">Transaksi makin praktis</p>
             <p className="mt-0.5 text-[11px] font-semibold text-slate-500">Pilih layanan, isi data, lalu selesaikan pembayaran.</p>
           </div>
         </div>
@@ -301,11 +301,11 @@ export function ServiceDirectory({ mode = "guest", role }: ServiceDirectoryProps
         filteredGroups.map((group) => (
           <div
             key={group.id}
-            className="overflow-hidden rounded-[26px] border border-emerald-950/[0.08] bg-white p-4 shadow-[0_14px_34px_rgba(6,78,59,0.08)]"
+            className="overflow-hidden rounded-[26px] border border-red-950/[0.08] bg-white p-4 shadow-[0_14px_34px_rgba(151,14,32,0.08)]"
           >
             <div className="mb-4 flex items-center gap-2">
               <h2 className="text-[17px] font-black tracking-tight text-slate-950">{group.title}</h2>
-              <span className="rounded-full bg-lime-100 px-2 py-1 text-[10px] font-black text-[#047857]">
+              <span className="rounded-full bg-rose-50 px-2 py-1 text-[10px] font-black text-[#d70717]">
                 {group.items.length} layanan
               </span>
             </div>
@@ -319,7 +319,7 @@ export function ServiceDirectory({ mode = "guest", role }: ServiceDirectoryProps
                     prefetch={false}
                     className="group flex min-h-[82px] flex-col items-center justify-start gap-2 text-center"
                   >
-                    <span className="relative grid h-14 w-14 place-items-center overflow-hidden rounded-[20px] bg-white shadow-[0_12px_24px_rgba(6,78,59,0.12)] ring-1 ring-slate-200/80 transition duration-300 group-hover:-translate-y-0.5 group-hover:shadow-[0_16px_30px_rgba(6,78,59,0.18)]">
+                    <span className="relative grid h-14 w-14 place-items-center overflow-hidden rounded-[20px] bg-white shadow-[0_12px_24px_rgba(151,14,32,0.10)] ring-1 ring-slate-200/80 transition duration-300 group-hover:-translate-y-0.5 group-hover:shadow-[0_16px_30px_rgba(151,14,32,0.16)]">
                       <Image
                         src={item.iconSrc}
                         alt=""
@@ -338,8 +338,8 @@ export function ServiceDirectory({ mode = "guest", role }: ServiceDirectoryProps
           </div>
         ))
       ) : (
-        <div className="rounded-[26px] border border-dashed border-emerald-200 bg-white p-8 text-center shadow-[0_14px_34px_rgba(6,78,59,0.08)]">
-          <BookOpen className="mx-auto h-8 w-8 text-[#047857]" />
+        <div className="rounded-[26px] border border-dashed border-red-200 bg-white p-8 text-center shadow-[0_14px_34px_rgba(151,14,32,0.08)]">
+          <BookOpen className="mx-auto h-8 w-8 text-[#d70717]" />
           <p className="mt-3 text-sm font-black text-slate-900">Layanan tidak ditemukan</p>
           <p className="mt-1 text-xs font-semibold text-slate-500">Coba kata kunci yang lebih singkat.</p>
         </div>
@@ -348,13 +348,13 @@ export function ServiceDirectory({ mode = "guest", role }: ServiceDirectoryProps
       <Link
         href={mode === "user" ? "/user" : "/"}
         prefetch={false}
-        className="group flex items-center justify-between rounded-[24px] border border-emerald-300/30 bg-[#052e26] px-4 py-4 text-white shadow-[0_16px_34px_rgba(5,46,38,0.22)]"
+        className="group flex items-center justify-between rounded-[24px] border border-red-300/30 bg-[#d70717] px-4 py-4 text-white shadow-[0_16px_34px_rgba(151,14,32,0.22)]"
       >
         <span>
           <span className="block text-sm font-black !text-white">Kembali ke beranda</span>
-          <span className="mt-0.5 block text-xs font-semibold !text-emerald-50">Lihat promo dan produk utama.</span>
+          <span className="mt-0.5 block text-xs font-semibold !text-rose-50">Lihat promo dan produk utama.</span>
         </span>
-        <span className="grid h-10 w-10 place-items-center rounded-2xl border border-white/70 bg-lime-300 text-[#052e26] shadow-[0_8px_18px_rgba(163,230,53,0.28)] transition group-hover:translate-x-0.5">
+        <span className="grid h-10 w-10 place-items-center rounded-2xl border border-white/70 bg-amber-300 text-[#d70717] shadow-[0_8px_18px_rgba(245,158,11,0.28)] transition group-hover:translate-x-0.5">
           <ChevronRight className="h-5 w-5" strokeWidth={2.6} />
         </span>
       </Link>
