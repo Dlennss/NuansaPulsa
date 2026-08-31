@@ -310,22 +310,22 @@ export function ServiceDirectory({ mode = "guest", role }: ServiceDirectoryProps
               </span>
             </div>
 
-            <div className="grid grid-cols-4 gap-x-2 gap-y-5">
+            <div className="grid grid-cols-4 gap-x-2 gap-y-4">
               {group.items.map((item) => {
                 return (
                   <Link
                     key={`${group.id}-${item.label}`}
                     href={item.href}
                     prefetch={false}
-                    className="group flex min-h-[82px] flex-col items-center justify-start gap-2 text-center"
+                    className="group flex min-h-[74px] flex-col items-center justify-start gap-1.5 text-center"
                   >
-                    <span className="relative grid h-14 w-14 place-items-center overflow-hidden rounded-[20px] bg-white shadow-[0_12px_24px_rgba(151,14,32,0.10)] ring-1 ring-slate-200/80 transition duration-300 group-hover:-translate-y-0.5 group-hover:shadow-[0_16px_30px_rgba(151,14,32,0.16)]">
+                    <span className="relative grid h-12 w-12 place-items-center overflow-hidden rounded-[16px] bg-white shadow-[0_10px_20px_rgba(151,14,32,0.09)] ring-1 ring-slate-200/80 transition duration-300 group-hover:-translate-y-0.5 group-hover:shadow-[0_14px_26px_rgba(151,14,32,0.14)]">
                       <Image
                         src={item.iconSrc}
                         alt=""
                         fill
-                        sizes="56px"
-                        className="object-contain p-0.5"
+                        sizes="48px"
+                        className="object-contain p-1"
                       />
                     </span>
                     <span className="line-clamp-2 max-w-[76px] text-[10px] font-black leading-tight text-slate-950">
