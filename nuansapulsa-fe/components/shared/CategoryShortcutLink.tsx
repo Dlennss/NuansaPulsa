@@ -11,7 +11,6 @@ type CategoryShortcutLinkProps = {
   href: string;
   label: string;
   visualName: string;
-  description?: string;
 };
 
 function normalizeName(name: string) {
@@ -66,7 +65,7 @@ function getCategoryVisual(name: string): CategoryVisual {
   }
 }
 
-export function CategoryShortcutLink({ href, label, visualName, description }: CategoryShortcutLinkProps) {
+export function CategoryShortcutLink({ href, label, visualName }: CategoryShortcutLinkProps) {
   const visual = getCategoryVisual(visualName);
 
   return (
@@ -74,7 +73,7 @@ export function CategoryShortcutLink({ href, label, visualName, description }: C
       href={href}
       prefetch={false}
       aria-label={label}
-      className="group flex min-h-[108px] flex-col items-center justify-start gap-1.5 rounded-xl px-0.5 py-1 text-center transition duration-200 hover:-translate-y-0.5"
+      className="group flex min-h-[76px] flex-col items-center justify-start gap-1.5 rounded-xl px-0.5 py-1 text-center transition duration-200 hover:-translate-y-0.5"
     >
       <div className="relative grid h-13 w-13 place-items-center overflow-hidden rounded-2xl bg-white p-2 shadow-[0_10px_24px_rgba(15,23,42,0.10)] ring-1 ring-slate-950/[0.04] transition-transform duration-200 group-hover:scale-105">
         <Image
@@ -89,11 +88,6 @@ export function CategoryShortcutLink({ href, label, visualName, description }: C
         <span className="line-clamp-2 text-[10px] font-black leading-tight text-slate-950">
           {label}
         </span>
-        {description ? (
-          <span className="mt-1 block text-[10px] font-medium leading-3 text-slate-500">
-            {description}
-          </span>
-        ) : null}
       </span>
     </Link>
   );

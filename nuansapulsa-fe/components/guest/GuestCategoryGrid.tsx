@@ -18,7 +18,6 @@ type HomeShortcut = {
   href: string;
   label: string;
   visualName: string;
-  description: string;
 };
 
 const PRIORITY: Record<string, number> = {
@@ -42,16 +41,16 @@ const PRIORITY: Record<string, number> = {
 };
 
 const HOME_SHORTCUTS: HomeShortcut[] = [
-  { href: "/pulsa", label: "Pulsa", visualName: "Pulsa", description: "Isi pulsa semua operator" },
-  { href: "/paket-data", label: "Paket Data", visualName: "Paket Data", description: "Internet cepat & hemat" },
-  { href: "/paket-telepon", label: "Telepon", visualName: "Telepon", description: "Nelpon semua operator" },
-  { href: "/masa-aktif", label: "SMS", visualName: "SMS", description: "Kirim pesan lebih mudah" },
-  { href: "/ewallet", label: "E-Wallet", visualName: "E-Wallet", description: "Top up dompet digital" },
-  { href: "/listrik", label: "Listrik PLN", visualName: "PLN", description: "Token listrik praktis" },
-  { href: "/game", label: "Game", visualName: "Game", description: "Top up game favorit" },
-  { href: "/tv", label: "TV & Streaming", visualName: "TV", description: "Bayar langganan mudah" },
-  { href: "/kategori", label: "Voucher", visualName: "Voucher", description: "Kode voucher menarik" },
-  { href: "/kategori", label: "Lainnya", visualName: "Lainnya", description: "Semua layanan dalam satu app" },
+  { href: "/pulsa", label: "Pulsa", visualName: "Pulsa" },
+  { href: "/paket-data", label: "Paket Data", visualName: "Paket Data" },
+  { href: "/paket-telepon", label: "Telepon", visualName: "Telepon" },
+  { href: "/masa-aktif", label: "SMS", visualName: "SMS" },
+  { href: "/ewallet", label: "E-Wallet", visualName: "E-Wallet" },
+  { href: "/listrik", label: "Listrik PLN", visualName: "PLN" },
+  { href: "/game", label: "Game", visualName: "Game" },
+  { href: "/tv", label: "TV & Streaming", visualName: "TV" },
+  { href: "/kategori", label: "Voucher", visualName: "Voucher" },
+  { href: "/kategori", label: "Lainnya", visualName: "Lainnya" },
 ];
 
 function normalizeName(name: string) {
@@ -108,7 +107,7 @@ export function GuestCategoryGrid({ items, showAll = false }: GuestCategoryGridP
       <div className="rounded-[24px] bg-white px-3 pb-3 pt-4 shadow-[0_16px_36px_rgba(99,24,34,0.10)] ring-1 ring-red-950/[0.04]">
         <div className={showAll ? "grid grid-cols-4 gap-x-3 gap-y-4 sm:grid-cols-5" : "grid grid-cols-5 gap-x-2 gap-y-3"}>
           {!showAll ? HOME_SHORTCUTS.map((item) => (
-            <CategoryShortcutLink key={item.label} href={item.href} label={item.label} visualName={item.visualName} description={item.description} />
+            <CategoryShortcutLink key={item.label} href={item.href} label={item.label} visualName={item.visualName} />
           )) : null}
           {showAll ? sortedItems.map((item) => (
             <CategoryCard key={item.id} item={item} />
