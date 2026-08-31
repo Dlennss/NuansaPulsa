@@ -10,14 +10,14 @@ function navClass(active: boolean) {
     : "flex min-w-0 flex-col items-center gap-1.5 py-1 text-slate-400! transition visited:text-slate-400! hover:text-[#8f1023]!";
 }
 
-const iconClass = "relative h-6 w-6 md:h-10 md:w-10";
-const textClass = "text-[11px] font-bold leading-none md:text-lg";
-const activeIndicatorClass = "absolute -bottom-2.5 left-1/2 h-1 w-8 -translate-x-1/2 rounded-full bg-[#d70717] md:h-1.5 md:w-16";
+const iconClass = "relative h-6 w-6";
+const textClass = "text-[11px] font-bold leading-none";
+const activeIndicatorClass = "absolute -bottom-2.5 left-1/2 h-1 w-8 -translate-x-1/2 rounded-full bg-[#d70717]";
 
 function NavIcon({ src }: { src: string }) {
   return (
     <span className={iconClass}>
-      <Image src={src} alt="" fill sizes="(max-width: 768px) 24px, 40px" className="object-contain" />
+      <Image src={src} alt="" fill sizes="24px" className="object-contain" />
     </span>
   );
 }
@@ -40,8 +40,8 @@ export function GuestBottomNav({ isLoggedIn = false }: GuestBottomNavProps) {
     : pathname.startsWith("/login");
 
   return (
-    <section className="fixed bottom-0 left-1/2 z-[90] w-full max-w-[954px] -translate-x-1/2 overflow-visible px-4 pb-4 md:px-0">
-      <div className="grid grid-cols-5 items-end rounded-t-[26px] bg-white/96 px-4 pb-[calc(0.55rem+env(safe-area-inset-bottom))] pt-3 shadow-[0_-16px_36px_rgba(99,24,34,0.13)] ring-1 ring-red-950/5 backdrop-blur-xl md:rounded-[28px] md:px-10 md:pb-5 md:pt-4">
+    <section className="fixed bottom-0 left-1/2 z-[90] w-full max-w-md -translate-x-1/2 overflow-visible px-4 pb-4 md:w-97.5">
+      <div className="grid grid-cols-5 items-end rounded-t-[26px] bg-white/96 px-4 pb-[calc(0.55rem+env(safe-area-inset-bottom))] pt-3 shadow-[0_-16px_36px_rgba(99,24,34,0.13)] ring-1 ring-red-950/5 backdrop-blur-xl">
         <Link href="/" prefetch={false} className={`${navClass(homeActive)} relative`}>
           <NavIcon src="/nuansapulsa-assets/nav_beranda.png" />
           <span className={textClass}>Beranda</span>
@@ -55,9 +55,9 @@ export function GuestBottomNav({ isLoggedIn = false }: GuestBottomNavProps) {
         </Link>
 
         <Link href={scanHref} prefetch={false} className="relative flex min-w-0 flex-col items-center gap-1.5 py-1 text-slate-950! visited:text-slate-950!">
-          <span className="relative -mt-8 grid h-16 w-16 place-items-center rounded-full bg-[#d70717] shadow-[0_12px_30px_rgba(215,7,23,0.28)] ring-6 ring-white md:-mt-12 md:h-24 md:w-24">
-            <span className="relative h-8 w-8 md:h-12 md:w-12">
-              <Image src="/nuansapulsa-assets/nav_scan_qr_putih.png" alt="" fill sizes="(max-width: 768px) 32px, 48px" className="object-contain" />
+          <span className="relative -mt-8 grid h-16 w-16 place-items-center rounded-full bg-[#d70717] shadow-[0_12px_30px_rgba(215,7,23,0.28)] ring-6 ring-white">
+            <span className="relative h-8 w-8">
+              <Image src="/nuansapulsa-assets/nav_scan_qr_putih.png" alt="" fill sizes="32px" className="object-contain" />
             </span>
           </span>
           <span className={textClass}>Scan</span>
@@ -66,8 +66,8 @@ export function GuestBottomNav({ isLoggedIn = false }: GuestBottomNavProps) {
 
         <Link href={notificationHref} prefetch={false} className={`${navClass(notificationActive)} relative`}>
           <span className={iconClass}>
-            <Image src="/nuansapulsa-assets/nav_notifikasi.png" alt="" fill sizes="(max-width: 768px) 24px, 40px" className="object-contain" />
-            <span className="absolute -right-0.5 -top-0.5 h-2.5 w-2.5 rounded-full bg-[#d70717] ring-1 ring-white md:h-4 md:w-4" />
+            <Image src="/nuansapulsa-assets/nav_notifikasi.png" alt="" fill sizes="24px" className="object-contain" />
+            <span className="absolute -right-0.5 -top-0.5 h-2.5 w-2.5 rounded-full bg-[#d70717] ring-1 ring-white" />
           </span>
           <span className={textClass}>Notifikasi</span>
           {notificationActive ? <span className={activeIndicatorClass} /> : null}

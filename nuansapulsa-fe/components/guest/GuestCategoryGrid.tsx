@@ -105,8 +105,8 @@ export function GuestCategoryGrid({ items, showAll = false }: GuestCategoryGridP
 
   return (
     <section>
-      <div className="rounded-[24px] bg-white px-3 pb-3 pt-4 shadow-[0_16px_36px_rgba(99,24,34,0.10)] ring-1 ring-red-950/[0.04] md:rounded-[22px] md:px-7 md:py-6">
-        <div className={showAll ? "grid grid-cols-4 gap-x-3 gap-y-4 sm:grid-cols-5" : "grid grid-cols-5 gap-x-2 gap-y-3 md:gap-x-8 md:gap-y-5"}>
+      <div className="rounded-[24px] bg-white px-3 pb-3 pt-4 shadow-[0_16px_36px_rgba(99,24,34,0.10)] ring-1 ring-red-950/[0.04]">
+        <div className={showAll ? "grid grid-cols-4 gap-x-3 gap-y-4 sm:grid-cols-5" : "grid grid-cols-5 gap-x-2 gap-y-3"}>
           {!showAll ? HOME_SHORTCUTS.map((item) => (
             <CategoryShortcutLink key={item.label} href={item.href} label={item.label} visualName={item.visualName} description={item.description} />
           )) : null}
