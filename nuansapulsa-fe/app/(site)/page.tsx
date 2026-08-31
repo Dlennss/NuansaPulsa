@@ -79,14 +79,14 @@ function HomeHero({ isLoggedIn }: { isLoggedIn: boolean }) {
         href="/"
         prefetch={false}
         aria-label="NuansaPulsa"
-        className="absolute left-6 top-18 h-[62px] w-[clamp(220px,78vw,308px)] focus-visible:outline-none focus-visible:ring-4 focus-visible:ring-white/70"
+        className="absolute left-5 top-5 h-[50px] w-[clamp(200px,68vw,272px)] focus-visible:outline-none focus-visible:ring-4 focus-visible:ring-white/70"
       >
         <Image
           src="/nuansapulsa-assets/logo_full_dengan_tagline.png"
           alt="NuansaPulsa"
           fill
           priority
-          sizes="(max-width: 480px) 78vw, 308px"
+          sizes="(max-width: 480px) 68vw, 272px"
           className="object-contain object-left"
         />
       </Link>
@@ -95,7 +95,7 @@ function HomeHero({ isLoggedIn }: { isLoggedIn: boolean }) {
         href={isLoggedIn ? "/user/account/topup" : "/login"}
         prefetch={false}
         aria-label="Top Up"
-        className="absolute bottom-11 right-4 flex w-[clamp(214px,62vw,238px)] rounded-[20px] bg-white px-3 py-3 text-slate-700 shadow-[0_18px_40px_rgba(90,6,20,0.22)] ring-1 ring-white/70 focus-visible:outline-none focus-visible:ring-4 focus-visible:ring-white/70"
+        className="absolute bottom-10 right-4 flex w-[clamp(208px,60vw,232px)] rounded-[20px] bg-white px-3 py-3 text-slate-700 shadow-[0_18px_40px_rgba(90,6,20,0.22)] ring-1 ring-white/70 focus-visible:outline-none focus-visible:ring-4 focus-visible:ring-white/70"
       >
         <span className="relative mr-3 h-10 w-10 shrink-0 overflow-hidden rounded-full bg-[#fff1f2]">
           <Image src="/nuansapulsa-assets/icon_saldo_badge.png" alt="" fill sizes="40px" className="object-contain" />
