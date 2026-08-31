@@ -1,8 +1,6 @@
 "use client";
 
-import Link from "next/link";
 import { useMemo } from "react";
-import Image from "next/image";
 import type { UserCategoryItem } from "@/components/user/types";
 import { getGuestCategoryPath } from "@/lib/category-routes";
 import { CategoryShortcutLink } from "@/components/shared/CategoryShortcutLink";
@@ -14,6 +12,13 @@ type GuestCategoryGridProps = {
 
 type CategoryCardProps = {
   item: UserCategoryItem;
+};
+
+type HomeShortcut = {
+  href: string;
+  label: string;
+  visualName: string;
+  description: string;
 };
 
 const PRIORITY: Record<string, number> = {
@@ -36,15 +41,17 @@ const PRIORITY: Record<string, number> = {
   lainnya: 15,
 };
 
-const HOME_FALLBACK_ITEMS: UserCategoryItem[] = [
-  { id: 1, nama: "Pulsa", aktif: true },
-  { id: 5, nama: "Game", aktif: true },
-  { id: 3, nama: "E-Wallet", aktif: true },
-  { id: 11, nama: "Listrik", aktif: true },
-  { id: 4, nama: "PLN", aktif: true },
-  { id: 7, nama: "TV", aktif: true },
-  { id: 17, nama: "PDAM", aktif: true },
-  { id: 19, nama: "BPJS", aktif: true },
+const HOME_SHORTCUTS: HomeShortcut[] = [
+  { href: "/pulsa", label: "Pulsa", visualName: "Pulsa", description: "Isi pulsa semua operator" },
+  { href: "/paket-data", label: "Paket Data", visualName: "Paket Data", description: "Internet cepat & hemat" },
+  { href: "/paket-telepon", label: "Telepon", visualName: "Telepon", description: "Nelpon semua operator" },
+  { href: "/masa-aktif", label: "SMS", visualName: "SMS", description: "Kirim pesan lebih mudah" },
+  { href: "/ewallet", label: "E-Wallet", visualName: "E-Wallet", description: "Top up dompet digital" },
+  { href: "/listrik", label: "Listrik PLN", visualName: "PLN", description: "Token listrik praktis" },
+  { href: "/game", label: "Game", visualName: "Game", description: "Top up game favorit" },
+  { href: "/tv", label: "TV & Streaming", visualName: "TV", description: "Bayar langganan mudah" },
+  { href: "/kategori", label: "Voucher", visualName: "Voucher", description: "Kode voucher menarik" },
+  { href: "/kategori", label: "Lainnya", visualName: "Lainnya", description: "Semua layanan dalam satu app" },
 ];
 
 function normalizeName(name: string) {
@@ -95,44 +102,17 @@ function CategoryCard({ item }: CategoryCardProps) {
 
 export function GuestCategoryGrid({ items, showAll = false }: GuestCategoryGridProps) {
   const sortedItems = useMemo(() => sortCategories(items), [items]);
-  const homeItems = useMemo(() => {
-    const activeItems = sortedItems.filter((item) => item.aktif);
-    const activeKeys = new Set(activeItems.map((item) => normalizeName(item.nama)));
-    const fallbackItems = HOME_FALLBACK_ITEMS.filter((item) => !activeKeys.has(normalizeName(item.nama)));
-    return [...activeItems, ...fallbackItems].slice(0, 9);
-  }, [sortedItems]);
 
   return (
     <section>
-      <div className="rounded-[24px] bg-white px-3 pb-3 pt-4 shadow-[0_16px_36px_rgba(99,24,34,0.10)] ring-1 ring-red-950/[0.04]">
-        <div className={showAll ? "grid grid-cols-4 gap-x-3 gap-y-4 sm:grid-cols-5" : "grid grid-cols-5 gap-x-2 gap-y-3"}>
-          {!showAll ? homeItems.map((item) => (
-            <CategoryCard key={item.id} item={item} />
+      <div className="rounded-[24px] bg-white px-3 pb-3 pt-4 shadow-[0_16px_36px_rgba(99,24,34,0.10)] ring-1 ring-red-950/[0.04] md:rounded-[22px] md:px-7 md:py-6">
+        <div className={showAll ? "grid grid-cols-4 gap-x-3 gap-y-4 sm:grid-cols-5" : "grid grid-cols-5 gap-x-2 gap-y-3 md:gap-x-8 md:gap-y-5"}>
+          {!showAll ? HOME_SHORTCUTS.map((item) => (
+            <CategoryShortcutLink key={item.label} href={item.href} label={item.label} visualName={item.visualName} description={item.description} />
           )) : null}
           {showAll ? sortedItems.map((item) => (
             <CategoryCard key={item.id} item={item} />
           )) : null}
-          {!showAll ? (
-            <Link
-              href="/kategori"
-              prefetch={false}
-              aria-label="Lainnya"
-              className="group flex min-h-[88px] flex-col items-center justify-start gap-1.5 rounded-xl px-0.5 py-1 text-center transition duration-200 hover:-translate-y-0.5"
-            >
-              <div className="relative h-13 w-13 overflow-hidden rounded-2xl bg-white p-2 shadow-[0_10px_24px_rgba(15,23,42,0.10)] ring-1 ring-slate-950/[0.04] transition-transform duration-200 group-hover:scale-105">
-                <Image
-                  src="/nuansapulsa-assets/layanan_lainnya.png"
-                  alt=""
-                  fill
-                  sizes="52px"
-                  className="object-contain p-2"
-                />
-              </div>
-              <span className="line-clamp-2 px-0.5 text-[10px] font-black leading-tight text-slate-950">
-                Lainnya
-              </span>
-            </Link>
-          ) : null}
         </div>
       </div>
     </section>

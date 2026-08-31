@@ -57,7 +57,7 @@ export function GuestAdsCarousel({ items }: GuestAdsCarouselProps) {
   const touchStartXRef = useRef<number | null>(null);
   const touchDeltaXRef = useRef(0);
   const safeActiveIndex = ads.length > 0 ? Math.min(activeIndex, ads.length - 1) : 0;
-  const peekSize = viewportWidth >= 768 ? 32 : 12;
+  const peekSize = viewportWidth >= 768 ? 0 : 12;
   const slideGap = viewportWidth >= 768 ? 10 : 8;
   const slideWidth = Math.max(0, viewportWidth - (ads.length > 1 ? peekSize * 2 : 0));
   const trackOffset = ads.length > 1 ? safeActiveIndex * (slideWidth + slideGap) : 0;
@@ -146,7 +146,7 @@ export function GuestAdsCarousel({ items }: GuestAdsCarouselProps) {
           const hasCaption = Boolean(item.judul || item.keterangan);
           const content = (
             <div
-              className="relative aspect-[19/9] shrink-0 overflow-hidden rounded-[18px] bg-red-50"
+              className="relative aspect-[19/9] shrink-0 overflow-hidden rounded-[18px] bg-red-50 md:aspect-[954/286]"
               style={{ width: slideWidth > 0 ? `${slideWidth}px` : "100%" }}
             >
               <img
