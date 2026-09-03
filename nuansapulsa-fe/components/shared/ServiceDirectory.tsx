@@ -76,36 +76,36 @@ function isAgentRole(role?: string | null) {
 }
 
 const iconPath = {
-  pulsa: "pulsa.svg",
-  paketData: "paket-data.svg",
-  hpPascabayar: "hp-pascabayar.svg",
-  esimRoaming: "esim-roaming.svg",
-  ewallet: "ewallet.svg",
-  transferBank: "transfer-bank.svg",
-  qris: "qris.svg",
-  uangElektronik: "uang-elektronik.svg",
-  kartuKredit: "kartu-kredit.svg",
-  asuransi: "asuransi.svg",
-  bpjs: "bpjs.svg",
-  tokenPln: "token-pln.svg",
-  pdam: "pdam.svg",
-  gasPgn: "gas-pgn.svg",
-  internetWifi: "internet-wifi.svg",
-  tvKabel: "tv-kabel.svg",
-  voucherGame: "voucher-game.svg",
-  voucherDigital: "voucher-digital.svg",
-  streamingMusik: "streaming-musik.svg",
-  klinikKesehatan: "klinik-kesehatan.svg",
-  uangSekolah: "uang-sekolah.svg",
-  cicilanKendaraan: "cicilan-kendaraan.svg",
-  cicilanMultifinance: "cicilan-multifinance.svg",
-  pbb: "pbb.svg",
-  pajakNegara: "pajak-negara.svg",
-  tiketPerjalanan: "tiket-perjalanan.svg",
-  saldoKartuTol: "saldo-kartu-tol.svg",
-  parkirDigital: "parkir-digital.svg",
-  kurirPengiriman: "kurir-pengiriman.svg",
-  zakatDonasi: "zakat-donasi.svg",
+  pulsa: "pulsa.png",
+  paketData: "paket-data.png",
+  hpPascabayar: "hp-pascabayar.png",
+  esimRoaming: "esim-roaming.png",
+  ewallet: "ewallet.png",
+  transferBank: "transfer-bank.png",
+  qris: "qris.png",
+  uangElektronik: "uang-elektronik.png",
+  kartuKredit: "kartu-kredit.png",
+  asuransi: "asuransi.png",
+  bpjs: "bpjs.png",
+  tokenPln: "token-pln.png",
+  pdam: "pdam.png",
+  gasPgn: "gas-pgn.png",
+  internetWifi: "internet-wifi.png",
+  tvKabel: "tv-kabel.png",
+  voucherGame: "voucher-game.png",
+  voucherDigital: "voucher-digital.png",
+  streamingMusik: "streaming-musik.png",
+  klinikKesehatan: "klinik-kesehatan.png",
+  uangSekolah: "uang-sekolah.png",
+  cicilanKendaraan: "cicilan-kendaraan.png",
+  cicilanMultifinance: "cicilan-multifinance.png",
+  pbb: "pbb.png",
+  pajakNegara: "pajak-negara.png",
+  tiketPerjalanan: "tiket-perjalanan.png",
+  saldoKartuTol: "saldo-kartu-tol.png",
+  parkirDigital: "parkir-digital.png",
+  kurirPengiriman: "kurir-pengiriman.png",
+  zakatDonasi: "zakat-donasi.png",
 };
 
 function DirectoryServiceIcon({ iconSrc, label }: { iconSrc: string; label: string }) {
@@ -333,7 +333,7 @@ export function ServiceDirectory({ mode = "guest", role }: ServiceDirectoryProps
                     prefetch={false}
                     className="group flex min-h-[82px] flex-col items-center justify-start gap-1 text-center"
                   >
-                    <DirectoryServiceIcon iconSrc={`/service-icons-nuansa/${item.iconKey}`} label={item.label} />
+                    <DirectoryServiceIcon iconSrc={`/service-icons-exact/${item.iconKey}`} label={item.label} />
                     <span className="line-clamp-2 max-w-[76px] text-[10px] font-black leading-tight text-slate-950">
                       {item.label}
                     </span>
