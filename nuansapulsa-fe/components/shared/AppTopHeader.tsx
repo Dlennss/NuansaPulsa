@@ -3,7 +3,6 @@
 import Link from "next/link";
 import Image from "next/image";
 import { usePathname } from "next/navigation";
-import { Headset } from "lucide-react";
 
 type AppTopHeaderProps = {
   isLoggedIn?: boolean;
@@ -59,17 +58,7 @@ export function AppTopHeader({ isLoggedIn = false, userName, saldo, role }: AppT
           </Link>
         </div>
 
-        <div className="flex items-center gap-2">
-          <a
-            href="#"
-            target="_blank"
-            rel="noreferrer"
-            className="grid h-10 w-10 shrink-0 place-items-center rounded-2xl border border-white/20 bg-white/12 text-white shadow-sm transition hover:bg-white/18"
-            aria-label="Hubungi bantuan via WhatsApp"
-          >
-            <Headset className="h-4 w-4" />
-          </a>
-        </div>
+        <div className="h-10 w-10 shrink-0" aria-hidden="true" />
       </div>
     </header>
   );

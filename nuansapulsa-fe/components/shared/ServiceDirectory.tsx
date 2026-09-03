@@ -1,41 +1,14 @@
 "use client";
 
 import Link from "next/link";
+import Image from "next/image";
 import { useMemo, useState } from "react";
 import {
-  ArrowUpDown,
   BookOpen,
-  Building2,
-  CarFront,
   ChevronRight,
-  CircleParking,
-  CreditCard,
-  Droplets,
-  Flame,
-  Gamepad2,
-  GraduationCap,
-  HandHeart,
-  Headphones,
-  Home,
-  Landmark,
-  PhoneCall,
-  Plane,
-  QrCode,
-  RefreshCw,
   Search,
-  ShieldCheck,
-  Smartphone,
-  Sparkles,
-  Stethoscope,
-  TicketPercent,
-  Truck,
-  Tv,
-  UsersRound,
-  WalletCards,
-  Wifi,
   Zap,
 } from "lucide-react";
-import type { LucideIcon } from "lucide-react";
 import { cn } from "@/lib/utils";
 
 type DirectoryMode = "guest" | "user";
@@ -103,89 +76,48 @@ function isAgentRole(role?: string | null) {
 }
 
 const iconPath = {
-  pulsa: "pulsa",
-  paketData: "paketData",
-  hpPascabayar: "hpPascabayar",
-  esimRoaming: "esimRoaming",
-  ewallet: "ewallet",
-  transferBank: "transferBank",
-  qris: "qris",
-  uangElektronik: "uangElektronik",
-  kartuKredit: "kartuKredit",
-  asuransi: "asuransi",
-  bpjs: "bpjs",
-  tokenPln: "tokenPln",
-  pdam: "pdam",
-  gasPgn: "gasPgn",
-  internetWifi: "internetWifi",
-  tvKabel: "tvKabel",
-  voucherGame: "voucherGame",
-  voucherDigital: "voucherDigital",
-  streamingMusik: "streamingMusik",
-  klinikKesehatan: "klinikKesehatan",
-  uangSekolah: "uangSekolah",
-  cicilanKendaraan: "cicilanKendaraan",
-  cicilanMultifinance: "cicilanMultifinance",
-  pbb: "pbb",
-  pajakNegara: "pajakNegara",
-  tiketPerjalanan: "tiketPerjalanan",
-  saldoKartuTol: "saldoKartuTol",
-  parkirDigital: "parkirDigital",
-  kurirPengiriman: "kurirPengiriman",
-  zakatDonasi: "zakatDonasi",
+  pulsa: "pulsa.svg",
+  paketData: "paket-data.svg",
+  hpPascabayar: "hp-pascabayar.svg",
+  esimRoaming: "esim-roaming.svg",
+  ewallet: "ewallet.svg",
+  transferBank: "transfer-bank.svg",
+  qris: "qris.svg",
+  uangElektronik: "uang-elektronik.svg",
+  kartuKredit: "kartu-kredit.svg",
+  asuransi: "asuransi.svg",
+  bpjs: "bpjs.svg",
+  tokenPln: "token-pln.svg",
+  pdam: "pdam.svg",
+  gasPgn: "gas-pgn.svg",
+  internetWifi: "internet-wifi.svg",
+  tvKabel: "tv-kabel.svg",
+  voucherGame: "voucher-game.svg",
+  voucherDigital: "voucher-digital.svg",
+  streamingMusik: "streaming-musik.svg",
+  klinikKesehatan: "klinik-kesehatan.svg",
+  uangSekolah: "uang-sekolah.svg",
+  cicilanKendaraan: "cicilan-kendaraan.svg",
+  cicilanMultifinance: "cicilan-multifinance.svg",
+  pbb: "pbb.svg",
+  pajakNegara: "pajak-negara.svg",
+  tiketPerjalanan: "tiket-perjalanan.svg",
+  saldoKartuTol: "saldo-kartu-tol.svg",
+  parkirDigital: "parkir-digital.svg",
+  kurirPengiriman: "kurir-pengiriman.svg",
+  zakatDonasi: "zakat-donasi.svg",
 };
 
-const directoryIcons: Record<string, LucideIcon> = {
-  pulsa: Smartphone,
-  paketData: ArrowUpDown,
-  hpPascabayar: PhoneCall,
-  esimRoaming: Smartphone,
-  ewallet: WalletCards,
-  transferBank: Landmark,
-  qris: QrCode,
-  uangElektronik: CreditCard,
-  kartuKredit: CreditCard,
-  asuransi: ShieldCheck,
-  bpjs: UsersRound,
-  tokenPln: Zap,
-  pdam: Droplets,
-  gasPgn: Flame,
-  internetWifi: Wifi,
-  tvKabel: Tv,
-  voucherGame: Gamepad2,
-  voucherDigital: TicketPercent,
-  streamingMusik: Headphones,
-  klinikKesehatan: Stethoscope,
-  uangSekolah: GraduationCap,
-  cicilanKendaraan: CarFront,
-  cicilanMultifinance: RefreshCw,
-  pbb: Home,
-  pajakNegara: Building2,
-  tiketPerjalanan: Plane,
-  saldoKartuTol: CreditCard,
-  parkirDigital: CircleParking,
-  kurirPengiriman: Truck,
-  zakatDonasi: HandHeart,
-};
-
-const blueIconKeys = new Set(["pdam", "internetWifi", "parkirDigital"]);
-
-function DirectoryServiceIcon({ iconKey }: { iconKey: string }) {
-  const Icon = directoryIcons[iconKey] || Sparkles;
-  const isBlue = blueIconKeys.has(iconKey);
-
+function DirectoryServiceIcon({ iconSrc, label }: { iconSrc: string; label: string }) {
   return (
-    <span className="relative grid h-12 w-12 place-items-center overflow-hidden rounded-[16px] bg-white shadow-[0_10px_20px_rgba(151,14,32,0.09)] ring-1 ring-slate-200/80 transition duration-300 group-hover:-translate-y-0.5 group-hover:shadow-[0_14px_26px_rgba(151,14,32,0.14)]">
-      <span
-        className={cn(
-          "grid h-8 w-8 place-items-center rounded-[12px] text-white shadow-[inset_0_1px_0_rgba(255,255,255,0.38),0_8px_16px_rgba(215,7,23,0.20)]",
-          isBlue
-            ? "bg-[linear-gradient(135deg,#38bdf8_0%,#0ea5e9_52%,#2563eb_100%)]"
-            : "bg-[linear-gradient(135deg,#ffb000_0%,#ff4d00_42%,#e50917_100%)]"
-        )}
-      >
-        <Icon className="h-5 w-5" strokeWidth={2.8} />
-      </span>
+    <span className="relative grid h-[58px] w-[58px] place-items-center transition duration-300 group-hover:-translate-y-0.5">
+      <Image
+        src={iconSrc}
+        alt={label}
+        width={58}
+        height={58}
+        className="h-[58px] w-[58px] object-contain drop-shadow-[0_8px_10px_rgba(151,14,32,0.12)]"
+      />
     </span>
   );
 }
@@ -399,9 +331,9 @@ export function ServiceDirectory({ mode = "guest", role }: ServiceDirectoryProps
                     key={`${group.id}-${item.label}`}
                     href={item.href}
                     prefetch={false}
-                    className="group flex min-h-[74px] flex-col items-center justify-start gap-1.5 text-center"
+                    className="group flex min-h-[82px] flex-col items-center justify-start gap-1 text-center"
                   >
-                    <DirectoryServiceIcon iconKey={item.iconKey} />
+                    <DirectoryServiceIcon iconSrc={`/service-icons-nuansa/${item.iconKey}`} label={item.label} />
                     <span className="line-clamp-2 max-w-[76px] text-[10px] font-black leading-tight text-slate-950">
                       {item.label}
                     </span>
