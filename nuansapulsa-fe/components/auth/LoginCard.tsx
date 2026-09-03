@@ -158,7 +158,7 @@ export function LoginCard() {
 
   return (
     <section className={cn("min-h-svh bg-[#fff6f4] text-slate-950 sm:min-h-[820px]", shake && "auth-shake")}>
-      <div className="relative h-[360px] overflow-hidden rounded-b-[36px] bg-[#e50917] text-center text-white shadow-[0_18px_44px_rgba(151,14,32,0.22)]">
+      <div className="relative h-[clamp(315px,43svh,380px)] overflow-hidden rounded-b-[34px] bg-[#e50917] text-center text-white shadow-[0_18px_44px_rgba(151,14,32,0.22)]">
         <Image
           src="/nuansapulsa-assets/login_hero_reference.png"
           alt=""
@@ -167,10 +167,11 @@ export function LoginCard() {
           sizes="430px"
           className="object-cover object-top"
         />
+        <div className="pointer-events-none absolute inset-x-0 bottom-0 h-24 bg-linear-to-b from-transparent to-[#fff6f4]/12" />
       </div>
 
-      <div className="relative -mt-16 px-5 pb-8">
-        <div className="rounded-[28px] bg-white px-5 py-6 shadow-[0_24px_64px_rgba(151,14,32,0.16)] ring-1 ring-red-950/[0.04]">
+      <div className="relative -mt-14 px-4 pb-8 sm:px-5">
+        <div className="rounded-[26px] bg-white px-5 py-6 shadow-[0_22px_56px_rgba(151,14,32,0.16)] ring-1 ring-red-950/[0.05]">
 
         {err && (
           <div className="mb-4 flex items-start gap-2.5 rounded-2xl border border-rose-200 bg-rose-50 px-4 py-3">
@@ -182,37 +183,41 @@ export function LoginCard() {
         <form onSubmit={onSubmit} className="space-y-4">
           <div>
             <label className="sr-only">Nomor HP</label>
-            <div className="relative flex min-h-[72px] items-center gap-4 rounded-[20px] border border-slate-200 bg-white px-4 shadow-[0_10px_22px_rgba(15,23,42,0.04)] focus-within:border-[#d70717] focus-within:ring-4 focus-within:ring-rose-100">
+            <div className="flex min-h-[72px] items-center gap-4 rounded-[20px] border border-slate-200 bg-white px-4 shadow-[0_10px_22px_rgba(15,23,42,0.04)] transition focus-within:border-[#d70717] focus-within:ring-4 focus-within:ring-rose-100">
               <span className="grid h-11 w-11 shrink-0 place-items-center rounded-2xl bg-rose-50 text-[#d70717]">
                 <Smartphone className="h-5 w-5" />
               </span>
-              <input
-                className="min-w-0 flex-1 bg-transparent text-base font-bold text-slate-900 outline-none placeholder:text-sm placeholder:font-semibold placeholder:text-slate-400"
-                value={email}
-                onChange={(e) => setEmail(e.target.value)}
-                placeholder="Contoh: 08xxxxxxxxxx"
-                autoComplete="username"
-                type="text"
-              />
-              <span className="pointer-events-none absolute left-[76px] top-4 text-[11px] font-black text-slate-900">Nomor HP</span>
+              <div className="min-w-0 flex-1">
+                <span className="block text-xs font-black leading-none text-slate-900">Nomor HP</span>
+                <input
+                  className="mt-1 h-7 w-full min-w-0 bg-transparent text-base font-bold text-slate-900 outline-none placeholder:text-sm placeholder:font-semibold placeholder:text-slate-400"
+                  value={email}
+                  onChange={(e) => setEmail(e.target.value)}
+                  placeholder="Contoh: 08xxxxxxxxxx"
+                  autoComplete="username"
+                  type="text"
+                />
+              </div>
             </div>
           </div>
 
           <div>
             <label className="sr-only">PIN / Password</label>
-            <div className="relative flex min-h-[72px] items-center gap-4 rounded-[20px] border border-slate-200 bg-white px-4 shadow-[0_10px_22px_rgba(15,23,42,0.04)] focus-within:border-[#d70717] focus-within:ring-4 focus-within:ring-rose-100">
+            <div className="relative flex min-h-[72px] items-center gap-4 rounded-[20px] border border-slate-200 bg-white px-4 shadow-[0_10px_22px_rgba(15,23,42,0.04)] transition focus-within:border-[#d70717] focus-within:ring-4 focus-within:ring-rose-100">
               <span className="grid h-11 w-11 shrink-0 place-items-center rounded-2xl bg-rose-50 text-[#d70717]">
                 <LockKeyhole className="h-5 w-5" />
               </span>
-              <input
-                className="min-w-0 flex-1 bg-transparent pr-10 text-base font-bold text-slate-900 outline-none placeholder:text-sm placeholder:font-semibold placeholder:text-slate-400"
-                type={showPassword ? "text" : "password"}
-                value={password}
-                onChange={(e) => setPassword(e.target.value)}
-                placeholder="Masukkan PIN atau password Anda"
-                autoComplete="current-password"
-              />
-              <span className="pointer-events-none absolute left-[76px] top-4 text-[11px] font-black text-slate-900">PIN / Password</span>
+              <div className="min-w-0 flex-1 pr-9">
+                <span className="block text-xs font-black leading-none text-slate-900">PIN / Password</span>
+                <input
+                  className="mt-1 h-7 w-full min-w-0 bg-transparent text-base font-bold text-slate-900 outline-none placeholder:text-sm placeholder:font-semibold placeholder:text-slate-400"
+                  type={showPassword ? "text" : "password"}
+                  value={password}
+                  onChange={(e) => setPassword(e.target.value)}
+                  placeholder="Masukkan PIN atau password"
+                  autoComplete="current-password"
+                />
+              </div>
               <button
                 type="button"
                 onClick={() => setShowPassword(!showPassword)}
@@ -225,7 +230,7 @@ export function LoginCard() {
             </div>
           </div>
 
-          <div className="flex items-center justify-between gap-4">
+          <div className="flex items-center justify-between gap-4 px-0.5">
             <label className="flex items-center gap-3 text-sm font-semibold text-slate-700">
               <input
                 type="checkbox"
@@ -255,7 +260,7 @@ export function LoginCard() {
 
           {/* Login Button */}
           <button
-            className="group relative flex h-[58px] w-full items-center justify-center gap-3 rounded-[22px] bg-linear-to-r from-[#e50917] via-[#ff2115] to-[#ff6a00] text-lg font-black text-white shadow-[0_14px_30px_rgba(215,7,23,0.28)] transition-all hover:shadow-[0_18px_38px_rgba(215,7,23,0.36)] active:scale-[0.98] disabled:cursor-not-allowed disabled:opacity-60 disabled:shadow-none"
+            className="group relative flex h-[56px] w-full items-center justify-center gap-3 rounded-[22px] bg-linear-to-r from-[#e50917] via-[#ff2115] to-[#ff6a00] text-lg font-black text-white shadow-[0_14px_30px_rgba(215,7,23,0.28)] transition-all hover:shadow-[0_18px_38px_rgba(215,7,23,0.36)] active:scale-[0.98] disabled:cursor-not-allowed disabled:opacity-60 disabled:shadow-none"
             disabled={(TURNSTILE_ENABLED && !turnstileToken) || loading}
             type="submit"
           >
@@ -271,7 +276,7 @@ export function LoginCard() {
 
           <Link
             href="/register"
-            className="flex h-[58px] w-full items-center justify-center rounded-[22px] border-2 border-[#d70717] bg-white text-lg font-black text-[#d70717] transition hover:bg-rose-50 active:scale-[0.98]"
+            className="flex h-[56px] w-full items-center justify-center rounded-[22px] border-2 border-[#d70717] bg-white text-lg font-black text-[#d70717] transition hover:bg-rose-50 active:scale-[0.98]"
           >
             Daftar Akun Baru
           </Link>
@@ -284,8 +289,8 @@ export function LoginCard() {
 
           <button
             type="button"
-            className="flex h-[58px] w-full items-center justify-center gap-3 rounded-[18px] border border-slate-200 bg-white text-base font-black text-slate-800 shadow-[0_8px_20px_rgba(15,23,42,0.05)] transition-all hover:border-slate-300 hover:bg-slate-50 hover:shadow-sm active:scale-[0.98] disabled:cursor-not-allowed disabled:opacity-60"
-            disabled={loading || !canUseGoogleLogin}
+            className="flex h-[56px] w-full items-center justify-center gap-3 rounded-[18px] border border-slate-200 bg-white text-base font-black text-slate-800 shadow-[0_8px_20px_rgba(15,23,42,0.05)] transition-all hover:border-slate-300 hover:bg-slate-50 hover:shadow-sm active:scale-[0.98] disabled:cursor-wait disabled:opacity-70"
+            disabled={loading}
             onClick={() => {
               if (!canUseGoogleLogin) {
                 setErr(GOOGLE_LOGIN_ENABLED ? "Login Google belum dikonfigurasi." : "Login Google belum aktif.");
