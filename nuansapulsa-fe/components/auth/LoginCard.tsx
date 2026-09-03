@@ -5,7 +5,7 @@ import Image from "next/image";
 import Link from "next/link";
 import { useSearchParams } from "next/navigation";
 import { getProviders, signIn } from "next-auth/react";
-import { Eye, EyeOff, LockKeyhole, UserRound, Zap } from "lucide-react";
+import { Eye, EyeOff, LockKeyhole, Smartphone } from "lucide-react";
 import TurnstileWidget from "@/components/TurnstileWidget";
 import { decodeJwt } from "@/lib/jwt";
 
@@ -157,30 +157,23 @@ export function LoginCard() {
   }
 
   return (
-    <section className={cn(
-      "auth-card overflow-hidden rounded-[28px] bg-white/95 shadow-[0_24px_64px_rgba(5,46,38,0.32)]",
-      shake && "auth-shake"
-    )}>
-      <div className="px-7 py-8">
-        <div className="mb-6 text-center">
-          <Image
-            src="/images/logo-nuansapulsa-header.svg"
-            alt="NuansaPulsa"
-            width={340}
-            height={78}
-            className="mx-auto h-[64px] w-auto max-w-full object-contain"
-            priority
-          />
-          <h1 className="mt-4 text-[22px] font-black tracking-tight text-slate-900">
-            Masuk Akun
-          </h1>
-          <p className="mt-2 text-sm font-medium leading-6 text-slate-500">
-            Lanjutkan ke NuansaPulsa.
-          </p>
-        </div>
+    <section className={cn("min-h-svh bg-[#fff6f4] text-slate-950 sm:min-h-[820px]", shake && "auth-shake")}>
+      <div className="relative h-[360px] overflow-hidden rounded-b-[36px] bg-[#e50917] text-center text-white shadow-[0_18px_44px_rgba(151,14,32,0.22)]">
+        <Image
+          src="/nuansapulsa-assets/login_hero_reference.png"
+          alt=""
+          fill
+          priority
+          sizes="430px"
+          className="object-cover object-top"
+        />
+      </div>
+
+      <div className="relative -mt-16 px-5 pb-8">
+        <div className="rounded-[28px] bg-white px-5 py-6 shadow-[0_24px_64px_rgba(151,14,32,0.16)] ring-1 ring-red-950/[0.04]">
 
         {err && (
-          <div className="mb-5 flex items-start gap-2.5 rounded-xl border border-rose-200 bg-rose-50 px-4 py-3">
+          <div className="mb-4 flex items-start gap-2.5 rounded-2xl border border-rose-200 bg-rose-50 px-4 py-3">
             <div className="mt-0.5 h-1.5 w-1.5 shrink-0 rounded-full bg-rose-400" />
             <p className="text-[13px] font-medium text-rose-700">{err}</p>
           </div>
@@ -188,49 +181,42 @@ export function LoginCard() {
 
         <form onSubmit={onSubmit} className="space-y-4">
           <div>
-            <label className="mb-3 block text-sm font-bold text-slate-800">
-              Email / No HP
-            </label>
-            <div className="relative">
-              <UserRound className="pointer-events-none absolute left-5 top-1/2 h-5 w-5 -translate-y-1/2 text-slate-400" />
+            <label className="sr-only">Nomor HP</label>
+            <div className="relative flex min-h-[72px] items-center gap-4 rounded-[20px] border border-slate-200 bg-white px-4 shadow-[0_10px_22px_rgba(15,23,42,0.04)] focus-within:border-[#d70717] focus-within:ring-4 focus-within:ring-rose-100">
+              <span className="grid h-11 w-11 shrink-0 place-items-center rounded-2xl bg-rose-50 text-[#d70717]">
+                <Smartphone className="h-5 w-5" />
+              </span>
               <input
-                className="h-[54px] w-full rounded-2xl border border-slate-200 bg-white px-[52px] text-sm font-medium text-slate-900 outline-none shadow-[0_8px_20px_rgba(15,23,42,0.04)] transition placeholder:text-slate-400 focus:border-[#10b981] focus:ring-4 focus:ring-emerald-100"
+                className="min-w-0 flex-1 bg-transparent text-base font-bold text-slate-900 outline-none placeholder:text-sm placeholder:font-semibold placeholder:text-slate-400"
                 value={email}
                 onChange={(e) => setEmail(e.target.value)}
-                placeholder="Email / No HP"
+                placeholder="Contoh: 08xxxxxxxxxx"
                 autoComplete="username"
                 type="text"
               />
+              <span className="pointer-events-none absolute left-[76px] top-4 text-[11px] font-black text-slate-900">Nomor HP</span>
             </div>
           </div>
 
           <div>
-            <div className="mb-3 flex items-center justify-between gap-4">
-              <label className="block text-sm font-bold text-slate-800">Password</label>
-              <Link
-                href="#"
-                target="_blank"
-                rel="noreferrer"
-                className="text-xs font-black text-emerald-600 hover:underline"
-                style={{ color: "#059669" }}
-              >
-                Lupa?
-              </Link>
-            </div>
-            <div className="relative">
-              <LockKeyhole className="pointer-events-none absolute left-5 top-1/2 h-5 w-5 -translate-y-1/2 text-slate-400" />
+            <label className="sr-only">PIN / Password</label>
+            <div className="relative flex min-h-[72px] items-center gap-4 rounded-[20px] border border-slate-200 bg-white px-4 shadow-[0_10px_22px_rgba(15,23,42,0.04)] focus-within:border-[#d70717] focus-within:ring-4 focus-within:ring-rose-100">
+              <span className="grid h-11 w-11 shrink-0 place-items-center rounded-2xl bg-rose-50 text-[#d70717]">
+                <LockKeyhole className="h-5 w-5" />
+              </span>
               <input
-                className="h-[54px] w-full rounded-2xl border border-slate-200 bg-white px-[52px] pr-[52px] text-sm font-medium text-slate-900 outline-none shadow-[0_8px_20px_rgba(15,23,42,0.04)] transition placeholder:text-slate-400 focus:border-[#10b981] focus:ring-4 focus:ring-emerald-100"
+                className="min-w-0 flex-1 bg-transparent pr-10 text-base font-bold text-slate-900 outline-none placeholder:text-sm placeholder:font-semibold placeholder:text-slate-400"
                 type={showPassword ? "text" : "password"}
                 value={password}
                 onChange={(e) => setPassword(e.target.value)}
-                placeholder="Masukkan password"
+                placeholder="Masukkan PIN atau password Anda"
                 autoComplete="current-password"
               />
+              <span className="pointer-events-none absolute left-[76px] top-4 text-[11px] font-black text-slate-900">PIN / Password</span>
               <button
                 type="button"
                 onClick={() => setShowPassword(!showPassword)}
-                className="absolute right-4 top-1/2 -translate-y-1/2 rounded-lg p-1.5 text-slate-400 transition-colors hover:text-slate-600"
+                className="absolute right-5 top-1/2 -translate-y-1/2 rounded-lg p-1.5 text-slate-400 transition-colors hover:text-slate-600"
                 tabIndex={-1}
                 aria-label={showPassword ? "Sembunyikan password" : "Tampilkan password"}
               >
@@ -239,15 +225,20 @@ export function LoginCard() {
             </div>
           </div>
 
-          <label className="flex items-center gap-3 text-sm font-semibold text-slate-700">
-            <input
-              type="checkbox"
-              checked={remember}
-              onChange={(event) => setRemember(event.target.checked)}
-              className="h-5 w-5 rounded border-slate-300 accent-[#047857]"
-            />
-            Ingat
-          </label>
+          <div className="flex items-center justify-between gap-4">
+            <label className="flex items-center gap-3 text-sm font-semibold text-slate-700">
+              <input
+                type="checkbox"
+                checked={remember}
+                onChange={(event) => setRemember(event.target.checked)}
+                className="h-5 w-5 rounded border-slate-300 accent-[#d70717]"
+              />
+              Ingat saya
+            </label>
+            <Link href="#" className="text-sm font-black text-[#d70717] hover:underline">
+              Lupa PIN?
+            </Link>
+          </div>
 
           {/* Turnstile - interaction-only, tidak tampil kalau sudah verified */}
           {TURNSTILE_ENABLED && !turnstileToken && (
@@ -264,7 +255,7 @@ export function LoginCard() {
 
           {/* Login Button */}
           <button
-            className="group relative flex h-[58px] w-full items-center justify-center gap-3 rounded-2xl bg-linear-to-r from-[#009944] via-[#16b934] to-[#57d735] text-lg font-black uppercase tracking-wide text-white shadow-[0_14px_30px_rgba(22,185,52,0.34)] transition-all hover:shadow-[0_18px_38px_rgba(22,185,52,0.44)] active:scale-[0.98] disabled:cursor-not-allowed disabled:opacity-60 disabled:shadow-none"
+            className="group relative flex h-[58px] w-full items-center justify-center gap-3 rounded-[22px] bg-linear-to-r from-[#e50917] via-[#ff2115] to-[#ff6a00] text-lg font-black text-white shadow-[0_14px_30px_rgba(215,7,23,0.28)] transition-all hover:shadow-[0_18px_38px_rgba(215,7,23,0.36)] active:scale-[0.98] disabled:cursor-not-allowed disabled:opacity-60 disabled:shadow-none"
             disabled={(TURNSTILE_ENABLED && !turnstileToken) || loading}
             type="submit"
           >
@@ -274,24 +265,26 @@ export function LoginCard() {
                 <span>Memproses...</span>
               </>
             ) : (
-              <>
-                <Zap className="h-6 w-6 fill-white" />
-                <span>Masuk</span>
-              </>
+              <span>Masuk</span>
             )}
           </button>
 
-          {/* Divider */}
+          <Link
+            href="/register"
+            className="flex h-[58px] w-full items-center justify-center rounded-[22px] border-2 border-[#d70717] bg-white text-lg font-black text-[#d70717] transition hover:bg-rose-50 active:scale-[0.98]"
+          >
+            Daftar Akun Baru
+          </Link>
+
           <div className="flex items-center gap-4 pt-1">
             <div className="h-px flex-1 bg-slate-200" />
             <span className="text-sm font-semibold text-slate-400">atau</span>
             <div className="h-px flex-1 bg-slate-200" />
           </div>
 
-          {/* Google Button */}
           <button
             type="button"
-            className="flex h-[54px] w-full items-center justify-center gap-3 rounded-2xl border border-slate-200 bg-white text-sm font-bold text-slate-700 shadow-[0_8px_20px_rgba(15,23,42,0.05)] transition-all hover:border-slate-300 hover:bg-slate-50 hover:shadow-sm active:scale-[0.98] disabled:cursor-not-allowed disabled:opacity-60"
+            className="flex h-[58px] w-full items-center justify-center gap-3 rounded-[18px] border border-slate-200 bg-white text-base font-black text-slate-800 shadow-[0_8px_20px_rgba(15,23,42,0.05)] transition-all hover:border-slate-300 hover:bg-slate-50 hover:shadow-sm active:scale-[0.98] disabled:cursor-not-allowed disabled:opacity-60"
             disabled={loading || !canUseGoogleLogin}
             onClick={() => {
               if (!canUseGoogleLogin) {
@@ -302,19 +295,18 @@ export function LoginCard() {
             }}
           >
             <Image src="/google.svg" alt="" width={22} height={22} aria-hidden="true" />
-            {!GOOGLE_LOGIN_ENABLED ? "Google belum aktif" : googleAvailable ? "Masuk dengan Google" : "Google belum dikonfigurasi"}
+            Masuk dengan Google
           </button>
-
-          {/* Footer */}
-          <div className="space-y-2 pt-1 text-center">
-            <p className="text-sm font-medium text-slate-500">
-              Belum punya akun?{" "}
-              <Link href="/register" className="font-black text-emerald-700 hover:underline" style={{ color: "#047857" }}>
-                Daftar
-              </Link>
-            </p>
-          </div>
         </form>
+
+        </div>
+
+        <p className="px-8 pt-7 text-center text-sm font-semibold leading-6 text-slate-500">
+          Dengan masuk, Anda menyetujui{" "}
+          <Link href="/privacy-policy" className="font-black text-[#d70717]">
+            Syarat & Ketentuan
+          </Link>
+        </p>
       </div>
     </section>
   );

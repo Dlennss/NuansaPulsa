@@ -59,9 +59,9 @@ function getCategoryVisual(name: string): CategoryVisual {
     case "gas negara":
       return { iconSrc: "/service-icons-exact/gas-pgn.png" };
     case "lainnya":
-      return { iconSrc: "/service-icons-exact/qris.png" };
+      return { iconSrc: "/nuansapulsa-assets/layanan_lainnya.png" };
     default:
-      return { iconSrc: "/service-icons-exact/qris.png" };
+      return { iconSrc: "/nuansapulsa-assets/layanan_lainnya.png" };
   }
 }
 
