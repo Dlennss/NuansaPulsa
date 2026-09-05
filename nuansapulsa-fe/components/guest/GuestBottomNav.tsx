@@ -6,13 +6,13 @@ import Image from "next/image";
 
 function navClass(active: boolean) {
   return active
-    ? "flex min-w-0 flex-col items-center gap-1.5 py-1 text-[#d70717]! visited:text-[#d70717]!"
-    : "flex min-w-0 flex-col items-center gap-1.5 py-1 text-slate-400! transition visited:text-slate-400! hover:text-[#8f1023]!";
+    ? "relative flex min-w-0 flex-col items-center justify-center gap-1 text-[#d70717]! visited:text-[#d70717]!"
+    : "relative flex min-w-0 flex-col items-center justify-center gap-1 text-slate-400! transition visited:text-slate-400! hover:text-[#8f1023]!";
 }
 
 const iconClass = "relative h-6 w-6";
-const textClass = "text-[11px] font-bold leading-none";
-const activeIndicatorClass = "absolute -bottom-2.5 left-1/2 h-1 w-8 -translate-x-1/2 rounded-full bg-[#d70717]";
+const textClass = "max-w-full truncate text-[10px] font-black leading-none min-[380px]:text-[11px]";
+const activeIndicatorClass = "absolute bottom-0 left-1/2 h-1 w-7 -translate-x-1/2 rounded-full bg-[#d70717]";
 
 function NavIcon({ src }: { src: string }) {
   return (
@@ -32,39 +32,37 @@ export function GuestBottomNav({ isLoggedIn = false }: GuestBottomNavProps) {
   const historyActive = pathname.startsWith("/transaksi");
   const accountHref = isLoggedIn ? "/user/account" : "/login";
   const notificationHref = isLoggedIn ? "/user/transaksi" : "/transaksi";
-  const scanHref = isLoggedIn ? "/user/kategori" : "/kategori";
+  const menuHref = isLoggedIn ? "/user/kategori" : "/kategori";
   const notificationActive = pathname.startsWith("/user/transaksi") || pathname.startsWith("/transaksi");
-  const scanActive = pathname.startsWith("/user/kategori") || pathname.startsWith("/kategori");
+  const menuActive = pathname.startsWith("/user/kategori") || pathname.startsWith("/kategori");
   const accountActive = isLoggedIn
     ? pathname.startsWith("/user/account")
     : pathname.startsWith("/login");
 
   return (
-    <section className="fixed bottom-0 left-1/2 z-[90] w-full max-w-md -translate-x-1/2 overflow-visible px-4 pb-4 md:w-97.5">
-      <div className="grid grid-cols-5 items-end rounded-t-[26px] bg-white/96 px-4 pb-[calc(0.55rem+env(safe-area-inset-bottom))] pt-3 shadow-[0_-16px_36px_rgba(99,24,34,0.13)] ring-1 ring-red-950/5 backdrop-blur-xl">
-        <Link href="/" prefetch={false} className={`${navClass(homeActive)} relative`}>
+    <section className="fixed inset-x-0 bottom-0 z-[90] mx-auto w-full max-w-md px-2 pb-2 sm:px-4 sm:pb-4 md:w-97.5">
+      <div className="grid h-[70px] grid-cols-5 items-stretch rounded-t-[24px] border border-red-950/[0.06] bg-white/96 px-2 pb-[calc(0.45rem+env(safe-area-inset-bottom))] pt-2 shadow-[0_-14px_34px_rgba(99,24,34,0.12)] backdrop-blur-xl min-[380px]:h-[76px] min-[380px]:px-3">
+        <Link href="/" prefetch={false} className={navClass(homeActive)}>
           <NavIcon src="/nuansapulsa-assets/nav_beranda.png" />
           <span className={textClass}>Beranda</span>
           {homeActive ? <span className={activeIndicatorClass} /> : null}
         </Link>
 
-        <Link href="/transaksi" prefetch={false} className={`${navClass(historyActive)} relative`}>
+        <Link href="/transaksi" prefetch={false} className={navClass(historyActive)}>
           <NavIcon src="/nuansapulsa-assets/nav_riwayat.png" />
           <span className={textClass}>Riwayat</span>
           {historyActive ? <span className={activeIndicatorClass} /> : null}
         </Link>
 
-        <Link href={scanHref} prefetch={false} className="relative flex min-w-0 flex-col items-center gap-1.5 py-1 text-slate-950! visited:text-slate-950!">
-          <span className="relative -mt-8 grid h-16 w-16 place-items-center rounded-full bg-[#d70717] shadow-[0_12px_30px_rgba(215,7,23,0.28)] ring-6 ring-white">
-            <span className="relative h-8 w-8">
-              <Image src="/nuansapulsa-assets/nav_scan_qr_putih.png" alt="" fill sizes="32px" className="object-contain" />
-            </span>
+        <Link href={menuHref} prefetch={false} className={navClass(menuActive)}>
+          <span className={iconClass}>
+            <Image src="/nuansapulsa-assets/layanan_lainnya.png" alt="" fill sizes="24px" className="object-contain" />
           </span>
-          <span className={textClass}>Scan</span>
-          {scanActive ? <span className={activeIndicatorClass} /> : null}
+          <span className={textClass}>Menu</span>
+          {menuActive ? <span className={activeIndicatorClass} /> : null}
         </Link>
 
-        <Link href={notificationHref} prefetch={false} className={`${navClass(notificationActive)} relative`}>
+        <Link href={notificationHref} prefetch={false} className={navClass(notificationActive)}>
           <span className={iconClass}>
             <Image src="/nuansapulsa-assets/nav_notifikasi.png" alt="" fill sizes="24px" className="object-contain" />
             <span className="absolute -right-0.5 -top-0.5 h-2.5 w-2.5 rounded-full bg-[#d70717] ring-1 ring-white" />
@@ -73,7 +71,7 @@ export function GuestBottomNav({ isLoggedIn = false }: GuestBottomNavProps) {
           {notificationActive ? <span className={activeIndicatorClass} /> : null}
         </Link>
 
-        <Link href={accountHref} prefetch={false} className={`${navClass(accountActive)} relative`}>
+        <Link href={accountHref} prefetch={false} className={navClass(accountActive)}>
           <NavIcon src="/nuansapulsa-assets/nav_akun.png" />
           <span className={textClass}>Akun</span>
           {accountActive ? <span className={activeIndicatorClass} /> : null}
