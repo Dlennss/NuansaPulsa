@@ -14,8 +14,8 @@ const fallbackAds: GuestAdItem[] = [
     id: -1,
     judul: "",
     keterangan: "",
-    image_url: "/nuansapulsa-assets/banner_promo_lengkap.png",
-    link_url: "/ewallet",
+    image_url: "/nuansapulsa-assets/banner_tagihan_nuansapulsa.png",
+    link_url: "/kategori",
     urutan: 1,
     aktif: true,
   },
@@ -23,34 +23,36 @@ const fallbackAds: GuestAdItem[] = [
     id: -2,
     judul: "",
     keterangan: "",
-    image_url: "/images/guest-ads/banner-topup.png",
-    link_url: "/pulsa",
-    urutan: 2,
-    aktif: true,
-  },
-  {
-    id: -3,
-    judul: "",
-    keterangan: "",
-    image_url: "/images/guest-ads/banner-operator.png",
+    image_url: "/nuansapulsa-assets/banner_paket_data_nuansapulsa.png",
     link_url: "/paket-data",
-    urutan: 3,
-    aktif: true,
-  },
-  {
-    id: -4,
-    judul: "",
-    keterangan: "",
-    image_url: "/images/guest-ads/banner-pln.png",
-    link_url: "/listrik",
-    urutan: 4,
+    urutan: 2,
     aktif: true,
   },
 ];
 
+const nuansaBannerUrls = [
+  "/nuansapulsa-assets/banner_tagihan_nuansapulsa.png",
+  "/nuansapulsa-assets/banner_paket_data_nuansapulsa.png",
+];
+
+function isOldPulsaKilatBanner(imageUrl: string) {
+  const normalized = imageUrl.toLowerCase();
+  return normalized.includes("pulsakilat") || normalized.includes("/images/guest-ads/");
+}
+
+function normalizeAdBanner(item: GuestAdItem, index: number): GuestAdItem {
+  if (!isOldPulsaKilatBanner(item.image_url || "")) return item;
+  return {
+    ...item,
+    judul: "",
+    keterangan: "",
+    image_url: nuansaBannerUrls[index % nuansaBannerUrls.length],
+  };
+}
+
 export function GuestAdsCarousel({ items }: GuestAdsCarouselProps) {
   const activeAds = items.filter((item) => item.aktif !== false && item.image_url);
-  const ads = activeAds.length > 0 ? activeAds : fallbackAds;
+  const ads = (activeAds.length > 0 ? activeAds : fallbackAds).map(normalizeAdBanner);
   const [activeIndex, setActiveIndex] = useState(0);
   const [viewportWidth, setViewportWidth] = useState(0);
   const viewportRef = useRef<HTMLElement | null>(null);
@@ -127,7 +129,7 @@ export function GuestAdsCarousel({ items }: GuestAdsCarouselProps) {
   return (
     <section
       ref={viewportRef}
-      className="relative overflow-hidden rounded-[22px] bg-white shadow-[0_16px_34px_rgba(99,24,34,0.12)] ring-1 ring-red-950/[0.04] [touch-action:pan-y]"
+      className="relative overflow-hidden rounded-[22px] bg-[#e50917] shadow-[0_16px_34px_rgba(99,24,34,0.12)] ring-1 ring-red-950/[0.04] [touch-action:pan-y]"
       onTouchStart={handleTouchStart}
       onTouchMove={handleTouchMove}
       onTouchEnd={handleTouchEnd}
@@ -146,13 +148,13 @@ export function GuestAdsCarousel({ items }: GuestAdsCarouselProps) {
           const hasCaption = Boolean(item.judul || item.keterangan);
           const content = (
             <div
-              className="relative aspect-[19/9] shrink-0 overflow-hidden rounded-[18px] bg-red-50 md:aspect-[954/286]"
+              className="relative aspect-[3/1] shrink-0 overflow-hidden rounded-[18px] bg-[#e50917]"
               style={{ width: slideWidth > 0 ? `${slideWidth}px` : "100%" }}
             >
               <img
                 src={item.image_url}
                 alt={item.judul || 'Iklan NuansaPulsa'}
-                className="h-full w-full object-cover"
+                className="h-full w-full object-contain"
                 loading="lazy"
               />
               {hasCaption ? (
