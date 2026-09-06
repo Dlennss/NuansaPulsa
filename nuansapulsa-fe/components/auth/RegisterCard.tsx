@@ -164,7 +164,7 @@ export function RegisterCard() {
 
   return (
     <section className={cn("min-h-svh bg-[#fff6f4] text-slate-950 sm:min-h-[820px]", shake && "auth-shake")}>
-      <div className="relative h-[clamp(275px,37svh,345px)] overflow-hidden rounded-b-[34px] bg-[#e50917] text-center text-white shadow-[0_18px_44px_rgba(151,14,32,0.22)]">
+      <div className="relative h-[clamp(220px,30svh,280px)] overflow-hidden rounded-b-[34px] bg-[#e50917] text-center text-white shadow-[0_18px_44px_rgba(151,14,32,0.22)]">
         <Image
           src="/nuansapulsa-assets/login_hero_reference.png"
           alt=""
@@ -173,17 +173,18 @@ export function RegisterCard() {
           sizes="430px"
           className="object-cover object-top"
         />
-        <div className="absolute inset-0 bg-linear-to-b from-[#e50917]/5 via-[#e50917]/0 to-[#e50917]/10" />
-        <div className="absolute inset-x-5 bottom-12 mx-auto max-w-[340px]">
-          <h1 className="text-[30px] font-black leading-tight text-white drop-shadow-[0_3px_10px_rgba(160,0,20,0.24)]">Buat Akun Baru</h1>
-          <p className="mx-auto mt-2 max-w-[285px] text-sm font-semibold leading-5 text-white/90">
-            Daftar untuk lanjut transaksi pulsa, paket data, e-wallet, dan tagihan.
-          </p>
-        </div>
+        <div className="absolute inset-0 bg-linear-to-b from-[#e50917]/0 via-[#e50917]/0 to-[#e50917]/18" />
       </div>
 
-      <div className="relative -mt-10 px-4 pb-8 sm:px-5">
+      <div className="relative -mt-8 px-4 pb-8 sm:px-5">
         <div className="rounded-[26px] bg-white px-5 py-6 shadow-[0_22px_56px_rgba(151,14,32,0.16)] ring-1 ring-red-950/[0.05]">
+        <div className="mb-5">
+          <h1 className="text-2xl font-black leading-tight text-slate-950">Buat Akun Baru</h1>
+          <p className="mt-1.5 text-sm font-semibold leading-5 text-slate-500">
+            Daftar untuk lanjut transaksi NuansaPulsa.
+          </p>
+        </div>
+
         {err && (
           <div className="mb-5 flex items-start gap-2.5 rounded-2xl border border-rose-200 bg-rose-50 px-4 py-3">
             <div className="mt-0.5 h-1.5 w-1.5 shrink-0 rounded-full bg-rose-400" />
