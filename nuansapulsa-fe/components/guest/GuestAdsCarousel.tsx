@@ -14,7 +14,7 @@ const fallbackAds: GuestAdItem[] = [
     id: -1,
     judul: "",
     keterangan: "",
-    image_url: "/nuansapulsa-assets/banner_tagihan_nuansapulsa.png",
+    image_url: "/nuansapulsa-assets/banner_tagihan_nuansapulsa.webp",
     link_url: "/kategori",
     urutan: 1,
     aktif: true,
@@ -23,7 +23,7 @@ const fallbackAds: GuestAdItem[] = [
     id: -2,
     judul: "",
     keterangan: "",
-    image_url: "/nuansapulsa-assets/banner_paket_data_nuansapulsa.png",
+    image_url: "/nuansapulsa-assets/banner_paket_data_nuansapulsa.webp",
     link_url: "/paket-data",
     urutan: 2,
     aktif: true,
@@ -31,8 +31,8 @@ const fallbackAds: GuestAdItem[] = [
 ];
 
 const nuansaBannerUrls = [
-  "/nuansapulsa-assets/banner_tagihan_nuansapulsa.png",
-  "/nuansapulsa-assets/banner_paket_data_nuansapulsa.png",
+  "/nuansapulsa-assets/banner_tagihan_nuansapulsa.webp",
+  "/nuansapulsa-assets/banner_paket_data_nuansapulsa.webp",
 ];
 
 function isOldPulsaKilatBanner(imageUrl: string) {
