@@ -5,9 +5,9 @@ import Image from "next/image";
 import Link from "next/link";
 import { useRouter, useSearchParams } from "next/navigation";
 import { getProviders, getSession, signIn } from "next-auth/react";
-import { ArrowRight, Eye, EyeOff, LockKeyhole, Mail, Phone, ShieldCheck, UserPlus, UserRound } from "lucide-react";
+import { Eye, EyeOff, LockKeyhole, Mail, Phone, ShieldCheck, UserRound } from "lucide-react";
 
-const GOOGLE_LOGIN_ENABLED = String(process.env.NEXT_PUBLIC_GOOGLE_LOGIN_ENABLED ?? "false").toLowerCase() === "true";
+const GOOGLE_LOGIN_ENABLED = String(process.env.NEXT_PUBLIC_GOOGLE_LOGIN_ENABLED ?? "true").toLowerCase() === "true";
 
 type RegisterResp = {
   ok?: boolean;
@@ -157,34 +157,27 @@ export function RegisterCard() {
   if (err && !shake) setTimeout(() => setShake(true), 0);
   if (!err && shake) setTimeout(() => setShake(false), 0);
 
-  const inputClass = "h-[56px] w-full rounded-[19px] border border-slate-200 bg-white px-[54px] text-sm font-bold text-slate-900 outline-none shadow-[0_10px_24px_rgba(15,23,42,0.04)] transition placeholder:text-slate-400 focus:border-[#d70717] focus:ring-4 focus:ring-rose-100";
-  const inputWithToggle = "h-[56px] w-full rounded-[19px] border border-slate-200 bg-white px-[54px] pr-[52px] text-sm font-bold text-slate-900 outline-none shadow-[0_10px_24px_rgba(15,23,42,0.04)] transition placeholder:text-slate-400 focus:border-[#d70717] focus:ring-4 focus:ring-rose-100";
-  const inputIcon = "pointer-events-none absolute left-5 top-1/2 h-5 w-5 -translate-y-1/2 text-[#d70717]/70";
-  const toggleBtn = "absolute right-4 top-1/2 -translate-y-1/2 rounded-lg p-1.5 text-slate-400 transition-colors hover:text-[#d70717]";
+  const fieldClass = "flex min-h-[74px] items-center gap-3 rounded-[20px] border border-slate-200 bg-white px-4 shadow-[0_10px_22px_rgba(15,23,42,0.04)] transition focus-within:border-[#d70717] focus-within:ring-4 focus-within:ring-rose-100";
+  const fieldIconClass = "grid h-11 w-11 shrink-0 place-items-center rounded-2xl bg-rose-50 text-[#d70717]";
+  const inputClass = "mt-1 h-7 w-full min-w-0 bg-transparent text-base font-bold text-slate-900 outline-none placeholder:text-sm placeholder:font-semibold placeholder:text-slate-400";
+  const toggleBtn = "absolute right-5 top-1/2 -translate-y-1/2 rounded-lg p-1.5 text-slate-400 transition-colors hover:text-[#d70717]";
 
   return (
     <section className={cn("min-h-svh bg-[#fff6f4] text-slate-950 sm:min-h-[820px]", shake && "auth-shake")}>
-      <div className="relative h-[clamp(220px,30svh,280px)] overflow-hidden rounded-b-[34px] bg-[#e50917] text-center text-white shadow-[0_18px_44px_rgba(151,14,32,0.22)]">
+      <div className="relative h-[clamp(270px,38svh,335px)] overflow-hidden rounded-b-[34px] bg-[#e50917] text-center text-white shadow-[0_18px_44px_rgba(151,14,32,0.22)]">
         <Image
-          src="/nuansapulsa-assets/login_hero_reference.png"
+          src="/nuansapulsa-assets/register_hero_reference.png"
           alt=""
           fill
           priority
           sizes="430px"
-          className="object-cover object-top"
+          className="object-cover object-center"
         />
-        <div className="absolute inset-0 bg-linear-to-b from-[#e50917]/0 via-[#e50917]/0 to-[#e50917]/18" />
+        <div className="absolute inset-x-0 bottom-0 h-20 bg-linear-to-b from-transparent to-[#fff6f4]/20" />
       </div>
 
-      <div className="relative -mt-8 px-4 pb-8 sm:px-5">
+      <div className="relative -mt-14 px-4 pb-8 sm:px-5">
         <div className="rounded-[26px] bg-white px-5 py-6 shadow-[0_22px_56px_rgba(151,14,32,0.16)] ring-1 ring-red-950/[0.05]">
-        <div className="mb-5">
-          <h1 className="text-2xl font-black leading-tight text-slate-950">Buat Akun Baru</h1>
-          <p className="mt-1.5 text-sm font-semibold leading-5 text-slate-500">
-            Daftar untuk lanjut transaksi NuansaPulsa.
-          </p>
-        </div>
-
         {err && (
           <div className="mb-5 flex items-start gap-2.5 rounded-2xl border border-rose-200 bg-rose-50 px-4 py-3">
             <div className="mt-0.5 h-1.5 w-1.5 shrink-0 rounded-full bg-rose-400" />
@@ -201,63 +194,88 @@ export function RegisterCard() {
           </div>
         )}
 
-        <form onSubmit={onSubmit} className="space-y-4">
+        <form onSubmit={onSubmit} className="space-y-3.5">
           <div>
-            <label className="mb-2.5 block text-sm font-black text-slate-900">Nama Lengkap</label>
-            <div className="relative">
-              <UserRound className={inputIcon} />
-              <input className={inputClass} value={nama} onChange={(e) => setNama(e.target.value)} placeholder="Nama anda" autoComplete="name" />
+            <label className="sr-only">Nama Lengkap</label>
+            <div className={fieldClass}>
+              <span className={fieldIconClass}>
+                <UserRound className="h-5 w-5" />
+              </span>
+              <div className="min-w-0 flex-1">
+                <span className="block text-sm font-black leading-none text-slate-900">Nama Lengkap</span>
+                <input className={inputClass} value={nama} onChange={(e) => setNama(e.target.value)} placeholder="Masukkan nama lengkap" autoComplete="name" />
+              </div>
             </div>
           </div>
 
           <div>
-            <label className="mb-2.5 block text-sm font-black text-slate-900">Email</label>
-            <div className="relative">
-              <Mail className={inputIcon} />
-              <input className={inputClass} value={email} onChange={(e) => setEmail(e.target.value)} placeholder="nama@email.com" autoComplete="email" type="email" />
+            <label className="sr-only">Email</label>
+            <div className={fieldClass}>
+              <span className={fieldIconClass}>
+                <Mail className="h-5 w-5" />
+              </span>
+              <div className="min-w-0 flex-1">
+                <span className="block text-sm font-black leading-none text-slate-900">Email</span>
+                <input className={inputClass} value={email} onChange={(e) => setEmail(e.target.value)} placeholder="Masukkan email aktif" autoComplete="email" type="email" />
+              </div>
             </div>
           </div>
 
           <div>
-            <label className="mb-2.5 block text-sm font-black text-slate-900">Nomor Telepon</label>
-            <div className="relative">
-              <Phone className={inputIcon} />
-              <input
-                className={inputClass}
-                value={phone}
-                onChange={(e) => setPhone(cleanPhoneInput(e.target.value))}
-                placeholder="08xxxxxxxxxx"
-                autoComplete="tel"
-                inputMode="tel"
-                type="tel"
-              />
+            <label className="sr-only">Nomor Telepon</label>
+            <div className={fieldClass}>
+              <span className={fieldIconClass}>
+                <Phone className="h-5 w-5" />
+              </span>
+              <div className="min-w-0 flex-1">
+                <span className="block text-sm font-black leading-none text-slate-900">Nomor Telepon</span>
+                <input
+                  className={inputClass}
+                  value={phone}
+                  onChange={(e) => setPhone(cleanPhoneInput(e.target.value))}
+                  placeholder="Contoh: 08xxxxxxxxxx"
+                  autoComplete="tel"
+                  inputMode="tel"
+                  type="tel"
+                />
+              </div>
             </div>
           </div>
 
           <div>
-            <label className="mb-2.5 block text-sm font-black text-slate-900">Password</label>
-            <div className="relative">
-              <LockKeyhole className={inputIcon} />
-              <input className={inputWithToggle} type={showPassword ? "text" : "password"} value={password} onChange={(e) => setPassword(e.target.value)} placeholder="Minimal 8 karakter" autoComplete="new-password" />
+            <label className="sr-only">Password</label>
+            <div className={`relative pr-12 ${fieldClass}`}>
+              <span className={fieldIconClass}>
+                <LockKeyhole className="h-5 w-5" />
+              </span>
+              <div className="min-w-0 flex-1">
+                <span className="block text-sm font-black leading-none text-slate-900">Password</span>
+                <input className={inputClass} type={showPassword ? "text" : "password"} value={password} onChange={(e) => setPassword(e.target.value)} placeholder="Buat password" autoComplete="new-password" />
+              </div>
               <button type="button" onClick={() => setShowPassword((v) => !v)} className={toggleBtn} tabIndex={-1}>
-                {showPassword ? <EyeOff className="h-[18px] w-[18px]" /> : <Eye className="h-[18px] w-[18px]" />}
+                {showPassword ? <EyeOff className="h-5 w-5" /> : <Eye className="h-5 w-5" />}
               </button>
             </div>
           </div>
 
           <div>
-            <label className="mb-2.5 block text-sm font-black text-slate-900">Konfirmasi Password</label>
-            <div className="relative">
-              <ShieldCheck className={inputIcon} />
-              <input className={inputWithToggle} type={showConfirmPassword ? "text" : "password"} value={confirmPassword} onChange={(e) => setConfirmPassword(e.target.value)} placeholder="Ulangi password" autoComplete="new-password" />
+            <label className="sr-only">Konfirmasi Password</label>
+            <div className={`relative pr-12 ${fieldClass}`}>
+              <span className={fieldIconClass}>
+                <ShieldCheck className="h-5 w-5" />
+              </span>
+              <div className="min-w-0 flex-1">
+                <span className="block text-sm font-black leading-none text-slate-900">Konfirmasi Password</span>
+                <input className={inputClass} type={showConfirmPassword ? "text" : "password"} value={confirmPassword} onChange={(e) => setConfirmPassword(e.target.value)} placeholder="Ulangi password" autoComplete="new-password" />
+              </div>
               <button type="button" onClick={() => setShowConfirmPassword((v) => !v)} className={toggleBtn} tabIndex={-1}>
-                {showConfirmPassword ? <EyeOff className="h-[18px] w-[18px]" /> : <Eye className="h-[18px] w-[18px]" />}
+                {showConfirmPassword ? <EyeOff className="h-5 w-5" /> : <Eye className="h-5 w-5" />}
               </button>
             </div>
           </div>
 
           <button
-            className="group relative mt-2 flex h-[56px] w-full items-center justify-center gap-3 rounded-[22px] bg-linear-to-r from-[#e50917] via-[#ff2115] to-[#ff6a00] text-base font-black text-white shadow-[0_14px_30px_rgba(215,7,23,0.28)] transition-all hover:shadow-[0_18px_38px_rgba(215,7,23,0.36)] active:scale-[0.98] disabled:cursor-not-allowed disabled:opacity-60 disabled:shadow-none"
+            className="group relative mt-2 flex h-[56px] w-full items-center justify-center gap-3 rounded-[22px] bg-linear-to-r from-[#e50917] via-[#ff2115] to-[#ff6a00] text-lg font-black text-white shadow-[0_14px_30px_rgba(215,7,23,0.28)] transition-all hover:shadow-[0_18px_38px_rgba(215,7,23,0.36)] active:scale-[0.98] disabled:cursor-not-allowed disabled:opacity-60 disabled:shadow-none"
             disabled={loading}
             type="submit"
           >
@@ -267,11 +285,7 @@ export function RegisterCard() {
                 <span>Memproses...</span>
               </>
             ) : (
-              <>
-                <UserPlus className="h-5 w-5" />
-                <span>Daftar Sekarang</span>
-                <ArrowRight className="h-4 w-4 opacity-0 transition-all group-hover:translate-x-0.5 group-hover:opacity-100" />
-              </>
+              <span>Daftar</span>
             )}
           </button>
 
@@ -284,7 +298,7 @@ export function RegisterCard() {
               </div>
               <button
                 type="button"
-                className="flex h-[56px] w-full items-center justify-center gap-3 rounded-[18px] border border-slate-200 bg-white text-sm font-black text-slate-800 shadow-[0_8px_20px_rgba(15,23,42,0.05)] transition-all hover:border-slate-300 hover:bg-slate-50 hover:shadow-sm active:scale-[0.98] disabled:cursor-not-allowed disabled:opacity-60"
+                className="flex h-[56px] w-full items-center justify-center gap-3 rounded-[22px] border-2 border-[#d70717] bg-white text-base font-black text-[#d70717] shadow-[0_8px_20px_rgba(15,23,42,0.05)] transition-all hover:bg-rose-50 hover:shadow-sm active:scale-[0.98] disabled:cursor-not-allowed disabled:opacity-60"
                 disabled={!canUseGoogleLogin}
                 onClick={() => {
                   if (!canUseGoogleLogin) {
@@ -294,22 +308,29 @@ export function RegisterCard() {
                   void signIn("google", { callbackUrl: googleCallbackUrl });
                 }}
               >
-                <Image src="/google.svg" alt="" width={18} height={18} aria-hidden="true" />
-                {googleAvailable ? "Daftar dengan Google" : "Google belum dikonfigurasi"}
+                <Image src="/google.svg" alt="" width={24} height={24} aria-hidden="true" />
+                {googleAvailable ? "Masuk dengan Google" : "Google belum dikonfigurasi"}
               </button>
             </>
           )}
 
-          <div className="space-y-2 pt-1 text-center">
-            <p className="text-sm font-medium text-slate-500">
+          <div className="flex items-center gap-3 pt-1">
+            <div className="h-px flex-1 bg-slate-200" />
+            <p className="shrink-0 text-center text-sm font-semibold text-slate-500">
               Sudah punya akun?{" "}
               <Link href="/login" className="font-black text-[#d70717] hover:underline">
                 Masuk
               </Link>
             </p>
+            <div className="h-px flex-1 bg-slate-200" />
           </div>
         </form>
         </div>
+
+        <p className="flex items-center justify-center gap-2 px-8 pt-6 text-center text-sm font-semibold leading-6 text-slate-500">
+          <ShieldCheck className="h-5 w-5 shrink-0 fill-slate-500/15 text-slate-500" />
+          <span>Data Anda aman dan terlindungi</span>
+        </p>
       </div>
     </section>
   );
