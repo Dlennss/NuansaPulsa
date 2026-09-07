@@ -93,20 +93,21 @@ function HomeHero({ isLoggedIn }: { isLoggedIn: boolean }) {
       </Link>
 
       <Link
-        href={isLoggedIn ? "/user/account/topup" : "/login"}
+        href={isLoggedIn ? "/user/saldo" : "/login"}
         prefetch={false}
-        aria-label="Top Up"
-        className="absolute bottom-9 right-7 flex w-[clamp(184px,54vw,206px)] rounded-[17px] bg-white px-2.5 py-2.5 text-slate-700 shadow-[0_18px_40px_rgba(90,6,20,0.2)] ring-1 ring-white/70 focus-visible:outline-none focus-visible:ring-4 focus-visible:ring-white/70"
+        aria-label={isLoggedIn ? "Lihat saldo" : "Masuk untuk melihat saldo"}
+        className="absolute bottom-9 right-7 flex w-[clamp(184px,54vw,212px)] rounded-[17px] bg-white px-2.5 py-2.5 text-slate-700 shadow-[0_18px_40px_rgba(90,6,20,0.2)] ring-1 ring-white/70 focus-visible:outline-none focus-visible:ring-4 focus-visible:ring-white/70"
       >
         <span className="relative mr-2.5 h-8 w-8 shrink-0 overflow-hidden rounded-full bg-[#fff1f2]">
           <Image src="/nuansapulsa-assets/icon_saldo_badge.png" alt="" fill sizes="32px" className="object-contain" />
         </span>
         <span className="min-w-0 flex-1">
           <span className="block text-[11px] font-semibold leading-3 text-slate-500">Saldo Anda</span>
-          <span className="mt-1 block text-lg font-black leading-none text-[#d70717]">Rp 125.000</span>
-          <span className="mt-2 inline-flex h-7 w-full items-center justify-center gap-1 rounded-full bg-[#d70717] px-2.5 text-xs font-black text-white">
-            <span className="text-sm leading-none">+</span>
-            Top Up
+          <span className="mt-1 block text-sm font-black leading-4 text-[#d70717]">
+            {isLoggedIn ? "Lihat saldo akun" : "Masuk untuk melihat"}
+          </span>
+          <span className="mt-2 inline-flex h-7 w-full items-center justify-center rounded-full bg-[#d70717] px-2.5 text-xs font-black text-white">
+            {isLoggedIn ? "Buka Saldo" : "Masuk / Daftar"}
           </span>
         </span>
       </Link>
@@ -138,45 +139,41 @@ function HomeInfoStrip() {
   );
 }
 
-function HomeRecentActivity() {
+function HomePopularActions() {
   const items = [
     {
-      label: "Pulsa Telkomsel 25.000",
-      time: "20 Mei 2025  •  10:21",
-      amount: "Rp 25.000",
-      icon: "/nuansapulsa-assets/aktivitas_pulsa.png",
+      label: "Transaksi Praktis",
+      description: "Pilih layanan, isi tujuan, lalu lanjut bayar.",
+      icon: "/nuansapulsa-assets/promo_transaksi_cepat.png",
+      href: "/kategori",
     },
     {
-      label: "Token Listrik 20.000",
-      time: "20 Mei 2025  •  09:15",
-      amount: "Rp 20.000",
-      icon: "/nuansapulsa-assets/aktivitas_listrik.png",
+      label: "Saldo Setelah Login",
+      description: "Nominal saldo hanya tampil setelah akun masuk.",
+      icon: "/nuansapulsa-assets/kartu_saldo.png",
+      href: "/login",
     },
   ];
 
   return (
     <section className="rounded-[22px] bg-white px-4 py-4 shadow-[0_14px_34px_rgba(99,24,34,0.09)] ring-1 ring-red-950/[0.04]">
       <div className="flex items-center justify-between gap-4 border-b border-slate-100 pb-3">
-        <h2 className="text-lg font-black tracking-tight text-slate-950">Aktivitas Terakhir</h2>
-        <Link href="/transaksi" prefetch={false} className="inline-flex items-center gap-1 text-sm font-bold text-[#d70717]">
-          Lihat Semua
+        <h2 className="text-lg font-black tracking-tight text-slate-950">Mulai Transaksi</h2>
+        <Link href="/kategori" prefetch={false} className="inline-flex items-center gap-1 text-sm font-bold text-[#d70717]">
+          Lihat Menu
           <ChevronRight className="h-5 w-5" strokeWidth={2.6} />
         </Link>
       </div>
 
       <div className="divide-y divide-slate-100">
         {items.map((item) => (
-          <Link key={item.label} href="/transaksi" prefetch={false} className="flex items-center gap-3 py-3">
-            <span className="relative h-11 w-11 shrink-0">
+          <Link key={item.label} href={item.href} prefetch={false} className="flex items-center gap-3 py-3">
+            <span className="relative h-11 w-11 shrink-0 overflow-hidden rounded-full bg-rose-50">
               <Image src={item.icon} alt="" fill sizes="44px" className="object-contain" />
             </span>
             <span className="min-w-0 flex-1">
               <span className="block truncate text-sm font-black text-slate-950">{item.label}</span>
-              <span className="mt-1 block text-xs font-medium text-slate-500">{item.time}</span>
-            </span>
-            <span className="shrink-0 text-right">
-              <span className="inline-flex rounded-full bg-rose-100 px-3 py-1 text-xs font-black text-rose-700">Berhasil</span>
-              <span className="mt-1 block text-xs font-semibold text-slate-700">{item.amount}</span>
+              <span className="mt-1 block text-xs font-medium leading-4 text-slate-500">{item.description}</span>
             </span>
             <ChevronRight className="h-5 w-5 shrink-0 text-slate-400" strokeWidth={2.4} />
           </Link>
@@ -283,7 +280,7 @@ export default async function GuestHomePage() {
         <Suspense fallback={<GuestAdsCarouselSkeleton />}>
           <GuestAdsSection />
         </Suspense>
-        <HomeRecentActivity />
+        <HomePopularActions />
       </div>
 
       <GuestBottomNav isLoggedIn={!!session?.backendToken} />
