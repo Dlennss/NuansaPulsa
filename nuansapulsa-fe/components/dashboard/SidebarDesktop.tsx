@@ -15,12 +15,12 @@ export function SidebarDesktop({ sections, onLogout, contextLabel = "Control Cen
   const pathname = usePathname();
   const [openSections, setOpenSections] = useState<Record<string, boolean>>({});
   return (
-    <aside className="hidden w-72 shrink-0 self-start border-r border-emerald-950/20 bg-[radial-gradient(circle_at_20%_0%,rgba(190,242,100,0.18),transparent_30%),linear-gradient(180deg,#052e26_0%,#064e3b_46%,#047857_100%)] md:sticky md:top-0 md:flex md:h-screen md:flex-col">
+    <aside className="hidden w-72 shrink-0 self-start border-r border-red-950/20 bg-[radial-gradient(circle_at_20%_0%,rgba(255,204,0,0.22),transparent_30%),linear-gradient(180deg,#8f0614_0%,#d70717_50%,#ff6a00_120%)] md:sticky md:top-0 md:flex md:h-screen md:flex-col">
       <div className="border-b border-white/15 px-5 py-5">
         <div className="flex justify-center">
           <BrandLogo variant="dark" />
         </div>
-        <p className="mt-3 text-center text-[11px] font-black uppercase tracking-[0.18em] text-lime-100">
+        <p className="mt-3 text-center text-[11px] font-black uppercase tracking-[0.18em] text-yellow-100">
           {contextLabel}
         </p>
       </div>
@@ -36,19 +36,19 @@ export function SidebarDesktop({ sections, onLogout, contextLabel = "Control Cen
               {section.title ? (
                 <button
                   type="button"
-                  className={`mb-3 flex w-full items-center justify-between rounded-2xl border px-3 py-3 text-left text-[13px] font-black uppercase tracking-[0.10em] outline-none transition focus-visible:ring-4 focus-visible:ring-emerald-200 ${
+                  className={`mb-3 flex w-full items-center justify-between rounded-2xl border px-3 py-3 text-left text-[13px] font-black uppercase tracking-[0.10em] outline-none transition focus-visible:ring-4 focus-visible:ring-red-200 ${
                     active
-                      ? "border-white bg-white text-[#052e26] shadow-[0_14px_28px_rgba(0,0,0,0.16)]"
-                      : "border-white/15 bg-white/8 text-white hover:border-white/35 hover:bg-white/14 hover:text-white"
+                      ? "border-white bg-white text-[#b20717] shadow-[0_14px_28px_rgba(0,0,0,0.16)]"
+                      : "border-white/15 bg-white/10 text-white hover:border-white/35 hover:bg-white/20 hover:text-white"
                   }`}
                   onClick={() => setOpenSections((prev) => ({ ...prev, [key]: !isOpen }))}
                 >
                   <span>{section.title}</span>
-                  <ChevronDown className={`h-4 w-4 transition ${isOpen ? "rotate-180 text-[#052e26]" : "text-lime-100"}`} />
+                  <ChevronDown className={`h-4 w-4 transition ${isOpen ? "rotate-180 text-[#b20717]" : "text-yellow-100"}`} />
                 </button>
               ) : null}
               {isOpen ? (
-                <div className="space-y-1.5 rounded-[24px] border border-white/10 bg-[#033b2e]/25 p-2 shadow-inner shadow-black/5">
+                <div className="space-y-1.5 rounded-[24px] border border-white/10 bg-[#740511]/25 p-2 shadow-inner shadow-black/5">
                   {section.items.map((item) => (
                     <NavItem key={item.href} href={item.href} label={item.label} variant="dark" />
                   ))}

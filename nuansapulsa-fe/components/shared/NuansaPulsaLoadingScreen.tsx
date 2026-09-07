@@ -254,7 +254,6 @@ export function NuansaPulsaLoadingScreen({ persistent = false }: NuansaPulsaLoad
 
   useEffect(() => {
     if (persistent) {
-      setVisible(true);
       return;
     }
 
@@ -269,7 +268,7 @@ export function NuansaPulsaLoadingScreen({ persistent = false }: NuansaPulsaLoad
     };
   }, [pathname, persistent]);
 
-  if (!visible) return null;
+  if (!persistent && !visible) return null;
 
   if (pathname.startsWith("/user")) return <UserSkeletonScreen />;
   if (pathname.startsWith("/dashboard")) return <DashboardSkeletonScreen />;

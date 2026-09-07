@@ -107,13 +107,13 @@ export function NavItem({ href, label, onClick, variant = "light" }: Props) {
       href={href}
       onClick={onClick}
       className={[
-        "group flex min-h-12 items-center justify-between gap-3 rounded-2xl border px-3 py-2.5 text-[13px] font-black uppercase tracking-[0.08em] outline-none transition focus-visible:ring-4 focus-visible:ring-emerald-200",
+        "group flex min-h-12 items-center justify-between gap-3 rounded-2xl border px-3 py-2.5 text-[13px] font-black uppercase tracking-[0.08em] outline-none transition focus-visible:ring-4 focus-visible:ring-red-200",
         active
           ? isDark
-            ? "border-white bg-white !text-[#052e26] shadow-[0_14px_28px_rgba(0,0,0,0.16)]"
-            : "border-[#052e26] bg-white text-[#052e26] shadow-[0_10px_20px_rgba(6,78,59,0.10)]"
+            ? "border-white bg-white !text-[#b20717] shadow-[0_14px_28px_rgba(0,0,0,0.16)]"
+            : "border-[#d70717] bg-white text-[#b20717] shadow-[0_10px_20px_rgba(151,14,32,0.10)]"
           : isDark
-            ? "border-white/12 bg-white/8 !text-emerald-50 hover:border-lime-200/55 hover:bg-white/16 hover:!text-white"
+            ? "border-white/15 bg-white/10 !text-red-50 hover:border-yellow-200/60 hover:bg-white/20 hover:!text-white"
             : "border-transparent text-slate-800 hover:border-slate-300 hover:bg-white hover:text-slate-950",
       ].join(" ")}
       aria-current={active ? "page" : undefined}
@@ -125,20 +125,20 @@ export function NavItem({ href, label, onClick, variant = "light" }: Props) {
               "grid h-8 w-8 shrink-0 place-items-center rounded-xl border transition",
               active
                 ? isDark
-                  ? "border-emerald-100 bg-emerald-50 text-emerald-800"
-                  : "border-emerald-200 bg-emerald-50 text-emerald-700"
+                  ? "border-red-100 bg-red-50 text-[#d70717]"
+                  : "border-red-200 bg-red-50 text-[#d70717]"
                 : isDark
-                  ? "border-lime-200/25 bg-emerald-950/35 text-lime-200 group-hover:border-lime-100/55 group-hover:bg-emerald-900/45"
-                  : "border-slate-200 bg-white text-emerald-700",
+                  ? "border-yellow-200/25 bg-red-950/25 text-yellow-100 group-hover:border-yellow-100/55 group-hover:bg-red-900/30"
+                  : "border-slate-200 bg-white text-[#d70717]",
             ].join(" ")}
           >
             <Icon className="h-4.5 w-4.5" strokeWidth={2.4} />
           </span>
         ) : null}
-        <span className={`min-w-0 truncate ${isDark && !active ? "!text-emerald-50" : ""}`}>{label}</span>
+        <span className={`min-w-0 truncate ${isDark && !active ? "!text-red-50" : ""}`}>{label}</span>
       </span>
       {active ? (
-        <span className={`inline-flex h-6 w-6 items-center justify-center rounded-full ${isDark ? "bg-[#052e26] text-white" : "bg-[#052e26] text-white"}`}>
+        <span className={`inline-flex h-6 w-6 items-center justify-center rounded-full ${isDark ? "bg-[#d70717] text-white" : "bg-[#d70717] text-white"}`}>
           <CheckCircle2 className="h-4 w-4" />
         </span>
       ) : null}
