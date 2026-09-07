@@ -12,11 +12,11 @@ function navClass(active: boolean) {
 
 const iconClass = "relative h-6 w-6";
 const textClass = "max-w-full truncate text-[10px] font-black leading-none min-[380px]:text-[11px]";
-const activeIndicatorClass = "absolute bottom-0 left-1/2 h-1 w-7 -translate-x-1/2 rounded-full bg-[#d70717]";
+const activeIndicatorClass = "absolute bottom-1 left-1/2 h-1 w-7 -translate-x-1/2 rounded-full bg-[#d70717]";
 const navShellClass =
-  "h-[70px] pb-[calc(0.45rem+env(safe-area-inset-bottom))] min-[380px]:h-[76px]";
+  "h-[72px] pb-2 min-[380px]:h-[78px]";
 const navSafeSpaceClass =
-  "pointer-events-none h-[calc(86px+env(safe-area-inset-bottom))] min-[380px]:h-[calc(96px+env(safe-area-inset-bottom))]";
+  "pointer-events-none h-[calc(112px+env(safe-area-inset-bottom))]";
 
 function NavIcon({ src }: { src: string }) {
   return (
@@ -46,8 +46,8 @@ export function GuestBottomNav({ isLoggedIn = false }: GuestBottomNavProps) {
   return (
     <>
       <div aria-hidden="true" className={navSafeSpaceClass} />
-      <section className="fixed inset-x-0 bottom-0 z-[90] mx-auto w-full max-w-md px-2 pb-2 sm:px-4 sm:pb-4 md:w-97.5">
-        <div className={`grid grid-cols-5 items-stretch rounded-t-[24px] border border-red-950/[0.06] bg-white/96 px-2 pt-2 shadow-[0_-14px_34px_rgba(99,24,34,0.12)] backdrop-blur-xl min-[380px]:px-3 ${navShellClass}`}>
+      <section className="fixed inset-x-0 bottom-0 z-[90] mx-auto w-full max-w-md bg-linear-to-t from-[#f7f7f7] via-[#f7f7f7] to-transparent px-3 pb-[calc(0.75rem+env(safe-area-inset-bottom))] pt-4 sm:px-4 md:w-97.5">
+        <div className={`grid grid-cols-5 items-stretch overflow-hidden rounded-[24px] border border-red-950/[0.06] bg-white px-2 pt-2 shadow-[0_-10px_28px_rgba(99,24,34,0.14)] ring-1 ring-white min-[380px]:px-3 ${navShellClass}`}>
           <Link href="/" prefetch={false} className={navClass(homeActive)}>
             <NavIcon src="/nuansapulsa-assets/nav_beranda.png" />
             <span className={textClass}>Beranda</span>
