@@ -14,7 +14,7 @@ export function UserMenuGrid({ menuItems }: UserMenuGridProps) {
             const Icon = item.icon;
             return (
               <Link key={item.title} href={item.href} className="flex flex-col items-center gap-2 text-center">
-                <span className="grid h-18 w-18 place-items-center rounded-xl bg-sky-50 text-[#2d8fdc]">
+                <span className="grid h-18 w-18 place-items-center rounded-xl bg-[#fff6f4] text-[#2d8fdc]">
                   <Icon className="h-6 w-6" />
                 </span>
                 <span className="text-[11px] leading-tight font-medium text-neutral-800">{item.title}</span>

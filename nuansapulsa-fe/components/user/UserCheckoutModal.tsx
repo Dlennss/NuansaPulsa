@@ -760,7 +760,7 @@ export function UserCheckoutModal({
 
   if (isPaymentReceived) {
     statusText = "Pembayaran diterima";
-    statusTone = "text-sky-600";
+    statusTone = "text-[#d70717]";
     statusTitle = "Pembayaran berhasil";
     statusDescription = "Transaksi anda sedang diproses.";
   } else if (isProviderProcessing) {
@@ -770,7 +770,7 @@ export function UserCheckoutModal({
     statusDescription = "Transaksi anda sedang diproses.";
   } else if (isOrderSuccess) {
     statusText = "Transaksi berhasil";
-    statusTone = "text-emerald-600";
+    statusTone = "text-red-600";
     statusTitle = "Transaksi berhasil";
     statusDescription = "Pembayaran berhasil dan transaksi sukses diproses.";
   } else if (isOrderRefunded) {
@@ -924,21 +924,21 @@ export function UserCheckoutModal({
         {payment && order ? (
           <div className="mt-5 space-y-4">
             {showQRCode ? (
-              <div className="rounded-md border border-sky-100 bg-sky-50 p-1 text-center">
+              <div className="rounded-md border border-red-100 bg-[#fff6f4] p-1 text-center">
                 {payment.qr_url ? (
                    
                   <img src={payment.qr_url} alt={`QRIS ${order.invoice_id}`} className="mx-auto h-56 w-56 bg-white" />
                 ) : (
                   <div className="mx-auto grid h-56 w-56 place-items-center rounded-2xl bg-white">
-                    <QrCode className="h-8 w-8 text-sky-600" />
+                    <QrCode className="h-8 w-8 text-[#d70717]" />
                   </div>
                 )}
                 <p className="mt-1 text-xs text-slate-500">{formatRemaining(payment.expired_at)}</p>
-                {walletUsed > 0 ? <p className="mt-1 text-xs font-medium text-sky-700">Saldo terpakai {formatRupiah(walletUsed)}</p> : null}
+                {walletUsed > 0 ? <p className="mt-1 text-xs font-medium text-[#d70717]">Saldo terpakai {formatRupiah(walletUsed)}</p> : null}
               </div>
             ) : (
-              <div className={`rounded-3xl border p-5 text-center ${isOrderSuccess ? "border-emerald-100 bg-emerald-50" : isOrderRefunded ? "border-amber-100 bg-amber-50" : isOrderFailed || isOrderExpired ? "border-rose-100 bg-rose-50" : isProviderProcessing ? "border-violet-100 bg-violet-50" : "border-sky-100 bg-sky-50"}`}>
-                <div className={`mx-auto grid h-14 w-14 place-items-center rounded-2xl bg-white shadow-sm ${isOrderSuccess ? "text-emerald-600" : isOrderRefunded ? "text-amber-600" : isOrderFailed || isOrderExpired ? "text-rose-600" : isProviderProcessing ? "text-violet-600" : "text-sky-600"}`}>
+              <div className={`rounded-3xl border p-5 text-center ${isOrderSuccess ? "border-red-100 bg-red-50" : isOrderRefunded ? "border-amber-100 bg-amber-50" : isOrderFailed || isOrderExpired ? "border-rose-100 bg-rose-50" : isProviderProcessing ? "border-violet-100 bg-violet-50" : "border-red-100 bg-[#fff6f4]"}`}>
+                <div className={`mx-auto grid h-14 w-14 place-items-center rounded-2xl bg-white shadow-sm ${isOrderSuccess ? "text-red-600" : isOrderRefunded ? "text-amber-600" : isOrderFailed || isOrderExpired ? "text-rose-600" : isProviderProcessing ? "text-violet-600" : "text-[#d70717]"}`}>
                   <QrCode className="h-6 w-6" />
                 </div>
                 <p className={`mt-3 text-base font-bold ${statusTone}`}>{statusTitle}</p>
@@ -1042,7 +1042,7 @@ export function UserCheckoutModal({
               ) : null}
               <div className="mt-2 flex items-center justify-between gap-3">
                 <span>Total bayar</span>
-                <span className="font-semibold text-sky-700">{formatRupiah(totalAmount)}</span>
+                <span className="font-semibold text-[#d70717]">{formatRupiah(totalAmount)}</span>
               </div>
               <div className="mt-2 flex items-center justify-between gap-3">
                 <span>Metode bayar</span>
@@ -1056,7 +1056,7 @@ export function UserCheckoutModal({
                   href={payment.qr_url || "#"}
                   target="_blank"
                   rel="noreferrer"
-                  className="inline-flex h-11 w-full items-center justify-center rounded-2xl bg-linear-to-r from-[#0f6fcb] to-[#2f92df] px-4 text-sm font-semibold text-white shadow-[0_8px_20px_rgba(15,111,203,0.24)]"
+                  className="inline-flex h-11 w-full items-center justify-center rounded-2xl bg-linear-to-r from-[#d70717] to-[#ff6a00] px-4 text-sm font-semibold text-white shadow-[0_8px_20px_rgba(15,111,203,0.24)]"
                 >
                   Buka QRIS
                 </a>
@@ -1065,7 +1065,7 @@ export function UserCheckoutModal({
                 <button
                   type="button"
                   onClick={handleDownloadProof}
-                  className={`inline-flex h-11 w-full items-center justify-center rounded-2xl px-4 text-sm font-semibold text-white ${isOrderRefunded ? "bg-linear-to-r from-amber-500 to-orange-500 shadow-[0_8px_20px_rgba(245,158,11,0.24)]" : "bg-linear-to-r from-emerald-500 to-teal-500 shadow-[0_8px_20px_rgba(16,185,129,0.24)]"}`}
+                  className={`inline-flex h-11 w-full items-center justify-center rounded-2xl px-4 text-sm font-semibold text-white ${isOrderRefunded ? "bg-linear-to-r from-amber-500 to-orange-500 shadow-[0_8px_20px_rgba(245,158,11,0.24)]" : "bg-linear-to-r from-[#d70717] to-orange-500 shadow-[0_8px_20px_rgba(215,7,23,0.24)]"}`}
                 >
                   Download Bukti Pembayaran
                 </button>
@@ -1188,7 +1188,7 @@ export function UserCheckoutModal({
               ) : null}
               <div className="mt-2 flex items-center justify-between gap-3">
                 <span>Total bayar</span>
-                <span className="font-semibold text-sky-700">{formatRupiah(totalBayar)}</span>
+                <span className="font-semibold text-[#d70717]">{formatRupiah(totalBayar)}</span>
               </div>
             </div>
 
@@ -1203,7 +1203,7 @@ export function UserCheckoutModal({
                         type="tel"
                         inputMode="numeric"
                         maxLength={15}
-                        className="h-12 w-full rounded-2xl border border-slate-200 px-4 text-base text-slate-900 outline-none ring-0 transition focus:border-sky-300"
+                        className="h-12 w-full rounded-2xl border border-slate-200 px-4 text-base text-slate-900 outline-none ring-0 transition focus:border-red-300"
                       />
                       <input
                         value={destServer}
@@ -1212,7 +1212,7 @@ export function UserCheckoutModal({
                         type="tel"
                         inputMode="numeric"
                         maxLength={6}
-                        className="h-12 w-full rounded-2xl border border-slate-200 px-4 text-base text-slate-900 outline-none ring-0 transition focus:border-sky-300"
+                        className="h-12 w-full rounded-2xl border border-slate-200 px-4 text-base text-slate-900 outline-none ring-0 transition focus:border-red-300"
                       />
                     </div>
                   ) : (
@@ -1226,7 +1226,7 @@ export function UserCheckoutModal({
                     autoCorrect={destMode === "alphanumeric" ? "off" : undefined}
                     spellCheck={destMode === "alphanumeric" ? false : undefined}
                     maxLength={destMode === "alphanumeric" ? 32 : 13}
-                    className="h-12 w-full rounded-2xl border border-slate-200 px-4 text-base text-slate-900 outline-none ring-0 transition focus:border-sky-300"
+                    className="h-12 w-full rounded-2xl border border-slate-200 px-4 text-base text-slate-900 outline-none ring-0 transition focus:border-red-300"
                   />
                   )}
                 </label>
@@ -1239,7 +1239,7 @@ export function UserCheckoutModal({
                     onChange={(e) => setNominal(e.target.value.replace(/[^\d]/g, ""))}
                     placeholder="Contoh: 10000"
                     inputMode="numeric"
-                    className="h-12 w-full rounded-2xl border border-slate-200 px-4 text-base text-slate-900 outline-none ring-0 transition focus:border-sky-300"
+                    className="h-12 w-full rounded-2xl border border-slate-200 px-4 text-base text-slate-900 outline-none ring-0 transition focus:border-red-300"
                   />
                 </label>
             ) : null}
@@ -1275,7 +1275,7 @@ export function UserCheckoutModal({
               </div>
             ) : null}
             {error ? <div className="rounded-2xl border border-rose-100 bg-rose-50 px-4 py-3 text-sm text-rose-700">{error}</div> : null}
-            {turnstileHint ? <div className="rounded-2xl border border-sky-100 bg-sky-50 px-4 py-3 text-sm text-sky-700">{turnstileHint}</div> : null}
+            {turnstileHint ? <div className="rounded-2xl border border-red-100 bg-[#fff6f4] px-4 py-3 text-sm text-[#d70717]">{turnstileHint}</div> : null}
             {turnstileError ? <div className="rounded-2xl border border-amber-100 bg-amber-50 px-4 py-3 text-sm text-amber-700">{turnstileError}</div> : null}
 
             {needsTopup ? (
@@ -1285,7 +1285,7 @@ export function UserCheckoutModal({
                   onClose();
                   router.push(`/user/account/topup?amount=${Math.ceil(estimatedQrisAmount)}`);
                 }}
-                className="inline-flex h-13 w-full items-center justify-center rounded-2xl bg-[#047857] px-5 text-xs font-black text-white shadow-[0_10px_20px_rgba(4,120,87,0.22)] transition hover:bg-[#036b4d]"
+                className="inline-flex h-13 w-full items-center justify-center rounded-2xl bg-[#d70717] px-5 text-xs font-black text-white shadow-[0_10px_20px_rgba(215,7,23,0.22)] transition hover:bg-[#b80616]"
               >
                 Isi Saldo
               </button>
@@ -1293,7 +1293,7 @@ export function UserCheckoutModal({
               <button
                 type="submit"
                 disabled={loading}
-                className="inline-flex h-13 w-full items-center justify-center rounded-2xl bg-[#052e26] px-11 text-xs font-black text-white shadow-[0_10px_20px_rgba(5,46,38,0.18)] transition group-hover:bg-[#047857]"
+                className="inline-flex h-13 w-full items-center justify-center rounded-2xl bg-[#b20717] px-11 text-xs font-black text-white shadow-[0_10px_20px_rgba(151,14,32,0.18)] transition group-hover:bg-[#d70717]"
               >
                 {loading ? <LoaderCircle className="h-4 w-4 animate-spin" /> : null}
                 {loading ? "Memproses..." : "Bayar"}

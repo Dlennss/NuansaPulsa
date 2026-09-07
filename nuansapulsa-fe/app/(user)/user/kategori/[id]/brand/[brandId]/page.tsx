@@ -46,7 +46,7 @@ export default async function UserBrandProductsPage({ params }: PageProps) {
   const billingDescription = `Masukkan data pelanggan ${brand} terlebih dulu sebelum memilih produk pembayaran.`;
 
   return (
-    <main className="min-h-screen bg-sky-50">
+    <main className="min-h-screen bg-[#fff6f4]">
       {backendToken ? <UserAuthClientSync backendToken={backendToken} /> : null}
       <div className="space-y-4 px-4">
         <section>

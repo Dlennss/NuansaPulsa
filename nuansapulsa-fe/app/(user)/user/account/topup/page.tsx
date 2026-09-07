@@ -20,7 +20,7 @@ export default async function UserAccountTopupPage({ searchParams }: PageProps) 
   const initialAmount = Number.isFinite(requestedAmount) && requestedAmount > 0 ? requestedAmount : 0;
 
   return (
-    <main className="min-h-screen bg-[#eef8f3] px-4 pb-24 pt-5">
+    <main className="min-h-screen bg-[#fff6f4] px-4 pb-24 pt-5">
       <div className="mx-auto w-full max-w-md space-y-4">
         <RetailTopupClient authToken={session.backendToken} initialAmount={initialAmount} />
       </div>

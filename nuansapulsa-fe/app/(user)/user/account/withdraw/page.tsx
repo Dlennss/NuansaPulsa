@@ -16,7 +16,7 @@ export default async function UserAccountWithdrawPage() {
   if (role !== "agent" && role !== "master") redirect("/user/account");
 
   return (
-    <main className="min-h-screen bg-sky-50 px-4 pb-24 pt-5">
+    <main className="min-h-screen bg-[#fff6f4] px-4 pb-24 pt-5">
       <div className="mx-auto w-full max-w-md space-y-4">
         <RetailWithdrawClient authToken={session.backendToken} />
       </div>

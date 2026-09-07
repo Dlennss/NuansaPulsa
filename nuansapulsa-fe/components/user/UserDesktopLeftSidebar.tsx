@@ -18,7 +18,7 @@ export function UserDesktopLeftSidebar({ user }: UserDesktopLeftSidebarProps) {
           <p className="text-sm font-semibold text-neutral-700">Google</p>
         </div>
 
-        <Link href="/user/account" className="mt-4 inline-flex w-full items-center justify-center gap-2 rounded-xl bg-sky-600 px-3 py-2 text-sm font-semibold text-white hover:bg-sky-700">
+        <Link href="/user/account" className="mt-4 inline-flex w-full items-center justify-center gap-2 rounded-xl bg-red-600 px-3 py-2 text-sm font-semibold text-white hover:bg-red-700">
           <UserRound className="h-4 w-4" />
           Buka Halaman Akun
         </Link>

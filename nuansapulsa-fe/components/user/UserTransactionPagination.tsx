@@ -33,14 +33,14 @@ export function UserTransactionPagination({
         <button
           type="button"
           onClick={() => void onNext?.()}
-          className="inline-flex w-full justify-center rounded-2xl bg-[#0f6fcb] px-4 py-2 text-sm font-semibold text-white! shadow-sm transition hover:bg-[#0a5dad] hover:text-white!"
+          className="inline-flex w-full justify-center rounded-2xl bg-[#d70717] px-4 py-2 text-sm font-semibold text-white! shadow-sm transition hover:bg-[#b80616] hover:text-white!"
         >
           Lainnya
         </button>
       ) : (
         <Link
           href={buildHref(status, page + 1)}
-          className="inline-flex w-full justify-center rounded-2xl bg-[#0f6fcb] px-4 py-2 text-sm font-semibold text-white! visited:text-white! shadow-sm transition hover:bg-[#0a5dad] hover:text-white!"
+          className="inline-flex w-full justify-center rounded-2xl bg-[#d70717] px-4 py-2 text-sm font-semibold text-white! visited:text-white! shadow-sm transition hover:bg-[#b80616] hover:text-white!"
         >
           Lainnya
         </Link>

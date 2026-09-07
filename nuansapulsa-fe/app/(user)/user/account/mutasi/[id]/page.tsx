@@ -74,7 +74,7 @@ export default async function UserAccountMutasiDetailPage({ params }: PageProps)
   const isCredit = arah === "CREDIT";
 
   return (
-    <main className="h-dvh overflow-hidden bg-sky-50 px-4 pt-5">
+    <main className="h-dvh overflow-hidden bg-[#fff6f4] px-4 pt-5">
       <div className="mx-auto flex h-full w-full max-w-md flex-col gap-4">
         <section className="flex min-h-0 flex-1 flex-col rounded-md bg-white p-5 shadow-[0_8px_22px_rgba(15,23,42,0.13)]">
           <div className="flex items-center gap-3">
@@ -88,12 +88,12 @@ export default async function UserAccountMutasiDetailPage({ params }: PageProps)
           </div>
 
           <div className="mt-5 flex items-start gap-3 rounded-md border border-slate-200 bg-slate-50 p-4">
-            <span className={`grid h-10 w-10 shrink-0 place-items-center rounded-full ${isCredit ? "bg-emerald-100 text-emerald-700" : "bg-rose-100 text-rose-700"}`}>
+            <span className={`grid h-10 w-10 shrink-0 place-items-center rounded-full ${isCredit ? "bg-red-100 text-red-700" : "bg-rose-100 text-rose-700"}`}>
               {isCredit ? <ArrowDownLeft className="h-5 w-5" /> : <ArrowUpRight className="h-5 w-5" />}
             </span>
             <div className="min-w-0">
               <p className="text-sm font-semibold text-slate-900">{formatReason(item)}</p>
-              <p className={`mt-1 text-xl font-bold ${isCredit ? "text-emerald-700" : "text-rose-700"}`}>
+              <p className={`mt-1 text-xl font-bold ${isCredit ? "text-red-700" : "text-rose-700"}`}>
                 {isCredit ? "+" : "-"}{formatRupiah(item.jumlah)}
               </p>
               <p className="mt-1 text-xs text-slate-500">{formatDateTime(item.dibuat_pada)}</p>

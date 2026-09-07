@@ -21,7 +21,7 @@ export default async function UserAppHomePage() {
   const isAgent = role === "agent";
 
   return (
-    <main className="bg-sky-50">
+    <main className="bg-[#fff6f4]">
       {session?.backendToken ? <UserAuthClientSync backendToken={session.backendToken} /> : null}
       <div className="space-y-4 px-4 pt-4">
         <UserCategoryGrid items={categories} />

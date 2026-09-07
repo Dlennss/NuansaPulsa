@@ -24,7 +24,7 @@ export default async function UserListrikTagihanPage() {
   const products = plnBrand ? await getProductsByBrand("11", String(plnBrand.id)) : [];
 
   return (
-    <main className="bg-sky-50">
+    <main className="bg-[#fff6f4]">
       {backendToken ? <UserAuthClientSync backendToken={backendToken} /> : null}
       <div className="space-y-4 px-4 pt-4">
         <RetailBillingEntryFlow

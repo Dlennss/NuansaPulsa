@@ -117,14 +117,14 @@ function UserProductCard({
           onBuy(item);
         }}
         disabled={!canBuy}
-        className="group relative min-h-36 overflow-hidden rounded-[22px] border border-emerald-950/10 bg-white p-3 text-left shadow-[0_14px_30px_rgba(6,78,59,0.10)] transition-all duration-300 hover:-translate-y-0.5 hover:border-lime-300 hover:shadow-[0_18px_36px_rgba(6,78,59,0.16)] disabled:cursor-not-allowed disabled:opacity-60"
+        className="group relative min-h-36 overflow-hidden rounded-[22px] border border-red-950/10 bg-white p-3 text-left shadow-[0_14px_30px_rgba(151,14,32,0.10)] transition-all duration-300 hover:-translate-y-0.5 hover:border-amber-300 hover:shadow-[0_18px_36px_rgba(151,14,32,0.16)] disabled:cursor-not-allowed disabled:opacity-60"
       >
-        <div className="absolute inset-x-0 top-0 h-1.5 bg-linear-to-r from-[#052e26] via-[#047857] to-[#b8f138]" />
-        <div className="absolute -right-8 -top-8 h-24 w-24 rounded-full bg-lime-200/55 blur-2xl" />
+        <div className="absolute inset-x-0 top-0 h-1.5 bg-linear-to-r from-[#b20717] via-[#d70717] to-[#b8f138]" />
+        <div className="absolute -right-8 -top-8 h-24 w-24 rounded-full bg-amber-200/55 blur-2xl" />
         <div className="relative flex h-full min-h-30 flex-col justify-between gap-3">
           <div className="flex items-start justify-between gap-2">
             <div className="min-w-0">
-              <p className="text-[10px] font-black uppercase tracking-[0.16em] text-[#047857]">Nominal Top Up</p>
+              <p className="text-[10px] font-black uppercase tracking-[0.16em] text-[#d70717]">Nominal Top Up</p>
               <p className={item.tipe_harga === "OPEN_AMOUNT" ? "mt-2 line-clamp-2 text-[21px] font-black leading-tight text-slate-950" : "mt-2 text-[26px] font-black leading-none tracking-tight text-slate-950"}>
                 {nominalLabel}
               </p>
@@ -134,11 +134,11 @@ function UserProductCard({
           <div className="space-y-2">
             <div>
               <p className="line-clamp-1 text-[11px] font-bold text-slate-500">Top up {brandLabel}</p>
-              <p className="text-sm font-black text-[#052e26]">
+              <p className="text-sm font-black text-[#b20717]">
                 {canBuy ? formatRupiah(finalPrice) : (buyBlockedLabel || "Lengkapi dulu")}
               </p>
             </div>
-            <span className="inline-flex h-8 w-full items-center justify-center rounded-2xl bg-[#052e26] px-3 text-xs font-black text-white shadow-[0_10px_20px_rgba(5,46,38,0.18)] transition group-hover:bg-[#047857]">
+            <span className="inline-flex h-8 w-full items-center justify-center rounded-2xl bg-[#b20717] px-3 text-xs font-black text-white shadow-[0_10px_20px_rgba(151,14,32,0.18)] transition group-hover:bg-[#d70717]">
               {canBuy ? (buyLabel || "Top Up") : (buyBlockedLabel || "Lengkapi dulu")}
             </span>
           </div>
@@ -148,12 +148,12 @@ function UserProductCard({
   }
 
   return (
-    <article className="group relative rounded-xl bg-white p-3 shadow-[0_8px_22px_rgba(15,23,42,0.13)] transition-all duration-300 hover:shadow-[0_16px_40px_rgba(15,23,42,0.2)] hover:-translate-y-1 border border-slate-100/50 hover:border-sky-200/50">
-      <div className="absolute inset-0 rounded-xl bg-linear-to-br from-sky-50/30 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300" />
+    <article className="group relative rounded-xl bg-white p-3 shadow-[0_8px_22px_rgba(15,23,42,0.13)] transition-all duration-300 hover:shadow-[0_16px_40px_rgba(15,23,42,0.2)] hover:-translate-y-1 border border-slate-100/50 hover:border-red-200/50">
+      <div className="absolute inset-0 rounded-xl bg-linear-to-br from-red-50/30 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300" />
       <div className="relative">
         <div className="flex items-start justify-between gap-3">
           <div className="min-w-0 flex-1">
-            <h2 className={`text-slate-900 transition-colors group-hover:text-sky-900 ${packageStyle ? "line-clamp-3 text-[13px] font-bold leading-tight" : "line-clamp-2 text-sm font-bold"}`}>
+            <h2 className={`text-slate-900 transition-colors group-hover:text-red-900 ${packageStyle ? "line-clamp-3 text-[13px] font-bold leading-tight" : "line-clamp-2 text-sm font-bold"}`}>
               {displayName}
             </h2>
           </div>
@@ -184,7 +184,7 @@ function UserProductCard({
               onBuy(item);
             }}
             disabled={!canBuy}
-            className="inline-flex h-7 w-full items-center justify-center rounded-md bg-linear-to-r from-[#0f6fcb] to-[#2f92df] px-4 text-sm font-semibold text-white shadow-[0_8px_20px_rgba(15,111,203,0.24)] transition-all duration-300 hover:shadow-[0_12px_30px_rgba(15,111,203,0.4)] hover:scale-[1.02] active:scale-[0.98] disabled:cursor-not-allowed disabled:from-slate-300 disabled:to-slate-400 disabled:text-white disabled:shadow-none disabled:hover:scale-100"
+            className="inline-flex h-7 w-full items-center justify-center rounded-md bg-linear-to-r from-[#d70717] to-[#ff6a00] px-4 text-sm font-semibold text-white shadow-[0_8px_20px_rgba(15,111,203,0.24)] transition-all duration-300 hover:shadow-[0_12px_30px_rgba(15,111,203,0.4)] hover:scale-[1.02] active:scale-[0.98] disabled:cursor-not-allowed disabled:from-slate-300 disabled:to-slate-400 disabled:text-white disabled:shadow-none disabled:hover:scale-100"
           >
             {canBuy ? (buyLabel || "Beli") : (buyBlockedLabel || "Lengkapi dulu")}
           </button>
@@ -241,13 +241,13 @@ export function UserProductGrid({
             <div className="mt-4 grid grid-cols-2 gap-2">
               <Link
                 href="/login?callbackUrl=/user"
-                className="inline-flex h-10 items-center justify-center rounded-2xl bg-linear-to-r from-[#0f6fcb] to-[#2f92df] px-4 text-sm font-semibold text-white! visited:text-white! hover:text-white!"
+                className="inline-flex h-10 items-center justify-center rounded-2xl bg-linear-to-r from-[#d70717] to-[#ff6a00] px-4 text-sm font-semibold text-white! visited:text-white! hover:text-white!"
               >
                 Masuk
               </Link>
               <Link
                 href="/register"
-                className="inline-flex h-10 items-center justify-center rounded-2xl border border-sky-200 bg-white px-4 text-sm font-semibold text-sky-700"
+                className="inline-flex h-10 items-center justify-center rounded-2xl border border-red-200 bg-white px-4 text-sm font-semibold text-[#d70717]"
               >
                 Daftar
               </Link>

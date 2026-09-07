@@ -20,7 +20,7 @@ export function UserHero({ user, profile }: UserHeroProps) {
   const isLoggedIn = Boolean(user);
 
   return (
-    <section className="sticky top-0 z-30 border-b border-white/10 bg-linear-to-r from-[#0f6fcb] via-[#1576d0] to-[#2f92df] px-5 pb-2 pt-2 text-white shadow-[0_10px_24px_rgba(15,111,203,0.20)] backdrop-blur-sm">
+    <section className="sticky top-0 z-30 border-b border-white/10 bg-[linear-gradient(135deg,#d70717_0%,#ed1518_62%,#ff6a00_130%)] px-5 pb-2 pt-2 text-white shadow-[0_10px_24px_rgba(151,14,32,0.22)] backdrop-blur-sm">
       <div className="flex items-center justify-between gap-3">
         <div className="min-w-0 flex-1 pr-2">
           {isLoggedIn ? (
@@ -42,8 +42,8 @@ export function UserHero({ user, profile }: UserHeroProps) {
             </>
           ) : (
             <div className="inline-flex items-center gap-2 rounded-full border border-white/20 bg-white/10 px-2.5 py-1 backdrop-blur-sm">
-              <span className="grid h-6 w-6 place-items-center rounded-full bg-white text-[10px] font-black tracking-[0.18em] text-sky-700">
-                P
+              <span className="grid h-6 w-6 place-items-center rounded-full bg-white text-[10px] font-black italic tracking-normal text-[#d70717]">
+                N
               </span>
               <span className="text-sm font-black tracking-[0.2em] text-white/95">NUANSAPULSA</span>
             </div>

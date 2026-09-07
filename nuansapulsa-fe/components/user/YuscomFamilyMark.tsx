@@ -2,8 +2,8 @@ import Image from "next/image";
 import { getYuscomFamilyVisual } from "@/lib/yuscom-family-visuals";
 
 const badgeToneClass: Record<string, string> = {
-  sky: "border-sky-100 bg-sky-50 text-sky-700",
-  emerald: "border-emerald-100 bg-emerald-50 text-emerald-700",
+  sky: "border-red-100 bg-[#fff6f4] text-[#d70717]",
+  emerald: "border-red-100 bg-red-50 text-red-700",
   violet: "border-violet-100 bg-violet-50 text-violet-700",
   rose: "border-rose-100 bg-rose-50 text-rose-700",
   amber: "border-amber-100 bg-amber-50 text-amber-700",
@@ -23,7 +23,7 @@ export function YuscomFamilyMark({ family, size = 56 }: Props) {
   if (visual.kind === "image") {
     return (
       <div
-        className={`grid shrink-0 place-items-center overflow-hidden rounded-2xl border border-sky-100 bg-white shadow-sm ${
+        className={`grid shrink-0 place-items-center overflow-hidden rounded-2xl border border-red-100 bg-white shadow-sm ${
           isSmartfren ? "p-1.5" : "p-2"
         }`}
         style={{ width: size, height: size }}

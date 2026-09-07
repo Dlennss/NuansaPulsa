@@ -30,7 +30,7 @@ export default async function UserSaldoKreditAgentPage() {
   const applications = await getMyAgentCreditApplications(session.backendToken);
 
   return (
-    <main className="min-h-screen bg-[#eef8f3]">
+    <main className="min-h-screen bg-[#fff6f4]">
       <UserAgentCreditPageContent
         name={name}
         email={email}

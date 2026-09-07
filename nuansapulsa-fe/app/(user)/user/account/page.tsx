@@ -153,8 +153,8 @@ export default async function UserAccountPage() {
   ];
 
   return (
-    <main className="min-h-screen bg-[#f3f7f5] pb-24">
-      <section className="relative overflow-hidden rounded-b-[32px] bg-[linear-gradient(135deg,#052e26_0%,#047857_58%,#84cc16_145%)] px-4 pb-8 pt-7 text-white shadow-[0_20px_44px_rgba(4,120,87,0.24)]">
+    <main className="min-h-screen bg-[#fff6f4] pb-24">
+      <section className="relative overflow-hidden rounded-b-[32px] bg-[linear-gradient(135deg,#c90016_0%,#ef1717_58%,#ff6a00_145%)] px-4 pb-8 pt-7 text-white shadow-[0_20px_44px_rgba(151,14,32,0.24)]">
         <div className="pointer-events-none absolute -left-14 -top-16 h-40 w-40 rounded-full border border-white/10 bg-white/8" />
         <div className="pointer-events-none absolute -right-10 top-7 h-32 w-32 rounded-full bg-white/10" />
         <div className="mx-auto flex w-full max-w-md flex-col items-center text-center">
@@ -175,17 +175,17 @@ export default async function UserAccountPage() {
       </section>
 
       <div className="mx-auto -mt-4 w-full max-w-md space-y-3.5 px-4">
-        <section className="overflow-hidden rounded-[22px] border border-emerald-950/5 bg-white shadow-[0_16px_36px_rgba(6,78,59,0.08)]">
+        <section className="overflow-hidden rounded-[22px] border border-red-950/[0.06] bg-white shadow-[0_16px_36px_rgba(151,14,32,0.08)]">
           <div className="flex items-center justify-between border-b border-slate-100 px-4 py-3.5">
             <h2 className="text-sm font-black text-slate-950">Informasi Pribadi</h2>
-            <Link href="/user/account/edit" className="text-[10px] font-black text-[#047857]">Edit</Link>
+            <Link href="/user/account/edit" className="text-[10px] font-black text-[#d70717]">Edit</Link>
           </div>
           <div className="divide-y divide-slate-100">
             {personalItems.map((item) => {
               const Icon = item.icon;
               return (
                 <div key={item.label} className="flex items-center gap-3 px-4 py-3.5">
-                  <Icon className="h-5 w-5 shrink-0 text-[#047857]" strokeWidth={1.9} />
+                  <Icon className="h-5 w-5 shrink-0 text-[#d70717]" strokeWidth={1.9} />
                   <div className="min-w-0">
                     <p className="text-[10px] font-semibold text-slate-400">{item.label}</p>
                     <p className="mt-0.5 truncate text-xs font-black text-slate-950">{item.value}</p>
@@ -196,7 +196,7 @@ export default async function UserAccountPage() {
           </div>
         </section>
 
-        <section className="overflow-hidden rounded-[22px] border border-emerald-950/5 bg-white shadow-[0_16px_36px_rgba(6,78,59,0.08)]">
+        <section className="overflow-hidden rounded-[22px] border border-red-950/[0.06] bg-white shadow-[0_16px_36px_rgba(151,14,32,0.08)]">
           <div className="divide-y divide-slate-100">
             {settingItems.map((item) => {
               const Icon = item.icon;
@@ -204,9 +204,9 @@ export default async function UserAccountPage() {
                 <Link
                   key={item.label}
                   href={item.href}
-                  className="flex items-center gap-3 px-4 py-3.5 transition hover:bg-emerald-50/50"
+                  className="flex items-center gap-3 px-4 py-3.5 transition hover:bg-red-50/50"
                 >
-                  <span className="grid h-11 w-11 shrink-0 place-items-center rounded-2xl bg-emerald-50 text-[#047857]">
+                  <span className="grid h-11 w-11 shrink-0 place-items-center rounded-2xl bg-red-50 text-[#d70717]">
                     <Icon className="h-5 w-5" strokeWidth={2.2} />
                   </span>
                   <span className="min-w-0 flex-1">

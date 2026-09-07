@@ -28,7 +28,7 @@ const sendOptions = [
     desc: "Transfer ke bank Indonesia",
     href: "/user/transfer-bank",
     icon: Landmark,
-    tone: "from-emerald-500 to-lime-400",
+    tone: "from-[#d70717] to-[#ff6a00]",
     badge: "Bank",
   },
   {
@@ -36,7 +36,7 @@ const sendOptions = [
     desc: "DANA, OVO, GoPay, dan lainnya",
     href: "/user/ewallet",
     icon: WalletCards,
-    tone: "from-cyan-500 to-emerald-400",
+    tone: "from-cyan-500 to-[#ff6a00]",
     badge: "Cepat",
   },
   {
@@ -44,7 +44,7 @@ const sendOptions = [
     desc: "Kirim saldo ke pengguna lain",
     href: "/user/saldo/kirim",
     icon: UsersRound,
-    tone: "from-[#047857] to-[#84cc16]",
+    tone: "from-[#d70717] to-[#ff6a00]",
     badge: "Gratis",
   },
   {
@@ -52,7 +52,7 @@ const sendOptions = [
     desc: "Bayar atau kirim via VA",
     href: "/user/account/topup",
     icon: ScanLine,
-    tone: "from-slate-700 to-emerald-500",
+    tone: "from-slate-700 to-[#ff6a00]",
     badge: "VA",
   },
 ];
@@ -62,8 +62,8 @@ export default async function UserSaldoKirimPage() {
   if (!session?.backendToken) redirect("/login");
 
   return (
-    <main className="min-h-screen bg-[#eef8f3] pb-24">
-      <section className="relative overflow-hidden bg-[linear-gradient(135deg,#052e26_0%,#047857_62%,#84cc16_135%)] px-4 pb-7 pt-5 text-white shadow-[0_18px_42px_rgba(4,120,87,0.22)]">
+    <main className="min-h-screen bg-[#fff6f4] pb-24">
+      <section className="relative overflow-hidden bg-[linear-gradient(135deg,#b20717_0%,#d70717_62%,#ff6a00_135%)] px-4 pb-7 pt-5 text-white shadow-[0_18px_42px_rgba(215,7,23,0.22)]">
         <div className="pointer-events-none absolute -right-10 -top-14 h-36 w-36 rounded-full bg-white/10" />
         <div className="pointer-events-none absolute right-10 top-10 h-20 w-20 rounded-full border border-white/10" />
         <div className="mx-auto flex w-full max-w-md items-center justify-between gap-3">
@@ -74,20 +74,20 @@ export default async function UserSaldoKirimPage() {
             <h1 className="text-lg font-black tracking-tight">Kirim Saldo</h1>
             <p className="mt-0.5 text-[11px] font-semibold text-white/75">Pilih tujuan pengiriman</p>
           </div>
-          <div className="grid h-11 w-11 shrink-0 place-items-center rounded-2xl bg-white text-[#047857] shadow-[0_12px_26px_rgba(6,78,59,0.18)]">
-            <Zap className="h-5 w-5 fill-lime-300 text-[#047857]" strokeWidth={2.4} />
+          <div className="grid h-11 w-11 shrink-0 place-items-center rounded-2xl bg-white text-[#d70717] shadow-[0_12px_26px_rgba(151,14,32,0.18)]">
+            <Zap className="h-5 w-5 fill-amber-300 text-[#d70717]" strokeWidth={2.4} />
           </div>
         </div>
       </section>
 
       <div className="mx-auto -mt-3 w-full max-w-md space-y-4 px-4">
-        <section className="rounded-[26px] border border-emerald-950/5 bg-white p-4 shadow-[0_18px_42px_rgba(6,78,59,0.10)]">
+        <section className="rounded-[26px] border border-red-950/5 bg-white p-4 shadow-[0_18px_42px_rgba(151,14,32,0.10)]">
           <div className="flex items-center justify-between gap-3">
             <div>
-              <p className="text-[10px] font-black uppercase tracking-[0.22em] text-[#047857]">Pilih Jenis</p>
+              <p className="text-[10px] font-black uppercase tracking-[0.22em] text-[#d70717]">Pilih Jenis</p>
               <h2 className="mt-1 text-xl font-black tracking-tight text-slate-950">Mau kirim ke mana?</h2>
             </div>
-            <span className="grid h-10 w-10 place-items-center rounded-2xl bg-lime-100 text-[#047857]">
+            <span className="grid h-10 w-10 place-items-center rounded-2xl bg-amber-100 text-[#d70717]">
               <Send className="h-5 w-5" strokeWidth={2.4} />
             </span>
           </div>
@@ -99,18 +99,18 @@ export default async function UserSaldoKirimPage() {
                 <Link
                   key={item.title}
                   href={item.href}
-                  className="group relative min-h-[136px] overflow-hidden rounded-[22px] border border-slate-200 bg-[#fbfffd] p-3 shadow-[0_10px_24px_rgba(15,23,42,0.04)] transition hover:-translate-y-0.5 hover:border-emerald-200 hover:shadow-[0_18px_34px_rgba(6,78,59,0.12)]"
+                  className="group relative min-h-[136px] overflow-hidden rounded-[22px] border border-slate-200 bg-[#fffafa] p-3 shadow-[0_10px_24px_rgba(15,23,42,0.04)] transition hover:-translate-y-0.5 hover:border-red-200 hover:shadow-[0_18px_34px_rgba(151,14,32,0.12)]"
                 >
                   <div className={`absolute inset-x-0 top-0 h-1.5 bg-linear-to-r ${item.tone}`} />
                   <div className="flex items-start justify-between gap-2">
-                    <span className={`grid h-11 w-11 shrink-0 place-items-center rounded-2xl bg-linear-to-br ${item.tone} text-white shadow-[0_10px_20px_rgba(6,78,59,0.14)]`}>
+                    <span className={`grid h-11 w-11 shrink-0 place-items-center rounded-2xl bg-linear-to-br ${item.tone} text-white shadow-[0_10px_20px_rgba(151,14,32,0.14)]`}>
                       <Icon className="h-5 w-5" strokeWidth={2.4} />
                     </span>
-                    <span className="rounded-full bg-emerald-50 px-2 py-1 text-[9px] font-black text-[#047857]">{item.badge}</span>
+                    <span className="rounded-full bg-red-50 px-2 py-1 text-[9px] font-black text-[#d70717]">{item.badge}</span>
                   </div>
                   <h3 className="mt-4 text-sm font-black leading-4 text-slate-950">{item.title}</h3>
                   <p className="mt-1 text-[10px] font-semibold leading-4 text-slate-500">{item.desc}</p>
-                  <span className="absolute bottom-3 right-3 grid h-7 w-7 place-items-center rounded-full bg-slate-100 text-slate-500 transition group-hover:bg-lime-300 group-hover:text-[#052e26]">
+                  <span className="absolute bottom-3 right-3 grid h-7 w-7 place-items-center rounded-full bg-slate-100 text-slate-500 transition group-hover:bg-amber-300 group-hover:text-[#b20717]">
                     <ChevronRight className="h-4 w-4" strokeWidth={2.5} />
                   </span>
                 </Link>
@@ -119,9 +119,9 @@ export default async function UserSaldoKirimPage() {
           </div>
         </section>
 
-        <section className="rounded-[24px] border border-emerald-200 bg-emerald-50 px-4 py-3">
+        <section className="rounded-[24px] border border-red-200 bg-red-50 px-4 py-3">
           <div className="flex items-center gap-3">
-            <span className="grid h-11 w-11 shrink-0 place-items-center rounded-2xl bg-white text-[#047857] ring-1 ring-emerald-100">
+            <span className="grid h-11 w-11 shrink-0 place-items-center rounded-2xl bg-white text-[#d70717] ring-1 ring-red-100">
               <ShieldCheck className="h-5 w-5" strokeWidth={2.4} />
             </span>
             <div className="min-w-0">
@@ -131,7 +131,7 @@ export default async function UserSaldoKirimPage() {
           </div>
         </section>
 
-        <section className="rounded-[24px] border border-emerald-950/5 bg-white p-4 shadow-[0_16px_36px_rgba(6,78,59,0.08)]">
+        <section className="rounded-[24px] border border-red-950/5 bg-white p-4 shadow-[0_16px_36px_rgba(151,14,32,0.08)]">
           <div className="flex items-center gap-3">
             <span className="grid h-11 w-11 shrink-0 place-items-center rounded-2xl bg-slate-100 text-slate-500">
               <Building2 className="h-5 w-5" strokeWidth={2.4} />
@@ -140,7 +140,7 @@ export default async function UserSaldoKirimPage() {
               <p className="text-xs font-black text-slate-950">Tujuan tersimpan</p>
               <p className="mt-0.5 text-[10px] font-semibold text-slate-400">Belum ada penerima favorit.</p>
             </div>
-            <Sparkles className="h-4 w-4 shrink-0 text-lime-500" strokeWidth={2.5} />
+            <Sparkles className="h-4 w-4 shrink-0 text-amber-500" strokeWidth={2.5} />
           </div>
         </section>
       </div>

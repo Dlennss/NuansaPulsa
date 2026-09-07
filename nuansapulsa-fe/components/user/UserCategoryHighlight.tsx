@@ -32,7 +32,7 @@ export function UserCategoryHighlight() {
   if (!lastVisited) return null;
 
   return (
-    <div className="mb-3 rounded-lg bg-sky-50 p-3 text-sm text-sky-700">
+    <div className="mb-3 rounded-lg bg-[#fff6f4] p-3 text-sm text-[#d70717]">
       <span className="font-medium">Terakhir dilihat:</span> {lastVisited.name}
     </div>
   );

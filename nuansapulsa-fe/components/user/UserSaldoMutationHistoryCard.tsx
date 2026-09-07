@@ -50,7 +50,7 @@ export function UserSaldoMutationHistoryCard({ item }: Props) {
       className="flex items-center justify-between gap-3 rounded-md border border-slate-200 bg-slate-50 px-4 py-3 transition hover:border-slate-300 hover:bg-slate-100"
     >
       <div className="flex min-w-0 items-center gap-3">
-        <span className={`grid h-9 w-9 shrink-0 place-items-center rounded-full ${isCredit ? "bg-emerald-100 text-emerald-700" : "bg-rose-100 text-rose-700"}`}>
+        <span className={`grid h-9 w-9 shrink-0 place-items-center rounded-full ${isCredit ? "bg-red-100 text-red-700" : "bg-rose-100 text-rose-700"}`}>
           {isCredit ? <ArrowDownLeft className="h-4 w-4" /> : <ArrowUpRight className="h-4 w-4" />}
         </span>
         <div className="min-w-0">
@@ -60,7 +60,7 @@ export function UserSaldoMutationHistoryCard({ item }: Props) {
       </div>
 
       <div className="flex shrink-0 items-center gap-2">
-        <p className={`text-sm font-bold ${isCredit ? "text-emerald-700" : "text-rose-700"}`}>
+        <p className={`text-sm font-bold ${isCredit ? "text-red-700" : "text-rose-700"}`}>
           {isCredit ? "+" : "-"}{formatRupiah(item.jumlah)}
         </p>
         <ChevronRight className="h-4 w-4 text-slate-400" />

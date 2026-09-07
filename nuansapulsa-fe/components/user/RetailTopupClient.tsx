@@ -141,69 +141,69 @@ export function RetailTopupClient({ authToken, initialAmount = 0 }: Props) {
   return (
     <div className="space-y-4">
       <section className="px-1">
-        <p className="text-[10px] font-black uppercase tracking-[0.22em] text-[#047857]">Isi Saldo</p>
+        <p className="text-[10px] font-black uppercase tracking-[0.22em] text-[#d70717]">Isi Saldo</p>
         <h1 className="mt-1 text-2xl font-black text-slate-950">Topup saldo</h1>
         <p className="mt-1 text-xs font-semibold text-slate-500">Pembayaran diproses melalui QRIS dan tercatat otomatis di Pulsa24Jam.</p>
       </section>
 
       {error ? <div className="rounded-2xl border border-rose-300 bg-rose-50 px-4 py-3 text-xs font-bold text-rose-700">{error}</div> : null}
-      {message ? <div className="rounded-2xl border border-emerald-300 bg-emerald-50 px-4 py-3 text-xs font-bold text-emerald-800">{message}</div> : null}
+      {message ? <div className="rounded-2xl border border-red-300 bg-red-50 px-4 py-3 text-xs font-bold text-red-800">{message}</div> : null}
 
       {loading ? (
-        <div className="grid min-h-48 place-items-center rounded-[28px] bg-white"><LoaderCircle className="h-6 w-6 animate-spin text-[#047857]" /></div>
+        <div className="grid min-h-48 place-items-center rounded-[28px] bg-white"><LoaderCircle className="h-6 w-6 animate-spin text-[#d70717]" /></div>
       ) : payment ? (
-        <section className="rounded-[28px] border border-emerald-950/5 bg-white p-5 shadow-[0_18px_42px_rgba(6,78,59,0.11)]">
+        <section className="rounded-[28px] border border-red-950/5 bg-white p-5 shadow-[0_18px_42px_rgba(151,14,32,0.11)]">
           <div className="flex items-start justify-between gap-3">
             <div>
-              <p className="text-[10px] font-black uppercase tracking-[0.2em] text-[#047857]">Pembayaran QRIS</p>
+              <p className="text-[10px] font-black uppercase tracking-[0.2em] text-[#d70717]">Pembayaran QRIS</p>
               <h2 className="mt-1 text-lg font-black text-slate-950">{statusLabel(payment.status)}</h2>
             </div>
-            <button type="button" onClick={() => void checkStatus(payment.ref_id, true)} disabled={checking} className="grid h-10 w-10 place-items-center rounded-2xl bg-emerald-50 text-[#047857] disabled:opacity-60" aria-label="Periksa status pembayaran">
+            <button type="button" onClick={() => void checkStatus(payment.ref_id, true)} disabled={checking} className="grid h-10 w-10 place-items-center rounded-2xl bg-red-50 text-[#d70717] disabled:opacity-60" aria-label="Periksa status pembayaran">
               <RefreshCcw className={`h-4 w-4 ${checking ? "animate-spin" : ""}`} />
             </button>
           </div>
 
           {isPending && payment.qr_url ? (
-            <div className="mt-5 rounded-2xl border border-emerald-100 bg-[#f8fffb] p-4 text-center">
+            <div className="mt-5 rounded-2xl border border-red-100 bg-[#f8fffb] p-4 text-center">
               <img src={payment.qr_url} alt="QRIS topup saldo" className="mx-auto aspect-square w-full max-w-56 rounded-xl bg-white object-contain p-2" />
               <p className="mt-3 text-[11px] font-bold text-slate-600">Pindai dengan aplikasi bank atau dompet digital</p>
             </div>
           ) : payment.status === "approved" ? (
-            <div className="mt-5 grid min-h-44 place-items-center rounded-2xl bg-emerald-50 text-center">
-              <div><CheckCircle2 className="mx-auto h-12 w-12 text-[#047857]" /><p className="mt-3 text-sm font-black text-emerald-900">Topup berhasil</p></div>
+            <div className="mt-5 grid min-h-44 place-items-center rounded-2xl bg-red-50 text-center">
+              <div><CheckCircle2 className="mx-auto h-12 w-12 text-[#d70717]" /><p className="mt-3 text-sm font-black text-red-900">Topup berhasil</p></div>
             </div>
           ) : null}
 
           <div className="mt-4 space-y-3 rounded-2xl bg-slate-50 p-4">
             <div className="flex justify-between gap-4 text-xs"><span className="font-semibold text-slate-500">Saldo diterima</span><strong className="text-slate-950">Rp {fmtIDR(payment.amount)}</strong></div>
             {payment.fee_admin > 0 ? <div className="flex justify-between gap-4 text-xs"><span className="font-semibold text-slate-500">Biaya layanan</span><strong className="text-slate-950">Rp {fmtIDR(payment.fee_admin)}</strong></div> : null}
-            <div className="flex justify-between gap-4 border-t border-slate-200 pt-3 text-sm"><span className="font-black text-slate-700">Total pembayaran</span><strong className="text-[#047857]">Rp {fmtIDR(payment.gross_amount || payment.amount)}</strong></div>
-            <button type="button" onClick={() => void copy(payment.ref_id)} className="flex w-full items-center justify-between rounded-xl bg-white px-3 py-3 text-left"><span><span className="block text-[9px] font-bold uppercase text-slate-400">Referensi</span><span className="text-xs font-black text-slate-950">{payment.ref_id}</span></span><Copy className="h-4 w-4 text-[#047857]" /></button>
+            <div className="flex justify-between gap-4 border-t border-slate-200 pt-3 text-sm"><span className="font-black text-slate-700">Total pembayaran</span><strong className="text-[#d70717]">Rp {fmtIDR(payment.gross_amount || payment.amount)}</strong></div>
+            <button type="button" onClick={() => void copy(payment.ref_id)} className="flex w-full items-center justify-between rounded-xl bg-white px-3 py-3 text-left"><span><span className="block text-[9px] font-bold uppercase text-slate-400">Referensi</span><span className="text-xs font-black text-slate-950">{payment.ref_id}</span></span><Copy className="h-4 w-4 text-[#d70717]" /></button>
           </div>
 
-          {!isPending ? <button type="button" onClick={() => { setPayment(null); setError(""); setMessage(""); void load(); }} className="mt-4 h-12 w-full rounded-2xl bg-[#047857] text-xs font-black text-white">Buat Topup Baru</button> : null}
+          {!isPending ? <button type="button" onClick={() => { setPayment(null); setError(""); setMessage(""); void load(); }} className="mt-4 h-12 w-full rounded-2xl bg-[#d70717] text-xs font-black text-white">Buat Topup Baru</button> : null}
         </section>
       ) : (
         <form className="space-y-4" onSubmit={createPayment}>
-          <section className="rounded-[28px] border border-emerald-950/5 bg-white p-4 shadow-[0_18px_42px_rgba(6,78,59,0.11)]">
+          <section className="rounded-[28px] border border-red-950/5 bg-white p-4 shadow-[0_18px_42px_rgba(151,14,32,0.11)]">
             <h2 className="text-base font-black text-slate-950">Pilih nominal</h2>
-            <div className="mt-4 grid grid-cols-2 gap-2.5">{QUICK_AMOUNTS.map((value) => <button key={value} type="button" onClick={() => setAmount(String(value))} className={`h-12 rounded-2xl border text-xs font-black ${nominal === value ? "border-[#047857] bg-emerald-50 text-[#047857]" : "border-slate-200 bg-slate-50 text-slate-700"}`}>Rp {fmtIDR(value)}</button>)}</div>
-            <label className="mt-4 flex h-12 items-center gap-3 rounded-2xl border border-slate-200 bg-[#f8fffb] px-4"><span className="text-xs font-black text-[#047857]">Rp</span><input className="min-w-0 flex-1 bg-transparent text-sm font-black text-slate-950 outline-none" inputMode="numeric" placeholder="Minimum 100.000" value={amount ? fmtIDR(nominal) : ""} onChange={(event) => setAmount(event.target.value.replace(/\D/g, ""))} /></label>
+            <div className="mt-4 grid grid-cols-2 gap-2.5">{QUICK_AMOUNTS.map((value) => <button key={value} type="button" onClick={() => setAmount(String(value))} className={`h-12 rounded-2xl border text-xs font-black ${nominal === value ? "border-[#d70717] bg-red-50 text-[#d70717]" : "border-slate-200 bg-slate-50 text-slate-700"}`}>Rp {fmtIDR(value)}</button>)}</div>
+            <label className="mt-4 flex h-12 items-center gap-3 rounded-2xl border border-slate-200 bg-[#f8fffb] px-4"><span className="text-xs font-black text-[#d70717]">Rp</span><input className="min-w-0 flex-1 bg-transparent text-sm font-black text-slate-950 outline-none" inputMode="numeric" placeholder="Minimum 100.000" value={amount ? fmtIDR(nominal) : ""} onChange={(event) => setAmount(event.target.value.replace(/\D/g, ""))} /></label>
           </section>
 
-          <section className="rounded-[28px] border border-[#047857] bg-emerald-50 p-4 shadow-[0_18px_42px_rgba(6,78,59,0.08)]">
+          <section className="rounded-[28px] border border-[#d70717] bg-red-50 p-4 shadow-[0_18px_42px_rgba(151,14,32,0.08)]">
             <div className="flex items-center gap-3">
-              <span className="grid h-11 w-11 place-items-center rounded-2xl bg-white text-[#047857]"><QrCode className="h-5 w-5" /></span>
+              <span className="grid h-11 w-11 place-items-center rounded-2xl bg-white text-[#d70717]"><QrCode className="h-5 w-5" /></span>
               <span className="min-w-0 flex-1"><span className="block text-sm font-black text-slate-950">QRIS</span><span className="text-[10px] font-semibold text-slate-600">Pembayaran otomatis melalui Pulsa24Jam</span></span>
-              <ShieldCheck className="h-5 w-5 text-[#047857]" />
+              <ShieldCheck className="h-5 w-5 text-[#d70717]" />
             </div>
           </section>
 
-          <button type="submit" disabled={saving} className="inline-flex h-12 w-full items-center justify-center gap-2 rounded-2xl bg-[#047857] text-xs font-black text-white disabled:opacity-60">{saving ? <LoaderCircle className="h-4 w-4 animate-spin" /> : null}{saving ? "Membuat QR..." : "Lanjutkan Pembayaran"}<ChevronRight className="h-4 w-4" /></button>
+          <button type="submit" disabled={saving} className="inline-flex h-12 w-full items-center justify-center gap-2 rounded-2xl bg-[#d70717] text-xs font-black text-white disabled:opacity-60">{saving ? <LoaderCircle className="h-4 w-4 animate-spin" /> : null}{saving ? "Membuat QR..." : "Lanjutkan Pembayaran"}<ChevronRight className="h-4 w-4" /></button>
         </form>
       )}
 
-      {history.length ? <section className="rounded-[28px] bg-white p-4"><h2 className="text-sm font-black text-slate-950">Riwayat terbaru</h2><div className="mt-3 space-y-2">{history.slice(0, 5).map((row) => <div key={row.id} className="flex items-center justify-between rounded-2xl bg-slate-50 px-3 py-3"><div><p className="text-xs font-black text-slate-900">Rp {fmtIDR(row.requested_amount || row.amount)}</p><p className="text-[10px] font-semibold text-slate-500">QRIS</p></div><span className="text-[10px] font-black text-[#047857]">{statusLabel(row.status)}</span></div>)}</div></section> : null}
+      {history.length ? <section className="rounded-[28px] bg-white p-4"><h2 className="text-sm font-black text-slate-950">Riwayat terbaru</h2><div className="mt-3 space-y-2">{history.slice(0, 5).map((row) => <div key={row.id} className="flex items-center justify-between rounded-2xl bg-slate-50 px-3 py-3"><div><p className="text-xs font-black text-slate-900">Rp {fmtIDR(row.requested_amount || row.amount)}</p><p className="text-[10px] font-semibold text-slate-500">QRIS</p></div><span className="text-[10px] font-black text-[#d70717]">{statusLabel(row.status)}</span></div>)}</div></section> : null}
     </div>
   );
 }

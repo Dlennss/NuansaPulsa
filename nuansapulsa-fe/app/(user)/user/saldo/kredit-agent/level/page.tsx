@@ -21,7 +21,7 @@ export default async function UserAgentLevelPage() {
   const initialLevelCode = String(applications[0]?.credit_level_code || "start").trim().toLowerCase();
 
   return (
-    <main className="min-h-screen bg-[#eef8f3]">
+    <main className="min-h-screen bg-[#fff6f4]">
       <UserAgentLevelPageContent initialLevelCode={initialLevelCode} />
       <UserBottomNav />
     </main>

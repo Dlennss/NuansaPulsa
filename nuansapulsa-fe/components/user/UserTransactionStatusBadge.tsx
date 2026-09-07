@@ -23,14 +23,14 @@ type UserTransactionStatusBadgeProps = {
 export function UserTransactionStatusBadge({ status }: UserTransactionStatusBadgeProps) {
   if (status === "success") {
     return (
-      <span className="inline-flex items-center gap-1 rounded-full bg-emerald-50 px-2.5 py-1 text-xs font-semibold text-emerald-700">
+      <span className="inline-flex items-center gap-1 rounded-full bg-red-50 px-2.5 py-1 text-xs font-semibold text-red-700">
         <CircleCheck className="h-3.5 w-3.5" /> {formatStatusLabel(status)}
       </span>
     );
   }
   if (status === "paid") {
     return (
-      <span className="inline-flex items-center gap-1 rounded-full bg-sky-50 px-2.5 py-1 text-xs font-semibold text-sky-700">
+      <span className="inline-flex items-center gap-1 rounded-full bg-[#fff6f4] px-2.5 py-1 text-xs font-semibold text-[#d70717]">
         <CircleCheck className="h-3.5 w-3.5" /> {formatStatusLabel(status)}
       </span>
     );

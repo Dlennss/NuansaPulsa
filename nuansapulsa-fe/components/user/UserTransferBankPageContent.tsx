@@ -39,7 +39,7 @@ export function UserTransferBankPageContent({ backHref = "/user/kategori" }: Use
 
   return (
     <>
-      <section className="bg-[linear-gradient(135deg,#d70717_0%,#d70717_72%,#65a30d_145%)] px-4 pb-6 pt-5 text-white shadow-[0_16px_36px_rgba(215,7,23,0.20)]">
+      <section className="bg-[linear-gradient(135deg,#d70717_0%,#d70717_72%,#d97706_145%)] px-4 pb-6 pt-5 text-white shadow-[0_16px_36px_rgba(215,7,23,0.20)]">
         <div className="mx-auto flex w-full max-w-md items-center gap-3">
           {selectedBank ? (
             <button
@@ -176,7 +176,7 @@ export function UserTransferBankPageContent({ backHref = "/user/kategori" }: Use
               <button
                 type="button"
                 disabled={!canContinue}
-                className="mt-4 flex h-13 w-full items-center justify-center gap-2 rounded-md bg-[linear-gradient(135deg,#d70717,#d70717,#65a30d)] px-4 text-sm font-black text-white shadow-[0_14px_28px_rgba(215,7,23,0.20)] transition hover:brightness-105 disabled:bg-none disabled:bg-slate-200 disabled:text-slate-400 disabled:shadow-none"
+                className="mt-4 flex h-13 w-full items-center justify-center gap-2 rounded-md bg-[linear-gradient(135deg,#d70717,#d70717,#d97706)] px-4 text-sm font-black text-white shadow-[0_14px_28px_rgba(215,7,23,0.20)] transition hover:brightness-105 disabled:bg-none disabled:bg-slate-200 disabled:text-slate-400 disabled:shadow-none"
               >
                 Lanjutkan
                 <ChevronRight className="h-4 w-4" strokeWidth={2.6} />

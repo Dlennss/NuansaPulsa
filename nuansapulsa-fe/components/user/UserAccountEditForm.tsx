@@ -130,10 +130,10 @@ export function UserAccountEditForm({ nama, email, phone, profilePhotoURL = "" }
   }
 
   return (
-    <main className="min-h-screen bg-[#f3f7f5] px-4 pb-24 pt-4">
+    <main className="min-h-screen bg-[#fff6f4] px-4 pb-24 pt-4">
       <div className="mx-auto w-full max-w-md">
         <header className="mb-4 flex items-center gap-3">
-          <Link href="/user/account" className="grid h-11 w-11 shrink-0 place-items-center rounded-2xl bg-white text-[#047857] shadow-[0_10px_24px_rgba(6,78,59,0.08)]">
+          <Link href="/user/account" className="grid h-11 w-11 shrink-0 place-items-center rounded-2xl bg-white text-[#d70717] shadow-[0_10px_24px_rgba(151,14,32,0.08)]">
             <ArrowLeft className="h-5 w-5" />
           </Link>
           <div className="min-w-0">
@@ -142,8 +142,8 @@ export function UserAccountEditForm({ nama, email, phone, profilePhotoURL = "" }
           </div>
         </header>
 
-        <section className="overflow-hidden rounded-[28px] border border-emerald-950/5 bg-white shadow-[0_18px_42px_rgba(6,78,59,0.10)]">
-          <div className="bg-[linear-gradient(135deg,#052e26_0%,#047857_60%,#84cc16_150%)] px-5 py-5 text-white">
+        <section className="overflow-hidden rounded-[28px] border border-red-950/5 bg-white shadow-[0_18px_42px_rgba(151,14,32,0.10)]">
+          <div className="bg-[linear-gradient(135deg,#b20717_0%,#d70717_60%,#ff6a00_150%)] px-5 py-5 text-white">
             <div className="flex items-center gap-3">
               <label className="relative grid h-16 w-16 shrink-0 cursor-pointer place-items-center overflow-hidden rounded-2xl bg-white/15 ring-1 ring-white/20">
                 {photoValue ? (
@@ -178,7 +178,7 @@ export function UserAccountEditForm({ nama, email, phone, profilePhotoURL = "" }
             ) : null}
 
             {success ? (
-              <div className="flex items-center gap-2 rounded-2xl border border-emerald-200 bg-emerald-50 px-4 py-3 text-xs font-bold text-emerald-700">
+              <div className="flex items-center gap-2 rounded-2xl border border-red-200 bg-red-50 px-4 py-3 text-xs font-bold text-red-700">
                 <CheckCircle2 className="h-4 w-4" />
                 {success}
               </div>
@@ -187,11 +187,11 @@ export function UserAccountEditForm({ nama, email, phone, profilePhotoURL = "" }
             <label className="block">
               <span className="mb-2 block text-xs font-black text-slate-700">Nama Lengkap</span>
               <span className="relative block">
-                <UserRound className="pointer-events-none absolute left-4 top-1/2 h-5 w-5 -translate-y-1/2 text-emerald-700/55" />
+                <UserRound className="pointer-events-none absolute left-4 top-1/2 h-5 w-5 -translate-y-1/2 text-red-700/55" />
                 <input
                   value={nameValue}
                   onChange={(event) => setNameValue(event.target.value)}
-                  className="h-14 w-full rounded-2xl border border-slate-200 bg-white px-12 text-sm font-bold text-slate-950 outline-none shadow-[0_8px_20px_rgba(15,23,42,0.04)] transition placeholder:text-slate-400 focus:border-[#10b981] focus:ring-4 focus:ring-emerald-100"
+                  className="h-14 w-full rounded-2xl border border-slate-200 bg-white px-12 text-sm font-bold text-slate-950 outline-none shadow-[0_8px_20px_rgba(15,23,42,0.04)] transition placeholder:text-slate-400 focus:border-[#f43f5e] focus:ring-4 focus:ring-red-100"
                   placeholder="Nama lengkap"
                   autoComplete="name"
                 />
@@ -201,11 +201,11 @@ export function UserAccountEditForm({ nama, email, phone, profilePhotoURL = "" }
             <label className="block">
               <span className="mb-2 block text-xs font-black text-slate-700">Nomor Handphone</span>
               <span className="relative block">
-                <Phone className="pointer-events-none absolute left-4 top-1/2 h-5 w-5 -translate-y-1/2 text-emerald-700/55" />
+                <Phone className="pointer-events-none absolute left-4 top-1/2 h-5 w-5 -translate-y-1/2 text-red-700/55" />
                 <input
                   value={phoneValue}
                   onChange={(event) => setPhoneValue(cleanPhone(event.target.value))}
-                  className="h-14 w-full rounded-2xl border border-slate-200 bg-white px-12 text-sm font-bold text-slate-950 outline-none shadow-[0_8px_20px_rgba(15,23,42,0.04)] transition placeholder:text-slate-400 focus:border-[#10b981] focus:ring-4 focus:ring-emerald-100"
+                  className="h-14 w-full rounded-2xl border border-slate-200 bg-white px-12 text-sm font-bold text-slate-950 outline-none shadow-[0_8px_20px_rgba(15,23,42,0.04)] transition placeholder:text-slate-400 focus:border-[#f43f5e] focus:ring-4 focus:ring-red-100"
                   placeholder="08xxxxxxxxxx"
                   autoComplete="tel"
                   inputMode="tel"

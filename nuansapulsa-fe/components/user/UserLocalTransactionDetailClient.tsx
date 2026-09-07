@@ -65,8 +65,8 @@ export function UserLocalTransactionDetailClient({ invoiceId }: { invoiceId: str
         <UserTransactionStatusBadge status={order.status} />
       </div>
 
-      <div className="mt-5 rounded-3xl bg-emerald-50 p-4">
-        <p className="text-xs font-semibold uppercase tracking-wide text-[#047857]">Total Pembayaran</p>
+      <div className="mt-5 rounded-3xl bg-red-50 p-4">
+        <p className="text-xs font-semibold uppercase tracking-wide text-[#d70717]">Total Pembayaran</p>
         <p className="mt-1 text-2xl font-bold text-slate-900">{formatRupiah(order.harga_final)}</p>
       </div>
 

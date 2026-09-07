@@ -40,14 +40,14 @@ export function UserLoginPromptModal({ isOpen, onClose }: UserLoginPromptModalPr
         <div className="mt-4 grid grid-cols-2 gap-2">
           <Link
             href="/login?callbackUrl=/user"
-            className="inline-flex h-10 items-center justify-center rounded-2xl bg-linear-to-r from-[#0f6fcb] to-[#2f92df] px-4 text-sm font-semibold text-white! visited:text-white! hover:text-white!"
+            className="inline-flex h-10 items-center justify-center rounded-2xl bg-linear-to-r from-[#d70717] to-[#ff6a00] px-4 text-sm font-semibold text-white! visited:text-white! hover:text-white!"
             onClick={onClose}
           >
             Masuk
           </Link>
           <Link
             href="/register"
-            className="inline-flex h-10 items-center justify-center rounded-2xl border border-sky-200 bg-white px-4 text-sm font-semibold text-sky-700"
+            className="inline-flex h-10 items-center justify-center rounded-2xl border border-red-200 bg-white px-4 text-sm font-semibold text-[#d70717]"
             onClick={onClose}
           >
             Daftar

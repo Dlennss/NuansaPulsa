@@ -135,7 +135,7 @@ export function UserSaldoMutationHistoryList({ initialItems, initialHasNextPage,
           <button
             type="button"
             onClick={() => void handleEnableAutoLoad()}
-            className="inline-flex w-full justify-center rounded-md bg-[#0f6fcb] px-4 py-2 text-sm font-semibold text-white! shadow-sm transition hover:bg-[#0a5dad] hover:text-white!"
+            className="inline-flex w-full justify-center rounded-md bg-[#d70717] px-4 py-2 text-sm font-semibold text-white! shadow-sm transition hover:bg-[#b80616] hover:text-white!"
           >
             Lainnya
           </button>

@@ -20,11 +20,11 @@ export function UserBalanceHeader({ name, saldo, label }: Props) {
   return (
     <section className="flex items-center justify-between gap-3">
       <div className="min-w-0">
-        <p className="truncate text-[13px] font-medium tracking-[0.01em] text-sky-900/75">{displayLabel}</p>
+        <p className="truncate text-[13px] font-medium tracking-[0.01em] text-red-900/75">{displayLabel}</p>
       </div>
 
       <div className="flex shrink-0 items-center gap-2">
-        <p className="text-[13px] font-semibold tracking-[-0.01em] text-sky-950/85 sm:text-sm">
+        <p className="text-[13px] font-semibold tracking-[-0.01em] text-red-950/85 sm:text-sm">
           {revealed ? formatIDR(saldo) : "Rp *******"}
         </p>
         <button

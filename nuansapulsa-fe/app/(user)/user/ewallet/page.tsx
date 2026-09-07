@@ -62,7 +62,7 @@ export default async function UserEwalletPage() {
   ].filter((item) => item.brand) as Array<{ key: string; title: string; brand: UserBrandItem }>;
 
   return (
-    <main className="bg-sky-50">
+    <main className="bg-[#fff6f4]">
       <div className="space-y-4 px-4 pt-4">
         {!ewalletCategory ? (
           <section className="grid min-h-40 place-items-center rounded-md border border-dashed border-slate-200 bg-white px-4 text-center text-sm text-slate-500 shadow-[0_10px_28px_rgba(15,23,42,0.08)]">
@@ -88,7 +88,7 @@ export default async function UserEwalletPage() {
                       {imageSrc ? (
                         <Image src={imageSrc} alt={card.title} title={card.title} width={100} height={100} className="h-full w-full object-contain" />
                       ) : (
-                        <span className="text-sm font-black uppercase tracking-tight text-sky-700">{card.title.slice(0, 2)}</span>
+                        <span className="text-sm font-black uppercase tracking-tight text-[#d70717]">{card.title.slice(0, 2)}</span>
                       )}
                     </div>
                   </div>

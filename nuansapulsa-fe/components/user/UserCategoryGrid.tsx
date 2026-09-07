@@ -92,7 +92,7 @@ export function UserCategoryGrid({ items, showAll = false }: UserCategoryGridPro
 
   return (
     <section>
-      <div className="rounded-[24px] border border-emerald-950/5 bg-linear-to-br from-white via-emerald-50/70 to-lime-50/80 p-2.5 shadow-[0_18px_38px_rgba(6,78,59,0.12)]">
+      <div className="rounded-[24px] border border-red-950/[0.06] bg-[linear-gradient(135deg,#ffffff_0%,#fff3f0_58%,#fff8df_100%)] p-2.5 shadow-[0_18px_38px_rgba(151,14,32,0.11)]">
         <div className={showAll ? "grid grid-cols-3 gap-2.5" : "grid grid-cols-3 gap-2.5"}>
           {!showAll
             ? DEFAULT_SHORTCUTS.map((item) => (

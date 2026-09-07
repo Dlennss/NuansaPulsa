@@ -11,9 +11,9 @@ const kilatLevels = [
     name: "Nuansa Start",
     short: "Start",
     image: "/agent-levels/kilat-start-badge.png",
-    bg: "from-emerald-50 via-white to-lime-100",
-    accent: "bg-emerald-600",
-    text: "text-emerald-700",
+    bg: "from-red-50 via-white to-amber-100",
+    accent: "bg-red-600",
+    text: "text-red-700",
     desc: "Level awal untuk agent baru. Limit dasar Rp 500.000 dan menjadi titik awal membangun riwayat pembayaran.",
     benefits: [
       ["Limit sampai Rp 500.000", "Agent baru mulai dari limit dasar NuansaPulsa", WalletCards],
@@ -27,7 +27,7 @@ const kilatLevels = [
     name: "Nuansa Plus",
     short: "Plus",
     image: "/agent-levels/kilat-plus-badge.png",
-    bg: "from-sky-50 via-white to-blue-100",
+    bg: "from-red-50 via-white to-blue-100",
     accent: "bg-blue-600",
     text: "text-blue-700",
     desc: "Level untuk agent yang sudah menyelesaikan 3 pengajuan tepat waktu. Limit naik menjadi Rp 1.000.000.",
@@ -166,12 +166,12 @@ export function UserAgentLevelPageContent({ initialLevelCode = "start" }: { init
           </div>
         </section>
 
-        <section className="mt-3 rounded-[24px] border border-emerald-100 bg-emerald-50 p-4 text-[#047857]">
+        <section className="mt-3 rounded-[24px] border border-red-100 bg-red-50 p-4 text-[#d70717]">
           <div className="flex items-center gap-3">
             <ShieldCheck className="h-8 w-8 shrink-0" strokeWidth={2.5} />
             <div>
               <p className="text-sm font-black">Naik Level Bertahap</p>
-              <p className="mt-1 text-[11px] font-semibold leading-5 text-[#047857]/75">Level naik dari jumlah pengajuan yang sudah lunas tepat waktu: 3 kali menjadi Plus, 5 kali menjadi Elite.</p>
+              <p className="mt-1 text-[11px] font-semibold leading-5 text-[#d70717]/75">Level naik dari jumlah pengajuan yang sudah lunas tepat waktu: 3 kali menjadi Plus, 5 kali menjadi Elite.</p>
             </div>
           </div>
         </section>

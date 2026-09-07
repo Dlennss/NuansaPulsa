@@ -72,7 +72,7 @@ export function RetailCommissionClient({ authToken }: Props) {
 
   return (
     <div className="space-y-4">
-      <section className="relative overflow-hidden rounded-md border border-sky-100 bg-[linear-gradient(135deg,#f8fbff_0%,#eef7ff_45%,#fff7db_100%)] p-5 shadow-[0_10px_28px_rgba(15,23,42,0.1)]">
+      <section className="relative overflow-hidden rounded-md border border-red-100 bg-[linear-gradient(135deg,#f8fbff_0%,#eef7ff_45%,#fff7db_100%)] p-5 shadow-[0_10px_28px_rgba(15,23,42,0.1)]">
         <div className="pointer-events-none absolute inset-y-0 right-0 w-28 bg-[radial-gradient(circle_at_top_right,rgba(59,130,246,0.18),transparent_58%)]" />
         <div className="pointer-events-none absolute inset-x-0 bottom-0 h-16 bg-[linear-gradient(90deg,rgba(14,165,233,0.06),rgba(245,158,11,0.12),rgba(59,130,246,0.08))]" />
         <div className="relative flex items-center gap-3">
@@ -80,7 +80,7 @@ export function RetailCommissionClient({ authToken }: Props) {
             <Coins className="h-5 w-5" />
           </span>
           <div>
-            <div className="text-[11px] font-semibold uppercase tracking-[0.24em] text-sky-700">Komisi</div>
+            <div className="text-[11px] font-semibold uppercase tracking-[0.24em] text-[#d70717]">Komisi</div>
             <h1 className="text-xl font-bold text-slate-900">Fee Retail</h1>
             <p className="text-sm text-slate-600">Komisi retail yang sudah masuk ke saldo akun anda.</p>
           </div>
@@ -95,15 +95,15 @@ export function RetailCommissionClient({ authToken }: Props) {
             label: "Total Fee",
             value: summary?.total_earned || 0,
             cardClass:
-              "border-sky-200 bg-[linear-gradient(180deg,#ffffff_0%,#eef7ff_100%)] before:bg-sky-500",
-            valueClass: "text-sky-700",
+              "border-red-200 bg-[linear-gradient(180deg,#ffffff_0%,#eef7ff_100%)] before:bg-[#fff6f4]0",
+            valueClass: "text-[#d70717]",
           },
           {
             label: "Saldo Tersedia",
             value: summary?.available_saldo || 0,
             cardClass:
-              "border-emerald-200 bg-[linear-gradient(180deg,#ffffff_0%,#effcf6_100%)] before:bg-emerald-500",
-            valueClass: "text-emerald-700",
+              "border-red-200 bg-[linear-gradient(180deg,#ffffff_0%,#fff1ee_100%)] before:bg-red-500",
+            valueClass: "text-red-700",
           },
           {
             label: "Withdraw Pending",
@@ -144,7 +144,7 @@ export function RetailCommissionClient({ authToken }: Props) {
               <div className="flex items-start justify-between gap-3">
                 <div>
                   <div className="text-sm font-semibold text-slate-900">Rp {fmtIDR(item.amount)}</div>
-                  <div className="mt-1 inline-flex rounded-sm bg-sky-50 px-2 py-1 text-[11px] font-semibold uppercase tracking-[0.14em] text-sky-700">
+                  <div className="mt-1 inline-flex rounded-sm bg-[#fff6f4] px-2 py-1 text-[11px] font-semibold uppercase tracking-[0.14em] text-[#d70717]">
                     {item.level?.toUpperCase()} • {item.invoice_id}
                   </div>
                   <div className="mt-1 text-xs text-slate-500">

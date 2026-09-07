@@ -58,14 +58,14 @@ function Field({ name, label, placeholder, defaultValue = "", className = "", te
           defaultValue={defaultValue}
           placeholder={placeholder}
           rows={4}
-          className="mt-2 w-full resize-none rounded-2xl border border-slate-200 bg-[#fbfffd] px-4 py-3 text-sm font-bold text-slate-950 outline-none transition placeholder:text-slate-400 focus:border-[#047857] focus:ring-4 focus:ring-emerald-100"
+          className="mt-2 w-full resize-none rounded-2xl border border-slate-200 bg-[#fffafa] px-4 py-3 text-sm font-bold text-slate-950 outline-none transition placeholder:text-slate-400 focus:border-[#d70717] focus:ring-4 focus:ring-red-100"
         />
       ) : (
         <input
           name={name}
           defaultValue={defaultValue}
           placeholder={placeholder}
-          className="mt-2 h-12 w-full rounded-2xl border border-slate-200 bg-[#fbfffd] px-4 text-sm font-bold text-slate-950 outline-none transition placeholder:text-slate-400 focus:border-[#047857] focus:ring-4 focus:ring-emerald-100"
+          className="mt-2 h-12 w-full rounded-2xl border border-slate-200 bg-[#fffafa] px-4 text-sm font-bold text-slate-950 outline-none transition placeholder:text-slate-400 focus:border-[#d70717] focus:ring-4 focus:ring-red-100"
         />
       )}
     </label>
@@ -79,7 +79,7 @@ function SelectField({ name, label, defaultValue = "", className = "", options }
       <select
         name={name}
         defaultValue={defaultValue}
-        className="mt-2 h-12 w-full rounded-2xl border border-slate-200 bg-[#fbfffd] px-4 text-sm font-bold text-slate-950 outline-none transition focus:border-[#047857] focus:ring-4 focus:ring-emerald-100"
+        className="mt-2 h-12 w-full rounded-2xl border border-slate-200 bg-[#fffafa] px-4 text-sm font-bold text-slate-950 outline-none transition focus:border-[#d70717] focus:ring-4 focus:ring-red-100"
       >
         <option value="" disabled>
           Pilih hubungan
@@ -171,7 +171,7 @@ function SignaturePad({ signerName, onSignatureChange }: { signerName: string; o
       ctx.lineCap = "round";
       ctx.lineJoin = "round";
       ctx.lineWidth = 1.35;
-      ctx.strokeStyle = "#047857";
+      ctx.strokeStyle = "#d70717";
     };
 
     resize();
@@ -232,7 +232,7 @@ function SignaturePad({ signerName, onSignatureChange }: { signerName: string; o
   }
 
   return (
-    <div className="rounded-[24px] border border-emerald-300 bg-[linear-gradient(180deg,#ffffff_0%,#f3fff9_100%)] p-4 text-center shadow-[0_12px_26px_rgba(4,120,87,0.10)]">
+    <div className="rounded-[24px] border border-red-300 bg-[linear-gradient(180deg,#ffffff_0%,#fff7f5_100%)] p-4 text-center shadow-[0_12px_26px_rgba(215,7,23,0.10)]">
       <div className="flex items-center justify-between gap-2">
         <p className="text-[10px] font-black uppercase tracking-[0.18em] text-slate-950">Agent</p>
         <button
@@ -244,7 +244,7 @@ function SignaturePad({ signerName, onSignatureChange }: { signerName: string; o
           <RotateCcw className="h-3.5 w-3.5" strokeWidth={2.4} />
         </button>
       </div>
-      <div className="relative mt-3 overflow-hidden rounded-[22px] border border-slate-200 bg-[#fbfffd]">
+      <div className="relative mt-3 overflow-hidden rounded-[22px] border border-slate-200 bg-[#fffafa]">
         <canvas
           ref={canvasRef}
           className="h-40 w-full touch-none"
@@ -261,7 +261,7 @@ function SignaturePad({ signerName, onSignatureChange }: { signerName: string; o
         ) : null}
       </div>
       <p className="mt-3 truncate text-[11px] font-black text-slate-500">{signerName}</p>
-      <p className={hasSignature ? "mt-1 text-[9px] font-black text-[#047857]" : "mt-1 text-[9px] font-black text-slate-400"}>
+      <p className={hasSignature ? "mt-1 text-[9px] font-black text-[#d70717]" : "mt-1 text-[9px] font-black text-slate-400"}>
         {hasSignature ? "Siap dikirim" : "Belum tanda tangan"}
       </p>
     </div>
@@ -286,7 +286,7 @@ function getApplicationNotice(application?: AgentCreditApplication) {
       return {
         title: "Pengajuan disetujui",
         desc: `Kredit ${formatIDR(application.approved_amount || application.requested_amount)} sudah disetujui operator dan masuk ke saldo utama.`,
-        className: "border-emerald-200 bg-emerald-50 text-emerald-700",
+        className: "border-red-200 bg-red-50 text-red-700",
         icon: BadgeCheck,
       };
     case "rejected":
@@ -330,21 +330,21 @@ function getApplicationNotice(application?: AgentCreditApplication) {
       return {
         title: "Menunggu aktivasi",
         desc: `Operator sudah menyetujui nominal ${formatIDR(application.approved_amount || application.requested_amount)}. Limit sedang disiapkan.`,
-        className: "border-sky-200 bg-sky-50 text-sky-700",
+        className: "border-red-200 bg-[#fff6f4] text-[#d70717]",
         icon: BadgeCheck,
       };
     case "analysis_review":
       return {
         title: "Sedang dicek operator",
         desc: "Operator sedang mengecek kelengkapan data, risiko, dan nominal.",
-        className: "border-sky-200 bg-sky-50 text-sky-700",
+        className: "border-red-200 bg-[#fff6f4] text-[#d70717]",
         icon: SearchCheck,
       };
     case "master_review":
       return {
         title: "Sedang diproses",
         desc: "Dokumen agent sedang diperiksa sebelum keputusan operator.",
-        className: "border-sky-200 bg-sky-50 text-sky-700",
+        className: "border-red-200 bg-[#fff6f4] text-[#d70717]",
         icon: SearchCheck,
       };
     case "submitted":
@@ -501,7 +501,7 @@ export function UserAgentCreditPageContent({ name, email, phone, storeName = "",
   };
   const statusClassName = (item: AgentCreditApplication) => {
     if (hasOperatorDocumentRevision(item)) return "bg-amber-100 text-amber-800";
-    if (item.status === "approved") return String(item.loan_status || "").toLowerCase() === "suspended" ? "bg-amber-100 text-amber-800" : "bg-emerald-100 text-emerald-800";
+    if (item.status === "approved") return String(item.loan_status || "").toLowerCase() === "suspended" ? "bg-amber-100 text-amber-800" : "bg-red-100 text-red-800";
     if (isRejectedStatus(item.status)) return "bg-rose-100 text-rose-700";
     return "bg-amber-100 text-amber-800";
   };
@@ -701,7 +701,7 @@ export function UserAgentCreditPageContent({ name, email, phone, storeName = "",
 
   return (
     <form onSubmit={handleSubmit} className="mx-auto w-full max-w-md pb-24">
-      <section className="relative overflow-hidden bg-[linear-gradient(135deg,#052e26_0%,#047857_58%,#84cc16_140%)] px-4 pb-7 pt-5 text-white shadow-[0_18px_42px_rgba(4,120,87,0.22)]">
+      <section className="relative overflow-hidden bg-[linear-gradient(135deg,#b20717_0%,#d70717_58%,#ff6a00_140%)] px-4 pb-7 pt-5 text-white shadow-[0_18px_42px_rgba(215,7,23,0.22)]">
         <div className="pointer-events-none absolute -right-12 -top-16 h-40 w-40 rounded-full bg-white/10" />
         <div className="flex items-center gap-3">
           <Link href="/user/saldo" className="grid h-10 w-10 shrink-0 place-items-center rounded-2xl bg-white/12 text-white ring-1 ring-white/15">
@@ -713,7 +713,7 @@ export function UserAgentCreditPageContent({ name, email, phone, storeName = "",
           </div>
           <Link
             href="/user/saldo/kredit-agent/level"
-            className="flex h-12 shrink-0 items-center gap-2 rounded-2xl bg-white px-2.5 text-[#047857] shadow-[0_10px_22px_rgba(0,0,0,0.08)]"
+            className="flex h-12 shrink-0 items-center gap-2 rounded-2xl bg-white px-2.5 text-[#d70717] shadow-[0_10px_22px_rgba(0,0,0,0.08)]"
             aria-label={`Lihat level ${creditLevelName}`}
           >
             <span className="relative h-9 w-9 shrink-0">
@@ -721,16 +721,16 @@ export function UserAgentCreditPageContent({ name, email, phone, storeName = "",
             </span>
             <span className="hidden min-w-0 text-left min-[380px]:block">
               <span className="block text-[9px] font-black leading-3 text-slate-400">Level</span>
-              <span className="block max-w-[72px] truncate text-[10px] font-black leading-3 text-[#047857]">{levelSubtitle}</span>
+              <span className="block max-w-[72px] truncate text-[10px] font-black leading-3 text-[#d70717]">{levelSubtitle}</span>
             </span>
           </Link>
         </div>
       </section>
 
       <div className="-mt-4 space-y-4 px-3">
-        <section className="overflow-hidden rounded-[28px] border border-emerald-100 bg-white shadow-[0_20px_48px_rgba(6,78,59,0.12)]">
-          <div className="flex items-center gap-3 border-b border-emerald-50 p-4">
-            <span className="relative h-16 w-16 shrink-0 rounded-[22px] bg-emerald-50 p-2 ring-1 ring-emerald-100">
+        <section className="overflow-hidden rounded-[28px] border border-red-100 bg-white shadow-[0_20px_48px_rgba(151,14,32,0.12)]">
+          <div className="flex items-center gap-3 border-b border-red-50 p-4">
+            <span className="relative h-16 w-16 shrink-0 rounded-[22px] bg-red-50 p-2 ring-1 ring-red-100">
               <Image src={creditLevelImage} alt={creditLevelName} fill sizes="64px" className="object-contain p-1" />
             </span>
             <div className="min-w-0 flex-1">
@@ -738,30 +738,30 @@ export function UserAgentCreditPageContent({ name, email, phone, storeName = "",
               <p className="mt-1 text-[11px] font-semibold leading-4 text-slate-500">
                 {acceptedApplications} pengajuan diterima
               </p>
-              {latestApplication?.id ? <p className="mt-1 text-[10px] font-black tracking-[0.08em] text-emerald-700">ID KREDIT KRD-{String(latestApplication.id).padStart(8, "0")}</p> : null}
+              {latestApplication?.id ? <p className="mt-1 text-[10px] font-black tracking-[0.08em] text-red-700">ID KREDIT KRD-{String(latestApplication.id).padStart(8, "0")}</p> : null}
             </div>
-            <span className="rounded-full bg-emerald-950 px-3 py-1 text-[10px] font-black uppercase tracking-wide text-white">
+            <span className="rounded-full bg-red-950 px-3 py-1 text-[10px] font-black uppercase tracking-wide text-white">
               {levelSubtitle}
             </span>
           </div>
 
           <div className="space-y-3 p-4">
-            <div className="overflow-hidden rounded-[24px] bg-[linear-gradient(135deg,#052e26_0%,#047857_58%,#84cc16_145%)] text-white shadow-[0_18px_34px_rgba(4,120,87,0.22)]">
+            <div className="overflow-hidden rounded-[24px] bg-[linear-gradient(135deg,#b20717_0%,#d70717_58%,#ff6a00_145%)] text-white shadow-[0_18px_34px_rgba(215,7,23,0.22)]">
               <div className="min-w-0 p-4">
-                <p className="truncate text-[10px] font-black uppercase tracking-[0.16em] text-lime-100/85">Saldo Utama</p>
+                <p className="truncate text-[10px] font-black uppercase tracking-[0.16em] text-amber-100/85">Saldo Utama</p>
                 <p className="mt-2 truncate text-2xl font-black">{formatIDR(displayMainBalance)}</p>
-                <p className="mt-2 text-[10px] font-semibold leading-4 text-emerald-50/80">Saldo untuk pembelian produk dan transaksi harian. Kredit yang disetujui operator langsung masuk ke saldo ini.</p>
+                <p className="mt-2 text-[10px] font-semibold leading-4 text-red-50/80">Saldo untuk pembelian produk dan transaksi harian. Kredit yang disetujui operator langsung masuk ke saldo ini.</p>
               </div>
             </div>
           </div>
         </section>
 
-        <section className="grid grid-cols-2 gap-2 rounded-[24px] border border-emerald-100 bg-emerald-50 p-2 shadow-[0_14px_30px_rgba(6,78,59,0.08)]">
+        <section className="grid grid-cols-2 gap-2 rounded-[24px] border border-red-100 bg-red-50 p-2 shadow-[0_14px_30px_rgba(151,14,32,0.08)]">
           <button
             type="button"
             onClick={() => setActiveCreditTab("list")}
             className={activeCreditTab === "list"
-              ? "flex min-h-14 items-center gap-3 rounded-[20px] bg-white px-3 text-left text-[#047857] shadow-[0_12px_22px_rgba(6,78,59,0.10)]"
+              ? "flex min-h-14 items-center gap-3 rounded-[20px] bg-white px-3 text-left text-[#d70717] shadow-[0_12px_22px_rgba(151,14,32,0.10)]"
               : "flex min-h-14 items-center gap-3 rounded-[20px] px-3 text-left text-slate-500"}
           >
             <FileText className="h-5 w-5 shrink-0" strokeWidth={2.4} />
@@ -774,7 +774,7 @@ export function UserAgentCreditPageContent({ name, email, phone, storeName = "",
             type="button"
             onClick={() => setActiveCreditTab("new")}
             className={activeCreditTab === "new"
-              ? "flex min-h-14 items-center gap-3 rounded-[20px] bg-white px-3 text-left text-[#047857] shadow-[0_12px_22px_rgba(6,78,59,0.10)]"
+              ? "flex min-h-14 items-center gap-3 rounded-[20px] bg-white px-3 text-left text-[#d70717] shadow-[0_12px_22px_rgba(151,14,32,0.10)]"
               : "flex min-h-14 items-center gap-3 rounded-[20px] px-3 text-left text-slate-500"}
           >
             <UserRound className="h-5 w-5 shrink-0" strokeWidth={2.4} />
@@ -786,21 +786,21 @@ export function UserAgentCreditPageContent({ name, email, phone, storeName = "",
         </section>
 
         {activeCreditTab === "list" ? (
-          <section className="rounded-[26px] border border-emerald-100 bg-white p-4 shadow-[0_18px_42px_rgba(6,78,59,0.10)]">
-            <p className="text-[10px] font-black uppercase tracking-[0.18em] text-[#047857]">Data Pengajuan Agent</p>
+          <section className="rounded-[26px] border border-red-100 bg-white p-4 shadow-[0_18px_42px_rgba(151,14,32,0.10)]">
+            <p className="text-[10px] font-black uppercase tracking-[0.18em] text-[#d70717]">Data Pengajuan Agent</p>
             <h2 className="mt-1 text-xl font-black leading-6 text-slate-950">Orang yang didaftarkan</h2>
             <p className="mt-1 text-[11px] font-semibold leading-4 text-slate-500">
               Semua pengajuan tersimpan rapi di sini. Pilih salah satu untuk melihat status dan detail pengajuan.
             </p>
 
-            <div className="mt-4 grid grid-cols-4 overflow-hidden rounded-[22px] border border-emerald-100 bg-[linear-gradient(135deg,#f0fdf4,#ffffff)]">
+            <div className="mt-4 grid grid-cols-4 overflow-hidden rounded-[22px] border border-red-100 bg-[linear-gradient(135deg,#fff1ee,#ffffff)]">
               {[
                 ["Total", totalApplications],
                 ["Menunggu", pendingApplications],
                 ["Diterima", acceptedApplications],
                 ["Ditolak", rejectedApplications],
               ].map(([label, value]) => (
-                <div key={label} className="border-r border-emerald-100 px-2 py-3 text-center last:border-r-0">
+                <div key={label} className="border-r border-red-100 px-2 py-3 text-center last:border-r-0">
                   <p className="text-lg font-black text-slate-950">{value}</p>
                   <p className="mt-1 text-[9px] font-black text-slate-500">{label}</p>
                 </div>
@@ -812,7 +812,7 @@ export function UserAgentCreditPageContent({ name, email, phone, storeName = "",
                 <span
                   key={filter}
                   className={index === 0
-                    ? "shrink-0 rounded-full border border-[#047857] bg-white px-3 py-2 text-[10px] font-black text-[#047857]"
+                    ? "shrink-0 rounded-full border border-[#d70717] bg-white px-3 py-2 text-[10px] font-black text-[#d70717]"
                     : "shrink-0 rounded-full border border-slate-200 bg-white px-3 py-2 text-[10px] font-black text-slate-500"}
                 >
                   {filter}
@@ -831,15 +831,15 @@ export function UserAgentCreditPageContent({ name, email, phone, storeName = "",
                   const agentName = String(data.agent_name || data.nama_lengkap || `Agent NuansaPulsa ${index + 1}`);
                   const storeName = String(data.store_name || data.nama_toko || "Pengajuan kredit saldo");
                   return (
-                    <div key={item.id || index} className="flex items-center gap-3 rounded-[22px] border border-emerald-100 bg-white p-3 shadow-[0_10px_24px_rgba(15,23,42,0.04)]">
-                      <span className="grid h-11 w-11 shrink-0 place-items-center rounded-2xl bg-emerald-50 text-[#047857]">
+                    <div key={item.id || index} className="flex items-center gap-3 rounded-[22px] border border-red-100 bg-white p-3 shadow-[0_10px_24px_rgba(15,23,42,0.04)]">
+                      <span className="grid h-11 w-11 shrink-0 place-items-center rounded-2xl bg-red-50 text-[#d70717]">
                         <FileText className="h-5 w-5" strokeWidth={2.4} />
                       </span>
                       <div className="min-w-0 flex-1">
                         <p className="truncate text-sm font-black text-slate-950">{agentName}</p>
                         <p className="mt-0.5 truncate text-[10px] font-semibold text-slate-500">{storeName}</p>
-                        <p className="mt-1 truncate text-[10px] font-black tracking-[0.08em] text-emerald-700">ID KREDIT KRD-{String(item.id).padStart(8, "0")}</p>
-                        <p className="mt-1 text-xs font-black text-[#047857]">{formatIDR(Number(item.approved_amount || item.requested_amount || 0))}</p>
+                        <p className="mt-1 truncate text-[10px] font-black tracking-[0.08em] text-red-700">ID KREDIT KRD-{String(item.id).padStart(8, "0")}</p>
+                        <p className="mt-1 text-xs font-black text-[#d70717]">{formatIDR(Number(item.approved_amount || item.requested_amount || 0))}</p>
                       </div>
                       <div className="flex shrink-0 flex-col items-end gap-2">
                         <span className={`rounded-full px-2.5 py-1 text-[9px] font-black ${statusClassName(item)}`}>
@@ -851,7 +851,7 @@ export function UserAgentCreditPageContent({ name, email, phone, storeName = "",
                             setLatestApplication(item);
                             setActiveCreditTab(hasOperatorDocumentRevision(item) ? "new" : "status");
                           }}
-                          className="rounded-full border border-emerald-100 bg-emerald-50 px-3 py-2 text-[10px] font-black text-[#047857]"
+                          className="rounded-full border border-red-100 bg-red-50 px-3 py-2 text-[10px] font-black text-[#d70717]"
                         >
                           {hasOperatorDocumentRevision(item) ? "Perbaiki Dokumen" : "Lihat Status"}
                         </button>
@@ -860,8 +860,8 @@ export function UserAgentCreditPageContent({ name, email, phone, storeName = "",
                   );
                 })
               ) : (
-                <div className="rounded-[24px] border border-dashed border-emerald-200 bg-emerald-50/40 px-4 py-10 text-center">
-                  <UserRound className="mx-auto h-9 w-9 text-[#047857]" strokeWidth={2.2} />
+                <div className="rounded-[24px] border border-dashed border-red-200 bg-red-50/40 px-4 py-10 text-center">
+                  <UserRound className="mx-auto h-9 w-9 text-[#d70717]" strokeWidth={2.2} />
                   <p className="mt-3 text-sm font-black text-slate-950">Belum ada pengajuan</p>
                   <p className="mt-1 text-[11px] font-semibold text-slate-500">Mulai dari tab Daftar Baru untuk membuat pengajuan kredit saldo.</p>
                 </div>
@@ -870,22 +870,22 @@ export function UserAgentCreditPageContent({ name, email, phone, storeName = "",
           </section>
         ) : activeCreditTab === "status" && latestApplication ? (
           <section className="space-y-4">
-            <div className="relative overflow-hidden rounded-[28px] border border-emerald-200 bg-[linear-gradient(135deg,#f0fdf4_0%,#ffffff_72%)] p-5 shadow-[0_18px_42px_rgba(6,78,59,0.10)]">
-              <div className="pointer-events-none absolute -right-14 -top-14 h-32 w-32 rounded-full bg-sky-100/70" />
+            <div className="relative overflow-hidden rounded-[28px] border border-red-200 bg-[linear-gradient(135deg,#fff1ee_0%,#ffffff_72%)] p-5 shadow-[0_18px_42px_rgba(151,14,32,0.10)]">
+              <div className="pointer-events-none absolute -right-14 -top-14 h-32 w-32 rounded-full bg-red-100/70" />
               <div className="relative flex items-start justify-between gap-3">
-                <span className={statusIsRejected ? "grid h-14 w-14 shrink-0 place-items-center rounded-2xl bg-rose-50 text-rose-600 ring-1 ring-rose-100" : "grid h-14 w-14 shrink-0 place-items-center rounded-2xl bg-emerald-100 text-[#047857] ring-1 ring-emerald-200"}>
+                <span className={statusIsRejected ? "grid h-14 w-14 shrink-0 place-items-center rounded-2xl bg-rose-50 text-rose-600 ring-1 ring-rose-100" : "grid h-14 w-14 shrink-0 place-items-center rounded-2xl bg-red-100 text-[#d70717] ring-1 ring-red-200"}>
                   {statusIsRejected ? <XCircle className="h-7 w-7" strokeWidth={2.5} /> : <BadgeCheck className="h-7 w-7" strokeWidth={2.5} />}
                 </span>
                 <button
                   type="button"
                   onClick={() => setActiveCreditTab("list")}
-                  className="rounded-full border border-emerald-100 bg-white px-3 py-2 text-[10px] font-black text-[#047857] shadow-[0_10px_22px_rgba(6,78,59,0.08)]"
+                  className="rounded-full border border-red-100 bg-white px-3 py-2 text-[10px] font-black text-[#d70717] shadow-[0_10px_22px_rgba(151,14,32,0.08)]"
                 >
                   Kembali
                 </button>
               </div>
 
-              <p className={statusIsRejected ? "relative mt-5 text-[10px] font-black uppercase tracking-[0.18em] text-rose-600" : "relative mt-5 text-[10px] font-black uppercase tracking-[0.18em] text-[#047857]"}>
+              <p className={statusIsRejected ? "relative mt-5 text-[10px] font-black uppercase tracking-[0.18em] text-rose-600" : "relative mt-5 text-[10px] font-black uppercase tracking-[0.18em] text-[#d70717]"}>
                 {statusIsRejected ? "Pengajuan Ditolak" : statusIsPaid ? "Siklus Modal Selesai" : statusIsWaiting ? "Menunggu Proses" : "Modal Disetujui"}
               </p>
               <h2 className="relative mt-1 text-2xl font-black leading-7 text-slate-950">{statusHeadline}</h2>
@@ -901,10 +901,10 @@ export function UserAgentCreditPageContent({ name, email, phone, storeName = "",
 
               <div className="relative mt-5 flex items-center justify-between gap-3 rounded-2xl border border-slate-200 bg-white px-4 py-3 shadow-[0_12px_24px_rgba(15,23,42,0.04)]">
                 <span className="min-w-0 truncate text-xs font-black text-slate-600">{statusApplicationCode}</span>
-                <span className="shrink-0 text-sm font-black text-[#047857]">{formatIDR(statusAmount)}</span>
+                <span className="shrink-0 text-sm font-black text-[#d70717]">{formatIDR(statusAmount)}</span>
               </div>
 
-              <div className={statusIsRejected ? "relative mt-4 rounded-[24px] bg-[linear-gradient(135deg,#be123c,#fb7185)] p-5 text-white shadow-[0_18px_34px_rgba(225,29,72,0.20)]" : statusIsWaiting ? "relative mt-4 rounded-[24px] bg-[linear-gradient(135deg,#b45309,#f59e0b)] p-5 text-white shadow-[0_18px_34px_rgba(245,158,11,0.20)]" : "relative mt-4 rounded-[24px] bg-[linear-gradient(135deg,#047857,#16a34a,#22c55e)] p-5 text-white shadow-[0_18px_34px_rgba(4,120,87,0.22)]"}>
+              <div className={statusIsRejected ? "relative mt-4 rounded-[24px] bg-[linear-gradient(135deg,#be123c,#fb7185)] p-5 text-white shadow-[0_18px_34px_rgba(225,29,72,0.20)]" : statusIsWaiting ? "relative mt-4 rounded-[24px] bg-[linear-gradient(135deg,#b45309,#f59e0b)] p-5 text-white shadow-[0_18px_34px_rgba(245,158,11,0.20)]" : "relative mt-4 rounded-[24px] bg-[linear-gradient(135deg,#d70717,#16a34a,#22c55e)] p-5 text-white shadow-[0_18px_34px_rgba(215,7,23,0.22)]"}>
                 <div className="flex items-center gap-3">
                   <span className="grid h-10 w-10 shrink-0 place-items-center rounded-full bg-white/15 ring-1 ring-white/20">
                     {statusIsRejected ? <XCircle className="h-5 w-5" strokeWidth={2.5} /> : <BadgeCheck className="h-5 w-5" strokeWidth={2.5} />}
@@ -916,12 +916,12 @@ export function UserAgentCreditPageContent({ name, email, phone, storeName = "",
                 </div>
               </div>
 
-              <div className="relative mt-4 h-1.5 rounded-full bg-[linear-gradient(90deg,#6d5dfc_0%,#0ea5e9_48%,#10b981_100%)]" />
+              <div className="relative mt-4 h-1.5 rounded-full bg-[linear-gradient(90deg,#6d5dfc_0%,#0ea5e9_48%,#f43f5e_100%)]" />
 
               <div className="relative mt-4 space-y-3">
                 {statusSteps.map((step) => (
-                  <div key={step.label} className={step.done ? "flex items-center gap-3 rounded-2xl border border-emerald-100 bg-emerald-50/70 px-3 py-3" : "flex items-center gap-3 rounded-2xl border border-slate-200 bg-slate-50 px-3 py-3"}>
-                    <span className={step.done ? "grid h-5 w-5 shrink-0 place-items-center rounded-full border border-[#047857] bg-white text-[#047857]" : "grid h-5 w-5 shrink-0 place-items-center rounded-full border border-slate-300 bg-white text-slate-400"}>
+                  <div key={step.label} className={step.done ? "flex items-center gap-3 rounded-2xl border border-red-100 bg-red-50/70 px-3 py-3" : "flex items-center gap-3 rounded-2xl border border-slate-200 bg-slate-50 px-3 py-3"}>
+                    <span className={step.done ? "grid h-5 w-5 shrink-0 place-items-center rounded-full border border-[#d70717] bg-white text-[#d70717]" : "grid h-5 w-5 shrink-0 place-items-center rounded-full border border-slate-300 bg-white text-slate-400"}>
                       {step.done ? <Check className="h-3 w-3" strokeWidth={3} /> : <Clock3 className="h-3 w-3" strokeWidth={2.5} />}
                     </span>
                     <p className={step.done ? "text-[11px] font-black leading-4 text-slate-800" : "text-[11px] font-black leading-4 text-slate-500"}>{step.label}</p>
@@ -931,9 +931,9 @@ export function UserAgentCreditPageContent({ name, email, phone, storeName = "",
             </div>
 
             {statusIsApproved && !isCreditSuspended ? (
-              <div className="rounded-[28px] border border-emerald-100 bg-white p-4 shadow-[0_18px_42px_rgba(6,78,59,0.10)]">
+              <div className="rounded-[28px] border border-red-100 bg-white p-4 shadow-[0_18px_42px_rgba(151,14,32,0.10)]">
                 <div className="flex items-start gap-3">
-                  <span className="grid h-12 w-12 shrink-0 place-items-center rounded-2xl bg-emerald-50 text-[#047857]">
+                  <span className="grid h-12 w-12 shrink-0 place-items-center rounded-2xl bg-red-50 text-[#d70717]">
                     <FileText className="h-6 w-6" strokeWidth={2.4} />
                   </span>
                   <div className="min-w-0">
@@ -943,13 +943,13 @@ export function UserAgentCreditPageContent({ name, email, phone, storeName = "",
                     </p>
                   </div>
                 </div>
-                <div className="mt-4 rounded-2xl bg-[linear-gradient(135deg,#064e3b,#047857,#16a34a)] px-4 py-3 text-white">
+                <div className="mt-4 rounded-2xl bg-[linear-gradient(135deg,#b20717,#d70717,#16a34a)] px-4 py-3 text-white">
                   <div className="flex items-center justify-between gap-3">
                     <span className="text-[10px] font-black">Kredit berjalan</span>
                     <span className="text-lg font-black">{formatIDR(statusOutstanding)}</span>
                   </div>
                 </div>
-                <div className="mt-3 rounded-[22px] border border-slate-200 bg-[#fbfffd] p-4">
+                <div className="mt-3 rounded-[22px] border border-slate-200 bg-[#fffafa] p-4">
                   <p className="text-xs font-black text-slate-950">
                     Siklus Kredit Tetap Aktif
                   </p>
@@ -963,7 +963,7 @@ export function UserAgentCreditPageContent({ name, email, phone, storeName = "",
                       setPaymentError("");
                       setPaymentSuccess("");
                     }}
-                    className="mt-3 h-11 w-full rounded-2xl bg-[linear-gradient(135deg,#047857,#16a34a)] text-xs font-black text-white shadow-[0_12px_24px_rgba(4,120,87,0.18)]"
+                    className="mt-3 h-11 w-full rounded-2xl bg-[linear-gradient(135deg,#d70717,#16a34a)] text-xs font-black text-white shadow-[0_12px_24px_rgba(215,7,23,0.18)]"
                   >
                     Bayar Sebagian
                   </button>
@@ -993,9 +993,9 @@ export function UserAgentCreditPageContent({ name, email, phone, storeName = "",
           </section>
         ) : (
           <>
-        <section className="rounded-[26px] border border-emerald-950/5 bg-white p-4 shadow-[0_18px_42px_rgba(6,78,59,0.10)]">
+        <section className="rounded-[26px] border border-red-950/5 bg-white p-4 shadow-[0_18px_42px_rgba(151,14,32,0.10)]">
           <div className="mb-4 flex items-start gap-3">
-            <span className="grid h-12 w-12 shrink-0 place-items-center rounded-2xl bg-emerald-50 text-[#047857]">
+            <span className="grid h-12 w-12 shrink-0 place-items-center rounded-2xl bg-red-50 text-[#d70717]">
               <UserRound className="h-5 w-5" strokeWidth={2.4} />
             </span>
             <div>
@@ -1012,10 +1012,10 @@ export function UserAgentCreditPageContent({ name, email, phone, storeName = "",
             <Field name="email" label="Email" placeholder="email@domain.com" defaultValue={applicantText("email", email !== "-" ? email : "")} />
             <Field name="home_address" label="Alamat Rumah" placeholder="Alamat lengkap rumah" defaultValue={applicantText("home_address")} textarea className="sm:col-span-2" />
             <Field name="store_address" label="Alamat Toko" placeholder="Alamat lengkap toko" defaultValue={applicantText("store_address")} textarea className="sm:col-span-2" />
-            <div className="rounded-[22px] border border-emerald-100 bg-[linear-gradient(135deg,#f0fdf4,#ffffff)] p-4 sm:col-span-2">
-              <p className="text-[10px] font-black uppercase tracking-[0.16em] text-emerald-600">Nominal Kredit Saldo</p>
-              <label className="mt-3 flex h-14 items-center overflow-hidden rounded-2xl border border-emerald-200 bg-white focus-within:border-emerald-500 focus-within:ring-4 focus-within:ring-emerald-100">
-                <span className="grid h-full shrink-0 place-items-center border-r border-emerald-100 bg-emerald-50 px-4 text-sm font-black text-emerald-700">Rp</span>
+            <div className="rounded-[22px] border border-red-100 bg-[linear-gradient(135deg,#fff1ee,#ffffff)] p-4 sm:col-span-2">
+              <p className="text-[10px] font-black uppercase tracking-[0.16em] text-red-600">Nominal Kredit Saldo</p>
+              <label className="mt-3 flex h-14 items-center overflow-hidden rounded-2xl border border-red-200 bg-white focus-within:border-red-500 focus-within:ring-4 focus-within:ring-red-100">
+                <span className="grid h-full shrink-0 place-items-center border-r border-red-100 bg-red-50 px-4 text-sm font-black text-red-700">Rp</span>
                 <input
                   type="number"
                   name="requested_amount"
@@ -1031,15 +1031,15 @@ export function UserAgentCreditPageContent({ name, email, phone, storeName = "",
               </label>
               <div className="mt-3 flex items-center justify-between gap-3 text-[10px] font-bold">
                 <span className="text-slate-400">Rp500.000 - Rp2.000.000</span>
-                <span className="text-emerald-700">{formatIDR(requestedAmount)}</span>
+                <span className="text-red-700">{formatIDR(requestedAmount)}</span>
               </div>
             </div>
           </div>
         </section>
 
-        <section className="rounded-[26px] border border-emerald-950/5 bg-white p-4 shadow-[0_18px_42px_rgba(6,78,59,0.10)]">
+        <section className="rounded-[26px] border border-red-950/5 bg-white p-4 shadow-[0_18px_42px_rgba(151,14,32,0.10)]">
           <div className="mb-4 flex items-start gap-3">
-            <span className="grid h-12 w-12 shrink-0 place-items-center rounded-2xl bg-lime-50 text-[#047857]">
+            <span className="grid h-12 w-12 shrink-0 place-items-center rounded-2xl bg-amber-50 text-[#d70717]">
               <Home className="h-5 w-5" strokeWidth={2.4} />
             </span>
             <div>
@@ -1055,16 +1055,16 @@ export function UserAgentCreditPageContent({ name, email, phone, storeName = "",
           </div>
         </section>
 
-        <section className="relative isolate overflow-hidden rounded-[30px] border border-emerald-100 bg-white shadow-[0_22px_54px_rgba(6,78,59,0.12)]">
-          <div className="pointer-events-none absolute -right-16 -top-16 h-44 w-44 rounded-full bg-lime-100/70" />
-          <div className="pointer-events-none absolute bottom-0 left-0 h-24 w-24 rounded-full bg-emerald-50" />
+        <section className="relative isolate overflow-hidden rounded-[30px] border border-red-100 bg-white shadow-[0_22px_54px_rgba(151,14,32,0.12)]">
+          <div className="pointer-events-none absolute -right-16 -top-16 h-44 w-44 rounded-full bg-amber-100/70" />
+          <div className="pointer-events-none absolute bottom-0 left-0 h-24 w-24 rounded-full bg-red-50" />
           <div className="relative p-4">
             <div className="flex items-start gap-3">
-              <span className="grid h-12 w-12 shrink-0 place-items-center rounded-[22px] bg-[linear-gradient(135deg,#ecfdf5,#d9f99d)] text-[#047857] ring-1 ring-emerald-100 shadow-[0_12px_24px_rgba(4,120,87,0.10)]">
+              <span className="grid h-12 w-12 shrink-0 place-items-center rounded-[22px] bg-[linear-gradient(135deg,#ecfdf5,#d9f99d)] text-[#d70717] ring-1 ring-red-100 shadow-[0_12px_24px_rgba(215,7,23,0.10)]">
                 <Camera className="h-6 w-6" strokeWidth={2.4} />
               </span>
               <div className="min-w-0">
-                <p className="text-[10px] font-black uppercase tracking-[0.18em] text-emerald-600">Survey Lapangan</p>
+                <p className="text-[10px] font-black uppercase tracking-[0.18em] text-red-600">Survey Lapangan</p>
                 <h2 className="mt-1 text-xl font-black leading-6 text-slate-950">Dokumen Pengajuan Agent</h2>
                 <p className="mt-1 text-[11px] font-semibold leading-5 text-slate-500">
                   {isDocumentRevision ? "Operator meminta perbaikan pada dokumen tertentu. Unggah ulang hanya bagian yang ditandai." : "Lengkapi empat foto yang jelas sebelum mengirim pengajuan. Marketing hanya dapat memantau hasilnya."}
@@ -1083,17 +1083,17 @@ export function UserAgentCreditPageContent({ name, email, phone, storeName = "",
                 const selected = surveyFiles[item.key];
                 const isRequiredForRevision = !isDocumentRevision || requiredSurveyKeys.includes(item.key);
                 return (
-                  <label key={item.title} className={`${selected ? "border-emerald-300 bg-emerald-50" : "border-dashed border-emerald-200 bg-[linear-gradient(135deg,#f0fdf4,#ffffff)]"} min-w-0 rounded-[22px] border p-3 shadow-[0_10px_22px_rgba(6,78,59,0.055)] ${isRequiredForRevision ? "cursor-pointer" : "cursor-not-allowed opacity-50"}`}>
+                  <label key={item.title} className={`${selected ? "border-red-300 bg-red-50" : "border-dashed border-red-200 bg-[linear-gradient(135deg,#fff1ee,#ffffff)]"} min-w-0 rounded-[22px] border p-3 shadow-[0_10px_22px_rgba(151,14,32,0.055)] ${isRequiredForRevision ? "cursor-pointer" : "cursor-not-allowed opacity-50"}`}>
                     <div className="flex items-start justify-between gap-2">
-                      <span className="grid h-10 w-10 shrink-0 place-items-center rounded-2xl bg-white text-[#047857] ring-1 ring-emerald-100">
+                      <span className="grid h-10 w-10 shrink-0 place-items-center rounded-2xl bg-white text-[#d70717] ring-1 ring-red-100">
                         <Icon className="h-5 w-5" strokeWidth={2.4} />
                       </span>
-                      <span className={selected ? "grid h-6 w-6 shrink-0 place-items-center rounded-full bg-emerald-600 text-white" : "grid h-6 w-6 shrink-0 place-items-center rounded-full bg-slate-100 text-slate-400"}>
+                      <span className={selected ? "grid h-6 w-6 shrink-0 place-items-center rounded-full bg-red-600 text-white" : "grid h-6 w-6 shrink-0 place-items-center rounded-full bg-slate-100 text-slate-400"}>
                         {selected ? <Check className="h-3.5 w-3.5" strokeWidth={3} /> : <Upload className="h-3.5 w-3.5" strokeWidth={3} />}
                       </span>
                     </div>
                     {selected && surveyPreviewUrls[item.key] ? (
-                      <div className="mt-3 h-24 overflow-hidden rounded-2xl bg-slate-100 ring-1 ring-emerald-100">
+                      <div className="mt-3 h-24 overflow-hidden rounded-2xl bg-slate-100 ring-1 ring-red-100">
                         <img
                           src={surveyPreviewUrls[item.key]}
                           alt={`Preview ${item.title}`}
@@ -1113,9 +1113,9 @@ export function UserAgentCreditPageContent({ name, email, phone, storeName = "",
           </div>
         </section>
 
-        <section className="rounded-[26px] border border-emerald-950/5 bg-white p-4 shadow-[0_18px_42px_rgba(6,78,59,0.10)]">
+        <section className="rounded-[26px] border border-red-950/5 bg-white p-4 shadow-[0_18px_42px_rgba(151,14,32,0.10)]">
           <div className="mb-4 flex items-start gap-3">
-            <span className="grid h-12 w-12 shrink-0 place-items-center rounded-2xl bg-lime-50 text-[#047857]">
+            <span className="grid h-12 w-12 shrink-0 place-items-center rounded-2xl bg-amber-50 text-[#d70717]">
               <FileText className="h-5 w-5" strokeWidth={2.4} />
             </span>
             <div>
@@ -1131,8 +1131,8 @@ export function UserAgentCreditPageContent({ name, email, phone, storeName = "",
             <li>5. Jika agent ingin berhenti menjadi mitra, penyelesaian modal ditentukan dan diproses oleh operator.</li>
             <li>6. NuansaPulsa berhak menolak, menunda, atau mengevaluasi ulang pengajuan jika data/bukti tidak sesuai.</li>
           </ol>
-          <label className="mt-4 flex cursor-pointer items-start gap-3 rounded-2xl border border-emerald-200 bg-emerald-50/70 p-3">
-            <span className="mt-0.5 grid h-5 w-5 shrink-0 place-items-center rounded border border-[#047857] bg-white text-[#047857]">
+          <label className="mt-4 flex cursor-pointer items-start gap-3 rounded-2xl border border-red-200 bg-red-50/70 p-3">
+            <span className="mt-0.5 grid h-5 w-5 shrink-0 place-items-center rounded border border-[#d70717] bg-white text-[#d70717]">
               {agreed ? <Check className="h-3.5 w-3.5" strokeWidth={3} /> : null}
             </span>
             <input type="checkbox" checked={agreed} onChange={(event) => setAgreed(event.target.checked)} className="sr-only" />
@@ -1140,9 +1140,9 @@ export function UserAgentCreditPageContent({ name, email, phone, storeName = "",
           </label>
         </section>
 
-        {!isDocumentRevision ? <section className="rounded-[26px] border border-emerald-950/5 bg-white p-4 shadow-[0_18px_42px_rgba(6,78,59,0.10)]">
+        {!isDocumentRevision ? <section className="rounded-[26px] border border-red-950/5 bg-white p-4 shadow-[0_18px_42px_rgba(151,14,32,0.10)]">
           <div className="mb-4 flex items-start gap-3">
-            <span className="grid h-12 w-12 shrink-0 place-items-center rounded-2xl bg-emerald-50 text-[#047857]">
+            <span className="grid h-12 w-12 shrink-0 place-items-center rounded-2xl bg-red-50 text-[#d70717]">
               <PenLine className="h-5 w-5" strokeWidth={2.4} />
             </span>
             <div>
@@ -1153,11 +1153,11 @@ export function UserAgentCreditPageContent({ name, email, phone, storeName = "",
 
           {notice ? (
             isApproved ? (
-              <div className="mb-4 overflow-hidden rounded-[24px] border border-emerald-200 bg-white shadow-[0_16px_34px_rgba(4,120,87,0.12)]">
-                <div className="relative bg-[linear-gradient(135deg,#047857_0%,#16a34a_62%,#84cc16_130%)] px-4 py-4 text-white">
+              <div className="mb-4 overflow-hidden rounded-[24px] border border-red-200 bg-white shadow-[0_16px_34px_rgba(215,7,23,0.12)]">
+                <div className="relative bg-[linear-gradient(135deg,#d70717_0%,#16a34a_62%,#ff6a00_130%)] px-4 py-4 text-white">
                   <div className="pointer-events-none absolute -right-8 -top-10 h-28 w-28 rounded-full bg-white/14" />
                   <div className="relative flex items-center gap-3">
-                    <span className="grid h-12 w-12 shrink-0 place-items-center rounded-2xl bg-white text-emerald-700 shadow-[0_10px_22px_rgba(0,0,0,0.10)]">
+                    <span className="grid h-12 w-12 shrink-0 place-items-center rounded-2xl bg-white text-red-700 shadow-[0_10px_22px_rgba(0,0,0,0.10)]">
                       {NoticeIcon ? <NoticeIcon className="h-6 w-6" strokeWidth={2.6} /> : null}
                     </span>
                     <div className="min-w-0 flex-1">
@@ -1168,13 +1168,13 @@ export function UserAgentCreditPageContent({ name, email, phone, storeName = "",
                   </div>
                 </div>
                 <div className="grid grid-cols-1 gap-2 p-3 min-[380px]:grid-cols-2">
-                  <div className="rounded-2xl bg-emerald-50 px-3 py-3">
-                    <p className="text-[9px] font-black uppercase tracking-[0.12em] text-emerald-600">Limit Aktif</p>
+                  <div className="rounded-2xl bg-red-50 px-3 py-3">
+                    <p className="text-[9px] font-black uppercase tracking-[0.12em] text-red-600">Limit Aktif</p>
                     <p className="mt-1 text-lg font-black text-slate-950">{formatIDR(latestApplication?.approved_amount || latestApplication?.requested_amount || 0)}</p>
                   </div>
                   <div className="rounded-2xl bg-slate-50 px-3 py-3">
                     <p className="text-[9px] font-black uppercase tracking-[0.12em] text-slate-400">Status</p>
-                    <p className="mt-1 text-sm font-black text-emerald-700">Disetujui master</p>
+                    <p className="mt-1 text-sm font-black text-red-700">Disetujui master</p>
                   </div>
                 </div>
               </div>
@@ -1212,13 +1212,13 @@ export function UserAgentCreditPageContent({ name, email, phone, storeName = "",
         <button
           type="submit"
           disabled={submitting}
-          className="sticky bottom-[calc(5.5rem+env(safe-area-inset-bottom))] z-20 flex h-14 w-full items-center justify-center gap-2 rounded-[22px] bg-[linear-gradient(135deg,#052e26,#047857,#84cc16)] text-sm font-black text-white shadow-[0_18px_36px_rgba(4,120,87,0.24)] transition disabled:opacity-50"
+          className="sticky bottom-[calc(5.5rem+env(safe-area-inset-bottom))] z-20 flex h-14 w-full items-center justify-center gap-2 rounded-[22px] bg-[linear-gradient(135deg,#b20717,#d70717,#ff6a00)] text-sm font-black text-white shadow-[0_18px_36px_rgba(215,7,23,0.24)] transition disabled:opacity-50"
         >
           {creditBalanceAvailable ? "Saldo Modal Masih Tersedia" : hasOpenApplication && !isDocumentRevision ? "Menunggu Review" : submitting ? "Mengirim..." : !surveyDocumentsComplete ? (isDocumentRevision ? "Lengkapi Foto Diminta" : "Lengkapi 4 Foto") : unsignedPendingApplication && !isDocumentRevision ? "Kirim Tanda Tangan" : isDocumentRevision ? "Kirim Perbaikan Dokumen" : canRefill ? "Ajukan Modal Lagi" : canReapply ? "Ajukan Modal Berikutnya" : "Ajukan Modal"}
           <ChevronRight className="h-4 w-4" strokeWidth={2.6} />
         </button>
 
-        <p className="pb-2 text-center text-[10px] font-semibold text-[#047857]">Dokumen hanya digunakan untuk verifikasi pengajuan agent NuansaPulsa.</p>
+        <p className="pb-2 text-center text-[10px] font-semibold text-[#d70717]">Dokumen hanya digunakan untuk verifikasi pengajuan agent NuansaPulsa.</p>
           </>
         )}
       </div>
@@ -1228,7 +1228,7 @@ export function UserAgentCreditPageContent({ name, email, phone, storeName = "",
           <div className="max-h-[calc(100dvh-2rem)] w-full max-w-[520px] overflow-y-auto overscroll-contain rounded-[26px] bg-white p-4 shadow-[0_28px_70px_rgba(15,23,42,0.34)] sm:max-h-[calc(100dvh-3rem)] sm:p-5">
             <div className="flex items-start justify-between gap-4">
               <div className="min-w-0">
-                <p className="text-[9px] font-black uppercase tracking-[0.22em] text-[#047857]">Kredit Berputar</p>
+                <p className="text-[9px] font-black uppercase tracking-[0.22em] text-[#d70717]">Kredit Berputar</p>
                 <h3 className="mt-1 text-xl font-black leading-6 text-slate-950">Pelunasan Sebagian</h3>
               </div>
               <button
@@ -1241,7 +1241,7 @@ export function UserAgentCreditPageContent({ name, email, phone, storeName = "",
               </button>
             </div>
 
-            <div className="mt-4 rounded-[22px] bg-[linear-gradient(135deg,#064e3b,#047857,#16a34a)] p-4 text-white shadow-[0_16px_34px_rgba(4,120,87,0.20)]">
+            <div className="mt-4 rounded-[22px] bg-[linear-gradient(135deg,#b20717,#d70717,#16a34a)] p-4 text-white shadow-[0_16px_34px_rgba(215,7,23,0.20)]">
               <p className="text-[10px] font-semibold text-white/80">Saldo utama saat ini</p>
               <p className="mt-2 text-3xl font-black tracking-tight">{formatIDR(displayMainBalance)}</p>
               <p className="mt-2 text-[10px] font-semibold text-white/78">Pembayaran akan langsung menambah saldo utama kembali</p>
@@ -1262,7 +1262,7 @@ export function UserAgentCreditPageContent({ name, email, phone, storeName = "",
                   paymentRequestRef.current = "";
                 }}
                 placeholder="Contoh: 250000"
-                className="h-12 w-full rounded-[18px] border border-slate-200 bg-white px-4 text-sm font-black text-slate-900 outline-none transition focus:border-[#047857] focus:ring-2 focus:ring-emerald-100"
+                className="h-12 w-full rounded-[18px] border border-slate-200 bg-white px-4 text-sm font-black text-slate-900 outline-none transition focus:border-[#d70717] focus:ring-2 focus:ring-red-100"
               />
             </label>
 
@@ -1279,24 +1279,24 @@ export function UserAgentCreditPageContent({ name, email, phone, storeName = "",
                       setPaymentError("");
                     }}
                     className={selected
-                      ? "flex min-h-[58px] w-full items-center gap-3 rounded-[18px] border border-[#047857] bg-emerald-50 px-3 text-left shadow-[0_10px_22px_rgba(4,120,87,0.08)]"
-                      : "flex min-h-[58px] w-full items-center gap-3 rounded-[18px] border border-slate-200 bg-white px-3 text-left transition hover:border-emerald-200 hover:bg-emerald-50/40"}
+                      ? "flex min-h-[58px] w-full items-center gap-3 rounded-[18px] border border-[#d70717] bg-red-50 px-3 text-left shadow-[0_10px_22px_rgba(215,7,23,0.08)]"
+                      : "flex min-h-[58px] w-full items-center gap-3 rounded-[18px] border border-slate-200 bg-white px-3 text-left transition hover:border-red-200 hover:bg-red-50/40"}
                   >
-                    <span className={selected ? "grid h-11 w-11 shrink-0 place-items-center rounded-2xl bg-white text-[#047857]" : "grid h-11 w-11 shrink-0 place-items-center rounded-2xl bg-emerald-50 text-[#047857]"}>
+                    <span className={selected ? "grid h-11 w-11 shrink-0 place-items-center rounded-2xl bg-white text-[#d70717]" : "grid h-11 w-11 shrink-0 place-items-center rounded-2xl bg-red-50 text-[#d70717]"}>
                       <MethodIcon className="h-5 w-5" strokeWidth={2.4} />
                     </span>
                     <span className="min-w-0 flex-1">
                       <span className="block truncate text-xs font-black text-slate-800">{method.title}</span>
                       <span className="mt-1 block truncate text-[10px] font-semibold text-slate-400">{method.desc}</span>
                     </span>
-                    {selected ? <Check className="h-4 w-4 shrink-0 text-[#047857]" strokeWidth={3} /> : null}
+                    {selected ? <Check className="h-4 w-4 shrink-0 text-[#d70717]" strokeWidth={3} /> : null}
                   </button>
                 );
               })}
             </div>
 
-            <label className="mt-3 flex min-h-[54px] cursor-pointer items-center gap-3 rounded-[18px] border border-dashed border-emerald-200 bg-emerald-50/30 px-3 transition hover:bg-emerald-50">
-              <span className="grid h-10 w-10 shrink-0 place-items-center rounded-2xl bg-white text-[#047857]">
+            <label className="mt-3 flex min-h-[54px] cursor-pointer items-center gap-3 rounded-[18px] border border-dashed border-red-200 bg-red-50/30 px-3 transition hover:bg-red-50">
+              <span className="grid h-10 w-10 shrink-0 place-items-center rounded-2xl bg-white text-[#d70717]">
                 <Upload className="h-5 w-5" strokeWidth={2.4} />
               </span>
               <span className="min-w-0 flex-1">
@@ -1322,7 +1322,7 @@ export function UserAgentCreditPageContent({ name, email, phone, storeName = "",
               </div>
             ) : null}
             {paymentSuccess ? (
-              <div className="mt-3 rounded-2xl border border-emerald-200 bg-emerald-50 px-3 py-2 text-center text-[11px] font-black text-[#047857]">
+              <div className="mt-3 rounded-2xl border border-red-200 bg-red-50 px-3 py-2 text-center text-[11px] font-black text-[#d70717]">
                 {paymentSuccess}
               </div>
             ) : null}
@@ -1331,7 +1331,7 @@ export function UserAgentCreditPageContent({ name, email, phone, storeName = "",
               type="button"
               disabled={paymentSubmitting || Number(paymentAmount) <= 0}
               onClick={handleCreditPaymentConfirmation}
-              className="mt-4 flex h-12 w-full items-center justify-center gap-2 rounded-[18px] bg-[linear-gradient(135deg,#047857,#16a34a,#84cc16)] text-xs font-black text-white shadow-[0_14px_28px_rgba(4,120,87,0.18)] transition disabled:opacity-60"
+              className="mt-4 flex h-12 w-full items-center justify-center gap-2 rounded-[18px] bg-[linear-gradient(135deg,#d70717,#16a34a,#ff6a00)] text-xs font-black text-white shadow-[0_14px_28px_rgba(215,7,23,0.18)] transition disabled:opacity-60"
             >
               {paymentSubmitting ? (
                 <>

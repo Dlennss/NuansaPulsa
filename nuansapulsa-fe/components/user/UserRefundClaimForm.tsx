@@ -91,7 +91,7 @@ export function UserRefundClaimForm({ authToken, initialInvoiceID, initialGuestE
             value={invoiceID}
             onChange={(e) => setInvoiceID(e.target.value)}
             placeholder="INV-2026..."
-            className="h-11 w-full rounded-2xl border border-slate-200 bg-white px-3 text-sm text-slate-900 outline-none focus:border-sky-300"
+            className="h-11 w-full rounded-2xl border border-slate-200 bg-white px-3 text-sm text-slate-900 outline-none focus:border-red-300"
           />
         </label>
 
@@ -101,7 +101,7 @@ export function UserRefundClaimForm({ authToken, initialInvoiceID, initialGuestE
             value={guestEmail}
             onChange={(e) => setGuestEmail(e.target.value)}
             placeholder="guest@email.com"
-            className="h-11 w-full rounded-2xl border border-slate-200 bg-white px-3 text-sm text-slate-900 outline-none focus:border-sky-300"
+            className="h-11 w-full rounded-2xl border border-slate-200 bg-white px-3 text-sm text-slate-900 outline-none focus:border-red-300"
           />
         </label>
 
@@ -111,18 +111,18 @@ export function UserRefundClaimForm({ authToken, initialInvoiceID, initialGuestE
             value={guestPhone}
             onChange={(e) => setGuestPhone(e.target.value)}
             placeholder="08xxxxxxxxxx"
-            className="h-11 w-full rounded-2xl border border-slate-200 bg-white px-3 text-sm text-slate-900 outline-none focus:border-sky-300"
+            className="h-11 w-full rounded-2xl border border-slate-200 bg-white px-3 text-sm text-slate-900 outline-none focus:border-red-300"
           />
         </label>
 
         {error ? <div className="rounded-2xl border border-rose-100 bg-rose-50 px-3 py-2 text-sm text-rose-700">{error}</div> : null}
-        {success ? <div className="rounded-2xl border border-emerald-100 bg-emerald-50 px-3 py-2 text-sm text-emerald-700">{success}</div> : null}
+        {success ? <div className="rounded-2xl border border-red-100 bg-red-50 px-3 py-2 text-sm text-red-700">{success}</div> : null}
 
         <div className="grid grid-cols-2 gap-2">
           <button
             type="submit"
             disabled={loading}
-            className="inline-flex h-11 items-center justify-center gap-2 rounded-2xl bg-linear-to-r from-[#0f6fcb] to-[#2f92df] px-4 text-sm font-semibold text-white shadow-[0_8px_20px_rgba(15,111,203,0.24)] disabled:cursor-not-allowed disabled:opacity-60"
+            className="inline-flex h-11 items-center justify-center gap-2 rounded-2xl bg-linear-to-r from-[#d70717] to-[#ff6a00] px-4 text-sm font-semibold text-white shadow-[0_8px_20px_rgba(15,111,203,0.24)] disabled:cursor-not-allowed disabled:opacity-60"
           >
             {loading ? <LoaderCircle className="h-4 w-4 animate-spin" /> : null}
             {loading ? "Memproses..." : "Klaim Refund"}

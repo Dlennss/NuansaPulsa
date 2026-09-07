@@ -14,7 +14,7 @@ export default async function UserTransferBankPage() {
   if (!session?.backendToken) redirect("/login");
 
   return (
-    <main className="min-h-screen bg-[#eef8f3] pb-24">
+    <main className="min-h-screen bg-[#fff6f4] pb-24">
       <UserTransferBankPageContent />
       <UserBottomNav />
     </main>

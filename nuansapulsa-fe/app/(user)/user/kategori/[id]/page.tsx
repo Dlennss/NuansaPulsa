@@ -44,7 +44,7 @@ export default async function UserKategoriPage({ params }: PageProps) {
   const brands = await getBrandsByKategori(id);
 
   return (
-    <main className="min-h-screen bg-sky-50">
+    <main className="min-h-screen bg-[#fff6f4]">
       {backendToken ? <UserAuthClientSync backendToken={backendToken} /> : null}
       <div className=" space-y-4 px-4">
         {String(id) === "1" ? (
@@ -59,7 +59,7 @@ export default async function UserKategoriPage({ params }: PageProps) {
             <section className="rounded-xl bg-white p-5 shadow-[0_8px_22px_rgba(15,23,42,0.13)]">
               <div className="flex items-start justify-between gap-3">
                 <div />
-                <div className="grid h-11 w-11 place-items-center rounded-2xl bg-sky-50 text-sky-600">
+                <div className="grid h-11 w-11 place-items-center rounded-2xl bg-[#fff6f4] text-[#d70717]">
                   <ShoppingBag className="h-5 w-5" />
                 </div>
               </div>
@@ -92,7 +92,7 @@ export default async function UserKategoriPage({ params }: PageProps) {
                                 className="h-full w-full object-contain"
                               />
                             ) : (
-                              <span className="text-base font-black uppercase tracking-tight text-sky-700">
+                              <span className="text-base font-black uppercase tracking-tight text-[#d70717]">
                                 {brand.nama.slice(0, 2)}
                               </span>
                             )}

@@ -14,7 +14,7 @@ export default async function MarketingAgentsPage() {
   if (!session?.backendToken) redirect("/login");
 
   return (
-    <main className="min-h-screen bg-[#eef8f3] px-3 pb-24 pt-3">
+    <main className="min-h-screen bg-[#fff6f4] px-3 pb-24 pt-3">
       <div className="mx-auto w-full max-w-md">
         <RetailDownlineManager authToken={session.backendToken} role="marketing" allowCreate={false} />
       </div>

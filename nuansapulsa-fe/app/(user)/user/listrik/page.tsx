@@ -20,11 +20,11 @@ export default async function UserListrikPage() {
 
   const cards = [
     { key: "token", title: "Token Listrik", href: "/user/listrik/token", icon: Bolt, accent: "from-amber-400 via-yellow-400 to-orange-500" },
-    { key: "tagihan", title: "Tagihan Listrik", href: "/user/listrik/tagihan", icon: ReceiptText, accent: "from-sky-500 via-cyan-500 to-blue-600" },
+    { key: "tagihan", title: "Tagihan Listrik", href: "/user/listrik/tagihan", icon: ReceiptText, accent: "from-[#d70717] via-cyan-500 to-blue-600" },
   ];
 
   return (
-    <main className="bg-sky-50">
+    <main className="bg-[#fff6f4]">
       <div className="space-y-4 px-4 pt-4">
         {!listrikCategory ? (
           <section className="grid min-h-40 place-items-center rounded-md border border-dashed border-slate-200 bg-white px-4 text-center text-sm text-slate-500 shadow-[0_10px_28px_rgba(15,23,42,0.08)]">

@@ -17,7 +17,7 @@ export default async function UserAccountDownlinePage() {
   const role = String(profile?.role || session.user?.role || "").toLowerCase();
 
   return (
-    <main className="min-h-screen bg-[#eef8f3] px-3 pb-24 pt-3">
+    <main className="min-h-screen bg-[#fff6f4] px-3 pb-24 pt-3">
       <div className="mx-auto w-full max-w-md space-y-4">
         <RetailDownlineManager authToken={session.backendToken} role={role} />
       </div>

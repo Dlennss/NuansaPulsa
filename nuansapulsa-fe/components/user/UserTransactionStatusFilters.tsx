@@ -29,7 +29,7 @@ export function UserTransactionStatusFilters({ status }: UserTransactionStatusFi
             href={href}
             className={`whitespace-nowrap rounded-full px-3 py-2 text-xs font-semibold transition ${
               active
-                ? "bg-[#0f6fcb] text-white! visited:text-white! hover:bg-[#0a5dad] hover:text-white! focus-visible:text-white!"
+                ? "bg-[#d70717] text-white! visited:text-white! hover:bg-[#b80616] hover:text-white! focus-visible:text-white!"
                 : "bg-slate-100 text-slate-600 hover:bg-slate-200"
             }`}
           >

@@ -10,7 +10,7 @@ export default async function MarketingApplicationsPage() {
   const items = applications.filter((item) => item.status === "submitted" || item.status === "marketing_review");
 
   return (
-    <main className="bg-sky-50 px-4 py-4">
+    <main className="bg-[#fff6f4] px-4 py-4">
       <section className="mx-auto w-full max-w-md">
         <MasterAgentCreditApplicationList
           applications={items}

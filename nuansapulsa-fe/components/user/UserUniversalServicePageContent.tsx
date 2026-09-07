@@ -612,7 +612,7 @@ export function UserUniversalServicePageContent({ serviceSlug }: { serviceSlug: 
 
   if (isEsimRoaming && !completedOrder) {
     return (
-      <main className="min-h-screen bg-[#f4fbf7] pb-36 text-[#07112e]">
+      <main className="min-h-screen bg-[#fff6f4] pb-36 text-[#07112e]">
         <section className="relative overflow-hidden bg-[radial-gradient(circle_at_82%_2%,rgba(255,255,255,0.18),transparent_34%),linear-gradient(145deg,#d70717_0%,#ff4d00_55%,#a20d22_100%)] px-5 pb-20 pt-8 text-white shadow-[0_18px_42px_rgba(151,14,32,0.22)]">
           <div className="mx-auto flex w-full max-w-md items-center justify-between">
             <Link href="/user/kategori" className="grid h-11 w-11 shrink-0 place-items-center rounded-full text-white transition hover:bg-white/12">
@@ -850,7 +850,7 @@ export function UserUniversalServicePageContent({ serviceSlug }: { serviceSlug: 
 
   if (isHpPostpaid && !completedOrder) {
     return (
-      <main className="min-h-screen overflow-x-hidden bg-[#edf7f2] pb-32 text-slate-950">
+      <main className="min-h-screen overflow-x-hidden bg-[#fff6f4] pb-32 text-slate-950">
         <header className="relative overflow-hidden bg-[linear-gradient(140deg,#d70717_0%,#d70717_64%,#ff6a00_115%)] px-4 pb-10 pt-5 text-white shadow-[0_16px_36px_rgba(151,14,32,0.22)]">
           <div className="mx-auto w-full max-w-md">
             <div className="grid grid-cols-[44px_minmax(0,1fr)_44px] items-center gap-2">
@@ -1033,7 +1033,7 @@ export function UserUniversalServicePageContent({ serviceSlug }: { serviceSlug: 
   }
 
   return (
-    <main className="min-h-screen bg-[#eef8f3] pb-24">
+    <main className="min-h-screen bg-[#fff6f4] pb-24">
       <section className="relative overflow-hidden bg-[linear-gradient(135deg,#d70717_0%,#d70717_58%,#ffb000_150%)] px-4 pb-9 pt-5 text-white">
         <div className="pointer-events-none absolute -right-14 -top-16 h-44 w-44 rounded-full bg-amber-300/20 blur-2xl" />
         <div className="pointer-events-none absolute -bottom-16 left-8 h-36 w-56 rounded-full bg-rose-300/15 blur-2xl" />
@@ -1115,7 +1115,7 @@ export function UserUniversalServicePageContent({ serviceSlug }: { serviceSlug: 
                   <p className="text-[11px] font-semibold text-slate-400">Pastikan data tujuan sudah benar.</p>
                 </div>
               </div>
-              <div className="flex h-14 overflow-hidden rounded-[20px] border border-rose-200 bg-[#fbfffd] focus-within:border-[#d70717] focus-within:ring-4 focus-within:ring-rose-100">
+              <div className="flex h-14 overflow-hidden rounded-[20px] border border-rose-200 bg-[#fffafa] focus-within:border-[#d70717] focus-within:ring-4 focus-within:ring-rose-100">
                 <span className="grid w-14 shrink-0 place-items-center border-r border-rose-100 text-[#d70717]">
                   ID
                 </span>

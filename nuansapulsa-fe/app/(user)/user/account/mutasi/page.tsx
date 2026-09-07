@@ -70,7 +70,7 @@ export default async function UserAccountMutasiPage({ searchParams }: { searchPa
   const rows = hasNextPage ? fetchedRows.slice(0, PAGE_SIZE) : fetchedRows;
 
   return (
-    <main className="h-dvh overflow-hidden bg-sky-50 px-4 pt-5">
+    <main className="h-dvh overflow-hidden bg-[#fff6f4] px-4 pt-5">
       <div className="mx-auto flex h-full w-full max-w-md flex-col gap-4">
         <section className="flex min-h-0 flex-1 flex-col">
           <h1 className="text-lg font-bold text-neutral-900">Mutasi Saldo</h1>
@@ -83,7 +83,7 @@ export default async function UserAccountMutasiPage({ searchParams }: { searchPa
                 type="date"
                 name="from"
                 defaultValue={from}
-                className="h-10 rounded-md border border-slate-200 bg-white px-3 text-sm text-slate-900 outline-none focus:border-sky-500"
+                className="h-10 rounded-md border border-slate-200 bg-white px-3 text-sm text-slate-900 outline-none focus:border-red-500"
               />
             </label>
             <label className="grid gap-1">
@@ -92,13 +92,13 @@ export default async function UserAccountMutasiPage({ searchParams }: { searchPa
                 type="date"
                 name="to"
                 defaultValue={to}
-                className="h-10 rounded-md border border-slate-200 bg-white px-3 text-sm text-slate-900 outline-none focus:border-sky-500"
+                className="h-10 rounded-md border border-slate-200 bg-white px-3 text-sm text-slate-900 outline-none focus:border-red-500"
               />
             </label>
             <div className="col-span-2 flex gap-2">
               <button
                 type="submit"
-                className="inline-flex h-10 flex-1 items-center justify-center rounded-md bg-[#0f6fcb] px-4 text-sm font-semibold text-white shadow-sm transition hover:bg-[#0a5dad]"
+                className="inline-flex h-10 flex-1 items-center justify-center rounded-md bg-[#d70717] px-4 text-sm font-semibold text-white shadow-sm transition hover:bg-[#b80616]"
               >
                 Terapkan
               </button>

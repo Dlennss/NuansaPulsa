@@ -38,11 +38,11 @@ function fmtIDR(value: number) {
 function statusInfo(status: string) {
   switch (String(status || "").toLowerCase()) {
     case "approved":
-      return { label: "Berhasil", className: "bg-emerald-100 text-emerald-700" };
+      return { label: "Berhasil", className: "bg-red-100 text-red-700" };
     case "rejected":
       return { label: "Ditolak · Dikembalikan", className: "bg-rose-100 text-rose-700" };
     case "processing_provider":
-      return { label: "Diproses Otomatis", className: "bg-sky-100 text-sky-700" };
+      return { label: "Diproses Otomatis", className: "bg-red-100 text-[#d70717]" };
     default:
       return { label: "Menyiapkan Transaksi", className: "bg-amber-100 text-amber-700" };
   }
@@ -205,13 +205,13 @@ export function RetailWithdrawClient({ authToken }: Props) {
 
   return (
     <div className="space-y-4 text-slate-950">
-      <section className="border-b border-emerald-200 bg-white px-1 pb-4">
+      <section className="border-b border-red-200 bg-white px-1 pb-4">
         <div className="flex items-start gap-3">
-          <span className="grid h-12 w-12 shrink-0 place-items-center rounded-lg bg-emerald-100 text-emerald-700">
+          <span className="grid h-12 w-12 shrink-0 place-items-center rounded-lg bg-red-100 text-red-700">
             <ArrowDownToLine className="h-6 w-6" />
           </span>
           <div>
-            <p className="text-[10px] font-black uppercase tracking-[0.18em] text-emerald-700">Penarikan Agent</p>
+            <p className="text-[10px] font-black uppercase tracking-[0.18em] text-red-700">Penarikan Agent</p>
             <h1 className="mt-1 text-2xl font-black">Tarik Saldo</h1>
             <p className="mt-1 text-xs font-semibold leading-5 text-slate-500">Tarik saldo utama ke rekening atau e-wallet tujuan.</p>
           </div>
@@ -219,14 +219,14 @@ export function RetailWithdrawClient({ authToken }: Props) {
       </section>
 
       <section>
-        <div className="rounded-lg border border-emerald-200 bg-white p-3">
-          <WalletCards className="h-5 w-5 text-emerald-700" />
+        <div className="rounded-lg border border-red-200 bg-white p-3">
+          <WalletCards className="h-5 w-5 text-red-700" />
           <p className="mt-3 text-[10px] font-black uppercase text-slate-400">Saldo Utama</p>
-          <p className="mt-1 text-lg font-black text-emerald-700">{fmtIDR(mainBalance)}</p>
+          <p className="mt-1 text-lg font-black text-red-700">{fmtIDR(mainBalance)}</p>
         </div>
       </section>
 
-      {success ? <div className="flex items-center gap-2 rounded-lg border border-emerald-200 bg-emerald-50 px-3 py-3 text-xs font-bold text-emerald-700"><CheckCircle2 className="h-4 w-4" />{success}</div> : null}
+      {success ? <div className="flex items-center gap-2 rounded-lg border border-red-200 bg-red-50 px-3 py-3 text-xs font-bold text-red-700"><CheckCircle2 className="h-4 w-4" />{success}</div> : null}
       {!showCreateModal && error ? <div className="rounded-lg border border-rose-200 bg-rose-50 px-3 py-3 text-xs font-bold text-rose-700">{error}</div> : null}
 
       <section className="overflow-hidden rounded-lg border border-slate-200 bg-white">
@@ -239,7 +239,7 @@ export function RetailWithdrawClient({ authToken }: Props) {
               {pendingCount > 0 ? `${pendingCount} diproses otomatis · ${fmtIDR(pendingAmount)}` : "Tidak ada transaksi aktif"}
             </span>
           </div>
-          <button type="button" onClick={openCreate} className="inline-flex h-10 items-center gap-2 rounded-lg bg-emerald-700 px-3 text-xs font-black text-white">
+          <button type="button" onClick={openCreate} className="inline-flex h-10 items-center gap-2 rounded-lg bg-red-700 px-3 text-xs font-black text-white">
             <Plus className="h-4 w-4" /> Ajukan
           </button>
         </div>
@@ -250,7 +250,7 @@ export function RetailWithdrawClient({ authToken }: Props) {
             const status = statusInfo(item.status);
             return (
               <div key={item.id} className="flex items-start gap-3 px-4 py-4">
-                <span className="grid h-10 w-10 shrink-0 place-items-center rounded-lg bg-emerald-50 text-emerald-700"><ReceiptText className="h-4 w-4" /></span>
+                <span className="grid h-10 w-10 shrink-0 place-items-center rounded-lg bg-red-50 text-red-700"><ReceiptText className="h-4 w-4" /></span>
                 <div className="min-w-0 flex-1">
                   <div className="flex items-start justify-between gap-2">
                     <div>
@@ -273,7 +273,7 @@ export function RetailWithdrawClient({ authToken }: Props) {
           <div className="flex max-h-[calc(100dvh-1.5rem)] w-full max-w-md flex-col overflow-hidden rounded-lg bg-white shadow-2xl sm:max-h-[calc(100dvh-2rem)]">
               <div className="flex shrink-0 items-start justify-between gap-3 border-b border-slate-200 px-4 py-3 sm:py-4">
                 <div>
-                  <p className="text-[10px] font-black uppercase text-emerald-700">Pengajuan Baru</p>
+                  <p className="text-[10px] font-black uppercase text-red-700">Pengajuan Baru</p>
                   <h3 className="mt-1 text-xl font-black">Tarik ke Rekening</h3>
                 </div>
                 <button type="button" onClick={() => setShowCreateModal(false)} className="grid h-10 w-10 place-items-center rounded-lg bg-slate-100 text-slate-500" aria-label="Tutup"><X className="h-5 w-5" /></button>
@@ -281,34 +281,34 @@ export function RetailWithdrawClient({ authToken }: Props) {
 
               <form className="flex min-h-0 flex-1 flex-col" onSubmit={submit}>
                 <div className="min-h-0 flex-1 space-y-4 overflow-y-auto overscroll-contain px-4 py-4">
-                <div className="rounded-lg border border-emerald-200 bg-emerald-50 px-3 py-2 text-xs font-semibold text-emerald-800">
+                <div className="rounded-lg border border-red-200 bg-red-50 px-3 py-2 text-xs font-semibold text-red-800">
                   Dana penarikan menggunakan Saldo Utama.
                 </div>
 
                 <label className="block">
                   <span className="text-[10px] font-black uppercase text-slate-500">Nominal penarikan</span>
                   <div className="mt-2 flex gap-2">
-                    <input value={amount} onChange={(event) => { setAmount(event.target.value.replace(/\D/g, "")); setError(""); }} inputMode="numeric" placeholder="Masukkan nominal" className="h-11 min-w-0 flex-1 rounded-lg border border-slate-200 px-3 text-sm font-black outline-none focus:border-emerald-600" />
-                    <button type="button" onClick={() => setAmount(String(sourceBalance))} disabled={sourceBalance <= 0} className="h-11 w-16 shrink-0 rounded-lg border border-emerald-200 bg-emerald-50 text-[10px] font-black text-emerald-700 disabled:opacity-50">Semua</button>
+                    <input value={amount} onChange={(event) => { setAmount(event.target.value.replace(/\D/g, "")); setError(""); }} inputMode="numeric" placeholder="Masukkan nominal" className="h-11 min-w-0 flex-1 rounded-lg border border-slate-200 px-3 text-sm font-black outline-none focus:border-red-600" />
+                    <button type="button" onClick={() => setAmount(String(sourceBalance))} disabled={sourceBalance <= 0} className="h-11 w-16 shrink-0 rounded-lg border border-red-200 bg-red-50 text-[10px] font-black text-red-700 disabled:opacity-50">Semua</button>
                   </div>
                 </label>
 
                 <div className="grid gap-3">
-                  <input className="h-11 rounded-lg border border-slate-200 px-3 text-sm font-semibold outline-none focus:border-emerald-600" placeholder="Nama bank" value={bankName} onChange={(event) => setBankName(event.target.value)} />
-                  <input className="h-11 rounded-lg border border-slate-200 px-3 text-sm font-semibold outline-none focus:border-emerald-600" placeholder="Nama pemilik rekening" value={accountName} onChange={(event) => setAccountName(event.target.value)} />
-                  <input className="h-11 rounded-lg border border-slate-200 px-3 text-sm font-semibold outline-none focus:border-emerald-600" placeholder="Nomor rekening" inputMode="numeric" value={accountNumber} onChange={(event) => setAccountNumber(event.target.value.replace(/\D/g, ""))} />
-                  <textarea className="min-h-20 rounded-lg border border-slate-200 px-3 py-3 text-sm font-semibold outline-none focus:border-emerald-600" placeholder="Catatan opsional" value={note} onChange={(event) => setNote(event.target.value)} />
+                  <input className="h-11 rounded-lg border border-slate-200 px-3 text-sm font-semibold outline-none focus:border-red-600" placeholder="Nama bank" value={bankName} onChange={(event) => setBankName(event.target.value)} />
+                  <input className="h-11 rounded-lg border border-slate-200 px-3 text-sm font-semibold outline-none focus:border-red-600" placeholder="Nama pemilik rekening" value={accountName} onChange={(event) => setAccountName(event.target.value)} />
+                  <input className="h-11 rounded-lg border border-slate-200 px-3 text-sm font-semibold outline-none focus:border-red-600" placeholder="Nomor rekening" inputMode="numeric" value={accountNumber} onChange={(event) => setAccountNumber(event.target.value.replace(/\D/g, ""))} />
+                  <textarea className="min-h-20 rounded-lg border border-slate-200 px-3 py-3 text-sm font-semibold outline-none focus:border-red-600" placeholder="Catatan opsional" value={note} onChange={(event) => setNote(event.target.value)} />
                 </div>
 
                 <div className="rounded-lg bg-slate-50 p-3 text-xs">
                   <div className="flex justify-between gap-3 text-slate-500"><span>Sumber dana</span><span className="font-black text-slate-900">Saldo Utama</span></div>
-                  <div className="mt-2 flex justify-between gap-3 text-slate-500"><span>Dana diterima</span><span className="font-black text-emerald-700">{fmtIDR(amountValue)}</span></div>
+                  <div className="mt-2 flex justify-between gap-3 text-slate-500"><span>Dana diterima</span><span className="font-black text-red-700">{fmtIDR(amountValue)}</span></div>
                 </div>
                 </div>
 
                 <div className="shrink-0 space-y-2 border-t border-slate-200 bg-white px-4 pb-[max(1rem,env(safe-area-inset-bottom))] pt-3">
                   {error ? <div className="rounded-lg border border-rose-200 bg-rose-50 px-3 py-2 text-xs font-bold text-rose-700">{error}</div> : null}
-                  <button type="submit" disabled={saving || sourceBalance <= 0} className="flex h-11 w-full items-center justify-center gap-2 rounded-lg bg-emerald-700 text-xs font-black text-white disabled:bg-slate-300">
+                  <button type="submit" disabled={saving || sourceBalance <= 0} className="flex h-11 w-full items-center justify-center gap-2 rounded-lg bg-red-700 text-xs font-black text-white disabled:bg-slate-300">
                     {saving ? <Loader2 className="h-4 w-4 animate-spin" /> : <Landmark className="h-4 w-4" />}
                     {saving ? "Mengirim..." : "Tarik Sekarang"}
                   </button>

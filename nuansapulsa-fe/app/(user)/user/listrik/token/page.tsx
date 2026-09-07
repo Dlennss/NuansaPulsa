@@ -42,7 +42,7 @@ export default async function UserListrikTokenPage() {
       : [];
 
   return (
-    <main className="bg-sky-50">
+    <main className="bg-[#fff6f4]">
       <div className="space-y-4 px-4 pt-4">
         <GuestElectricityEntryFlow title="Token Listrik" description="" placeholder="Masukkan nomor meter PLN" items={products} />
       </div>

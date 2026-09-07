@@ -6,8 +6,8 @@ import { History, House, UserRound, WalletCards } from "lucide-react";
 
 function navClass(active: boolean) {
   return active
-    ? "flex min-w-0 flex-col items-center gap-1.5 py-1 text-[#047857]! visited:text-[#047857]!"
-    : "flex min-w-0 flex-col items-center gap-1.5 py-1 text-slate-400! transition visited:text-slate-400! hover:text-[#064e3b]!";
+    ? "flex min-w-0 flex-col items-center gap-1.5 py-1 text-[#d70717]! visited:text-[#d70717]!"
+    : "flex min-w-0 flex-col items-center gap-1.5 py-1 text-slate-400! transition visited:text-slate-400! hover:text-[#b20717]!";
 }
 
 function isActivePath(pathname: string, basePath: string) {
@@ -25,7 +25,7 @@ export function UserBottomNav() {
   const homeActive = isActivePath(pathname, "/user") && !trxActive && !accountActive && !saldoActive;
 
   return (
-    <section className="fixed bottom-0 left-1/2 z-[90] w-full max-w-md -translate-x-1/2 overflow-hidden rounded-t-[24px] border-t border-[#064e3b]/10 bg-white/96 shadow-[0_-14px_34px_rgba(6,78,59,0.10)] backdrop-blur-xl md:bottom-0 md:w-97.5 md:max-w-none">
+    <section className="fixed bottom-0 left-1/2 z-[90] w-full max-w-md -translate-x-1/2 overflow-hidden rounded-t-[24px] border-t border-red-950/[0.06] bg-white/96 shadow-[0_-14px_34px_rgba(151,14,32,0.10)] backdrop-blur-xl md:bottom-0 md:w-97.5 md:max-w-none">
       <div className="grid grid-cols-4 px-4 pb-[calc(0.55rem+env(safe-area-inset-bottom))] pt-2.5">
         <Link href="/user" className={navClass(homeActive)}>
           <House className={iconClass} strokeWidth={1.65} />

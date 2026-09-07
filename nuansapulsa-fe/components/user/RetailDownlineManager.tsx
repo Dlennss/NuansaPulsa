@@ -131,18 +131,18 @@ export function RetailDownlineManager({ authToken, role, allowCreate = true }: P
 
   return (
     <div className="space-y-4">
-      <section className="relative overflow-hidden rounded-[30px] bg-[linear-gradient(135deg,#052e26_0%,#047857_58%,#84cc16_145%)] p-5 text-white shadow-[0_20px_44px_rgba(4,120,87,0.22)]">
+      <section className="relative overflow-hidden rounded-[30px] bg-[linear-gradient(135deg,#b20717_0%,#d70717_58%,#ff6a00_145%)] p-5 text-white shadow-[0_20px_44px_rgba(215,7,23,0.22)]">
         <div className="pointer-events-none absolute -right-12 -top-16 h-40 w-40 rounded-full bg-white/10" />
         <div className="pointer-events-none absolute right-10 top-8 h-24 w-24 rounded-full border border-white/10" />
         <div className="relative flex items-center gap-3">
           <Link href="/user/account" className="grid h-11 w-11 shrink-0 place-items-center rounded-2xl bg-white/12 text-white ring-1 ring-white/15">
             <ArrowLeft className="h-5 w-5" />
           </Link>
-          <span className="grid h-12 w-12 shrink-0 place-items-center rounded-2xl bg-white text-[#047857] shadow-[0_10px_22px_rgba(0,0,0,0.10)]">
+          <span className="grid h-12 w-12 shrink-0 place-items-center rounded-2xl bg-white text-[#d70717] shadow-[0_10px_22px_rgba(0,0,0,0.10)]">
             <Users className="h-5 w-5" />
           </span>
           <div className="min-w-0">
-            <div className="text-[10px] font-black uppercase tracking-[0.22em] text-lime-100">{role === "marketing" ? "Agent Binaan" : role === "agent" ? "Member Bawahan" : "Downline Retail"}</div>
+            <div className="text-[10px] font-black uppercase tracking-[0.22em] text-amber-100">{role === "marketing" ? "Agent Binaan" : role === "agent" ? "Member Bawahan" : "Downline Retail"}</div>
             <h1 className="mt-1 text-xl font-black">{role === "marketing" ? "Agent Binaan" : role === "agent" ? "Tambah Member" : "Jaringan Retail"}</h1>
             <p className="mt-1 text-xs font-semibold leading-5 text-white/75">
               {role === "master" ? "Master dapat menambahkan agent atau user." : role === "agent" ? "Agent dapat menambahkan user." : "Daftar jaringan di atas akun retail."}
@@ -162,7 +162,7 @@ export function RetailDownlineManager({ authToken, role, allowCreate = true }: P
           ))}
         </div>
       </section>
-      <section className="overflow-hidden rounded-[28px] border border-emerald-950/5 bg-white shadow-[0_18px_42px_rgba(6,78,59,0.08)]">
+      <section className="overflow-hidden rounded-[28px] border border-red-950/5 bg-white shadow-[0_18px_42px_rgba(151,14,32,0.08)]">
         <div className="flex items-center justify-between gap-3 border-b border-slate-100 bg-[linear-gradient(135deg,#f8fffb,#eefbf4)] px-4 py-4">
           <div>
             <h2 className="text-sm font-black text-slate-950">{role === "marketing" ? "Daftar Agent Binaan" : role === "agent" ? "Member Terdaftar" : "Daftar Agent/User"}</h2>
@@ -176,7 +176,7 @@ export function RetailDownlineManager({ authToken, role, allowCreate = true }: P
                 setOk("");
                 setShowCreateModal(true);
               }}
-              className="inline-flex h-10 shrink-0 items-center gap-2 rounded-2xl bg-[#052e26] px-3 text-xs font-black text-white shadow-[0_10px_20px_rgba(6,78,59,0.18)] transition hover:bg-[#064e3b]"
+              className="inline-flex h-10 shrink-0 items-center gap-2 rounded-2xl bg-[#b20717] px-3 text-xs font-black text-white shadow-[0_10px_20px_rgba(151,14,32,0.18)] transition hover:bg-[#b20717]"
             >
               <UserPlus className="h-4 w-4" />
               Tambah
@@ -187,9 +187,9 @@ export function RetailDownlineManager({ authToken, role, allowCreate = true }: P
         <div className="space-y-3 p-4">
           {loading ? <div className="text-sm font-semibold text-slate-500">Memuat jaringan retail...</div> : null}
           {!loading && items.length === 0 ? (
-            <div className="grid min-h-[180px] place-items-center rounded-[24px] border border-dashed border-emerald-200 bg-emerald-50/50 px-4 text-center">
+            <div className="grid min-h-[180px] place-items-center rounded-[24px] border border-dashed border-red-200 bg-red-50/50 px-4 text-center">
               <div>
-                <div className="mx-auto grid h-14 w-14 place-items-center rounded-2xl bg-white text-[#047857] shadow-sm">
+                <div className="mx-auto grid h-14 w-14 place-items-center rounded-2xl bg-white text-[#d70717] shadow-sm">
                   <Users className="h-7 w-7" />
                 </div>
                 <p className="mt-3 text-sm font-black text-slate-950">Belum ada jaringan</p>
@@ -203,7 +203,7 @@ export function RetailDownlineManager({ authToken, role, allowCreate = true }: P
                 <div className="min-w-0">
                   <div className="truncate text-sm font-black text-slate-950">{item.nama || item.email}</div>
                   <div className="truncate text-xs font-semibold text-slate-500">{item.email}</div>
-                  {item.store_name ? <div className="mt-1 truncate text-[11px] font-bold text-emerald-700">Toko: {item.store_name}</div> : null}
+                  {item.store_name ? <div className="mt-1 truncate text-[11px] font-bold text-red-700">Toko: {item.store_name}</div> : null}
                   {item.phone ? <div className="mt-1 text-[11px] font-semibold text-slate-500">WA {item.phone}</div> : null}
                   <div className="mt-1 text-[11px] font-semibold text-slate-500">
                     {roleLabel(item.role)}
@@ -211,17 +211,17 @@ export function RetailDownlineManager({ authToken, role, allowCreate = true }: P
                     {item.retail_master_nama ? ` • Master: ${item.retail_master_nama}` : ""}
                   </div>
                   {item.marketing_nama || item.marketing_email ? (
-                    <div className="mt-2 rounded-xl bg-emerald-50 px-2.5 py-2 text-[11px] font-bold text-emerald-800">
+                    <div className="mt-2 rounded-xl bg-red-50 px-2.5 py-2 text-[11px] font-bold text-red-800">
                       Marketing pembina: {item.marketing_nama || item.marketing_email}
-                      {item.marketing_nama && item.marketing_email ? <span className="block font-semibold text-emerald-700/75">{item.marketing_email}</span> : null}
+                      {item.marketing_nama && item.marketing_email ? <span className="block font-semibold text-red-700/75">{item.marketing_email}</span> : null}
                     </div>
                   ) : null}
                 </div>
                 <div className="text-right">
-                  <div className={`inline-flex rounded-full px-2.5 py-1 text-[9px] font-black uppercase tracking-[0.12em] ${item.aktif ? "bg-emerald-100 text-emerald-700" : "bg-slate-100 text-slate-500"}`}>
+                  <div className={`inline-flex rounded-full px-2.5 py-1 text-[9px] font-black uppercase tracking-[0.12em] ${item.aktif ? "bg-red-100 text-red-700" : "bg-slate-100 text-slate-500"}`}>
                     {item.aktif ? "Aktif" : "Nonaktif"}
                   </div>
-                  <div className="mt-2 text-sm font-black text-[#047857]">Rp {fmtIDR(item.saldo)}</div>
+                  <div className="mt-2 text-sm font-black text-[#d70717]">Rp {fmtIDR(item.saldo)}</div>
                 </div>
               </div>
             </div>
@@ -234,7 +234,7 @@ export function RetailDownlineManager({ authToken, role, allowCreate = true }: P
           <div className="max-h-[calc(100dvh-2rem)] w-full max-w-md overflow-y-auto rounded-[30px] bg-white p-5 shadow-[0_18px_46px_rgba(15,23,42,0.24)] md:w-[390px] md:max-w-none">
             <div className="flex items-start justify-between gap-4 border-b border-slate-100 pb-4">
               <div>
-                <div className="text-[10px] font-black uppercase tracking-[0.22em] text-[#047857]">Tambah Downline</div>
+                <div className="text-[10px] font-black uppercase tracking-[0.22em] text-[#d70717]">Tambah Downline</div>
                 <h3 className="mt-1 text-xl font-black text-slate-950">{role === "marketing" ? "Buat Agent Binaan" : role === "agent" ? "Buat Member" : "Buat Akun Retail"}</h3>
                 <p className="mt-1 text-xs font-semibold leading-5 text-slate-500">Akun baru akan langsung terhubung sebagai member anda.</p>
               </div>
@@ -256,7 +256,7 @@ export function RetailDownlineManager({ authToken, role, allowCreate = true }: P
                   <div className="grid gap-1.5">
                     <label className="text-xs font-black text-slate-700">Role</label>
                     <select
-                      className="h-12 rounded-2xl border border-slate-200 px-3 text-sm font-bold text-slate-900 outline-none focus:border-emerald-500 focus:ring-4 focus:ring-emerald-100"
+                      className="h-12 rounded-2xl border border-slate-200 px-3 text-sm font-bold text-slate-900 outline-none focus:border-red-500 focus:ring-4 focus:ring-red-100"
                       value={targetRole}
                       onChange={(e) => setTargetRole(e.target.value)}
                     >
@@ -266,10 +266,10 @@ export function RetailDownlineManager({ authToken, role, allowCreate = true }: P
                     </select>
                   </div>
                 ) : null}
-                <input className="h-12 rounded-2xl border border-slate-200 px-3 text-sm font-bold outline-none focus:border-emerald-500 focus:ring-4 focus:ring-emerald-100" placeholder="Nama" value={nama} onChange={(e) => setNama(e.target.value)} />
-                <input className="h-12 rounded-2xl border border-slate-200 px-3 text-sm font-bold outline-none focus:border-emerald-500 focus:ring-4 focus:ring-emerald-100" placeholder="Email" value={email} onChange={(e) => setEmail(e.target.value)} />
-                <input className="h-12 rounded-2xl border border-slate-200 px-3 text-sm font-bold outline-none focus:border-emerald-500 focus:ring-4 focus:ring-emerald-100" placeholder="Password minimal 8 karakter" type="password" value={password} onChange={(e) => setPassword(e.target.value)} />
-                <button className="mt-1 inline-flex h-12 items-center justify-center gap-2 rounded-2xl bg-[#052e26] text-sm font-black text-white shadow-[0_12px_24px_rgba(6,78,59,0.18)] hover:bg-[#064e3b] disabled:opacity-70" disabled={saving} type="submit">
+                <input className="h-12 rounded-2xl border border-slate-200 px-3 text-sm font-bold outline-none focus:border-red-500 focus:ring-4 focus:ring-red-100" placeholder="Nama" value={nama} onChange={(e) => setNama(e.target.value)} />
+                <input className="h-12 rounded-2xl border border-slate-200 px-3 text-sm font-bold outline-none focus:border-red-500 focus:ring-4 focus:ring-red-100" placeholder="Email" value={email} onChange={(e) => setEmail(e.target.value)} />
+                <input className="h-12 rounded-2xl border border-slate-200 px-3 text-sm font-bold outline-none focus:border-red-500 focus:ring-4 focus:ring-red-100" placeholder="Password minimal 8 karakter" type="password" value={password} onChange={(e) => setPassword(e.target.value)} />
+                <button className="mt-1 inline-flex h-12 items-center justify-center gap-2 rounded-2xl bg-[#b20717] text-sm font-black text-white shadow-[0_12px_24px_rgba(151,14,32,0.18)] hover:bg-[#b20717] disabled:opacity-70" disabled={saving} type="submit">
                   {saving ? "Menyimpan..." : "Tambah Akun"}
                   {!saving ? <ChevronRight className="h-4 w-4" /> : null}
                 </button>

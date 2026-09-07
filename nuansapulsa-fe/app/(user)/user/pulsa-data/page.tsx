@@ -46,7 +46,7 @@ export default async function UserPulsaDataPage({ searchParams }: PageProps) {
   };
 
   return (
-    <main className="min-h-screen bg-sky-50">
+    <main className="min-h-screen bg-[#fff6f4]">
       {backendToken ? <UserAuthClientSync backendToken={backendToken} /> : null}
       <UserPulsaDataExplorer tabs={tabs} isLoggedIn={isLoggedIn} authToken={backendToken} initialTab={initialTab} />
       <UserBottomNav />

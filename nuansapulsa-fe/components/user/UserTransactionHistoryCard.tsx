@@ -27,7 +27,7 @@ type UserTransactionHistoryCardProps = {
 
 export function UserTransactionHistoryCard({ item }: UserTransactionHistoryCardProps) {
   return (
-    <Link href={`/user/transaksi/${encodeURIComponent(item.invoice_id)}`} className="block rounded-2xl border border-neutral-100 p-4 shadow-sm transition hover:border-sky-200 hover:shadow-md">
+    <Link href={`/user/transaksi/${encodeURIComponent(item.invoice_id)}`} className="block rounded-2xl border border-neutral-100 p-4 shadow-sm transition hover:border-red-200 hover:shadow-md">
       <article>
         <div className="flex items-start justify-between gap-3">
           <div className="min-w-0">

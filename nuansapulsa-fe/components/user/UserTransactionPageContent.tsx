@@ -60,8 +60,8 @@ export function UserTransactionPageContent({
             }}
             className={
               selectedRange === label
-                ? "h-9 shrink-0 rounded-full bg-[#047857] px-4 text-xs font-black text-white shadow-[0_10px_20px_rgba(4,120,87,0.20)]"
-                : "h-9 shrink-0 rounded-full border border-slate-200 bg-white px-4 text-xs font-black text-slate-500 transition hover:border-emerald-200 hover:text-[#047857]"
+                ? "h-9 shrink-0 rounded-full bg-[#d70717] px-4 text-xs font-black text-white shadow-[0_10px_20px_rgba(215,7,23,0.20)]"
+                : "h-9 shrink-0 rounded-full border border-slate-200 bg-white px-4 text-xs font-black text-slate-500 transition hover:border-red-200 hover:text-[#d70717]"
             }
           >
             {label}
@@ -70,7 +70,7 @@ export function UserTransactionPageContent({
       </div>
 
       <label className="relative flex h-13 cursor-pointer items-center gap-3 rounded-[16px] border border-slate-200 bg-white px-4 text-slate-500 shadow-[0_10px_24px_rgba(15,23,42,0.04)]">
-        <CalendarDays className="h-4.5 w-4.5 text-[#047857]" strokeWidth={2.1} />
+        <CalendarDays className="h-4.5 w-4.5 text-[#d70717]" strokeWidth={2.1} />
         <span className="text-xs font-bold text-slate-500">Pilih tanggal</span>
         <span className={selectedDate ? "ml-auto text-xs font-black text-slate-700" : "ml-auto text-xs font-bold text-slate-400"}>
           {formatDateDisplay(selectedDate)}
