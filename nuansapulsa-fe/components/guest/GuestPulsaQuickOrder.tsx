@@ -316,7 +316,7 @@ export function GuestPulsaQuickOrder({ kategoriId, brands, authToken, buyerRole,
           {detectedBrand ? (
             <div>
               <div className="mb-2 flex items-center justify-between gap-3">
-                {loading ? <LoaderCircle className="h-4 w-4 animate-spin text-sky-600" /> : null}
+                {loading ? <LoaderCircle className="h-4 w-4 animate-spin text-[#e50b18]" /> : null}
               </div>
 
               {variantGroups.length > 1 ? (
@@ -328,8 +328,8 @@ export function GuestPulsaQuickOrder({ kategoriId, brands, authToken, buyerRole,
                       onClick={() => setSelectedVariant(group.label)}
                       className={`shrink-0 snap-start whitespace-nowrap rounded-full px-2.5 py-2 text-[10px] font-semibold leading-tight transition ${
                         selectedVariant === group.label
-                          ? "bg-sky-600 text-white shadow-[0_8px_18px_rgba(15,111,203,0.22)]"
-                          : "bg-white text-slate-700 ring-1 ring-slate-200 hover:bg-slate-50"
+                          ? "bg-linear-to-r from-[#e50914] to-[#ff6a00] text-white shadow-[0_8px_18px_rgba(229,9,20,0.22)]"
+                          : "bg-white text-slate-700 ring-1 ring-red-100 hover:bg-red-50"
                       }`}
                     >
                       {detectedBrand.nama.toUpperCase()} {group.label}
@@ -339,7 +339,7 @@ export function GuestPulsaQuickOrder({ kategoriId, brands, authToken, buyerRole,
               ) : null}
 
               {loading ? (
-                <div className="grid min-h-28 place-items-center rounded-md border border-dashed border-slate-200 bg-slate-50 text-sm text-slate-500">
+                <div className="grid min-h-28 place-items-center rounded-2xl border border-dashed border-red-200 bg-red-50/60 text-sm font-semibold text-slate-500">
                   Memuat produk pulsa...
                 </div>
               ) : visibleProducts.length > 0 ? (
@@ -371,7 +371,7 @@ export function GuestPulsaQuickOrder({ kategoriId, brands, authToken, buyerRole,
                   variant="pulsa"
                 />
               ) : (
-                <div className="grid min-h-28 place-items-center rounded-md border border-dashed border-slate-200 bg-slate-50 text-sm text-slate-500">
+                <div className="grid min-h-28 place-items-center rounded-2xl border border-dashed border-red-200 bg-red-50/60 px-4 text-center text-sm font-semibold text-slate-500">
                   Belum ada produk aktif untuk operator ini.
                 </div>
               )}

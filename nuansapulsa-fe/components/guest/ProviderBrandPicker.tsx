@@ -26,16 +26,16 @@ export function ProviderBrandPicker({ items, layout = "grid", columns = 3 }: Pro
             aria-label={brand.nama}
             className={
               layout === "list"
-                ? "group flex items-center gap-3 border border-slate-200 bg-white px-3 py-3 shadow-[0_8px_18px_rgba(15,23,42,0.06)] transition-transform duration-300 hover:-translate-y-1 hover:border-sky-300 hover:shadow-[0_10px_24px_rgba(15,111,203,0.08)]"
-                : "group rounded-md border border-slate-200 bg-white px-2 py-3 text-center shadow-[0_8px_18px_rgba(15,23,42,0.06)] transition-transform duration-300 hover:-translate-y-1 hover:border-sky-300 hover:shadow-[0_10px_24px_rgba(15,111,203,0.08)]"
+                ? "group flex items-center gap-3 rounded-2xl border border-red-100/80 bg-white px-3 py-3 shadow-[0_8px_18px_rgba(99,24,34,0.06)] transition-transform duration-300 hover:-translate-y-1 hover:border-red-200 hover:shadow-[0_12px_26px_rgba(215,7,23,0.10)]"
+                : "group rounded-2xl border border-red-100/80 bg-white px-2 py-3 text-center shadow-[0_8px_18px_rgba(99,24,34,0.06)] transition-transform duration-300 hover:-translate-y-1 hover:border-red-200 hover:shadow-[0_12px_26px_rgba(215,7,23,0.10)]"
             }
           >
             <div className={layout === "list" ? "grid h-12 w-12 shrink-0 place-items-center overflow-hidden" : "flex flex-col items-center gap-3"}>
-              <div className={layout === "list" ? "grid h-12 w-12 place-items-center overflow-hidden" : "grid h-14 w-14 place-items-center overflow-hidden"}>
+              <div className={layout === "list" ? "grid h-12 w-12 place-items-center overflow-hidden rounded-xl bg-white" : "grid h-14 w-14 place-items-center overflow-hidden rounded-xl bg-white"}>
                 {logo ? (
                   <Image src={logo.src} alt={logo.alt} title={logo.alt} width={56} height={56} className="h-full w-full object-contain" />
                 ) : (
-                  <span className="text-base font-black uppercase tracking-tight text-sky-700">{brand.nama.slice(0, 2)}</span>
+                  <span className="text-base font-black uppercase tracking-tight text-[#e50b18]">{brand.nama.slice(0, 2)}</span>
                 )}
               </div>
             </div>

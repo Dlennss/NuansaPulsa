@@ -33,14 +33,14 @@ export function QuickProductOptionGrid({
               key={item.id}
               type="button"
               onClick={() => onSelect(item.id)}
-              className={`relative w-full overflow-hidden rounded-md px-5 py-3 text-left ${
+              className={`relative w-full overflow-hidden rounded-2xl px-5 py-3 text-left ${
                 selected
-                  ? "bg-[#0084D1] shadow-[0_18px_36px_rgba(0,132,209,0.28)]"
-                  : "bg-[#1491db] shadow-[0_14px_30px_rgba(0,132,209,0.22)]"
+                  ? "bg-linear-to-br from-[#d70717] to-[#ff6a00] shadow-[0_18px_36px_rgba(215,7,23,0.26)]"
+                  : "bg-linear-to-br from-[#ef1b18] to-[#ff8a00] shadow-[0_14px_30px_rgba(215,7,23,0.18)]"
               }`}
             >
-              <div className="absolute inset-0 bg-[radial-gradient(circle_at_top_left,rgba(255,255,255,0.22),transparent_30%),linear-gradient(180deg,rgba(255,255,255,0.06),rgba(255,255,255,0.02))]" />
-              <div className="absolute inset-0 opacity-30 bg-[repeating-radial-gradient(circle_at_0_100%,rgba(255,255,255,0.35)_0,rgba(255,255,255,0.35)_2px,transparent_2px,transparent_12px)] bg-size-[160%_120%]" />
+              <div className="absolute inset-0 bg-[radial-gradient(circle_at_top_left,rgba(255,255,255,0.24),transparent_34%),linear-gradient(180deg,rgba(255,255,255,0.08),rgba(255,255,255,0.02))]" />
+              <div className="absolute -right-8 -top-8 h-24 w-24 rounded-full border border-white/20" />
 
               <div className="relative flex min-h-18 flex-col justify-between gap-2">
                 <div className="min-w-0">
@@ -67,14 +67,14 @@ export function QuickProductOptionGrid({
             key={item.id}
             type="button"
             onClick={() => onSelect(item.id)}
-            className={`relative overflow-hidden rounded-md px-4 py-4 ${
+            className={`relative overflow-hidden rounded-2xl px-4 py-4 ${
               selected
-                ? "bg-[#0084D1] shadow-[0_18px_36px_rgba(0,132,209,0.28)]"
-                : "bg-[#1491db] shadow-[0_14px_30px_rgba(0,132,209,0.22)]"
+                ? "bg-linear-to-br from-[#d70717] to-[#ff6a00] shadow-[0_18px_36px_rgba(215,7,23,0.26)]"
+                : "bg-linear-to-br from-[#ef1b18] to-[#ff8a00] shadow-[0_14px_30px_rgba(215,7,23,0.18)]"
             }`}
           >
-            <div className="absolute inset-0 bg-[radial-gradient(circle_at_top_left,rgba(255,255,255,0.22),transparent_30%),linear-gradient(180deg,rgba(255,255,255,0.06),rgba(255,255,255,0.02))]" />
-            <div className="absolute inset-0 opacity-30 bg-[repeating-radial-gradient(circle_at_0_100%,rgba(255,255,255,0.35)_0,rgba(255,255,255,0.35)_2px,transparent_2px,transparent_12px)] bg-size-[170%_130%]" />
+            <div className="absolute inset-0 bg-[radial-gradient(circle_at_top_left,rgba(255,255,255,0.24),transparent_34%),linear-gradient(180deg,rgba(255,255,255,0.08),rgba(255,255,255,0.02))]" />
+            <div className="absolute -right-8 -top-8 h-24 w-24 rounded-full border border-white/20" />
 
             <div
               className={`relative ${
