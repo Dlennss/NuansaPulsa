@@ -4,7 +4,7 @@ import Image from "next/image";
 import Link from "next/link";
 import { getServerSession } from "next-auth";
 import type { Metadata } from "next";
-import { ChevronRight } from "lucide-react";
+import { ChevronRight, ClipboardCheck, Grid3X3, ShieldCheck } from "lucide-react";
 import { authOptions } from "@/lib/nextauth";
 import { getCategories } from "@/lib/api.products";
 import type { UserCategoryItem, UserSession } from "@/components/user/types";
@@ -92,25 +92,25 @@ function HomeHero({ isLoggedIn }: { isLoggedIn: boolean }) {
         />
       </Link>
 
-      <Link
-        href={isLoggedIn ? "/user/saldo" : "/login"}
-        prefetch={false}
-        aria-label={isLoggedIn ? "Lihat saldo" : "Masuk untuk melihat saldo"}
-        className="absolute bottom-9 right-7 flex w-[clamp(184px,54vw,212px)] rounded-[17px] bg-white px-2.5 py-2.5 text-slate-700 shadow-[0_18px_40px_rgba(90,6,20,0.2)] ring-1 ring-white/70 focus-visible:outline-none focus-visible:ring-4 focus-visible:ring-white/70"
-      >
-        <span className="relative mr-2.5 h-8 w-8 shrink-0 overflow-hidden rounded-full bg-[#fff1f2]">
-          <Image src="/nuansapulsa-assets/icon_saldo_badge.png" alt="" fill sizes="32px" className="object-contain" />
-        </span>
-        <span className="min-w-0 flex-1">
-          <span className="block text-[11px] font-semibold leading-3 text-slate-500">Saldo Anda</span>
-          <span className="mt-1 block text-sm font-black leading-4 text-[#d70717]">
-            {isLoggedIn ? "Lihat saldo akun" : "Masuk untuk melihat"}
+      {isLoggedIn ? (
+        <Link
+          href="/user/saldo"
+          prefetch={false}
+          aria-label="Lihat saldo"
+          className="absolute bottom-9 right-7 flex w-[clamp(184px,54vw,212px)] rounded-[17px] bg-white px-2.5 py-2.5 text-slate-700 shadow-[0_18px_40px_rgba(90,6,20,0.2)] ring-1 ring-white/70 focus-visible:outline-none focus-visible:ring-4 focus-visible:ring-white/70"
+        >
+          <span className="relative mr-2.5 h-8 w-8 shrink-0 overflow-hidden rounded-full bg-[#fff1f2]">
+            <Image src="/nuansapulsa-assets/icon_saldo_badge.png" alt="" fill sizes="32px" className="object-contain" />
           </span>
-          <span className="mt-2 inline-flex h-7 w-full items-center justify-center rounded-full bg-[#d70717] px-2.5 text-xs font-black text-white">
-            {isLoggedIn ? "Buka Saldo" : "Masuk / Daftar"}
+          <span className="min-w-0 flex-1">
+            <span className="block text-[11px] font-semibold leading-3 text-slate-500">Saldo Anda</span>
+            <span className="mt-1 block text-sm font-black leading-4 text-[#d70717]">Lihat saldo akun</span>
+            <span className="mt-2 inline-flex h-7 w-full items-center justify-center rounded-full bg-[#d70717] px-2.5 text-xs font-black text-white">
+              Buka Saldo
+            </span>
           </span>
-        </span>
-      </Link>
+        </Link>
+      ) : null}
     </section>
   );
 }
@@ -142,42 +142,58 @@ function HomeInfoStrip() {
 function HomePopularActions() {
   const items = [
     {
-      label: "Transaksi Praktis",
-      description: "Pilih layanan, isi tujuan, lalu lanjut bayar.",
-      icon: "/nuansapulsa-assets/promo_transaksi_cepat.png",
-      href: "/kategori",
+      label: "Pilih Layanan",
+      description: "Pulsa, data, e-wallet, PLN, game, dan PPOB.",
+      icon: Grid3X3,
     },
     {
-      label: "Saldo Setelah Login",
-      description: "Nominal saldo hanya tampil setelah akun masuk.",
-      icon: "/nuansapulsa-assets/kartu_saldo.png",
-      href: "/login",
+      label: "Isi Data",
+      description: "Masukkan nomor atau ID pelanggan dengan rapi.",
+      icon: ClipboardCheck,
+    },
+    {
+      label: "Bayar Aman",
+      description: "Lanjutkan pembayaran dan pantau status transaksi.",
+      icon: ShieldCheck,
     },
   ];
 
   return (
-    <section className="rounded-[22px] bg-white px-4 py-4 shadow-[0_14px_34px_rgba(99,24,34,0.09)] ring-1 ring-red-950/[0.04]">
-      <div className="flex items-center justify-between gap-4 border-b border-slate-100 pb-3">
-        <h2 className="text-lg font-black tracking-tight text-slate-950">Mulai Transaksi</h2>
-        <Link href="/kategori" prefetch={false} className="inline-flex items-center gap-1 text-sm font-bold text-[#d70717]">
-          Lihat Menu
-          <ChevronRight className="h-5 w-5" strokeWidth={2.6} />
-        </Link>
+    <section className="overflow-hidden rounded-[24px] bg-white shadow-[0_16px_36px_rgba(99,24,34,0.10)] ring-1 ring-red-950/[0.04]">
+      <div className="relative overflow-hidden bg-linear-to-br from-[#e50914] via-[#f42516] to-[#ff7a00] px-4 py-4 text-white">
+        <div className="absolute -right-10 -top-12 h-32 w-32 rounded-full border border-white/20" />
+        <div className="absolute right-7 top-3 h-12 w-12 rounded-full border border-white/20" />
+        <div className="relative flex items-center justify-between gap-3">
+          <div className="min-w-0">
+            <h2 className="text-lg font-black tracking-tight">Mulai Transaksi</h2>
+            <p className="mt-1 text-xs font-semibold leading-4 text-white/85">Semua kebutuhan digital dalam satu menu NuansaPulsa.</p>
+          </div>
+          <Link
+            href="/kategori"
+            prefetch={false}
+            className="inline-flex h-10 shrink-0 items-center justify-center gap-1 rounded-full bg-white px-3 text-xs font-black text-[#d70717] shadow-[0_12px_24px_rgba(99,24,34,0.18)]"
+          >
+            Menu
+            <ChevronRight className="h-4 w-4" strokeWidth={3} />
+          </Link>
+        </div>
       </div>
 
-      <div className="divide-y divide-slate-100">
-        {items.map((item) => (
-          <Link key={item.label} href={item.href} prefetch={false} className="flex items-center gap-3 py-3">
-            <span className="relative h-11 w-11 shrink-0 overflow-hidden rounded-full bg-rose-50">
-              <Image src={item.icon} alt="" fill sizes="44px" className="object-contain" />
-            </span>
-            <span className="min-w-0 flex-1">
-              <span className="block truncate text-sm font-black text-slate-950">{item.label}</span>
-              <span className="mt-1 block text-xs font-medium leading-4 text-slate-500">{item.description}</span>
-            </span>
-            <ChevronRight className="h-5 w-5 shrink-0 text-slate-400" strokeWidth={2.4} />
-          </Link>
-        ))}
+      <div className="grid gap-2 p-3">
+        {items.map((item) => {
+          const Icon = item.icon;
+          return (
+            <div key={item.label} className="flex items-center gap-3 rounded-2xl bg-[#fff7f5] px-3 py-3 ring-1 ring-red-100/70">
+              <span className="grid h-10 w-10 shrink-0 place-items-center rounded-2xl bg-white text-[#e50914] shadow-[0_10px_22px_rgba(215,7,23,0.10)]">
+                <Icon className="h-5 w-5" strokeWidth={2.5} />
+              </span>
+              <span className="min-w-0">
+                <span className="block text-sm font-black leading-4 text-slate-950">{item.label}</span>
+                <span className="mt-1 block text-xs font-semibold leading-4 text-slate-500">{item.description}</span>
+              </span>
+            </div>
+          );
+        })}
       </div>
     </section>
   );
