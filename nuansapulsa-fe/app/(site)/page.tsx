@@ -63,7 +63,7 @@ export const metadata: Metadata = {
 
 function HomeHero({ isLoggedIn }: { isLoggedIn: boolean }) {
   return (
-    <section className="relative isolate h-[280px] overflow-hidden rounded-b-[30px] bg-[#e50917] text-white shadow-[0_18px_42px_rgba(151,14,32,0.24)]">
+    <section className="relative isolate h-[300px] overflow-hidden rounded-b-[30px] bg-[#e50917] text-white shadow-[0_18px_42px_rgba(151,14,32,0.24)]">
       <div className="absolute inset-0 -z-20 bg-[linear-gradient(140deg,#ff2115_0%,#ed0b18_48%,#aa0d23_100%)]" />
       <div className="absolute inset-x-0 bottom-0 -z-10 h-32 bg-[linear-gradient(165deg,transparent_18%,rgba(255,166,0,0.54)_19%,rgba(255,111,0,0.32)_40%,rgba(179,10,28,0.12)_62%,transparent_76%)]" />
       <div className="absolute right-2 top-2 -z-10 h-56 w-44 opacity-22">
@@ -80,7 +80,7 @@ function HomeHero({ isLoggedIn }: { isLoggedIn: boolean }) {
         href="/"
         prefetch={false}
         aria-label="NuansaPulsa"
-        className="absolute left-5 top-5 h-[46px] w-[clamp(190px,64vw,260px)] focus-visible:outline-none focus-visible:ring-4 focus-visible:ring-white/70"
+        className="absolute left-5 top-5 h-[42px] w-[clamp(176px,56vw,238px)] focus-visible:outline-none focus-visible:ring-4 focus-visible:ring-white/70"
       >
         <Image
           src="/nuansapulsa-assets/logo_full_dengan_tagline.png"
@@ -111,18 +111,18 @@ function HomeHero({ isLoggedIn }: { isLoggedIn: boolean }) {
           </span>
         </Link>
       ) : (
-        <div className="absolute inset-x-5 bottom-13">
-          <div className="max-w-[245px]">
-            <p className="text-[11px] font-black uppercase tracking-[0.16em] text-yellow-200">Satu menu digital</p>
-            <h1 className="mt-1 text-[26px] font-black leading-[1.02] tracking-tight text-white drop-shadow-sm">
+        <div className="absolute inset-x-5 top-[96px]">
+          <div className="max-w-[270px]">
+            <p className="text-[10px] font-black uppercase tracking-[0.14em] text-yellow-200">Satu menu digital</p>
+            <h1 className="mt-1 text-[23px] font-black leading-[1.08] tracking-tight text-white drop-shadow-sm">
               Isi Pulsa dan Bayar Tagihan Lebih Mudah
             </h1>
-            <p className="mt-2 text-xs font-semibold leading-4 text-white/85">Pulsa, data, PLN, e-wallet, game, dan PPOB siap dipilih.</p>
+            <p className="mt-2 max-w-[240px] text-[12px] font-semibold leading-4 text-white/88">Pulsa, data, PLN, e-wallet, game, dan PPOB siap dipilih.</p>
           </div>
           <Link
             href="/kategori"
             prefetch={false}
-            className="mt-4 inline-flex h-10 items-center justify-center gap-1 rounded-full bg-white px-4 text-sm font-black text-[#d70717] shadow-[0_14px_28px_rgba(99,24,34,0.22)] ring-1 ring-white/70"
+            className="mt-4 inline-flex h-10 min-w-[148px] items-center justify-center gap-1 rounded-full bg-white px-4 text-sm font-black text-[#d70717] shadow-[0_14px_28px_rgba(99,24,34,0.22)] ring-1 ring-white/70"
           >
             Mulai Sekarang
             <ChevronRight className="h-4 w-4" strokeWidth={3} />
