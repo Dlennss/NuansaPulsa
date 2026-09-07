@@ -110,7 +110,25 @@ function HomeHero({ isLoggedIn }: { isLoggedIn: boolean }) {
             </span>
           </span>
         </Link>
-      ) : null}
+      ) : (
+        <div className="absolute inset-x-5 bottom-13">
+          <div className="max-w-[245px]">
+            <p className="text-[11px] font-black uppercase tracking-[0.16em] text-yellow-200">Satu menu digital</p>
+            <h1 className="mt-1 text-[26px] font-black leading-[1.02] tracking-tight text-white drop-shadow-sm">
+              Isi Pulsa dan Bayar Tagihan Lebih Mudah
+            </h1>
+            <p className="mt-2 text-xs font-semibold leading-4 text-white/85">Pulsa, data, PLN, e-wallet, game, dan PPOB siap dipilih.</p>
+          </div>
+          <Link
+            href="/kategori"
+            prefetch={false}
+            className="mt-4 inline-flex h-10 items-center justify-center gap-1 rounded-full bg-white px-4 text-sm font-black text-[#d70717] shadow-[0_14px_28px_rgba(99,24,34,0.22)] ring-1 ring-white/70"
+          >
+            Mulai Sekarang
+            <ChevronRight className="h-4 w-4" strokeWidth={3} />
+          </Link>
+        </div>
+      )}
     </section>
   );
 }
@@ -171,9 +189,9 @@ function HomePopularActions() {
           <Link
             href="/kategori"
             prefetch={false}
-            className="inline-flex h-10 shrink-0 items-center justify-center gap-1 rounded-full bg-white px-3 text-xs font-black text-[#d70717] shadow-[0_12px_24px_rgba(99,24,34,0.18)]"
+            className="inline-flex h-10 shrink-0 items-center justify-center gap-1 rounded-full bg-[#7a0612] px-4 text-xs font-black text-white shadow-[0_12px_24px_rgba(99,24,34,0.22)] ring-1 ring-white/25"
           >
-            Menu
+            Buka Menu
             <ChevronRight className="h-4 w-4" strokeWidth={3} />
           </Link>
         </div>
