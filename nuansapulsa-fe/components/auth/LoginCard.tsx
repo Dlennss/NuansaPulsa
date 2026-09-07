@@ -193,7 +193,7 @@ export function LoginCard() {
                   className="mt-1 h-7 w-full min-w-0 bg-transparent text-base font-bold text-slate-900 outline-none placeholder:text-sm placeholder:font-semibold placeholder:text-slate-400"
                   value={email}
                   onChange={(e) => setEmail(e.target.value)}
-                  placeholder="admin@nuansapulsa.com"
+                  placeholder="user@gamail.com"
                   autoComplete="username"
                   type="email"
                 />
