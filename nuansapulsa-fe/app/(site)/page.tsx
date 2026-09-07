@@ -122,9 +122,10 @@ function HomeHero({ isLoggedIn }: { isLoggedIn: boolean }) {
           <Link
             href="/kategori"
             prefetch={false}
-            className="mt-4 inline-flex h-10 min-w-[148px] items-center justify-center gap-1 rounded-full bg-white px-4 text-sm font-black text-[#d70717] shadow-[0_14px_28px_rgba(99,24,34,0.22)] ring-1 ring-white/70"
+            aria-label="Mulai transaksi sekarang"
+            className="relative z-20 mt-4 inline-flex h-11 min-w-[170px] items-center justify-center gap-1.5 rounded-full bg-[#7a0612] px-5 text-sm font-black leading-none text-white shadow-[0_14px_28px_rgba(99,24,34,0.28)] ring-1 ring-white/25"
           >
-            Mulai Sekarang
+            <span className="whitespace-nowrap text-white">Mulai Sekarang</span>
             <ChevronRight className="h-4 w-4" strokeWidth={3} />
           </Link>
         </div>
