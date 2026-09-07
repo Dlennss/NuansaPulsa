@@ -199,12 +199,12 @@ export default function AdminBusinessReportPage() {
   }
 
   return (
-    <div className="-m-2 min-h-screen bg-[#eef8f3] p-3 text-[#071b14] sm:p-5 lg:p-6">
+    <div className="-m-2 min-h-screen bg-[#fff6f4] p-3 text-slate-950 sm:p-5 lg:p-6">
       <div className="mx-auto max-w-7xl space-y-5">
       <div className="flex flex-wrap items-end justify-between gap-3">
         <div>
-          <div className="text-2xl font-black tracking-tight text-[#071b14]">Laporan Bisnis</div>
-          <div className="mt-1 max-w-3xl text-sm font-semibold leading-6 text-[#315847]">
+          <div className="text-2xl font-black tracking-tight text-slate-950">Laporan Bisnis</div>
+          <div className="mt-1 max-w-3xl text-sm font-semibold leading-6 text-slate-600">
             Rekap harian 3 bulan terakhir: transaksi, bayar provider, margin, komisi, pengeluaran transaksi, deposit member, dan deposit provider berbasis mutasi bank.
           </div>
         </div>
@@ -272,30 +272,30 @@ export default function AdminBusinessReportPage() {
         ].map((item) => (
           <div
             key={item.label}
-            className="rounded-[22px] border border-emerald-200 bg-[linear-gradient(135deg,#ffffff_0%,#f1fff8_100%)] p-4 shadow-[0_14px_30px_rgba(6,78,59,0.08)]"
+            className="rounded-[22px] border border-red-100 bg-[linear-gradient(135deg,#ffffff_0%,#fff1ee_100%)] p-4 shadow-[0_14px_30px_rgba(151,14,32,0.08)]"
           >
-            <div className="text-xs font-black uppercase tracking-[0.12em] text-[#064e3b]">{item.label}</div>
-            <div className="mt-2 text-lg font-black text-[#071b14]">{item.value}</div>
+            <div className="text-xs font-black uppercase tracking-[0.12em] text-[#b20717]">{item.label}</div>
+            <div className="mt-2 text-lg font-black text-slate-950">{item.value}</div>
           </div>
         ))}
       </section>
 
       <section className="space-y-4">
-        <div className="rounded-[24px] border border-emerald-200 bg-white p-4 shadow-[0_14px_30px_rgba(6,78,59,0.08)]">
-          <div className="text-base font-black text-[#071b14]">Rekap Harian 3 Bulan</div>
-          <div className="mt-1 text-sm font-semibold text-[#315847]">
+        <div className="rounded-[24px] border border-red-100 bg-white p-4 shadow-[0_14px_30px_rgba(151,14,32,0.08)]">
+          <div className="text-base font-black text-slate-950">Rekap Harian 3 Bulan</div>
+          <div className="mt-1 text-sm font-semibold text-slate-600">
             Data harian dikelompokkan per bulan, dengan total setiap item pada bagian bawah bulan.
           </div>
         </div>
 
         {loading ? (
-          <div className="rounded-[24px] border border-emerald-200 bg-white px-4 py-6 text-sm font-semibold text-[#315847]">
+          <div className="rounded-[24px] border border-red-100 bg-white px-4 py-6 text-sm font-semibold text-slate-600">
             Memuat laporan harian...
           </div>
         ) : null}
 
         {!loading && groupedMonths.length === 0 ? (
-          <div className="rounded-[24px] border border-emerald-200 bg-white px-4 py-6 text-sm font-semibold text-[#315847]">
+          <div className="rounded-[24px] border border-red-100 bg-white px-4 py-6 text-sm font-semibold text-slate-600">
             Belum ada data transaksi pada periode ini.
           </div>
         ) : null}
@@ -304,56 +304,56 @@ export default function AdminBusinessReportPage() {
           ? groupedMonths.map((group) => (
               <div
                 key={group.monthKey}
-                className="overflow-hidden rounded-[24px] border border-emerald-200 bg-white shadow-[0_14px_30px_rgba(6,78,59,0.08)]"
+                className="overflow-hidden rounded-[24px] border border-red-100 bg-white shadow-[0_14px_30px_rgba(151,14,32,0.08)]"
               >
-                <div className="border-b border-emerald-100 bg-[linear-gradient(135deg,#064e3b_0%,#047857_70%,#55c72f_140%)] px-4 py-3">
+                <div className="border-b border-red-100 bg-[linear-gradient(135deg,#c90016_0%,#ef1717_62%,#ff7a00_135%)] px-4 py-3">
                   <div className="text-sm font-black uppercase tracking-wide text-white">{group.monthKey}</div>
                 </div>
                 <div className="overflow-x-auto">
                   <table className="min-w-[1480px] w-full text-sm">
-                    <thead className="bg-[#f1fff8] text-left">
+                    <thead className="bg-red-50 text-left">
                       <tr>
-                        <th className="px-4 py-3 text-xs font-black uppercase tracking-wide text-[#064e3b]">Tanggal</th>
-                        <th className="px-4 py-3 text-xs font-black uppercase tracking-wide text-[#064e3b]">Jumlah Trx</th>
-                        <th className="px-4 py-3 text-xs font-black uppercase tracking-wide text-[#064e3b]">Nominal Trx</th>
-                        <th className="px-4 py-3 text-xs font-black uppercase tracking-wide text-[#064e3b]">Total Bayar Provider</th>
-                        <th className="px-4 py-3 text-xs font-black uppercase tracking-wide text-[#064e3b]">Margin</th>
-                        <th className="px-4 py-3 text-xs font-black uppercase tracking-wide text-[#064e3b]">Komisi Dibayar</th>
-                        <th className="px-4 py-3 text-xs font-black uppercase tracking-wide text-[#064e3b]">Pengeluaran Transaksi</th>
-                        <th className="px-4 py-3 text-xs font-black uppercase tracking-wide text-[#064e3b]">Deposit Member</th>
-                        <th className="px-4 py-3 text-xs font-black uppercase tracking-wide text-[#064e3b]">Deposit Provider Bank</th>
-                        <th className="px-4 py-3 text-xs font-black uppercase tracking-wide text-[#064e3b]">Selisih Deposit</th>
-                        <th className="px-4 py-3 text-xs font-black uppercase tracking-wide text-[#064e3b]">Keuntungan Bersih</th>
+                        <th className="px-4 py-3 text-xs font-black uppercase tracking-wide text-[#b20717]">Tanggal</th>
+                        <th className="px-4 py-3 text-xs font-black uppercase tracking-wide text-[#b20717]">Jumlah Trx</th>
+                        <th className="px-4 py-3 text-xs font-black uppercase tracking-wide text-[#b20717]">Nominal Trx</th>
+                        <th className="px-4 py-3 text-xs font-black uppercase tracking-wide text-[#b20717]">Total Bayar Provider</th>
+                        <th className="px-4 py-3 text-xs font-black uppercase tracking-wide text-[#b20717]">Margin</th>
+                        <th className="px-4 py-3 text-xs font-black uppercase tracking-wide text-[#b20717]">Komisi Dibayar</th>
+                        <th className="px-4 py-3 text-xs font-black uppercase tracking-wide text-[#b20717]">Pengeluaran Transaksi</th>
+                        <th className="px-4 py-3 text-xs font-black uppercase tracking-wide text-[#b20717]">Deposit Member</th>
+                        <th className="px-4 py-3 text-xs font-black uppercase tracking-wide text-[#b20717]">Deposit Provider Bank</th>
+                        <th className="px-4 py-3 text-xs font-black uppercase tracking-wide text-[#b20717]">Selisih Deposit</th>
+                        <th className="px-4 py-3 text-xs font-black uppercase tracking-wide text-[#b20717]">Keuntungan Bersih</th>
                       </tr>
                     </thead>
                     <tbody>
                       {group.rows.map((row) => (
-                        <tr key={`${group.monthKey}-${row.day}`} className="border-t border-emerald-100 odd:bg-white even:bg-[#fbfffd]">
-                          <td className="px-4 py-3 font-semibold text-[#315847]">{new Date(row.day).toLocaleDateString("id-ID")}</td>
-                          <td className="px-4 py-3 font-semibold text-[#315847]">{fmtID(Number(row.transaction_count || 0))}</td>
-                          <td className="px-4 py-3 font-bold text-[#071b14]">{fmtIDR(Number(row.transaction_amount || 0))}</td>
-                          <td className="px-4 py-3 font-bold text-[#064e3b]">{fmtIDR(Number(row.provider_payment_amount || 0))}</td>
-                          <td className="px-4 py-3 font-bold text-[#047857]">{fmtIDR(Number(row.margin_amount || 0))}</td>
-                          <td className="px-4 py-3 font-bold text-[#3f6212]">{fmtIDR(Number(row.commission_amount || 0))}</td>
+                        <tr key={`${group.monthKey}-${row.day}`} className="border-t border-red-50 odd:bg-white even:bg-[#fffafa]">
+                          <td className="px-4 py-3 font-semibold text-slate-600">{new Date(row.day).toLocaleDateString("id-ID")}</td>
+                          <td className="px-4 py-3 font-semibold text-slate-600">{fmtID(Number(row.transaction_count || 0))}</td>
+                          <td className="px-4 py-3 font-bold text-slate-950">{fmtIDR(Number(row.transaction_amount || 0))}</td>
+                          <td className="px-4 py-3 font-bold text-[#b20717]">{fmtIDR(Number(row.provider_payment_amount || 0))}</td>
+                          <td className="px-4 py-3 font-bold text-[#d70717]">{fmtIDR(Number(row.margin_amount || 0))}</td>
+                          <td className="px-4 py-3 font-bold text-[#ff6a00]">{fmtIDR(Number(row.commission_amount || 0))}</td>
                           <td className="px-4 py-3 font-bold text-rose-700">{fmtIDR(Number(row.transaction_expense_amount || 0))}</td>
-                          <td className="px-4 py-3 font-bold text-[#155e75]">{fmtIDR(Number(row.member_deposit_amount || 0))}</td>
-                          <td className="px-4 py-3 font-bold text-[#064e3b]">{fmtIDR(Number(row.provider_deposit_amount || 0))}</td>
-                          <td className="px-4 py-3 font-bold text-[#315847]">{fmtIDR(Number(row.deposit_gap_amount || 0))}</td>
-                          <td className="px-4 py-3 font-black text-[#047857]">{fmtIDR(Number(row.profit_amount || 0))}</td>
+                          <td className="px-4 py-3 font-bold text-[#d97706]">{fmtIDR(Number(row.member_deposit_amount || 0))}</td>
+                          <td className="px-4 py-3 font-bold text-[#b20717]">{fmtIDR(Number(row.provider_deposit_amount || 0))}</td>
+                          <td className="px-4 py-3 font-bold text-slate-600">{fmtIDR(Number(row.deposit_gap_amount || 0))}</td>
+                          <td className="px-4 py-3 font-black text-[#d70717]">{fmtIDR(Number(row.profit_amount || 0))}</td>
                         </tr>
                       ))}
-                      <tr className="border-t-2 border-[#064e3b] bg-[#e8fff4]">
-                        <td className="px-4 py-3 font-black text-[#064e3b]">Total {group.monthKey}</td>
-                        <td className="px-4 py-3 font-black text-[#064e3b]">{fmtID(group.totalTransactions)}</td>
-                        <td className="px-4 py-3 font-black text-[#064e3b]">{fmtIDR(group.totalAmount)}</td>
-                        <td className="px-4 py-3 font-black text-[#064e3b]">{fmtIDR(group.totalProviderPayment)}</td>
-                        <td className="px-4 py-3 font-black text-[#064e3b]">{fmtIDR(group.totalMargin)}</td>
-                        <td className="px-4 py-3 font-black text-[#064e3b]">{fmtIDR(group.totalCommission)}</td>
+                      <tr className="border-t-2 border-[#d70717] bg-red-50">
+                        <td className="px-4 py-3 font-black text-[#b20717]">Total {group.monthKey}</td>
+                        <td className="px-4 py-3 font-black text-[#b20717]">{fmtID(group.totalTransactions)}</td>
+                        <td className="px-4 py-3 font-black text-[#b20717]">{fmtIDR(group.totalAmount)}</td>
+                        <td className="px-4 py-3 font-black text-[#b20717]">{fmtIDR(group.totalProviderPayment)}</td>
+                        <td className="px-4 py-3 font-black text-[#b20717]">{fmtIDR(group.totalMargin)}</td>
+                        <td className="px-4 py-3 font-black text-[#b20717]">{fmtIDR(group.totalCommission)}</td>
                         <td className="px-4 py-3 font-black text-rose-700">{fmtIDR(group.totalTransactionExpense)}</td>
-                        <td className="px-4 py-3 font-black text-[#064e3b]">{fmtIDR(group.totalMemberDeposit)}</td>
-                        <td className="px-4 py-3 font-black text-[#064e3b]">{fmtIDR(group.totalProviderDeposit)}</td>
-                        <td className="px-4 py-3 font-black text-[#064e3b]">{fmtIDR(group.totalDepositGap)}</td>
-                        <td className="px-4 py-3 font-black text-[#064e3b]">{fmtIDR(group.totalProfit)}</td>
+                        <td className="px-4 py-3 font-black text-[#b20717]">{fmtIDR(group.totalMemberDeposit)}</td>
+                        <td className="px-4 py-3 font-black text-[#b20717]">{fmtIDR(group.totalProviderDeposit)}</td>
+                        <td className="px-4 py-3 font-black text-[#b20717]">{fmtIDR(group.totalDepositGap)}</td>
+                        <td className="px-4 py-3 font-black text-[#b20717]">{fmtIDR(group.totalProfit)}</td>
                       </tr>
                     </tbody>
                   </table>
