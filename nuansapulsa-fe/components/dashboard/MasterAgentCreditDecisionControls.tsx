@@ -63,7 +63,7 @@ function ReviewSignaturePad({
       ctx.lineCap = "round";
       ctx.lineJoin = "round";
       ctx.lineWidth = 1.35;
-      ctx.strokeStyle = "#047857";
+      ctx.strokeStyle = "#d70717";
     };
     resize();
     window.addEventListener("resize", resize);
@@ -119,14 +119,14 @@ function ReviewSignaturePad({
   }
 
   return (
-    <div className="rounded-[24px] border border-emerald-300 bg-[linear-gradient(180deg,#ffffff_0%,#f3fff9_100%)] p-4 text-center shadow-[0_12px_26px_rgba(4,120,87,0.10)]">
+    <div className="rounded-[24px] border border-red-300 bg-[linear-gradient(180deg,#ffffff_0%,#f3fff9_100%)] p-4 text-center shadow-[0_12px_26px_rgba(215,7,23,0.10)]">
       <div className="flex items-center justify-between gap-2">
         <p className="text-[10px] font-black uppercase tracking-[0.18em] text-slate-950">{label}</p>
         <button type="button" onClick={clear} className="grid h-7 w-7 place-items-center rounded-full bg-rose-50 text-rose-500 transition hover:bg-rose-100" aria-label="Hapus tanda tangan">
           <RotateCcw className="h-3.5 w-3.5" />
         </button>
       </div>
-      <div className="relative mt-3 overflow-hidden rounded-[22px] border border-slate-200 bg-[#fbfffd]">
+      <div className="relative mt-3 overflow-hidden rounded-[22px] border border-slate-200 bg-[#fffafa]">
         <canvas
           ref={canvasRef}
           className="h-40 w-full touch-none"
@@ -139,7 +139,7 @@ function ReviewSignaturePad({
         {!hasInk ? <span className="pointer-events-none absolute inset-0 grid place-items-center text-[10px] font-semibold text-slate-400">Tanda tangan</span> : null}
       </div>
       <p className="mt-3 truncate text-[11px] font-black text-slate-500">{signerName}</p>
-      <p className={hasInk ? "mt-1 text-[9px] font-black text-[#047857]" : "mt-1 text-[9px] font-black text-slate-400"}>
+      <p className={hasInk ? "mt-1 text-[9px] font-black text-[#d70717]" : "mt-1 text-[9px] font-black text-slate-400"}>
         {hasInk ? "Siap dikirim" : "Belum tanda tangan"}
       </p>
     </div>
@@ -286,7 +286,7 @@ export function MasterAgentCreditDecisionControls({
   if (isFinal && !editing) {
     return (
       <div className="space-y-2">
-        <div className={creditSuspended ? "rounded-2xl border border-amber-300 bg-amber-50 p-2.5 text-amber-800" : status === "approved" ? "rounded-2xl border border-emerald-200 bg-emerald-50 p-2.5 text-emerald-700" : "rounded-2xl border border-rose-200 bg-rose-50 p-2.5 text-rose-600"}>
+        <div className={creditSuspended ? "rounded-2xl border border-amber-300 bg-amber-50 p-2.5 text-amber-800" : status === "approved" ? "rounded-2xl border border-red-200 bg-red-50 p-2.5 text-red-700" : "rounded-2xl border border-rose-200 bg-rose-50 p-2.5 text-rose-600"}>
           <div className="flex items-center gap-2">
             <span className="grid h-9 w-9 shrink-0 place-items-center rounded-xl bg-white shadow-sm">
               {creditSuspended ? <LockKeyhole className="h-5 w-5" /> : status === "approved" ? <CheckCircle2 className="h-5 w-5" /> : <XCircle className="h-5 w-5" />}
@@ -306,7 +306,7 @@ export function MasterAgentCreditDecisionControls({
               <button
                 type="button"
                 onClick={() => setStatusEditorOpen(true)}
-                className={creditSuspended ? "inline-flex h-10 w-full items-center justify-center gap-2 rounded-xl bg-emerald-700 px-3 text-[11px] font-black text-white" : "inline-flex h-10 w-full items-center justify-center gap-2 rounded-xl border border-amber-300 bg-amber-50 px-3 text-[11px] font-black text-amber-800"}
+                className={creditSuspended ? "inline-flex h-10 w-full items-center justify-center gap-2 rounded-xl bg-red-700 px-3 text-[11px] font-black text-white" : "inline-flex h-10 w-full items-center justify-center gap-2 rounded-xl border border-amber-300 bg-amber-50 px-3 text-[11px] font-black text-amber-800"}
               >
                 {creditSuspended ? <UnlockKeyhole className="h-4 w-4" /> : <LockKeyhole className="h-4 w-4" />}
                 {creditSuspended ? "Aktifkan Kembali Kredit" : "Bekukan Kredit Agent"}
@@ -320,12 +320,12 @@ export function MasterAgentCreditDecisionControls({
                     onChange={(event) => setStatusReason(event.target.value)}
                     rows={2}
                     placeholder={creditSuspended ? "Alasan mengaktifkan kembali kredit" : "Contoh: pemeriksaan risiko atau tunggakan"}
-                    className="mt-1 w-full resize-none rounded-xl border border-slate-200 px-3 py-2 text-xs font-semibold outline-none focus:border-emerald-400"
+                    className="mt-1 w-full resize-none rounded-xl border border-slate-200 px-3 py-2 text-xs font-semibold outline-none focus:border-red-400"
                   />
                 </label>
                 <div className="grid grid-cols-2 gap-2">
                   <button type="button" onClick={() => { setStatusEditorOpen(false); setStatusReason(""); setError(""); }} disabled={statusBusy} className="h-10 rounded-xl bg-slate-100 text-[10px] font-black text-slate-600">Batal</button>
-                  <button type="button" onClick={() => void changeCreditOperationalStatus()} disabled={statusBusy} className="inline-flex h-10 items-center justify-center gap-2 rounded-xl bg-[#052e26] text-[10px] font-black text-white disabled:opacity-60">
+                  <button type="button" onClick={() => void changeCreditOperationalStatus()} disabled={statusBusy} className="inline-flex h-10 items-center justify-center gap-2 rounded-xl bg-[#b20717] text-[10px] font-black text-white disabled:opacity-60">
                     {statusBusy ? <Loader2 className="h-4 w-4 animate-spin" /> : null}
                     Simpan Status
                   </button>
@@ -371,10 +371,10 @@ export function MasterAgentCreditDecisionControls({
   }
 
   return (
-    <div className="rounded-2xl border border-emerald-100 bg-[linear-gradient(135deg,#ffffff_0%,#f8fffb_58%,#ecfdf5_100%)] p-3 shadow-[0_10px_24px_rgba(6,78,59,0.05)]">
+    <div className="rounded-2xl border border-red-100 bg-[linear-gradient(135deg,#ffffff_0%,#fff7f5_58%,#ecfdf5_100%)] p-3 shadow-[0_10px_24px_rgba(151,14,32,0.05)]">
       <div className="grid gap-2 xl:grid-cols-[160px_minmax(260px,1fr)_210px] xl:items-stretch">
-        <label className="block min-w-0 rounded-xl border border-slate-200 bg-white px-3 py-2 shadow-[0_8px_18px_rgba(15,23,42,0.035)] focus-within:border-emerald-300 focus-within:ring-2 focus-within:ring-emerald-100">
-          <span className="block truncate text-[9px] font-black uppercase tracking-[0.08em] text-emerald-600">{isMarketingReview ? "Nominal Diajukan" : "Nominal ACC"}</span>
+        <label className="block min-w-0 rounded-xl border border-slate-200 bg-white px-3 py-2 shadow-[0_8px_18px_rgba(15,23,42,0.035)] focus-within:border-red-300 focus-within:ring-2 focus-within:ring-red-100">
+          <span className="block truncate text-[9px] font-black uppercase tracking-[0.08em] text-red-600">{isMarketingReview ? "Nominal Diajukan" : "Nominal ACC"}</span>
           <input
             value={amount}
             onChange={(event) => setAmount(event.target.value)}
@@ -383,8 +383,8 @@ export function MasterAgentCreditDecisionControls({
             className="mt-1 h-8 w-full bg-transparent text-base font-black text-slate-950 outline-none disabled:text-slate-700"
           />
         </label>
-        <label className="block min-w-0 rounded-xl border border-slate-200 bg-white px-3 py-2 shadow-[0_8px_18px_rgba(15,23,42,0.035)] focus-within:border-emerald-300 focus-within:ring-2 focus-within:ring-emerald-100">
-          <span className="block truncate text-[9px] font-black uppercase tracking-[0.08em] text-emerald-600">Catatan</span>
+        <label className="block min-w-0 rounded-xl border border-slate-200 bg-white px-3 py-2 shadow-[0_8px_18px_rgba(15,23,42,0.035)] focus-within:border-red-300 focus-within:ring-2 focus-within:ring-red-100">
+          <span className="block truncate text-[9px] font-black uppercase tracking-[0.08em] text-red-600">Catatan</span>
           <textarea
             value={note}
             onChange={(event) => setNote(event.target.value)}
@@ -396,7 +396,7 @@ export function MasterAgentCreditDecisionControls({
         {mode === "analyst" || mode === "admin" ? (
           <div className="grid gap-2 rounded-xl border border-slate-200 bg-white p-2 shadow-[0_8px_18px_rgba(15,23,42,0.035)] min-[420px]:grid-cols-2 xl:col-span-2">
             <label className="block">
-              <span className="block text-[9px] font-black uppercase tracking-[0.08em] text-emerald-600">Level Risiko</span>
+              <span className="block text-[9px] font-black uppercase tracking-[0.08em] text-red-600">Level Risiko</span>
               <select value={riskLevel} onChange={(event) => setRiskLevel(event.target.value)} className="mt-1 h-10 w-full rounded-xl border border-slate-200 bg-slate-50 px-3 text-xs font-black text-slate-950 outline-none">
                 <option value="aman">Aman</option>
                 <option value="perhatian">Perlu Perhatian</option>
@@ -404,7 +404,7 @@ export function MasterAgentCreditDecisionControls({
               </select>
             </label>
             <label className="block">
-              <span className="block text-[9px] font-black uppercase tracking-[0.08em] text-emerald-600">Skor Risiko</span>
+              <span className="block text-[9px] font-black uppercase tracking-[0.08em] text-red-600">Skor Risiko</span>
               <input value={riskScore} onChange={(event) => setRiskScore(event.target.value)} inputMode="numeric" className="mt-1 h-10 w-full rounded-xl border border-slate-200 bg-slate-50 px-3 text-xs font-black text-slate-950 outline-none" />
             </label>
           </div>
@@ -451,7 +451,7 @@ export function MasterAgentCreditDecisionControls({
             type="button"
             onClick={() => decide(isMarketingReview ? "forward_to_analysis" : "approved")}
             disabled={Boolean(busy) || !canApprove}
-            className="inline-flex h-11 min-w-0 items-center justify-center gap-2 rounded-xl bg-[linear-gradient(135deg,#047857,#16a34a)] px-3 text-[11px] font-black leading-3 text-white shadow-[0_10px_18px_rgba(5,150,105,0.18)] transition hover:-translate-y-0.5 disabled:translate-y-0 disabled:bg-none disabled:bg-slate-200 disabled:text-slate-500 disabled:shadow-none"
+            className="inline-flex h-11 min-w-0 items-center justify-center gap-2 rounded-xl bg-[linear-gradient(135deg,#d70717,#16a34a)] px-3 text-[11px] font-black leading-3 text-white shadow-[0_10px_18px_rgba(5,150,105,0.18)] transition hover:-translate-y-0.5 disabled:translate-y-0 disabled:bg-none disabled:bg-slate-200 disabled:text-slate-500 disabled:shadow-none"
             title={!canApprove ? approveBlockReason || "Agent belum melengkapi persetujuan" : undefined}
           >
             {busy === "approved" || busy === "forward_to_analysis" ? <Loader2 className="h-4 w-4 shrink-0 animate-spin" /> : <CheckCircle2 className="h-4 w-4 shrink-0" />}

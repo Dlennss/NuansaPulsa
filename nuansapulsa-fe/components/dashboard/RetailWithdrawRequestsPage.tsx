@@ -35,7 +35,7 @@ function sourceLabel(source?: string) {
 }
 
 function statusBadge(status: string) {
-  if (status === "approved") return "bg-emerald-100 text-emerald-700";
+  if (status === "approved") return "bg-red-100 text-red-700";
   if (status === "rejected") return "bg-rose-100 text-rose-700";
   if (status === "processing_provider") return "bg-sky-100 text-sky-700";
   return "bg-amber-100 text-amber-700";
@@ -126,8 +126,8 @@ export default function RetailWithdrawRequestsPage() {
   return (
     <main className="min-h-screen bg-[#eef7f2] p-3 text-slate-950 sm:p-5 lg:p-7">
       <section className="mx-auto w-full max-w-7xl space-y-4">
-        <header className="border-b border-emerald-200 bg-white px-4 py-5 sm:px-6">
-          <p className="text-[10px] font-black uppercase tracking-[0.2em] text-emerald-700">Operator Kredit</p>
+        <header className="border-b border-red-200 bg-white px-4 py-5 sm:px-6">
+          <p className="text-[10px] font-black uppercase tracking-[0.2em] text-red-700">Operator Kredit</p>
           <h1 className="mt-1 text-2xl font-black sm:text-3xl">Penarikan Agent</h1>
           <p className="mt-2 max-w-2xl text-sm font-semibold leading-6 text-slate-500">Periksa sumber saldo, rekening tujuan, dan nominal sebelum dana dikirim.</p>
         </header>
@@ -135,7 +135,7 @@ export default function RetailWithdrawRequestsPage() {
         <section className="grid grid-cols-2 gap-2 lg:grid-cols-4">
           {[
             { label: "Menunggu", value: stats.pending, hint: fmtIDR(stats.amount), icon: Clock3, color: "text-amber-700 bg-amber-50" },
-            { label: "Disetujui", value: stats.approved, hint: "Sudah diproses", icon: BadgeCheck, color: "text-emerald-700 bg-emerald-50" },
+            { label: "Disetujui", value: stats.approved, hint: "Sudah diproses", icon: BadgeCheck, color: "text-red-700 bg-red-50" },
             { label: "Ditolak", value: stats.rejected, hint: "Dana dikembalikan", icon: ShieldX, color: "text-rose-700 bg-rose-50" },
             { label: "Total Data", value: items.length, hint: "Sesuai filter", icon: WalletCards, color: "text-sky-700 bg-sky-50" },
           ].map((item) => {
@@ -163,13 +163,13 @@ export default function RetailWithdrawRequestsPage() {
             <option value="rejected">Ditolak</option>
             <option value="all">Semua</option>
           </select>
-          <button type="button" onClick={() => void load()} className="inline-flex h-11 items-center justify-center gap-2 rounded-lg bg-emerald-700 px-4 text-xs font-black text-white"><RefreshCw className={`h-4 w-4 ${loading ? "animate-spin" : ""}`} />Muat Ulang</button>
+          <button type="button" onClick={() => void load()} className="inline-flex h-11 items-center justify-center gap-2 rounded-lg bg-red-700 px-4 text-xs font-black text-white"><RefreshCw className={`h-4 w-4 ${loading ? "animate-spin" : ""}`} />Muat Ulang</button>
         </section>
 
         <section className="overflow-hidden border border-slate-200 bg-white">
           <div className="hidden overflow-x-auto md:block">
             <table className="w-full min-w-[900px] border-collapse text-left">
-              <thead className="bg-emerald-50 text-[10px] font-black uppercase text-emerald-800">
+              <thead className="bg-red-50 text-[10px] font-black uppercase text-red-800">
                 <tr><th className="px-4 py-3">Agent</th><th className="px-4 py-3">Sumber</th><th className="px-4 py-3">Rekening Tujuan</th><th className="px-4 py-3">Nominal</th><th className="px-4 py-3">Status</th><th className="px-4 py-3 text-right">Aksi</th></tr>
               </thead>
               <tbody className="divide-y divide-slate-100 text-sm">
@@ -178,9 +178,9 @@ export default function RetailWithdrawRequestsPage() {
                     <td className="px-4 py-4"><p className="font-black">{item.member_nama || "Agent NuansaPulsa"}</p><p className="mt-1 text-[10px] font-semibold text-slate-500">{item.member_email || item.ref_id}</p></td>
                     <td className="px-4 py-4"><span className="rounded-full bg-sky-50 px-2.5 py-1 text-[10px] font-black text-sky-700">{sourceLabel(item.source_type)}</span></td>
                     <td className="px-4 py-4"><p className="font-bold">{item.bank_name} · {item.account_number}</p><p className="mt-1 text-[10px] font-semibold text-slate-500">{item.account_name}</p></td>
-                    <td className="px-4 py-4 font-black text-emerald-700">{fmtIDR(item.amount)}</td>
+                    <td className="px-4 py-4 font-black text-red-700">{fmtIDR(item.amount)}</td>
                     <td className="px-4 py-4"><span className={`rounded-full px-2.5 py-1 text-[10px] font-black ${statusBadge(item.status)}`}>{statusLabel(item.status)}</span></td>
-                    <td className="px-4 py-4"><div className="flex justify-end gap-2">{item.status === "pending" ? <><button onClick={() => setApproveTarget(item)} className="h-9 rounded-lg bg-emerald-700 px-3 text-[10px] font-black text-white">Setujui</button><button onClick={() => void reject(item)} className="h-9 rounded-lg border border-rose-200 px-3 text-[10px] font-black text-rose-600">Tolak</button></> : <span className="text-[10px] font-semibold text-slate-400">Selesai</span>}</div></td>
+                    <td className="px-4 py-4"><div className="flex justify-end gap-2">{item.status === "pending" ? <><button onClick={() => setApproveTarget(item)} className="h-9 rounded-lg bg-red-700 px-3 text-[10px] font-black text-white">Setujui</button><button onClick={() => void reject(item)} className="h-9 rounded-lg border border-rose-200 px-3 text-[10px] font-black text-rose-600">Tolak</button></> : <span className="text-[10px] font-semibold text-slate-400">Selesai</span>}</div></td>
                   </tr>
                 ))}
               </tbody>
@@ -190,9 +190,9 @@ export default function RetailWithdrawRequestsPage() {
           <div className="divide-y divide-slate-100 md:hidden">
             {items.map((item) => (
               <article key={item.id} className="p-4">
-                <div className="flex items-start justify-between gap-3"><div><p className="text-sm font-black">{item.member_nama || "Agent NuansaPulsa"}</p><p className="mt-1 text-[10px] font-bold text-sky-700">{sourceLabel(item.source_type)}</p></div><p className="text-sm font-black text-emerald-700">{fmtIDR(item.amount)}</p></div>
+                <div className="flex items-start justify-between gap-3"><div><p className="text-sm font-black">{item.member_nama || "Agent NuansaPulsa"}</p><p className="mt-1 text-[10px] font-bold text-sky-700">{sourceLabel(item.source_type)}</p></div><p className="text-sm font-black text-red-700">{fmtIDR(item.amount)}</p></div>
                 <p className="mt-3 text-xs font-semibold text-slate-600">{item.bank_name} · {item.account_number} · {item.account_name}</p>
-                <div className="mt-3 flex items-center justify-between gap-2"><span className={`rounded-full px-2.5 py-1 text-[9px] font-black ${statusBadge(item.status)}`}>{statusLabel(item.status)}</span>{item.status === "pending" ? <div className="flex gap-2"><button onClick={() => setApproveTarget(item)} className="h-9 rounded-lg bg-emerald-700 px-3 text-[10px] font-black text-white">Setujui</button><button onClick={() => void reject(item)} className="h-9 rounded-lg border border-rose-200 px-3 text-[10px] font-black text-rose-600">Tolak</button></div> : null}</div>
+                <div className="mt-3 flex items-center justify-between gap-2"><span className={`rounded-full px-2.5 py-1 text-[9px] font-black ${statusBadge(item.status)}`}>{statusLabel(item.status)}</span>{item.status === "pending" ? <div className="flex gap-2"><button onClick={() => setApproveTarget(item)} className="h-9 rounded-lg bg-red-700 px-3 text-[10px] font-black text-white">Setujui</button><button onClick={() => void reject(item)} className="h-9 rounded-lg border border-rose-200 px-3 text-[10px] font-black text-rose-600">Tolak</button></div> : null}</div>
               </article>
             ))}
           </div>

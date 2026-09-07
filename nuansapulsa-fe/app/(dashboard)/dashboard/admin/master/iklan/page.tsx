@@ -205,7 +205,7 @@ export default function AdminMasterIklanPage() {
       tdClassName: "whitespace-nowrap",
       render: (x) =>
         x.aktif ? (
-          <span className="rounded-full border border-emerald-400 bg-emerald-100 px-2 py-0.5 text-xs font-bold text-emerald-900">Aktif</span>
+          <span className="rounded-full border border-red-400 bg-red-100 px-2 py-0.5 text-xs font-bold text-red-900">Aktif</span>
         ) : (
           <span className="rounded-full border border-rose-400 bg-rose-100 px-2 py-0.5 text-xs font-bold text-rose-900">Nonaktif</span>
         ),
@@ -226,7 +226,7 @@ export default function AdminMasterIklanPage() {
       <div className="relative inline-flex" data-action-dropdown>
         <Button
           size="sm"
-          className="h-8 w-8 bg-emerald-700 px-0 text-white hover:bg-emerald-600"
+          className="h-8 w-8 bg-red-700 px-0 text-white hover:bg-red-600"
           onClick={() => setOpenActionKey((prev) => (prev === String(x.id) ? null : String(x.id)))}
           aria-label="Aksi"
         >
@@ -327,7 +327,7 @@ export default function AdminMasterIklanPage() {
               value={keterangan}
               onChange={(e) => setKeterangan(e.target.value)}
               placeholder="Isi keterangan singkat yang tampil di atas gambar."
-              className="min-h-24 rounded-xl border border-emerald-200 bg-white px-3 py-3 text-sm text-emerald-950 outline-none transition placeholder:text-emerald-700/50 focus:border-emerald-500"
+              className="min-h-24 rounded-xl border border-red-200 bg-white px-3 py-3 text-sm text-red-950 outline-none transition placeholder:text-red-700/50 focus:border-red-500"
             />
           </div>
 
@@ -368,7 +368,7 @@ export default function AdminMasterIklanPage() {
                 type="checkbox"
                 checked={aktif}
                 onChange={(e) => setAktif(e.target.checked)}
-                className="h-4 w-4 rounded border-emerald-300 bg-white text-emerald-600"
+                className="h-4 w-4 rounded border-red-300 bg-white text-red-600"
               />
               Iklan aktif
             </label>

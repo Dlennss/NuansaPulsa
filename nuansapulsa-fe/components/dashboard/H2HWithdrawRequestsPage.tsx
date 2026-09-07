@@ -151,7 +151,7 @@ export default function H2HWithdrawRequestsPage() {
             </div>
             {item.status === "pending" ? (
               <div className="mt-4 flex flex-wrap gap-2">
-                <button className="h-10 rounded-xl bg-emerald-600 px-4 text-sm font-semibold text-white" onClick={() => setApproveTarget(item)}>Approve</button>
+                <button className="h-10 rounded-xl bg-red-600 px-4 text-sm font-semibold text-white" onClick={() => setApproveTarget(item)}>Approve</button>
                 <button className="h-10 rounded-xl bg-rose-600 px-4 text-sm font-semibold text-white" onClick={() => void reject(item.id)}>Reject</button>
               </div>
             ) : null}

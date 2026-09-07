@@ -350,7 +350,7 @@ export default function AdminProviderSuccessSuspiciousMessagePage() {
         <span
           className={`inline-flex items-center rounded-full border px-2.5 py-1 text-xs font-semibold ${
             x.resolved
-              ? "border-emerald-400/30 bg-emerald-500/15 text-emerald-200"
+              ? "border-red-400/30 bg-red-500/15 text-red-200"
               : "border-amber-400/30 bg-amber-500/15 text-amber-200"
           }`}
         >
@@ -375,7 +375,7 @@ export default function AdminProviderSuccessSuspiciousMessagePage() {
     { id: "tujuan", header: "Tujuan", tdClassName: "whitespace-nowrap font-mono text-xs text-slate-300", render: (x) => x.tujuan },
     { id: "qty", header: "Qty", tdClassName: "whitespace-nowrap text-right text-slate-200", render: (x) => Number(x.qty || 0).toLocaleString("id-ID") },
     { id: "nominalProviderRequest", header: "Nominal Request", tdClassName: "whitespace-nowrap text-right text-cyan-100", render: (x) => money(getNominalProviderRequest(x)) },
-    { id: "harga", header: "Harga Provider", tdClassName: "whitespace-nowrap text-right text-emerald-200", render: (x) => money(x.harga) },
+    { id: "harga", header: "Harga Provider", tdClassName: "whitespace-nowrap text-right text-red-200", render: (x) => money(x.harga) },
     { id: "rc", header: "RC", tdClassName: "whitespace-nowrap text-slate-200", render: (x) => x.kode_respon || "-" },
     { id: "pesan", header: "Pesan Provider", tdClassName: "min-w-90 text-slate-200", render: (x) => <div className="max-w-[440px] whitespace-normal break-words">{x.pesan || "-"}</div> },
     { id: "statusMember", header: "Status Member", tdClassName: "whitespace-nowrap text-slate-300", render: (x) => x.status_member || "-" },
@@ -588,8 +588,8 @@ export default function AdminProviderSuccessSuspiciousMessagePage() {
               />
             </label>
 
-            <div className="rounded-md border border-emerald-400/20 bg-emerald-500/10 p-3">
-              <div>Total debit bank: <span className="font-semibold text-emerald-100">{money(settleTotal)}</span></div>
+            <div className="rounded-md border border-red-400/20 bg-red-500/10 p-3">
+              <div>Total debit bank: <span className="font-semibold text-red-100">{money(settleTotal)}</span></div>
             </div>
           </div>
         ) : null}

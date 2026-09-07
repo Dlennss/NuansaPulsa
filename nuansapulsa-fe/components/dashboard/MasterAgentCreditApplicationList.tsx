@@ -109,7 +109,7 @@ function getDisplayStatus(item: AgentCreditApplication) {
 function getStatusClass(status: string) {
   switch (status) {
     case "approved":
-      return "bg-emerald-100 text-emerald-700";
+      return "bg-red-100 text-red-700";
     case "ready_to_disburse":
       return "bg-sky-100 text-sky-700";
     case "rejected":
@@ -121,7 +121,7 @@ function getStatusClass(status: string) {
     case "master_review":
       return "bg-amber-100 text-amber-700";
     default:
-      return "bg-lime-100 text-emerald-700";
+      return "bg-amber-100 text-red-700";
   }
 }
 
@@ -131,7 +131,7 @@ function getDisplayStatusClass(item: AgentCreditApplication) {
     return "bg-sky-100 text-sky-700";
   }
   if (item.status === "approved" && (loanStatus === "active" || loanStatus === "due") && Number(item.outstanding_amount || 0) <= 0) {
-    return "bg-lime-100 text-emerald-700";
+    return "bg-amber-100 text-red-700";
   }
   if (item.status === "approved" && loanStatus === "overdue") {
     return "bg-rose-100 text-rose-600";
@@ -188,7 +188,7 @@ function SurveyImagePreview({ file, alt }: { file: File; alt: string }) {
   }, [file]);
 
   if (!src) {
-    return <div className="h-16 w-20 shrink-0 animate-pulse bg-emerald-50 sm:w-24" />;
+    return <div className="h-16 w-20 shrink-0 animate-pulse bg-red-50 sm:w-24" />;
   }
 
   return (
@@ -212,16 +212,16 @@ function missingSurveyDocumentLabels(item: AgentCreditApplication) {
 
 function SurveyDocumentsCompleteNotice() {
   return (
-    <div className="rounded-[22px] border border-emerald-100 bg-[linear-gradient(135deg,#ecfdf5,#ffffff)] p-3">
+    <div className="rounded-[22px] border border-red-100 bg-[linear-gradient(135deg,#ecfdf5,#ffffff)] p-3">
       <div className="flex items-center gap-3">
-        <span className="grid h-11 w-11 shrink-0 place-items-center rounded-2xl bg-emerald-100 text-[#047857]">
+        <span className="grid h-11 w-11 shrink-0 place-items-center rounded-2xl bg-red-100 text-[#d70717]">
           <CheckCircle2 className="h-5 w-5" strokeWidth={2.5} />
         </span>
         <div className="min-w-0 flex-1">
           <p className="text-sm font-black text-slate-950">Dokumen Lapangan Lengkap</p>
           <p className="mt-0.5 text-[10px] font-semibold leading-4 text-slate-500">Upload disembunyikan. Marketing tinggal tanda tangan lalu kirim ke operator.</p>
         </div>
-        <span className="hidden rounded-full bg-emerald-100 px-3 py-1 text-[9px] font-black uppercase text-[#047857] sm:inline-flex">
+        <span className="hidden rounded-full bg-red-100 px-3 py-1 text-[9px] font-black uppercase text-[#d70717] sm:inline-flex">
           4/4
         </span>
       </div>
@@ -291,10 +291,10 @@ function MarketingSurveyDocumentUploader({ item, onComplete }: { item: AgentCred
   }
 
   return (
-    <div className="rounded-[24px] border border-emerald-100 bg-[linear-gradient(135deg,#f8fffb_0%,#ffffff_48%,#ecfdf5_100%)] p-3 shadow-[0_12px_26px_rgba(4,120,87,0.06)]">
+    <div className="rounded-[24px] border border-red-100 bg-[linear-gradient(135deg,#fff7f5_0%,#ffffff_48%,#ecfdf5_100%)] p-3 shadow-[0_12px_26px_rgba(215,7,23,0.06)]">
       <div className="mb-3 flex flex-wrap items-start justify-between gap-3">
         <div className="flex min-w-0 items-start gap-3">
-          <span className="grid h-11 w-11 shrink-0 place-items-center rounded-2xl bg-emerald-50 text-[#047857] ring-1 ring-emerald-100">
+          <span className="grid h-11 w-11 shrink-0 place-items-center rounded-2xl bg-red-50 text-[#d70717] ring-1 ring-red-100">
             <Camera className="h-5 w-5" strokeWidth={2.4} />
           </span>
           <div className="min-w-0">
@@ -302,12 +302,12 @@ function MarketingSurveyDocumentUploader({ item, onComplete }: { item: AgentCred
             <p className="mt-0.5 text-[10px] font-semibold leading-4 text-slate-500">Marketing upload foto lapangan. Setelah lengkap, form ini otomatis diringkas.</p>
           </div>
         </div>
-        <span className="rounded-full bg-emerald-100 px-3 py-1 text-[9px] font-black uppercase text-[#047857]">
+        <span className="rounded-full bg-red-100 px-3 py-1 text-[9px] font-black uppercase text-[#d70717]">
           {savedCount}/4 tersimpan
         </span>
       </div>
-      <div className="rounded-[20px] border border-emerald-100 bg-white/80 p-2">
-        <div className="mb-2 flex items-center gap-2 rounded-2xl bg-emerald-50 px-3 py-2">
+      <div className="rounded-[20px] border border-red-100 bg-white/80 p-2">
+        <div className="mb-2 flex items-center gap-2 rounded-2xl bg-red-50 px-3 py-2">
           <Camera className="h-5 w-5" strokeWidth={2.4} />
           <div className="min-w-0">
             <p className="text-xs font-black text-slate-950">Foto yang masih perlu diambil</p>
@@ -323,18 +323,18 @@ function MarketingSurveyDocumentUploader({ item, onComplete }: { item: AgentCred
               key={field.key}
               className={
                 picked
-                  ? "group flex min-h-20 cursor-pointer items-center gap-3 overflow-hidden rounded-2xl border border-emerald-300 bg-white p-2 transition hover:border-[#047857] hover:bg-emerald-50/40"
-                  : "flex min-h-20 cursor-pointer items-center gap-3 rounded-2xl border border-dashed border-emerald-200 bg-white px-3 py-2 transition hover:border-[#047857] hover:bg-emerald-50"
+                  ? "group flex min-h-20 cursor-pointer items-center gap-3 overflow-hidden rounded-2xl border border-red-300 bg-white p-2 transition hover:border-[#d70717] hover:bg-red-50/40"
+                  : "flex min-h-20 cursor-pointer items-center gap-3 rounded-2xl border border-dashed border-red-200 bg-white px-3 py-2 transition hover:border-[#d70717] hover:bg-red-50"
               }
             >
               {picked ? (
                 <>
-                  <span className="block shrink-0 overflow-hidden rounded-xl border border-emerald-100">
+                  <span className="block shrink-0 overflow-hidden rounded-xl border border-red-100">
                     <SurveyImagePreview file={picked} alt={`Preview ${field.name}`} />
                   </span>
                   <span className="min-w-0 flex-1">
                     <span className="block text-xs font-black text-slate-950">{field.name}</span>
-                    <span className="mt-1 inline-flex items-center gap-1 rounded-full bg-emerald-100 px-2 py-1 text-[8px] font-black uppercase text-[#047857]">
+                    <span className="mt-1 inline-flex items-center gap-1 rounded-full bg-red-100 px-2 py-1 text-[8px] font-black uppercase text-[#d70717]">
                       <CheckCircle2 className="h-3 w-3" strokeWidth={2.8} />
                       Siap disimpan
                     </span>
@@ -343,7 +343,7 @@ function MarketingSurveyDocumentUploader({ item, onComplete }: { item: AgentCred
                 </>
               ) : (
                 <>
-                  <span className="grid h-11 w-11 shrink-0 place-items-center rounded-2xl bg-emerald-50 text-[#047857] ring-1 ring-emerald-100">
+                  <span className="grid h-11 w-11 shrink-0 place-items-center rounded-2xl bg-red-50 text-[#d70717] ring-1 ring-red-100">
                     <Icon className="h-5 w-5" strokeWidth={2.4} />
                   </span>
                   <span className="min-w-0 flex-1">
@@ -372,7 +372,7 @@ function MarketingSurveyDocumentUploader({ item, onComplete }: { item: AgentCred
         type="button"
         onClick={saveDocuments}
         disabled={!canSave || busy}
-        className="mt-3 inline-flex h-11 w-full items-center justify-center gap-2 rounded-2xl bg-[linear-gradient(135deg,#047857,#16a34a)] text-xs font-black text-white shadow-[0_12px_22px_rgba(4,120,87,0.16)] transition hover:-translate-y-0.5 disabled:translate-y-0 disabled:bg-none disabled:bg-slate-200 disabled:text-slate-500 disabled:shadow-none"
+        className="mt-3 inline-flex h-11 w-full items-center justify-center gap-2 rounded-2xl bg-[linear-gradient(135deg,#d70717,#16a34a)] text-xs font-black text-white shadow-[0_12px_22px_rgba(215,7,23,0.16)] transition hover:-translate-y-0.5 disabled:translate-y-0 disabled:bg-none disabled:bg-slate-200 disabled:text-slate-500 disabled:shadow-none"
       >
         {busy ? <Loader2 className="h-4 w-4 animate-spin" /> : <Upload className="h-4 w-4" />}
         {busy ? "Menyimpan Dokumen" : canSave ? "Simpan Dokumen Marketing" : `Lengkapi ${remainingCount} foto lagi`}
@@ -693,7 +693,7 @@ export function MasterAgentCreditApplicationList({
           <title>${escapeHTML(reportTitle)}</title>
           <style>
             body { font-family: Arial, sans-serif; color: #0f172a; margin: 28px; }
-            header { border-bottom: 4px solid #047857; padding-bottom: 16px; margin-bottom: 18px; }
+            header { border-bottom: 4px solid #d70717; padding-bottom: 16px; margin-bottom: 18px; }
             h1 { margin: 0; font-size: 24px; }
             p { margin: 6px 0 0; color: #475569; font-size: 12px; }
             .summary { display: grid; grid-template-columns: repeat(4, 1fr); gap: 10px; margin: 18px 0; }
@@ -701,7 +701,7 @@ export function MasterAgentCreditApplicationList({
             .label { color: #64748b; font-size: 10px; font-weight: 700; text-transform: uppercase; }
             .value { margin-top: 4px; font-size: 16px; font-weight: 800; }
             table { width: 100%; border-collapse: collapse; font-size: 10px; }
-            th { background: #047857; color: white; text-align: left; padding: 8px; }
+            th { background: #d70717; color: white; text-align: left; padding: 8px; }
             td { border: 1px solid #e2e8f0; padding: 7px; vertical-align: top; }
             tr:nth-child(even) td { background: #f8fafc; }
             @media print { body { margin: 14px; } .summary { grid-template-columns: repeat(4, 1fr); } }
@@ -740,7 +740,7 @@ export function MasterAgentCreditApplicationList({
     <section className="min-w-0 overflow-hidden rounded-[22px] border border-slate-200 bg-white p-3 shadow-[0_18px_42px_rgba(15,23,42,0.06)] sm:rounded-[28px] sm:p-5">
       <div className="flex min-w-0 flex-col items-start gap-3">
         <div className="min-w-0 max-w-2xl">
-          <p className="text-[11px] font-black uppercase tracking-[0.2em] text-emerald-600">{eyebrow || (showActions ? "Meja Review" : "Arsip Kredit")}</p>
+          <p className="text-[11px] font-black uppercase tracking-[0.2em] text-red-600">{eyebrow || (showActions ? "Meja Review" : "Arsip Kredit")}</p>
           <h2 className="mt-1 text-xl font-black text-slate-950">{title || (showActions ? "Pengajuan Kredit Terbaru" : "Riwayat Pinjaman Agent")}</h2>
           <p className="mt-1 max-w-2xl text-xs font-semibold leading-5 text-slate-500">
             {mode === "admin"
@@ -750,13 +750,13 @@ export function MasterAgentCreditApplicationList({
                 : "Tugas marketing: dampingi agent, lengkapi selfie pertemuan, tanda tangan verifikasi, lalu kirim data ke operator."}
           </p>
         </div>
-        <span className="inline-flex w-fit items-center rounded-full bg-[linear-gradient(135deg,#047857,#8bdc24)] px-4 py-2 text-[10px] font-black uppercase tracking-[0.12em] text-white shadow-[0_12px_28px_rgba(5,122,69,0.18)]">
+        <span className="inline-flex w-fit items-center rounded-full bg-[linear-gradient(135deg,#d70717,#8bdc24)] px-4 py-2 text-[10px] font-black uppercase tracking-[0.12em] text-white shadow-[0_12px_28px_rgba(151,14,32,0.18)]">
           {mode === "admin" ? "Admin" : mode === "analyst" ? "Operator" : "Marketing"}
         </span>
       </div>
 
       <div className="mt-4 flex min-w-0 flex-col gap-3 sm:mt-5">
-        <label className="flex h-12 min-w-0 flex-1 items-center gap-2 rounded-2xl border border-slate-200 bg-slate-50 px-4 text-sm font-bold text-slate-500 focus-within:border-emerald-300 focus-within:bg-white focus-within:ring-2 focus-within:ring-emerald-100">
+        <label className="flex h-12 min-w-0 flex-1 items-center gap-2 rounded-2xl border border-slate-200 bg-slate-50 px-4 text-sm font-bold text-slate-500 focus-within:border-red-300 focus-within:bg-white focus-within:ring-2 focus-within:ring-red-100">
           <Search className="h-4 w-4" />
           <input
             value={query}
@@ -766,7 +766,7 @@ export function MasterAgentCreditApplicationList({
           />
         </label>
         <div className="flex min-w-0 items-center gap-2 overflow-x-auto pb-1 [scrollbar-width:none] [&::-webkit-scrollbar]:hidden">
-          <span className="grid h-10 w-10 shrink-0 place-items-center rounded-2xl border border-slate-200 bg-white text-emerald-700">
+          <span className="grid h-10 w-10 shrink-0 place-items-center rounded-2xl border border-slate-200 bg-white text-red-700">
             <SlidersHorizontal className="h-4 w-4" strokeWidth={2.5} />
           </span>
           {applicationFilters.map((item) => {
@@ -778,8 +778,8 @@ export function MasterAgentCreditApplicationList({
                 onClick={() => { setFilter(item.key); setPage(1); setOpenId(null); }}
                 className={
                   active
-                    ? "h-10 shrink-0 rounded-2xl bg-emerald-800 px-4 text-xs font-black text-white shadow-[0_10px_22px_rgba(5,122,69,0.18)]"
-                    : "h-10 shrink-0 rounded-2xl border border-slate-200 bg-white px-4 text-xs font-black text-slate-600 transition hover:border-emerald-200 hover:bg-emerald-50 hover:text-emerald-800"
+                    ? "h-10 shrink-0 rounded-2xl bg-red-800 px-4 text-xs font-black text-white shadow-[0_10px_22px_rgba(151,14,32,0.18)]"
+                    : "h-10 shrink-0 rounded-2xl border border-slate-200 bg-white px-4 text-xs font-black text-slate-600 transition hover:border-red-200 hover:bg-red-50 hover:text-red-800"
                 }
               >
                 {item.label}
@@ -790,10 +790,10 @@ export function MasterAgentCreditApplicationList({
       </div>
 
       {enableReportActions ? (
-        <div className="mt-4 rounded-[24px] border border-emerald-100 bg-[linear-gradient(135deg,#f8fffb,#ffffff)] p-3">
+        <div className="mt-4 rounded-[24px] border border-red-100 bg-[linear-gradient(135deg,#fff7f5,#ffffff)] p-3">
           <div className="flex flex-col gap-3 lg:flex-row lg:items-center lg:justify-between">
             <div className="min-w-0">
-              <p className="text-[10px] font-black uppercase tracking-[0.2em] text-emerald-700">Rekap Audit</p>
+              <p className="text-[10px] font-black uppercase tracking-[0.2em] text-red-700">Rekap Audit</p>
               <p className="mt-1 text-sm font-black text-slate-950">Laporan mengikuti pencarian dan filter aktif</p>
               <p className="mt-1 text-[11px] font-semibold leading-4 text-slate-500">
                 {filteredApplications.length} data tampil • Modal berjalan {formatIDR(reportSummary.outstanding)} • Limit {formatIDR(reportSummary.limit)}
@@ -804,7 +804,7 @@ export function MasterAgentCreditApplicationList({
                 type="button"
                 disabled={!canExportReport}
                 onClick={printReport}
-                className="inline-flex h-11 items-center justify-center gap-2 rounded-2xl border border-emerald-200 bg-white px-3 text-[11px] font-black text-emerald-800 shadow-sm transition hover:bg-emerald-50 disabled:cursor-not-allowed disabled:opacity-50"
+                className="inline-flex h-11 items-center justify-center gap-2 rounded-2xl border border-red-200 bg-white px-3 text-[11px] font-black text-red-800 shadow-sm transition hover:bg-red-50 disabled:cursor-not-allowed disabled:opacity-50"
               >
                 <Printer className="h-4 w-4" strokeWidth={2.4} />
                 Cetak
@@ -822,7 +822,7 @@ export function MasterAgentCreditApplicationList({
                 type="button"
                 disabled={!canExportReport}
                 onClick={() => void exportXlsxReport()}
-                className="inline-flex h-11 items-center justify-center gap-2 rounded-2xl bg-[linear-gradient(135deg,#047857,#84cc16)] px-3 text-[11px] font-black text-white shadow-[0_12px_24px_rgba(4,120,87,0.18)] transition disabled:cursor-not-allowed disabled:opacity-50"
+                className="inline-flex h-11 items-center justify-center gap-2 rounded-2xl bg-[linear-gradient(135deg,#d70717,#84cc16)] px-3 text-[11px] font-black text-white shadow-[0_12px_24px_rgba(215,7,23,0.18)] transition disabled:cursor-not-allowed disabled:opacity-50"
               >
                 <Download className="h-4 w-4" strokeWidth={2.4} />
                 XLSX
@@ -894,13 +894,13 @@ export function MasterAgentCreditApplicationList({
                 key={item.id}
                 className={
                   useCompactTable
-                    ? "min-w-0 border-b border-emerald-100 bg-white p-3 transition last:border-b-0 hover:bg-emerald-50/40 lg:p-0"
-                    : "min-w-0 rounded-2xl border border-slate-200 bg-white p-2 shadow-[0_10px_24px_rgba(15,23,42,0.04)] transition hover:border-emerald-300 hover:shadow-[0_14px_28px_rgba(5,122,69,0.08)] sm:p-3"
+                    ? "min-w-0 border-b border-red-100 bg-white p-3 transition last:border-b-0 hover:bg-red-50/40 lg:p-0"
+                    : "min-w-0 rounded-2xl border border-slate-200 bg-white p-2 shadow-[0_10px_24px_rgba(15,23,42,0.04)] transition hover:border-red-300 hover:shadow-[0_14px_28px_rgba(151,14,32,0.08)] sm:p-3"
                 }
               >
                 <div className={useCompactTable ? "grid gap-3 lg:grid-cols-[minmax(220px,1.45fr)_150px_130px_145px_110px] lg:items-center lg:px-4 lg:py-3" : "grid gap-3 lg:grid-cols-[minmax(260px,1fr)_130px_120px] lg:items-center"}>
                   <div className="flex min-w-0 items-center gap-3">
-                    <div className="grid h-12 w-12 shrink-0 place-items-center rounded-2xl bg-[linear-gradient(145deg,#053b2f,#08764f)] text-xs font-black text-lime-200 shadow-[0_8px_16px_rgba(5,59,47,0.16)]">
+                    <div className="grid h-12 w-12 shrink-0 place-items-center rounded-2xl bg-[linear-gradient(145deg,#053b2f,#08764f)] text-xs font-black text-amber-200 shadow-[0_8px_16px_rgba(5,59,47,0.16)]">
                       {agentName.slice(0, 2).toUpperCase()}
                     </div>
                     <div className="min-w-0">
@@ -909,7 +909,7 @@ export function MasterAgentCreditApplicationList({
                         {!useCompactTable ? <span className={`rounded-full px-2.5 py-1 text-[9px] font-black uppercase ${getDisplayStatusClass(item)}`}>{getDisplayStatus(item)}</span> : null}
                       </div>
                       <p className="mt-0.5 truncate text-xs font-semibold text-slate-500">{storeName}</p>
-                      <p className="mt-1 truncate text-[10px] font-black tracking-[0.08em] text-emerald-700">ID KREDIT {formatCreditID(item.id)}</p>
+                      <p className="mt-1 truncate text-[10px] font-black tracking-[0.08em] text-red-700">ID KREDIT {formatCreditID(item.id)}</p>
                       <p className="mt-1 truncate text-[11px] font-bold text-slate-400">WA {wa} · NIK {nik}</p>
                     </div>
                   </div>
@@ -923,12 +923,12 @@ export function MasterAgentCreditApplicationList({
                   {useCompactTable ? (
                     <div className="rounded-xl bg-slate-50 px-3 py-2 text-left lg:bg-transparent lg:px-0 lg:py-0">
                       <p className="text-[9px] font-black uppercase tracking-[0.12em] text-slate-500">Dokumen</p>
-                      <p className={`mt-0.5 text-sm font-black ${storedDocumentCount >= 4 ? "text-emerald-700" : "text-amber-700"}`}>{storedDocumentCount}/4</p>
+                      <p className={`mt-0.5 text-sm font-black ${storedDocumentCount >= 4 ? "text-red-700" : "text-amber-700"}`}>{storedDocumentCount}/4</p>
                       <p className="mt-0.5 text-[9px] font-bold text-slate-400">{docsComplete ? "Lengkap" : "Perlu dilengkapi"}</p>
                     </div>
                   ) : null}
-                  <div className={useCompactTable ? "rounded-xl bg-emerald-50 px-3 py-2 text-left lg:bg-transparent lg:px-0 lg:py-0" : "rounded-xl bg-emerald-50 px-3 py-2 text-left lg:text-center"}>
-                    <p className="text-[9px] font-black uppercase tracking-[0.12em] text-emerald-600">{isPending ? "Diajukan" : "Modal Berjalan"}</p>
+                  <div className={useCompactTable ? "rounded-xl bg-red-50 px-3 py-2 text-left lg:bg-transparent lg:px-0 lg:py-0" : "rounded-xl bg-red-50 px-3 py-2 text-left lg:text-center"}>
+                    <p className="text-[9px] font-black uppercase tracking-[0.12em] text-red-600">{isPending ? "Diajukan" : "Modal Berjalan"}</p>
                     <p className="mt-0.5 text-sm font-black text-slate-950">{formatIDR(isPending ? item.requested_amount : outstanding)}</p>
                     {!isPending && approvedAmount ? <p className="mt-0.5 text-[9px] font-bold text-slate-400">Limit {formatIDR(approvedAmount)}</p> : null}
                   </div>
@@ -936,7 +936,7 @@ export function MasterAgentCreditApplicationList({
                     <button
                       type="button"
                       onClick={() => setOpenId((current) => (current === item.id ? null : item.id))}
-                      className="inline-flex h-10 items-center justify-center gap-2 rounded-xl border border-emerald-200 bg-white px-3 text-xs font-black text-emerald-800 shadow-sm transition hover:border-emerald-400 hover:bg-emerald-50"
+                      className="inline-flex h-10 items-center justify-center gap-2 rounded-xl border border-red-200 bg-white px-3 text-xs font-black text-red-800 shadow-sm transition hover:border-red-400 hover:bg-red-50"
                     >
                       Detail
                       <ChevronDown className={`h-4 w-4 transition ${openId === item.id ? "rotate-180" : ""}`} />
@@ -975,7 +975,7 @@ export function MasterAgentCreditApplicationList({
                 ) : null}
 
                 {openId === item.id ? (
-                  <div className="mt-3 min-w-0 rounded-3xl border border-emerald-200 bg-[linear-gradient(135deg,#f5fff9_0%,#ffffff_58%,#effcf5_100%)] p-3 shadow-[0_12px_28px_rgba(5,122,69,0.06)] sm:p-5">
+                  <div className="mt-3 min-w-0 rounded-3xl border border-red-200 bg-[linear-gradient(135deg,#fff7f5_0%,#ffffff_58%,#effcf5_100%)] p-3 shadow-[0_12px_28px_rgba(151,14,32,0.06)] sm:p-5">
                     {showActions && mode !== "marketing" && useCompactTable ? (
                       <div className="mb-3 space-y-3">
                         <MasterAgentCreditDecisionControls
@@ -995,35 +995,35 @@ export function MasterAgentCreditApplicationList({
                       </div>
                     ) : null}
                     <div className="grid min-w-0 gap-3 text-[11px] font-semibold text-slate-500 sm:grid-cols-2 xl:grid-cols-3">
-                      <div className="min-w-0 rounded-2xl border border-emerald-100 bg-white p-4 shadow-sm">
+                      <div className="min-w-0 rounded-2xl border border-red-100 bg-white p-4 shadow-sm">
                         <p className="font-black text-slate-950">ID Kredit</p>
-                        <p className="mt-1 break-words font-black leading-5 text-emerald-700">{formatCreditID(item.id)}</p>
+                        <p className="mt-1 break-words font-black leading-5 text-red-700">{formatCreditID(item.id)}</p>
                       </div>
-                      <div className="min-w-0 rounded-2xl border border-emerald-100 bg-white p-4 shadow-sm">
+                      <div className="min-w-0 rounded-2xl border border-red-100 bg-white p-4 shadow-sm">
                         <p className="font-black text-slate-950">Status Pinjaman</p>
                         <p className="mt-1 break-words leading-5">{getDisplayStatus(item)}</p>
                       </div>
-                      <div className="min-w-0 rounded-2xl border border-emerald-100 bg-white p-4 shadow-sm">
+                      <div className="min-w-0 rounded-2xl border border-red-100 bg-white p-4 shadow-sm">
                         <p className="font-black text-slate-950">Transaksi Terakhir</p>
                         <p className="mt-1 break-words leading-5">{item.last_transaction_at ? formatDateTime(item.last_transaction_at) : "Belum ada transaksi"}</p>
                       </div>
-                      <div className="min-w-0 rounded-2xl border border-emerald-100 bg-white p-4 shadow-sm">
+                      <div className="min-w-0 rounded-2xl border border-red-100 bg-white p-4 shadow-sm">
                         <p className="font-black text-slate-950">Jatuh Tempo</p>
                         <p className="mt-1 break-words leading-5">{formatDate(item.loan_due_date)}</p>
                       </div>
-                      <div className="min-w-0 rounded-2xl border border-emerald-100 bg-white p-4 shadow-sm">
+                      <div className="min-w-0 rounded-2xl border border-red-100 bg-white p-4 shadow-sm">
                         <p className="font-black text-slate-950">Email</p>
                         <p className="mt-1 break-all leading-5">{getApplicantText(item, "email", item.member_email || "-")}</p>
                       </div>
-                      <div className="min-w-0 rounded-2xl border border-emerald-100 bg-white p-4 shadow-sm">
+                      <div className="min-w-0 rounded-2xl border border-red-100 bg-white p-4 shadow-sm">
                         <p className="font-black text-slate-950">Alamat Rumah</p>
                         <p className="mt-1 break-words leading-5">{getApplicantText(item, "home_address")}</p>
                       </div>
-                      <div className="min-w-0 rounded-2xl border border-emerald-100 bg-white p-4 shadow-sm">
+                      <div className="min-w-0 rounded-2xl border border-red-100 bg-white p-4 shadow-sm">
                         <p className="font-black text-slate-950">Alamat Toko</p>
                         <p className="mt-1 break-words leading-5">{getApplicantText(item, "store_address")}</p>
                       </div>
-                      <div className="min-w-0 rounded-2xl bg-white p-3 ring-1 ring-emerald-100">
+                      <div className="min-w-0 rounded-2xl bg-white p-3 ring-1 ring-red-100">
                         <p className="font-black text-slate-950">Tanda Tangan</p>
                         <div className="mt-2 grid h-20 place-items-center rounded-xl bg-slate-50 bg-contain bg-center bg-no-repeat" style={signatureSrc ? { backgroundImage: `url(${signatureSrc})` } : undefined}>
                           {!signatureSrc ? <span className="text-[10px] font-black text-slate-400">Belum ada tanda tangan</span> : null}
@@ -1033,7 +1033,7 @@ export function MasterAgentCreditApplicationList({
                     <div className="mt-4 grid min-w-0 gap-2 sm:gap-3 lg:grid-cols-[minmax(0,1fr)_auto] lg:items-center">
                       <MasterAgentCreditDocumentButton agentName={agentName} documents={docs} />
                     </div>
-                    <div className="hidden mt-3 min-w-0 rounded-2xl border border-emerald-100 bg-white p-2 sm:p-3">
+                    <div className="hidden mt-3 min-w-0 rounded-2xl border border-red-100 bg-white p-2 sm:p-3">
                       <div className="flex flex-col gap-2 sm:flex-row sm:items-center sm:justify-between">
                         <div>
                           <p className="text-sm font-black text-slate-950">Riwayat Pembayaran</p>
@@ -1041,7 +1041,7 @@ export function MasterAgentCreditApplicationList({
                             Nominal, tanggal, status, dan bukti transfer agent.
                           </p>
                         </div>
-                        <span className="w-fit rounded-full bg-emerald-50 px-3 py-1 text-[10px] font-black text-emerald-700">
+                        <span className="w-fit rounded-full bg-red-50 px-3 py-1 text-[10px] font-black text-red-700">
                           {paymentTotal} pembayaran
                         </span>
                       </div>
@@ -1052,7 +1052,7 @@ export function MasterAgentCreditApplicationList({
                             return (
                               <div key={payment.id} className="grid gap-3 rounded-2xl border border-slate-200 bg-slate-50 p-3 sm:grid-cols-[1fr_auto] sm:items-center">
                                 <div className="flex min-w-0 items-start gap-3">
-                                  <span className="grid h-11 w-11 shrink-0 place-items-center rounded-2xl bg-emerald-100 text-emerald-700">
+                                  <span className="grid h-11 w-11 shrink-0 place-items-center rounded-2xl bg-red-100 text-red-700">
                                     <ReceiptText className="h-5 w-5" strokeWidth={2.4} />
                                   </span>
                                   <div className="min-w-0">
@@ -1069,7 +1069,7 @@ export function MasterAgentCreditApplicationList({
                                       <button
                                         type="button"
                                         onClick={() => setPreviewProof({ agentName, src: proofSrc, title: payment.payment_proof?.name || `Bukti pembayaran #${payment.id}` })}
-                                        className="inline-flex h-10 items-center justify-center gap-2 rounded-xl bg-emerald-700 px-3 text-xs font-black text-white transition hover:bg-emerald-800"
+                                        className="inline-flex h-10 items-center justify-center gap-2 rounded-xl bg-red-700 px-3 text-xs font-black text-white transition hover:bg-red-800"
                                       >
                                         <Eye className="h-4 w-4" strokeWidth={2.4} />
                                         Lihat Bukti
@@ -1077,7 +1077,7 @@ export function MasterAgentCreditApplicationList({
                                       <a
                                         href={proofSrc}
                                         download={payment.payment_proof?.name || `bukti-pembayaran-${payment.id}.png`}
-                                        className="inline-flex h-10 items-center justify-center gap-2 rounded-xl border border-emerald-200 bg-white px-3 text-xs font-black text-emerald-700 transition hover:bg-emerald-50"
+                                        className="inline-flex h-10 items-center justify-center gap-2 rounded-xl border border-red-200 bg-white px-3 text-xs font-black text-red-700 transition hover:bg-red-50"
                                       >
                                         <Download className="h-4 w-4" strokeWidth={2.4} />
                                         Download
@@ -1107,9 +1107,9 @@ export function MasterAgentCreditApplicationList({
             );
           })
         ) : (
-          <div className="grid min-h-[260px] place-items-center rounded-[26px] border border-dashed border-emerald-200 bg-[linear-gradient(135deg,#f8fffb_0%,#eefbf4_100%)] px-5 py-10 text-center">
+          <div className="grid min-h-[260px] place-items-center rounded-[26px] border border-dashed border-red-200 bg-[linear-gradient(135deg,#fff7f5_0%,#eefbf4_100%)] px-5 py-10 text-center">
             <div>
-              <div className="mx-auto grid h-16 w-16 place-items-center rounded-3xl bg-white text-emerald-700 shadow-[0_14px_32px_rgba(5,122,69,0.10)] ring-1 ring-emerald-100">
+              <div className="mx-auto grid h-16 w-16 place-items-center rounded-3xl bg-white text-red-700 shadow-[0_14px_32px_rgba(151,14,32,0.10)] ring-1 ring-red-100">
                 <FileSignature className="h-8 w-8" strokeWidth={2.3} />
               </div>
               <h3 className="mt-4 text-base font-black text-slate-950">{applications.length ? "Agent tidak ditemukan" : emptyTitle || "Belum ada pengajuan"}</h3>
@@ -1130,7 +1130,7 @@ export function MasterAgentCreditApplicationList({
           <div className="grid grid-cols-[auto_auto_auto] items-center gap-2">
             <button type="button" onClick={() => setPage(Math.max(1, safePage - 1))} disabled={safePage === 1} className="h-9 rounded-xl border border-slate-200 bg-white px-3 text-[10px] font-black text-slate-600 disabled:opacity-40">Sebelumnya</button>
             <span className="min-w-16 text-center text-[10px] font-black text-slate-600">{safePage} / {pageCount}</span>
-            <button type="button" onClick={() => setPage(Math.min(pageCount, safePage + 1))} disabled={safePage === pageCount} className="h-9 rounded-xl bg-emerald-700 px-3 text-[10px] font-black text-white disabled:opacity-40">Berikutnya</button>
+            <button type="button" onClick={() => setPage(Math.min(pageCount, safePage + 1))} disabled={safePage === pageCount} className="h-9 rounded-xl bg-red-700 px-3 text-[10px] font-black text-white disabled:opacity-40">Berikutnya</button>
           </div>
         </div>
       ) : null}
@@ -1145,7 +1145,7 @@ export function MasterAgentCreditApplicationList({
               <a
                 href={previewProof.src}
                 download={previewProof.title}
-                className="inline-flex h-10 items-center gap-2 rounded-2xl bg-emerald-700 px-3 text-xs font-black text-white transition hover:bg-emerald-800"
+                className="inline-flex h-10 items-center gap-2 rounded-2xl bg-red-700 px-3 text-xs font-black text-white transition hover:bg-red-800"
               >
                 <Download className="h-4 w-4" strokeWidth={2.5} />
                 Download

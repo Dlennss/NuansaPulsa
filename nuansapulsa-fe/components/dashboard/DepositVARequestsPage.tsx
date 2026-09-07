@@ -105,7 +105,7 @@ function formatDate(value?: string | null) {
 
 function statusClass(status: string) {
   const s = String(status || "").toLowerCase();
-  if (s === "approved") return "border-emerald-400/30 bg-emerald-400/10 text-emerald-200";
+  if (s === "approved") return "border-red-400/30 bg-red-400/10 text-red-200";
   if (s === "rejected" || s === "cancelled") return "border-red-400/30 bg-red-400/10 text-red-200";
   if (s === "pending") return "border-amber-400/30 bg-amber-400/10 text-amber-200";
   return "border-cyan-400/30 bg-cyan-400/10 text-cyan-200";
@@ -451,7 +451,7 @@ export default function DepositVARequestsPage({ readOnly = false, subtitle = "Ti
               {copiedID === d.id ? <Check className="h-3.5 w-3.5" /> : <Copy className="h-3.5 w-3.5" />}
             </Button>
           </div>
-          {copiedID === d.id ? <div className="text-[11px] font-medium text-emerald-200">Tersalin</div> : null}
+          {copiedID === d.id ? <div className="text-[11px] font-medium text-red-200">Tersalin</div> : null}
         </div>
       ),
     },

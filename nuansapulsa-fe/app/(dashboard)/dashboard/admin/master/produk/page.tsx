@@ -335,7 +335,7 @@ export default function AdminMasterProdukPage() {
         const tutup = (x.jam_tutup || "23:29").slice(0, 5);
         const is24h = buka === "00:00" && tutup === "23:59";
         return is24h
-          ? <span className="rounded-full border border-emerald-400 bg-emerald-100 px-2 py-0.5 text-xs font-bold text-emerald-900">24 Jam</span>
+          ? <span className="rounded-full border border-red-400 bg-red-100 px-2 py-0.5 text-xs font-bold text-red-900">24 Jam</span>
           : <span>{buka} - {tutup}</span>;
       },
     },
@@ -345,7 +345,7 @@ export default function AdminMasterProdukPage() {
       tdClassName: "whitespace-nowrap",
       render: (x) =>
         x.aktif ? (
-          <span className="rounded-full border border-emerald-400 bg-emerald-100 px-2 py-0.5 text-xs font-bold text-emerald-900">Aktif</span>
+          <span className="rounded-full border border-red-400 bg-red-100 px-2 py-0.5 text-xs font-bold text-red-900">Aktif</span>
         ) : (
           <span className="rounded-full border border-rose-400 bg-rose-100 px-2 py-0.5 text-xs font-bold text-rose-900">Nonaktif</span>
         ),
@@ -360,7 +360,7 @@ export default function AdminMasterProdukPage() {
       <div className="relative inline-flex" data-action-dropdown>
         <Button
           size="sm"
-          className="h-8 w-8 bg-emerald-700 px-0 text-white hover:bg-emerald-600"
+          className="h-8 w-8 bg-red-700 px-0 text-white hover:bg-red-600"
           onClick={() => setOpenActionKey((prev) => (prev === String(x.id) ? null : String(x.id)))}
           aria-label="Aksi"
         >
@@ -432,7 +432,7 @@ export default function AdminMasterProdukPage() {
             {mobileFilterOpen ? "Tutup Filter" : "Buka Filter"}
           </span>
           {activeFilterCount > 0 ? (
-            <span className="rounded-full bg-emerald-100 px-2 py-0.5 text-xs font-semibold text-emerald-700">{activeFilterCount}</span>
+            <span className="rounded-full bg-red-100 px-2 py-0.5 text-xs font-semibold text-red-700">{activeFilterCount}</span>
           ) : null}
         </Button>
       </div>
@@ -483,7 +483,7 @@ export default function AdminMasterProdukPage() {
                 <div className="mt-2 max-h-52 overflow-auto rounded-md border border-white/10">
                   <button
                     type="button"
-                    className={`block w-full px-3 py-2 text-left text-sm transition hover:bg-emerald-50 ${groupName === "" ? "bg-emerald-100 text-emerald-800" : "text-slate-200"}`}
+                    className={`block w-full px-3 py-2 text-left text-sm transition hover:bg-red-50 ${groupName === "" ? "bg-red-100 text-red-800" : "text-slate-200"}`}
                     onClick={() => {
                       setGroupName("");
                       setPage(1);
@@ -496,7 +496,7 @@ export default function AdminMasterProdukPage() {
                     <button
                       key={g}
                       type="button"
-                      className={`block w-full px-3 py-2 text-left text-sm transition hover:bg-emerald-50 ${groupName === g ? "bg-emerald-100 text-emerald-800" : "text-slate-200"}`}
+                      className={`block w-full px-3 py-2 text-left text-sm transition hover:bg-red-50 ${groupName === g ? "bg-red-100 text-red-800" : "text-slate-200"}`}
                       onClick={() => {
                         setGroupName(g);
                         setPage(1);
@@ -618,7 +618,7 @@ export default function AdminMasterProdukPage() {
               key={p}
               variant={p === page ? "outline" : "ghost"}
               size="sm"
-              className={p === page ? "border-emerald-300 bg-emerald-100 text-emerald-800" : "border-transparent"}
+              className={p === page ? "border-red-300 bg-red-100 text-red-800" : "border-transparent"}
               onClick={() => setPage(p)}
             >
               {p}

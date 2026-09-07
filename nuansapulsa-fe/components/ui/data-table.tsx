@@ -90,7 +90,7 @@ export function DataTable<TRow>(props: DataTableProps<TRow>) {
   const pageButtons = visiblePages(currentPage, totalPages);
   const isLight = variant === "light";
   const stateClassName = isLight
-    ? "rounded-lg border border-dashed border-emerald-200 bg-white px-3 py-10 text-center text-sm text-slate-500 shadow-sm sm:px-4 sm:py-12"
+    ? "rounded-lg border border-dashed border-red-200 bg-white px-3 py-10 text-center text-sm text-slate-500 shadow-sm sm:px-4 sm:py-12"
     : "mt-5 rounded-md border border-white/15 bg-slate-950/50 px-3 py-6 text-center text-sm text-slate-400 shadow-[0_18px_42px_-26px_rgba(56,189,248,0.45)] sm:px-4 sm:py-8";
 
   if (loading) {
@@ -130,22 +130,22 @@ export function DataTable<TRow>(props: DataTableProps<TRow>) {
         }
       >
         <table className={`w-full text-sm ${minWidthClassName || "min-w-245"}`}>
-          <thead className={isLight ? "sticky top-0 z-10 bg-emerald-50" : "sticky top-0 z-10 bg-linear-to-r from-cyan-500/20 via-sky-500/10 to-indigo-500/20 backdrop-blur"}>
+          <thead className={isLight ? "sticky top-0 z-10 bg-red-50" : "sticky top-0 z-10 bg-linear-to-r from-cyan-500/20 via-sky-500/10 to-indigo-500/20 backdrop-blur"}>
             <tr className="text-left">
               {showRowNumber ? (
-                <th className={`px-3 py-1.5 text-[11px] font-semibold uppercase tracking-wide sm:px-4 sm:py-3 sm:text-xs ${isLight ? "text-emerald-900" : "text-slate-200"}`}>No</th>
+                <th className={`px-3 py-1.5 text-[11px] font-semibold uppercase tracking-wide sm:px-4 sm:py-3 sm:text-xs ${isLight ? "text-red-900" : "text-slate-200"}`}>No</th>
               ) : null}
               {columns.map((col) => (
                 <th
                   key={col.id}
-                  className={`px-3 py-1.5 text-[11px] font-semibold uppercase tracking-wide sm:px-4 sm:py-3 sm:text-xs ${isLight ? "text-emerald-900" : "text-slate-200"} ${col.thClassName || ""}`}
+                  className={`px-3 py-1.5 text-[11px] font-semibold uppercase tracking-wide sm:px-4 sm:py-3 sm:text-xs ${isLight ? "text-red-900" : "text-slate-200"} ${col.thClassName || ""}`}
                 >
                   {col.header}
                 </th>
               ))}
               {actions ? (
                 <th
-                  className={`px-3 py-1.5 text-[11px] font-semibold uppercase tracking-wide sm:px-4 sm:py-3 sm:text-xs ${isLight ? "text-emerald-900" : "text-slate-200"} ${actionAlign} ${
+                  className={`px-3 py-1.5 text-[11px] font-semibold uppercase tracking-wide sm:px-4 sm:py-3 sm:text-xs ${isLight ? "text-red-900" : "text-slate-200"} ${actionAlign} ${
                     actions.thClassName || ""
                   }`}
                 >
@@ -156,7 +156,7 @@ export function DataTable<TRow>(props: DataTableProps<TRow>) {
           </thead>
           <tbody>
             {safeRows.map((row, index) => (
-              <tr key={rowKey(row, index)} className={isLight ? "border-t border-slate-100 bg-white transition hover:bg-emerald-50/60" : "border-t border-white/10 bg-white/1.5 transition hover:bg-cyan-400/[0.07]"}>
+              <tr key={rowKey(row, index)} className={isLight ? "border-t border-slate-100 bg-white transition hover:bg-red-50/60" : "border-t border-white/10 bg-white/1.5 transition hover:bg-cyan-400/[0.07]"}>
                 {showRowNumber ? <td className={`whitespace-nowrap px-3 py-2.5 sm:px-4 sm:py-3 ${isLight ? "text-slate-500" : "text-slate-300"}`}>{rowNumberStart + index}</td> : null}
                 {columns.map((col) => (
                   <td key={col.id} className={`px-3 py-2.5 sm:px-4 sm:py-3 ${col.tdClassName || ""}`}>

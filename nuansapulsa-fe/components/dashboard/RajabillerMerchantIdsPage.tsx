@@ -29,7 +29,7 @@ function authHeader(): Record<string, string> {
 
 function statusClass(active: boolean) {
   return active
-    ? "rounded-full bg-emerald-500/15 px-2 py-1 text-xs font-medium text-emerald-300"
+    ? "rounded-full bg-red-500/15 px-2 py-1 text-xs font-medium text-red-300"
     : "rounded-full bg-slate-500/15 px-2 py-1 text-xs font-medium text-slate-300";
 }
 
@@ -261,8 +261,8 @@ export default function RajabillerMerchantIdsPage() {
           <div className="text-xs uppercase tracking-[0.2em] text-cyan-200">Total Filter</div>
           <div className="mt-1 text-xl font-semibold text-white">{total}</div>
         </div>
-        <div className="rounded-md border border-emerald-400/20 bg-emerald-400/10 px-4 py-3">
-          <div className="text-xs uppercase tracking-[0.2em] text-emerald-200">Aktif di Halaman</div>
+        <div className="rounded-md border border-red-400/20 bg-red-400/10 px-4 py-3">
+          <div className="text-xs uppercase tracking-[0.2em] text-red-200">Aktif di Halaman</div>
           <div className="mt-1 text-xl font-semibold text-white">{activeCount}</div>
         </div>
       </div>

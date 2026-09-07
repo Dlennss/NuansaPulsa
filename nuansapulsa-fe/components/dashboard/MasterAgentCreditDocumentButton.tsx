@@ -98,7 +98,7 @@ export function MasterAgentCreditDocumentButton({
     <div className="fixed inset-0 z-[100] flex items-end justify-center bg-slate-950/65 p-0 backdrop-blur-sm sm:items-center sm:p-3">
       <section className="flex max-h-[100svh] w-full max-w-4xl flex-col overflow-hidden rounded-t-[24px] bg-white shadow-[0_28px_80px_rgba(15,23,42,0.35)] sm:max-h-[92vh] sm:rounded-[28px]">
         <div className="flex min-w-0 items-center gap-2 border-b border-slate-100 px-3 py-3 sm:gap-3 sm:px-4">
-          <div className="grid h-10 w-10 shrink-0 place-items-center rounded-2xl bg-emerald-50 text-emerald-700 sm:h-11 sm:w-11">
+          <div className="grid h-10 w-10 shrink-0 place-items-center rounded-2xl bg-red-50 text-red-700 sm:h-11 sm:w-11">
             <FileText className="h-5 w-5" strokeWidth={2.4} />
           </div>
           <div className="min-w-0 flex-1">
@@ -108,7 +108,7 @@ export function MasterAgentCreditDocumentButton({
           <button
             type="button"
             onClick={downloadPDF}
-            className="inline-flex h-10 shrink-0 items-center gap-1.5 rounded-2xl bg-emerald-600 px-2.5 text-[11px] font-black text-white transition hover:bg-emerald-700 sm:gap-2 sm:px-3 sm:text-xs"
+            className="inline-flex h-10 shrink-0 items-center gap-1.5 rounded-2xl bg-red-600 px-2.5 text-[11px] font-black text-white transition hover:bg-red-700 sm:gap-2 sm:px-3 sm:text-xs"
           >
             <Download className="h-4 w-4" strokeWidth={2.5} />
             <span className="hidden min-[390px]:inline">Download</span>
@@ -156,10 +156,10 @@ export function MasterAgentCreditDocumentButton({
         type="button"
         disabled={!canPreview || loading}
         onClick={openPreview}
-        className="flex w-full items-center gap-3 rounded-3xl border border-emerald-100 bg-white p-3 text-left shadow-[0_12px_26px_rgba(5,122,69,0.08)] transition hover:-translate-y-0.5 hover:border-emerald-300 disabled:cursor-not-allowed disabled:opacity-55"
+        className="flex w-full items-center gap-3 rounded-3xl border border-red-100 bg-white p-3 text-left shadow-[0_12px_26px_rgba(151,14,32,0.08)] transition hover:-translate-y-0.5 hover:border-red-300 disabled:cursor-not-allowed disabled:opacity-55"
         title={agentName}
       >
-        <span className="grid h-12 w-12 shrink-0 place-items-center rounded-2xl bg-emerald-50 text-emerald-700">
+        <span className="grid h-12 w-12 shrink-0 place-items-center rounded-2xl bg-red-50 text-red-700">
           <FileText className="h-6 w-6" strokeWidth={2.4} />
         </span>
         <span className="min-w-0 flex-1">
@@ -168,7 +168,7 @@ export function MasterAgentCreditDocumentButton({
             {canPreview ? `${readyDocuments.length} foto tersimpan` : "Belum ada foto"}
           </span>
         </span>
-        <span className="grid h-10 w-10 shrink-0 place-items-center rounded-2xl bg-emerald-600 text-white">
+        <span className="grid h-10 w-10 shrink-0 place-items-center rounded-2xl bg-red-600 text-white">
           <Eye className="h-4 w-4" strokeWidth={2.6} />
         </span>
       </button>

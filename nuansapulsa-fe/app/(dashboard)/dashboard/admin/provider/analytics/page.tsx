@@ -211,7 +211,7 @@ export default function ProviderAnalyticsPage() {
     {
       id: "success_count",
       header: "Trx Berhasil",
-      tdClassName: "whitespace-nowrap text-emerald-300",
+      tdClassName: "whitespace-nowrap text-red-300",
       render: (x) => fmtID(Number(x.success_count || 0)),
     },
     {
@@ -287,7 +287,7 @@ export default function ProviderAnalyticsPage() {
         </div>
         <div className="rounded-md border border-white/15 bg-slate-950/50 p-4">
           <div className="text-xs uppercase tracking-wide text-slate-400">Trx Berhasil</div>
-          <div className="mt-2 text-2xl font-semibold text-emerald-300">{fmtID(totalSuccessCount)}</div>
+          <div className="mt-2 text-2xl font-semibold text-red-300">{fmtID(totalSuccessCount)}</div>
         </div>
         <div className="rounded-md border border-white/15 bg-slate-950/50 p-4">
           <div className="text-xs uppercase tracking-wide text-slate-400">Nominal Berhasil</div>
@@ -326,7 +326,7 @@ export default function ProviderAnalyticsPage() {
                 <div className="grid gap-2 sm:grid-cols-3">
                   <div className="rounded-lg border border-white/10 bg-white/5 px-3 py-2">
                     <div className="text-[11px] uppercase tracking-wide text-slate-500">Total Trx Berhasil</div>
-                    <div className="mt-1 text-base font-semibold text-emerald-300">{fmtID(month.successCount)}</div>
+                    <div className="mt-1 text-base font-semibold text-red-300">{fmtID(month.successCount)}</div>
                   </div>
                   <div className="rounded-lg border border-white/10 bg-white/5 px-3 py-2">
                     <div className="text-[11px] uppercase tracking-wide text-slate-500">Total Nominal</div>

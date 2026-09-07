@@ -234,7 +234,7 @@ export default function FeeKategoriAplikasiPage() {
       tdClassName: "whitespace-nowrap",
       render: (x) =>
         x.aktif ? (
-          <span className="rounded-full border border-emerald-400 bg-emerald-100 px-2 py-0.5 text-xs font-bold text-emerald-900">Aktif</span>
+          <span className="rounded-full border border-red-400 bg-red-100 px-2 py-0.5 text-xs font-bold text-red-900">Aktif</span>
         ) : (
           <span className="rounded-full border border-rose-400 bg-rose-100 px-2 py-0.5 text-xs font-bold text-rose-900">Nonaktif</span>
         ),
@@ -255,7 +255,7 @@ export default function FeeKategoriAplikasiPage() {
       <div className="relative inline-flex" data-action-dropdown>
         <Button
           size="sm"
-          className="h-8 w-8 bg-emerald-700 px-0 text-white hover:bg-emerald-600"
+          className="h-8 w-8 bg-red-700 px-0 text-white hover:bg-red-600"
           onClick={() => setOpenActionKey((prev) => (prev === String(x.id) ? null : String(x.id)))}
           aria-label="Aksi"
         >

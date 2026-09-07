@@ -935,7 +935,7 @@ export default function AdminMembersPage() {
       header: "Status",
       tdClassName: "whitespace-nowrap",
       render: (m) => (
-        <span className={`inline-flex rounded-full px-2.5 py-1 text-xs font-bold ${m.aktif ? "bg-emerald-50 text-emerald-700" : "bg-rose-50 text-rose-700"}`}>
+        <span className={`inline-flex rounded-full px-2.5 py-1 text-xs font-bold ${m.aktif ? "bg-red-50 text-red-700" : "bg-rose-50 text-rose-700"}`}>
           {m.aktif ? "Aktif" : "Nonaktif"}
         </span>
       ),
@@ -943,7 +943,7 @@ export default function AdminMembersPage() {
     {
       id: "saldo",
       header: "Saldo Utama",
-      tdClassName: "whitespace-nowrap font-semibold text-emerald-700",
+      tdClassName: "whitespace-nowrap font-semibold text-red-700",
       render: (m) => `Rp ${fmtIDR(m.saldo)}`,
     },
     {
@@ -964,7 +964,7 @@ export default function AdminMembersPage() {
     render: (m) => (
       <div className="flex items-center justify-end gap-2">
         <Button
-          className="h-9 gap-1.5 border-emerald-200 bg-emerald-50 px-3 font-bold text-emerald-800 hover:bg-emerald-100"
+          className="h-9 gap-1.5 border-red-200 bg-red-50 px-3 font-bold text-red-800 hover:bg-red-100"
           variant="outline"
           onClick={() => {
             setActionMenu(null);
@@ -978,7 +978,7 @@ export default function AdminMembersPage() {
         <div className="inline-flex" data-action-dropdown>
           <button
             type="button"
-            className="flex h-9 w-9 cursor-pointer items-center justify-center rounded-lg border border-slate-200 bg-white text-slate-600 transition hover:border-emerald-300 hover:bg-emerald-50 hover:text-emerald-800"
+            className="flex h-9 w-9 cursor-pointer items-center justify-center rounded-lg border border-slate-200 bg-white text-slate-600 transition hover:border-red-300 hover:bg-red-50 hover:text-red-800"
             onClick={(e) => {
               const target = e.currentTarget as HTMLElement;
               if (actionMenu?.key === `manage-${m.id}`) {
@@ -1008,7 +1008,7 @@ export default function AdminMembersPage() {
             data-action-dropdown
           >
             {canManageSecurity ? <Button
-              className="h-9 w-full justify-start border-0 bg-white text-slate-700 hover:bg-emerald-50 hover:text-emerald-800"
+              className="h-9 w-full justify-start border-0 bg-white text-slate-700 hover:bg-red-50 hover:text-red-800"
               onClick={() => {
                 const member = actionMenu.member;
                 setActionMenu(null);
@@ -1019,7 +1019,7 @@ export default function AdminMembersPage() {
               <UserCog className="mr-1.5 h-4 w-4" /> Edit Akun
             </Button> : null}
             {canManageWallet && ["user", "agent"].includes(actionMenu.member.role) ? <Button
-              className="h-9 w-full justify-start border-0 bg-white text-slate-700 hover:bg-emerald-50 hover:text-emerald-800"
+              className="h-9 w-full justify-start border-0 bg-white text-slate-700 hover:bg-red-50 hover:text-red-800"
               onClick={() => {
                 const member = actionMenu.member;
                 setActionMenu(null);
@@ -1029,7 +1029,7 @@ export default function AdminMembersPage() {
               <Wallet className="mr-1.5 h-4 w-4" /> Kelola Saldo
             </Button> : null}
             {(["agent", "master", "agent_member", "master_member"].includes(actionMenu.member.role)) ? <Button
-              className="h-9 w-full justify-start border-0 bg-white text-slate-700 hover:bg-emerald-50 hover:text-emerald-800"
+              className="h-9 w-full justify-start border-0 bg-white text-slate-700 hover:bg-red-50 hover:text-red-800"
               onClick={() => {
                 const member = actionMenu.member;
                 setActionMenu(null);
@@ -1039,7 +1039,7 @@ export default function AdminMembersPage() {
               <Coins className="mr-1.5 h-4 w-4" /> Atur Komisi
             </Button> : null}
             {(["agent", "master", "agent_member", "master_member"].includes(actionMenu.member.role)) ? <Button
-              className="h-9 w-full justify-start border-0 bg-white text-slate-700 hover:bg-emerald-50 hover:text-emerald-800"
+              className="h-9 w-full justify-start border-0 bg-white text-slate-700 hover:bg-red-50 hover:text-red-800"
               onClick={() => {
                 const member = actionMenu.member;
                 setActionMenu(null);
@@ -1049,7 +1049,7 @@ export default function AdminMembersPage() {
               <Users className="mr-1.5 h-4 w-4" /> Lihat Jaringan
             </Button> : null}
             {(["agent", "master", "agent_member", "master_member"].includes(actionMenu.member.role)) ? <Button
-              className="h-9 w-full justify-start border-0 bg-white text-slate-700 hover:bg-emerald-50 hover:text-emerald-800"
+              className="h-9 w-full justify-start border-0 bg-white text-slate-700 hover:bg-red-50 hover:text-red-800"
               onClick={() => {
                 const member = actionMenu.member;
                 setActionMenu(null);
@@ -1059,7 +1059,7 @@ export default function AdminMembersPage() {
               <ShieldCheck className="mr-1.5 h-4 w-4" /> Atur Jaringan
             </Button> : null}
             <Button
-              className="h-9 w-full justify-start border-0 bg-white text-slate-700 hover:bg-emerald-50 hover:text-emerald-800"
+              className="h-9 w-full justify-start border-0 bg-white text-slate-700 hover:bg-red-50 hover:text-red-800"
               onClick={() => {
                 const member = actionMenu.member;
                 setActionMenu(null);
@@ -1072,24 +1072,24 @@ export default function AdminMembersPage() {
         </div>
       ) : null}
 
-    <div className="-m-2 min-h-screen bg-[#eef8f3] p-3 sm:p-5 lg:p-6">
+    <div className="-m-2 min-h-screen bg-[#fff6f4] p-3 sm:p-5 lg:p-6">
       <div className="mx-auto max-w-7xl space-y-4">
-        <section className="rounded-lg border border-emerald-100 bg-white p-4 shadow-sm sm:p-5">
+        <section className="rounded-lg border border-red-100 bg-white p-4 shadow-sm sm:p-5">
           <div className="flex flex-col gap-4 sm:flex-row sm:items-center sm:justify-between">
             <div className="flex min-w-0 items-start gap-3">
-              <div className="flex h-11 w-11 shrink-0 items-center justify-center rounded-lg bg-emerald-50 text-emerald-700">
+              <div className="flex h-11 w-11 shrink-0 items-center justify-center rounded-lg bg-red-50 text-red-700">
                 <Users className="h-5 w-5" />
               </div>
               <div className="min-w-0">
-                <div className="text-[11px] font-bold uppercase text-emerald-700">Direktori Akun</div>
+                <div className="text-[11px] font-bold uppercase text-red-700">Direktori Akun</div>
                 <h1 className="mt-1 text-xl font-bold text-slate-950 sm:text-2xl">Akun NuansaPulsa</h1>
                 <p className="mt-1 text-sm text-slate-600">Kelola pelanggan, agent, marketing, dan operator dalam satu tempat.</p>
               </div>
             </div>
-            <div className="rounded-lg border border-emerald-200 bg-emerald-50 px-4 py-3 sm:min-w-56">
-              <div className="text-[11px] font-bold uppercase text-emerald-700">Total Saldo</div>
-              <div className="mt-1 text-xl font-bold text-emerald-950">Rp {fmtIDR(totalSaldo)}</div>
-              <div className="mt-0.5 text-xs text-emerald-700">{roleFilter ? roleLabel(roleFilter) : scopeLabel(accountScope)}</div>
+            <div className="rounded-lg border border-red-200 bg-red-50 px-4 py-3 sm:min-w-56">
+              <div className="text-[11px] font-bold uppercase text-red-700">Total Saldo</div>
+              <div className="mt-1 text-xl font-bold text-red-950">Rp {fmtIDR(totalSaldo)}</div>
+              <div className="mt-0.5 text-xs text-red-700">{roleFilter ? roleLabel(roleFilter) : scopeLabel(accountScope)}</div>
             </div>
           </div>
         </section>
@@ -1109,8 +1109,8 @@ export default function AdminMembersPage() {
                 type="button"
                 className={`rounded-md px-4 py-2 text-sm font-semibold transition ${
                   accountScope === tab.scope && roleFilter === tab.role
-                    ? "bg-emerald-700 text-white"
-                    : "border border-slate-200 bg-white text-slate-600 hover:border-emerald-200 hover:bg-emerald-50 hover:text-emerald-800"
+                    ? "bg-red-700 text-white"
+                    : "border border-slate-200 bg-white text-slate-600 hover:border-red-200 hover:bg-red-50 hover:text-red-800"
                 }`}
                 onClick={() => {
                   setAccountScope(tab.scope);
@@ -1127,7 +1127,7 @@ export default function AdminMembersPage() {
           <div className="mt-4 grid gap-3 md:grid-cols-[auto_minmax(240px,1fr)]">
             {currentRole === "admin" ? (
               <Button
-                className="h-11 border-0 bg-emerald-700 px-4 text-white hover:bg-emerald-800"
+                className="h-11 border-0 bg-red-700 px-4 text-white hover:bg-red-800"
                 onClick={() => setRegisterOpen(true)}
               >
                 <Plus className="mr-1.5 h-4 w-4" />
@@ -1146,10 +1146,10 @@ export default function AdminMembersPage() {
                   }
                 }}
                 placeholder="Cari nama atau email"
-                className="h-11 min-w-0 flex-1 border-slate-200 bg-white text-slate-900 placeholder:text-slate-400 focus-visible:ring-emerald-500"
+                className="h-11 min-w-0 flex-1 border-slate-200 bg-white text-slate-900 placeholder:text-slate-400 focus-visible:ring-red-500"
               />
               <Button
-                className="h-11 w-11 shrink-0 border-0 bg-emerald-700 p-0 text-white hover:bg-emerald-800"
+                className="h-11 w-11 shrink-0 border-0 bg-red-700 p-0 text-white hover:bg-red-800"
                 onClick={() => {
                   setOffset(0);
                   void load(0);
@@ -1257,7 +1257,7 @@ export default function AdminMembersPage() {
                 Batal
               </Button>
               <Button
-                className="h-10 border-0 bg-emerald-700 text-white shadow-[0_12px_30px_-15px_rgba(4,120,87,0.45)] hover:bg-emerald-600"
+                className="h-10 border-0 bg-red-700 text-white shadow-[0_12px_30px_-15px_rgba(215,7,23,0.45)] hover:bg-red-600"
                 onClick={doAdjust}
                 disabled={adjustSubmitting}
               >
@@ -1268,13 +1268,13 @@ export default function AdminMembersPage() {
           }
         >
           <div className="space-y-4">
-            <div className="rounded-xl border border-emerald-200 bg-emerald-50 p-3">
+            <div className="rounded-xl border border-red-200 bg-red-50 p-3">
               <div className="text-base font-semibold text-slate-100">Adjust Saldo</div>
               <div className="mt-1 text-sm text-slate-300">
                 Member #{adjMember.id} {adjMember.email}
               </div>
               <div className="mt-1 text-xs text-slate-400">
-                Saldo saat ini: <span className="font-medium text-emerald-700">{fmtIDR(adjMember.saldo)}</span>
+                Saldo saat ini: <span className="font-medium text-red-700">{fmtIDR(adjMember.saldo)}</span>
               </div>
             </div>
 
@@ -1283,7 +1283,7 @@ export default function AdminMembersPage() {
                 <div className="text-xs font-semibold uppercase tracking-wider text-slate-300">Direction</div>
                 <div className="flex gap-2">
                   <Button
-                    className={`h-10 border-0 ${direction === "credit" ? "bg-emerald-700 text-white shadow-[0_12px_28px_-15px_rgba(4,120,87,0.45)]" : "bg-slate-800/80 text-slate-300 hover:bg-slate-700"}`}
+                    className={`h-10 border-0 ${direction === "credit" ? "bg-red-700 text-white shadow-[0_12px_28px_-15px_rgba(215,7,23,0.45)]" : "bg-slate-800/80 text-slate-300 hover:bg-slate-700"}`}
                     onClick={() => setDirection("credit")}
                     disabled={adjustSubmitting}
                   >
@@ -1378,7 +1378,7 @@ export default function AdminMembersPage() {
                 Simpan Relasi
               </Button>
               <Button
-                className="border-0 bg-emerald-700 text-white hover:bg-emerald-600"
+                className="border-0 bg-red-700 text-white hover:bg-red-600"
                 onClick={() => void applyHierarchy(true)}
                 disabled={hierarchySaving}
               >
@@ -1389,7 +1389,7 @@ export default function AdminMembersPage() {
           }
         >
           <div className="space-y-4">
-            <div className="rounded-xl border border-emerald-300 bg-emerald-50 px-4 py-3 text-sm font-medium text-emerald-900">
+            <div className="rounded-xl border border-red-300 bg-red-50 px-4 py-3 text-sm font-medium text-red-900">
               Gunakan modal ini untuk <span className="font-semibold">menambahkan akun ini ke agent atau master yang sudah ada</span>. Pilih upline di bawah, lalu simpan. Jika komisi historis ingin langsung masuk ke dompet upline, gunakan <span className="font-semibold">Simpan + Komisi Historis</span>.
             </div>
 
@@ -1430,7 +1430,7 @@ export default function AdminMembersPage() {
                             <Button
                               key={`${item.id}-${role}`}
                               variant={hierarchyTargetMember?.id === item.id && hierarchyTargetRole === role ? "default" : "outline"}
-                              className={hierarchyTargetMember?.id === item.id && hierarchyTargetRole === role ? "border-0 bg-emerald-700 text-white" : ""}
+                              className={hierarchyTargetMember?.id === item.id && hierarchyTargetRole === role ? "border-0 bg-red-700 text-white" : ""}
                               onClick={() => selectHierarchyTarget(item, role)}
                               disabled={hierarchySaving}
                             >
@@ -1453,23 +1453,23 @@ export default function AdminMembersPage() {
                 Akun ini akan menjadi downline dari agent/master yang dipilih. Komisi tetap memakai nilai flat per transaksi dari akun upline itu. Harga jual produk tetap mengikuti harga dasar + fee retail/H2H yang sudah berlaku.
               </div>
               {hierarchyTargetMember ? (
-                <div className="mt-3 rounded-lg border border-emerald-300 bg-emerald-50 px-3 py-2 text-sm font-medium text-emerald-900">
+                <div className="mt-3 rounded-lg border border-red-300 bg-red-50 px-3 py-2 text-sm font-medium text-red-900">
                   Downline terpilih: <span className="font-semibold">#{hierarchyTargetMember.id} {hierarchyTargetMember.email}</span> akan dijadikan <span className="font-semibold">{roleLabel(hierarchyTargetRole)}</span>.
                 </div>
               ) : null}
             </div>
 
             {hierarchyPreview ? (
-              <div className="space-y-3 rounded-xl border border-emerald-300/20 bg-emerald-500/10 p-4">
-                <div className="text-sm font-bold text-emerald-900">Preview Histori</div>
-                <div className="text-sm text-emerald-50">
+              <div className="space-y-3 rounded-xl border border-red-300/20 bg-red-500/10 p-4">
+                <div className="text-sm font-bold text-red-900">Preview Histori</div>
+                <div className="text-sm text-red-50">
                   Total transaksi sukses historis downline ini: <span className="font-semibold">{fmtIDR(hierarchyPreview.transaction_count)}</span>
                 </div>
                 {hierarchyPreview.derived_master_from_agent ? (
-                  <div className="text-xs font-medium text-emerald-800">Master otomatis mengikuti master yang terpasang pada agent terpilih.</div>
+                  <div className="text-xs font-medium text-red-800">Master otomatis mengikuti master yang terpasang pada agent terpilih.</div>
                 ) : null}
                 {hierarchyPreview.agent ? (
-                  <div className="rounded-lg border border-emerald-300/20 bg-slate-950/35 p-3 text-sm text-slate-200">
+                  <div className="rounded-lg border border-red-300/20 bg-slate-950/35 p-3 text-sm text-slate-200">
                     <div className="font-semibold text-slate-100">Agent</div>
                     <div className="mt-1">{hierarchyPreview.agent.email}</div>
                     <div className="mt-1 text-xs text-slate-400">
@@ -1478,7 +1478,7 @@ export default function AdminMembersPage() {
                   </div>
                 ) : null}
                 {hierarchyPreview.master ? (
-                  <div className="rounded-lg border border-emerald-300/20 bg-slate-950/35 p-3 text-sm text-slate-200">
+                  <div className="rounded-lg border border-red-300/20 bg-slate-950/35 p-3 text-sm text-slate-200">
                     <div className="font-semibold text-slate-100">Master</div>
                     <div className="mt-1">{hierarchyPreview.master.email}</div>
                     <div className="mt-1 text-xs text-slate-400">
@@ -1519,7 +1519,7 @@ export default function AdminMembersPage() {
           }
         >
           <div className="space-y-4">
-            <div className="rounded-xl border border-emerald-300 bg-emerald-50 px-4 py-3 text-sm font-medium text-emerald-900">
+            <div className="rounded-xl border border-red-300 bg-red-50 px-4 py-3 text-sm font-medium text-red-900">
               Menampilkan akun yang saat ini berada langsung di bawah <span className="font-semibold">{downlineViewerMember.nama}</span>.
             </div>
 
@@ -1543,7 +1543,7 @@ export default function AdminMembersPage() {
                       </div>
                       <div className="text-right">
                         <div className="text-xs uppercase tracking-wide text-slate-500">{item.aktif ? "Aktif" : "Nonaktif"}</div>
-                        <div className="mt-1 text-sm font-semibold text-emerald-700">Rp {fmtIDR(item.saldo)}</div>
+                        <div className="mt-1 text-sm font-semibold text-red-700">Rp {fmtIDR(item.saldo)}</div>
                       </div>
                     </div>
                   </div>
@@ -1645,7 +1645,7 @@ export default function AdminMembersPage() {
               Kategori fee H2H yang dipakai transaksi adalah <span className="font-semibold">DANA, GOPAY, OVO, LINKAJA, SHOPEEPAY, BANK, dan LAINNYA</span>. Retail memakai fee terpisah dan tidak ikut terbaca di jalur ini.
             </div>
 
-            <div className="grid gap-3 rounded-xl border border-emerald-300/20 bg-slate-900/55 p-3 sm:p-4">
+            <div className="grid gap-3 rounded-xl border border-red-300/20 bg-slate-900/55 p-3 sm:p-4">
               <div className="flex items-center justify-between gap-2">
                 <div>
                   <div className="text-sm font-semibold text-slate-100">Fee Kategori H2H</div>
@@ -1683,13 +1683,13 @@ export default function AdminMembersPage() {
                     type="checkbox"
                     checked={feeCategoryAktif}
                     onChange={(e) => setFeeCategoryAktif(e.target.checked)}
-                    className="h-4 w-4 rounded border-white/20 bg-slate-900 text-emerald-400"
+                    className="h-4 w-4 rounded border-white/20 bg-slate-900 text-red-400"
                   />
                   Aktif
                 </label>
 
                 <Button
-                  className="h-11 border-0 bg-emerald-700 text-white shadow-[0_12px_30px_-15px_rgba(4,120,87,0.45)] hover:bg-emerald-600"
+                  className="h-11 border-0 bg-red-700 text-white shadow-[0_12px_30px_-15px_rgba(215,7,23,0.45)] hover:bg-red-600"
                   onClick={doUpsertFeeCategory}
                   disabled={feeCategorySaving}
                 >
@@ -1775,7 +1775,7 @@ export default function AdminMembersPage() {
                 Batal
               </Button>
               <Button
-                className="border-0 bg-emerald-700 text-white hover:bg-emerald-600"
+                className="border-0 bg-red-700 text-white hover:bg-red-600"
                 onClick={doSetFee}
                 disabled={savingFee}
               >

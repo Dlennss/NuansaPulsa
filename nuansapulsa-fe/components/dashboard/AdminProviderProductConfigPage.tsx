@@ -577,7 +577,7 @@ export default function AdminProviderProductConfigPage() {
         if (!buka && !tutup) return <span className="text-slate-400 italic">Ikut Produk</span>;
         const is24h = buka === "00:00" && tutup === "23:59";
         return is24h
-          ? <span className="rounded-full border border-emerald-400/30 bg-emerald-500/10 px-2 py-0.5 text-xs font-semibold text-emerald-300">24 Jam</span>
+          ? <span className="rounded-full border border-red-400/30 bg-red-500/10 px-2 py-0.5 text-xs font-semibold text-red-300">24 Jam</span>
           : <span>{buka || "?"} - {tutup || "?"}</span>;
       },
     },
@@ -588,7 +588,7 @@ export default function AdminProviderProductConfigPage() {
       render: (item) =>
         item.map_id ? (
           item.map_aktif ? (
-            <span className="rounded-full border border-emerald-400/40 bg-emerald-500/15 px-2 py-0.5 text-xs font-semibold text-emerald-300">Aktif</span>
+            <span className="rounded-full border border-red-400/40 bg-red-500/15 px-2 py-0.5 text-xs font-semibold text-red-300">Aktif</span>
           ) : (
             <span className="rounded-full border border-rose-400/40 bg-rose-500/15 px-2 py-0.5 text-xs font-semibold text-rose-300">Nonaktif</span>
           )
@@ -607,7 +607,7 @@ export default function AdminProviderProductConfigPage() {
         return (
           <Button
             size="sm"
-            className={`h-8 ${item.map_aktif ? "bg-rose-600 hover:bg-rose-500" : "bg-emerald-600 hover:bg-emerald-500"} text-white`}
+            className={`h-8 ${item.map_aktif ? "bg-rose-600 hover:bg-rose-500" : "bg-red-600 hover:bg-red-500"} text-white`}
             onClick={() => void toggleActive(item)}
           >
             <Power className="mr-1.5 h-3.5 w-3.5" />
@@ -896,7 +896,7 @@ export default function AdminProviderProductConfigPage() {
             />
           </div>
 
-          <div className="mt-1 rounded-xl border border-emerald-400/20 bg-emerald-500/10 px-3 py-2 text-sm text-emerald-200">
+          <div className="mt-1 rounded-xl border border-red-400/20 bg-red-500/10 px-3 py-2 text-sm text-red-200">
             Fee provider selalu aktif. Yang bisa diaktifkan atau dinonaktifkan hanya mapping produk ke provider.
           </div>
         </div>

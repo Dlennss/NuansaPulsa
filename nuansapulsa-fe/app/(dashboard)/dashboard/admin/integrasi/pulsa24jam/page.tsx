@@ -154,35 +154,35 @@ export default function Pulsa24JamIntegrationPage() {
   ];
 
   return (
-    <main className="-m-2 min-h-screen bg-[#eef8f3] p-3 text-slate-950 sm:p-5 lg:p-7">
+    <main className="-m-2 min-h-screen bg-[#fff6f4] p-3 text-slate-950 sm:p-5 lg:p-7">
       <section className="mx-auto flex w-full max-w-7xl flex-col gap-5">
-        <header className="overflow-hidden rounded-[28px] border border-emerald-200 bg-white shadow-[0_24px_60px_rgba(6,78,59,0.10)]">
+        <header className="overflow-hidden rounded-[28px] border border-red-200 bg-white shadow-[0_24px_60px_rgba(151,14,32,0.10)]">
           <div className="grid gap-0 lg:grid-cols-[minmax(0,1fr)_360px]">
-            <div className="bg-[linear-gradient(135deg,#064e3b_0%,#047857_62%,#55c72f_100%)] px-5 py-7 text-white sm:px-7 lg:px-9">
-              <p className="inline-flex items-center gap-2 rounded-full border border-white bg-[#052e26] px-3 py-1 text-[11px] font-black uppercase tracking-[0.22em] text-white">
+            <div className="bg-[linear-gradient(135deg,#b20717_0%,#d70717_62%,#55c72f_100%)] px-5 py-7 text-white sm:px-7 lg:px-9">
+              <p className="inline-flex items-center gap-2 rounded-full border border-white bg-[#b20717] px-3 py-1 text-[11px] font-black uppercase tracking-[0.22em] text-white">
                 <Zap className="h-3.5 w-3.5 fill-white text-white" />
                 NuansaPulsa Gateway
               </p>
               <h1 className="mt-5 max-w-2xl text-3xl font-black tracking-normal sm:text-4xl">
                 Integrasi Provider
               </h1>
-              <p className="mt-3 max-w-2xl text-sm font-semibold leading-6 text-emerald-50">
+              <p className="mt-3 max-w-2xl text-sm font-semibold leading-6 text-red-50">
                 Halaman ini adalah pusat kontrol alur H2H Pulsa24Jam: whitelist IP, webhook, API key, PIN, command transaksi, callback final, dan monitoring semua panel.
               </p>
               <div className="mt-6 flex flex-wrap gap-2">
-                <span className="rounded-full border border-[#052e26] bg-white px-3 py-1.5 text-xs font-black text-[#052e26]">
+                <span className="rounded-full border border-[#b20717] bg-white px-3 py-1.5 text-xs font-black text-[#b20717]">
                   Provider: Pulsa24Jam
                 </span>
-                <span className="rounded-full border border-white bg-[#052e26] px-3 py-1.5 text-xs font-black text-white">
+                <span className="rounded-full border border-white bg-[#b20717] px-3 py-1.5 text-xs font-black text-white">
                   Endpoint: POST /v1/trx
                 </span>
               </div>
             </div>
 
-            <aside className="flex flex-col justify-center gap-4 bg-[#f8fffb] p-5 sm:p-7">
-              <div className={isReady ? "rounded-[24px] border-2 border-[#052e26] bg-white p-5" : "rounded-[24px] border-2 border-amber-700 bg-white p-5"}>
+            <aside className="flex flex-col justify-center gap-4 bg-[#fff7f5] p-5 sm:p-7">
+              <div className={isReady ? "rounded-[24px] border-2 border-[#b20717] bg-white p-5" : "rounded-[24px] border-2 border-amber-700 bg-white p-5"}>
                 <div className="flex items-center gap-3">
-                  <span className={isReady ? "grid h-12 w-12 place-items-center rounded-2xl bg-[#052e26] text-white shadow-[0_12px_24px_rgba(0,168,120,0.20)]" : "grid h-12 w-12 place-items-center rounded-2xl bg-white text-amber-800 ring-2 ring-amber-800 shadow-[0_12px_24px_rgba(251,191,36,0.22)]"}>
+                  <span className={isReady ? "grid h-12 w-12 place-items-center rounded-2xl bg-[#b20717] text-white shadow-[0_12px_24px_rgba(0,168,120,0.20)]" : "grid h-12 w-12 place-items-center rounded-2xl bg-white text-amber-800 ring-2 ring-amber-800 shadow-[0_12px_24px_rgba(251,191,36,0.22)]"}>
                     {isReady ? <CheckCircle2 className="h-6 w-6" /> : <Activity className="h-6 w-6" />}
                   </span>
                   <div>
@@ -191,7 +191,7 @@ export default function Pulsa24JamIntegrationPage() {
                   </div>
                 </div>
                 <div className="mt-4 h-3 overflow-hidden rounded-full bg-slate-200">
-                  <div className="h-full rounded-full bg-[#052e26]" style={{ width: `${(readyCount / envItems.length) * 100}%` }} />
+                  <div className="h-full rounded-full bg-[#b20717]" style={{ width: `${(readyCount / envItems.length) * 100}%` }} />
                 </div>
                 <p className="mt-3 text-xs font-bold text-slate-600">{readyCount}/{envItems.length} konfigurasi server terisi</p>
               </div>
@@ -209,13 +209,13 @@ export default function Pulsa24JamIntegrationPage() {
               item.key.includes("SECRET") ||
               item.key.includes("TOKEN");
             return (
-              <div key={item.key} className="rounded-[22px] border border-emerald-100 bg-white p-4 shadow-[0_14px_34px_rgba(6,78,59,0.07)]">
+              <div key={item.key} className="rounded-[22px] border border-red-100 bg-white p-4 shadow-[0_14px_34px_rgba(151,14,32,0.07)]">
                 <div className="flex items-start justify-between gap-3">
                   <div className="min-w-0">
-                    <p className="text-[10px] font-black uppercase tracking-[0.16em] text-[#052e26]">{item.label}</p>
+                    <p className="text-[10px] font-black uppercase tracking-[0.16em] text-[#b20717]">{item.label}</p>
                     <p className="mt-2 truncate text-sm font-black text-slate-950">{sensitive || item.key.includes("API_KEY") ? mask(item.value) : item.value || "Belum diisi"}</p>
                   </div>
-                  <span className={ok ? "grid h-8 w-8 shrink-0 place-items-center rounded-xl bg-white text-[#052e26] ring-2 ring-[#052e26]" : "grid h-8 w-8 shrink-0 place-items-center rounded-xl bg-white text-rose-700 ring-2 ring-rose-700"}>
+                  <span className={ok ? "grid h-8 w-8 shrink-0 place-items-center rounded-xl bg-white text-[#b20717] ring-2 ring-[#b20717]" : "grid h-8 w-8 shrink-0 place-items-center rounded-xl bg-white text-rose-700 ring-2 ring-rose-700"}>
                     {ok ? <CheckCircle2 className="h-4 w-4" /> : <XCircle className="h-4 w-4" />}
                   </span>
                 </div>
@@ -226,14 +226,14 @@ export default function Pulsa24JamIntegrationPage() {
         </section>
 
         <section className="grid gap-4 xl:grid-cols-[minmax(0,1fr)_390px]">
-          <div className="rounded-[28px] border border-emerald-100 bg-white p-5 shadow-[0_20px_46px_rgba(6,78,59,0.08)] sm:p-6">
+          <div className="rounded-[28px] border border-red-100 bg-white p-5 shadow-[0_20px_46px_rgba(151,14,32,0.08)] sm:p-6">
             <div className="flex flex-col gap-4 sm:flex-row sm:items-start sm:justify-between">
               <div className="flex items-start gap-3">
-                <span className="grid h-12 w-12 shrink-0 place-items-center rounded-2xl bg-[#e8fff4] text-[#008f6b] ring-1 ring-emerald-100">
+                <span className="grid h-12 w-12 shrink-0 place-items-center rounded-2xl bg-[#fff1ee] text-[#ff6a00] ring-1 ring-red-100">
                   <PlugZap className="h-6 w-6" />
                 </span>
                 <div className="min-w-0">
-                  <p className="text-[11px] font-black uppercase tracking-[0.20em] text-[#052e26]">Koneksi Transaksi</p>
+                  <p className="text-[11px] font-black uppercase tracking-[0.20em] text-[#b20717]">Koneksi Transaksi</p>
                   <h2 className="mt-1 text-xl font-black text-slate-950">Jalur hit NuansaPulsa ke Pulsa24Jam</h2>
                   <p className="mt-2 text-sm font-semibold leading-6 text-slate-500">
                     Frontend dan panel hanya membuat order atau monitoring. Backend NuansaPulsa yang menyimpan API key, mengirim command, mencatat refid, lalu menerima callback final.
@@ -245,37 +245,37 @@ export default function Pulsa24JamIntegrationPage() {
               </span>
             </div>
 
-            <div className="mt-5 rounded-[22px] border border-dashed border-emerald-300 bg-[#f7fffb] p-4">
+            <div className="mt-5 rounded-[22px] border border-dashed border-red-300 bg-[#f7fffb] p-4">
               <p className="text-[10px] font-black uppercase tracking-[0.16em] text-slate-500">Callback URL</p>
-              <p className="mt-2 break-all text-sm font-black text-[#064e3b]">{callbackURL}</p>
+              <p className="mt-2 break-all text-sm font-black text-[#b20717]">{callbackURL}</p>
             </div>
-            <div className="mt-3 rounded-[22px] border border-dashed border-emerald-300 bg-white p-4">
+            <div className="mt-3 rounded-[22px] border border-dashed border-red-300 bg-white p-4">
               <p className="text-[10px] font-black uppercase tracking-[0.16em] text-slate-500">Transaction URL</p>
-              <p className="mt-2 break-all text-sm font-black text-[#064e3b]">{trxURL}</p>
+              <p className="mt-2 break-all text-sm font-black text-[#b20717]">{trxURL}</p>
               <p className="mt-2 text-xs font-semibold leading-5 text-slate-500">
                 Header wajib: X-Api-Key dan Content-Type application/json. Body wajib berisi commands dan pin.
               </p>
             </div>
 
             <div className="mt-5 grid gap-3 sm:grid-cols-2">
-              <Link href="/dashboard/admin/master/produk/provider/map" className="inline-flex min-h-11 items-center justify-center gap-2 rounded-2xl border-2 border-[#052e26] bg-white px-4 py-3 text-sm font-black text-[#052e26] shadow-[0_12px_24px_rgba(6,78,59,0.10)] outline-none transition hover:bg-[#f8fffb] focus-visible:ring-4 focus-visible:ring-emerald-200">
+              <Link href="/dashboard/admin/master/produk/provider/map" className="inline-flex min-h-11 items-center justify-center gap-2 rounded-2xl border-2 border-[#b20717] bg-white px-4 py-3 text-sm font-black text-[#b20717] shadow-[0_12px_24px_rgba(151,14,32,0.10)] outline-none transition hover:bg-[#fff7f5] focus-visible:ring-4 focus-visible:ring-red-200">
                 Buka Mapping
                 <ArrowUpRight className="h-4 w-4" />
               </Link>
-              <Link href="/dashboard/admin/transaksi/provider" className="inline-flex min-h-11 items-center justify-center gap-2 rounded-2xl border-2 border-[#052e26] bg-white px-4 py-3 text-sm font-black text-[#052e26] outline-none transition hover:bg-slate-50 focus-visible:ring-4 focus-visible:ring-emerald-200">
+              <Link href="/dashboard/admin/transaksi/provider" className="inline-flex min-h-11 items-center justify-center gap-2 rounded-2xl border-2 border-[#b20717] bg-white px-4 py-3 text-sm font-black text-[#b20717] outline-none transition hover:bg-slate-50 focus-visible:ring-4 focus-visible:ring-red-200">
                 Log Provider
                 <ExternalLink className="h-4 w-4" />
               </Link>
             </div>
           </div>
 
-          <div className="rounded-[28px] border border-emerald-100 bg-white p-5 shadow-[0_20px_46px_rgba(6,78,59,0.08)] sm:p-6">
+          <div className="rounded-[28px] border border-red-100 bg-white p-5 shadow-[0_20px_46px_rgba(151,14,32,0.08)] sm:p-6">
             <div className="flex items-center gap-3">
-              <span className="grid h-12 w-12 place-items-center rounded-2xl bg-lime-100 text-[#3a8f00]">
+              <span className="grid h-12 w-12 place-items-center rounded-2xl bg-amber-100 text-[#3a8f00]">
                 <ClipboardList className="h-6 w-6" />
               </span>
               <div>
-                <p className="text-[11px] font-black uppercase tracking-[0.20em] text-[#052e26]">Setup Live</p>
+                <p className="text-[11px] font-black uppercase tracking-[0.20em] text-[#b20717]">Setup Live</p>
                 <h2 className="mt-1 text-xl font-black text-slate-950">Checklist</h2>
               </div>
             </div>
@@ -283,8 +283,8 @@ export default function Pulsa24JamIntegrationPage() {
               {steps.map((step, index) => {
                 const Icon = step.icon;
                 return (
-                  <div key={step.title} className="flex gap-3 rounded-[20px] border border-slate-100 bg-[#fbfffd] p-3">
-                    <span className="grid h-9 w-9 shrink-0 place-items-center rounded-xl bg-[#064e3b] text-white">
+                  <div key={step.title} className="flex gap-3 rounded-[20px] border border-slate-100 bg-[#fffafa] p-3">
+                    <span className="grid h-9 w-9 shrink-0 place-items-center rounded-xl bg-[#b20717] text-white">
                       <Icon className="h-4 w-4" />
                     </span>
                     <div>
@@ -298,22 +298,22 @@ export default function Pulsa24JamIntegrationPage() {
           </div>
         </section>
 
-        <section className="rounded-[28px] border border-emerald-100 bg-white p-5 shadow-[0_20px_46px_rgba(6,78,59,0.08)] sm:p-6">
+        <section className="rounded-[28px] border border-red-100 bg-white p-5 shadow-[0_20px_46px_rgba(151,14,32,0.08)] sm:p-6">
           <div className="flex flex-col gap-2 sm:flex-row sm:items-end sm:justify-between">
             <div>
-              <p className="text-[11px] font-black uppercase tracking-[0.20em] text-[#052e26]">Command H2H</p>
+              <p className="text-[11px] font-black uppercase tracking-[0.20em] text-[#b20717]">Command H2H</p>
               <h2 className="mt-1 text-xl font-black text-slate-950">Perintah yang Dipakai Semua Panel</h2>
               <p className="mt-2 text-sm font-semibold leading-6 text-slate-500">
                 Semua command dikirim dari backend ke Pulsa24Jam. Panel hanya mengatur data, menampilkan status, dan menjalankan monitoring.
               </p>
             </div>
-            <span className="w-fit rounded-full bg-[#052e26] px-3 py-1.5 text-xs font-black text-white">
+            <span className="w-fit rounded-full bg-[#b20717] px-3 py-1.5 text-xs font-black text-white">
               Jangan taruh API key di frontend
             </span>
           </div>
 
           <div className="mt-5 overflow-hidden rounded-[22px] border border-slate-200">
-            <div className="hidden grid-cols-[120px_160px_minmax(0,1fr)_220px_minmax(0,1fr)] gap-3 bg-[#052e26] px-4 py-3 text-[10px] font-black uppercase tracking-[0.12em] text-white md:grid">
+            <div className="hidden grid-cols-[120px_160px_minmax(0,1fr)_220px_minmax(0,1fr)] gap-3 bg-[#b20717] px-4 py-3 text-[10px] font-black uppercase tracking-[0.12em] text-white md:grid">
               <span>Command</span>
               <span>Panel</span>
               <span>Fungsi</span>
@@ -324,7 +324,7 @@ export default function Pulsa24JamIntegrationPage() {
               {commandRows.map((row) => (
                 <div key={row.command} className="grid gap-3 px-4 py-4 text-sm md:grid-cols-[120px_160px_minmax(0,1fr)_220px_minmax(0,1fr)] md:items-center">
                   <div>
-                    <span className="inline-flex rounded-xl bg-emerald-50 px-3 py-1 text-xs font-black text-[#047857] ring-1 ring-emerald-100">
+                    <span className="inline-flex rounded-xl bg-red-50 px-3 py-1 text-xs font-black text-[#d70717] ring-1 ring-red-100">
                       {row.command}
                     </span>
                   </div>

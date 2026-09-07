@@ -38,13 +38,13 @@ export default async function AdminCreditApplicationsPage() {
   return (
     <main className="-m-2 min-h-screen bg-[#eef7f2] p-3 text-slate-950 sm:p-5 lg:p-7">
       <section className="mx-auto flex w-full max-w-7xl flex-col gap-5">
-        <div className="overflow-hidden rounded-[30px] border border-emerald-100 bg-white shadow-[0_24px_60px_rgba(15,23,42,0.08)]">
+        <div className="overflow-hidden rounded-[30px] border border-red-100 bg-white shadow-[0_24px_60px_rgba(15,23,42,0.08)]">
           <div className="relative isolate overflow-hidden bg-[radial-gradient(circle_at_92%_10%,rgba(190,242,100,0.55),transparent_28%),linear-gradient(135deg,#053a2f_0%,#05824c_55%,#45d63f_100%)] px-5 py-7 text-white sm:px-7 lg:px-9 lg:py-9">
-            <p className="mb-3 inline-flex rounded-full border border-white/15 bg-white/12 px-3 py-1 text-[11px] font-black uppercase tracking-[0.24em] text-lime-100">
+            <p className="mb-3 inline-flex rounded-full border border-white/15 bg-white/12 px-3 py-1 text-[11px] font-black uppercase tracking-[0.24em] text-amber-100">
               Admin Kredit
             </p>
             <h1 className="text-3xl font-black tracking-normal sm:text-4xl">Approval Kredit Agent</h1>
-            <p className="mt-3 max-w-2xl text-sm font-medium leading-6 text-emerald-50/90 sm:text-base">
+            <p className="mt-3 max-w-2xl text-sm font-medium leading-6 text-red-50/90 sm:text-base">
               Admin bisa mengambil keputusan manual, memantau limit, aktivitas modal, dokumen survey marketing, dan riwayat transaksi agent.
             </p>
           </div>
@@ -61,7 +61,7 @@ export default async function AdminCreditApplicationsPage() {
                         <p className="mt-1 text-2xl font-black text-slate-950">{item.value}</p>
                         <p className="mt-1 text-xs font-semibold text-slate-400">{item.hint}</p>
                       </div>
-                      <div className="grid h-12 w-12 place-items-center rounded-2xl bg-emerald-50 text-emerald-700">
+                      <div className="grid h-12 w-12 place-items-center rounded-2xl bg-red-50 text-red-700">
                         <Icon className="h-6 w-6" />
                       </div>
                     </div>

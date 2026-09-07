@@ -230,10 +230,10 @@ export default function WalletActivityPage({
       </div>
 
       <div className="grid gap-4 md:grid-cols-2 xl:grid-cols-4">
-        <div className="rounded-2xl border border-emerald-400/25 bg-linear-to-r from-emerald-500/15 to-teal-500/10 px-4 py-4 text-sm text-emerald-100 shadow-[0_14px_30px_-20px_rgba(16,185,129,0.8)]">
-          <div className="text-emerald-200/90">Koreksi Saldo Member</div>
-          <div className="mt-1 text-2xl font-semibold text-emerald-50">{summary?.member_adjust_count ?? 0}</div>
-          <div className="mt-2 text-xs text-emerald-100/80">
+        <div className="rounded-2xl border border-red-400/25 bg-linear-to-r from-red-500/15 to-orange-500/10 px-4 py-4 text-sm text-red-100 shadow-[0_14px_30px_-20px_rgba(215,7,23,0.8)]">
+          <div className="text-red-200/90">Koreksi Saldo Member</div>
+          <div className="mt-1 text-2xl font-semibold text-red-50">{summary?.member_adjust_count ?? 0}</div>
+          <div className="mt-2 text-xs text-red-100/80">
             Credit {summary?.member_credit_count ?? 0} • Debit {summary?.member_debit_count ?? 0}
           </div>
         </div>
@@ -293,7 +293,7 @@ export default function WalletActivityPage({
                   <tr key={`${row.scope}-${row.ref_id}-${row.dibuat_pada}-${idx}`} className="border-t border-white/10 bg-white/1.5 transition hover:bg-cyan-400/[0.07]">
                     <td className="whitespace-nowrap px-4 py-3 text-slate-100">{formatDateTime(row.dibuat_pada)}</td>
                     <td className="whitespace-nowrap px-4 py-3">
-                      <span className={`inline-flex rounded-full px-2.5 py-1 text-xs font-semibold ${row.scope === "member" ? "bg-emerald-500/15 text-emerald-300" : "bg-sky-500/15 text-sky-300"}`}>
+                      <span className={`inline-flex rounded-full px-2.5 py-1 text-xs font-semibold ${row.scope === "member" ? "bg-red-500/15 text-red-300" : "bg-sky-500/15 text-sky-300"}`}>
                         {row.scope}
                       </span>
                     </td>

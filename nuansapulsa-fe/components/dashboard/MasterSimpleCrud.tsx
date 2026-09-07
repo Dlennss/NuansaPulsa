@@ -185,7 +185,7 @@ export default function MasterSimpleCrud({ title, endpoint, emptyLabel, showKete
       tdClassName: "whitespace-nowrap",
       render: (x) =>
         x.aktif ? (
-          <span className="rounded-full border border-emerald-400/40 bg-emerald-500/15 px-2 py-0.5 text-xs font-semibold text-emerald-300">Aktif</span>
+          <span className="rounded-full border border-red-400/40 bg-red-500/15 px-2 py-0.5 text-xs font-semibold text-red-300">Aktif</span>
         ) : (
           <span className="rounded-full border border-rose-400/40 bg-rose-500/15 px-2 py-0.5 text-xs font-semibold text-rose-300">Nonaktif</span>
         ),

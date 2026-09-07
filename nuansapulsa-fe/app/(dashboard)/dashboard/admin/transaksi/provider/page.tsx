@@ -98,7 +98,7 @@ function downloadBlob(filename: string, blob: Blob) {
 function statusClassName(status: string) {
   switch (status) {
     case "success":
-      return "border-emerald-400/25 bg-emerald-500/15 text-emerald-200";
+      return "border-red-400/25 bg-red-500/15 text-red-200";
     case "pending":
       return "border-amber-400/25 bg-amber-500/15 text-amber-200";
     case "failed":

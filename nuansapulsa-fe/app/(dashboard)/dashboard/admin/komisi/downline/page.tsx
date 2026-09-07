@@ -145,7 +145,7 @@ export default function AdminDownlineCommissionPage() {
     {
       id: "commission",
       header: "Total Komisi",
-      tdClassName: "whitespace-nowrap text-emerald-300 font-semibold",
+      tdClassName: "whitespace-nowrap text-red-300 font-semibold",
       render: (item) => fmtIDR(Number(item.total_commission || 0)),
     },
     {

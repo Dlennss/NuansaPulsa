@@ -288,7 +288,7 @@ export default function ProviderWalletsPage() {
       thClassName: "w-35",
       tdClassName: "whitespace-nowrap",
       render: (d) => (
-        <span className="rounded-md bg-emerald-500/15 px-2 py-1 font-medium text-emerald-300">Rp {fmtID(d.saldo_internal)}</span>
+        <span className="rounded-md bg-red-500/15 px-2 py-1 font-medium text-red-300">Rp {fmtID(d.saldo_internal)}</span>
       ),
     },
     {
@@ -400,7 +400,7 @@ export default function ProviderWalletsPage() {
         <span
           className={[
             "inline-flex items-center gap-1 rounded-full px-2 py-0.5 text-xs font-semibold",
-            h.arah === "credit" ? "bg-emerald-500/15 text-emerald-300" : "bg-rose-500/15 text-rose-300",
+            h.arah === "credit" ? "bg-red-500/15 text-red-300" : "bg-rose-500/15 text-rose-300",
           ].join(" ")}
         >
           {h.arah}
@@ -463,9 +463,9 @@ export default function ProviderWalletsPage() {
           </Button>
         </div>
         <div className="grid grid-cols-2 gap-3 border-b border-white/10 mt-2">
-            <div className="w-full rounded-2xl border border-emerald-400/25 bg-linear-to-r from-emerald-500/15 to-teal-500/10 px-4 py-3 text-sm text-emerald-100 shadow-[0_14px_30px_-20px_rgba(16,185,129,0.8)]">
-              <div className="text-emerald-200/90">Total Saldo Internal (Semua Provider)</div>
-              <div className="font-semibold text-emerald-50">Rp {fmtID(totalSaldoInternal)}</div>
+            <div className="w-full rounded-2xl border border-red-400/25 bg-linear-to-r from-red-500/15 to-orange-500/10 px-4 py-3 text-sm text-red-100 shadow-[0_14px_30px_-20px_rgba(215,7,23,0.8)]">
+              <div className="text-red-200/90">Total Saldo Internal (Semua Provider)</div>
+              <div className="font-semibold text-red-50">Rp {fmtID(totalSaldoInternal)}</div>
             </div>
             <div className="w-full rounded-2xl border border-sky-400/25 bg-linear-to-r from-sky-500/15 to-cyan-500/10 px-4 py-3 text-sm text-sky-100 shadow-[0_14px_30px_-20px_rgba(14,165,233,0.8)]">
               <div className="text-sky-200/90">Total Saldo Snapshot (Semua Provider)</div>
@@ -683,7 +683,7 @@ export default function ProviderWalletsPage() {
                 <div className="font-medium text-white">{selectedSourceBank.nama}</div>
                 <div className="text-white/75">{selectedSourceBank.atas_nama}</div>
                 <div className="font-mono text-cyan-200">{selectedSourceBank.nomor_rekening}</div>
-                <div className="text-emerald-300">Saldo bank: Rp {fmtID(Number(selectedSourceBank.saldo || 0))}</div>
+                <div className="text-red-300">Saldo bank: Rp {fmtID(Number(selectedSourceBank.saldo || 0))}</div>
                 <div className={selectedSourceBank.aktif ? "text-sky-300" : "text-amber-300"}>
                   Status: {selectedSourceBank.aktif ? "Aktif" : "Nonaktif"}
                 </div>

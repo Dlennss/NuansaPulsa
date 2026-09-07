@@ -158,7 +158,7 @@ export default function WithdrawApproveModal({
           </button>
           <button
             type="button"
-            className="h-11 rounded-xl bg-emerald-600 px-4 text-sm font-semibold text-white disabled:cursor-not-allowed disabled:opacity-60"
+            className="h-11 rounded-xl bg-red-600 px-4 text-sm font-semibold text-white disabled:cursor-not-allowed disabled:opacity-60"
             onClick={() => void handleSubmit()}
             disabled={submitting || loadingBanks || activeBanks.length === 0}
           >
@@ -222,7 +222,7 @@ export default function WithdrawApproveModal({
             </div>
             <div className="sm:col-span-2">
               <div className="text-xs uppercase tracking-wide text-slate-500">Total debit rekening sumber</div>
-              <div className="mt-1 text-base font-bold text-emerald-400">Rp {fmtIDR(totalDebit)}</div>
+              <div className="mt-1 text-base font-bold text-red-400">Rp {fmtIDR(totalDebit)}</div>
             </div>
             <div className="sm:col-span-2">
               <div className="text-xs uppercase tracking-wide text-slate-500">Rekening terpilih</div>

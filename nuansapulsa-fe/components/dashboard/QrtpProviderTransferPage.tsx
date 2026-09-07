@@ -64,7 +64,7 @@ function authHeader(): Record<string, string> {
 
 function statusClass(status: string): string {
   const s = String(status || "").toLowerCase();
-  if (s === "success") return "rounded-full bg-emerald-500/15 px-2 py-1 text-xs font-medium text-emerald-300";
+  if (s === "success") return "rounded-full bg-red-500/15 px-2 py-1 text-xs font-medium text-red-300";
   if (s === "failed" || s === "create_failed") return "rounded-full bg-red-500/15 px-2 py-1 text-xs font-medium text-red-300";
   if (s === "inquiry_success" || s === "requested" || s === "processing") return "rounded-full bg-sky-500/15 px-2 py-1 text-xs font-medium text-sky-300";
   return "rounded-full bg-slate-500/15 px-2 py-1 text-xs font-medium text-slate-300";
@@ -76,7 +76,7 @@ function displayStatus(status: string): string {
 }
 
 function directionClass(direction: string): string {
-  if (direction === "in") return "rounded-full bg-emerald-500/15 px-2 py-1 text-xs font-medium text-emerald-300";
+  if (direction === "in") return "rounded-full bg-red-500/15 px-2 py-1 text-xs font-medium text-red-300";
   return "rounded-full bg-rose-500/15 px-2 py-1 text-xs font-medium text-rose-300";
 }
 
@@ -132,7 +132,7 @@ export default function QrtpProviderTransferPage() {
     } },
     { id: "provider", header: "Provider", thClassName: "whitespace-nowrap", tdClassName: "whitespace-nowrap font-semibold uppercase text-slate-100", render: (item) => item.provider || ledgerLabel(item) },
     { id: "amount", header: "Nominal", thClassName: "whitespace-nowrap text-right", tdClassName: "whitespace-nowrap text-right font-semibold", render: (item) => (
-      <span className={item.direction === "in" ? "text-emerald-300" : "text-rose-300"}>
+      <span className={item.direction === "in" ? "text-red-300" : "text-rose-300"}>
         {item.direction === "in" ? "+" : "-"} Rp {fmtID(item.amount)}
       </span>
     ) },
@@ -561,7 +561,7 @@ export default function QrtpProviderTransferPage() {
           ) : null}
 
           {inquiry ? (
-            <div className="rounded-md border border-emerald-400/20 bg-emerald-500/10 p-3 text-sm text-emerald-100">
+            <div className="rounded-md border border-red-400/20 bg-red-500/10 p-3 text-sm text-red-100">
               Tujuan TukangPay: {inquiry.account_name} • {inquiry.bank_name} {inquiry.account_no}
             </div>
           ) : null}

@@ -39,7 +39,7 @@ function money(v: number) {
 
 function statusTone(status: string) {
   const s = (status || "").toLowerCase();
-  if (s === "success") return "border border-emerald-400 bg-emerald-100 text-emerald-900";
+  if (s === "success") return "border border-red-400 bg-red-100 text-red-900";
   if (s === "pending") return "border border-amber-400 bg-amber-100 text-amber-900";
   if (s === "failed") return "border border-rose-400 bg-rose-100 text-rose-900";
   return "border border-slate-400 bg-slate-100 text-slate-800";
@@ -193,7 +193,7 @@ export default function AdminAppProviderTrxPage() {
               {mobileFilterOpen ? "Tutup Filter" : "Buka Filter"}
             </span>
             {activeFilterCount > 0 ? (
-              <span className="rounded-full bg-emerald-100 px-2 py-0.5 text-xs font-semibold text-emerald-700">{activeFilterCount}</span>
+              <span className="rounded-full bg-red-100 px-2 py-0.5 text-xs font-semibold text-red-700">{activeFilterCount}</span>
             ) : null}
           </Button>
         </div>
@@ -203,7 +203,7 @@ export default function AdminAppProviderTrxPage() {
         className={`${mobileFilterOpen ? "block" : "hidden"} rounded-2xl border border-white/10 bg-linear-to-br from-slate-900/85 via-slate-900/65 to-slate-800/45 p-3 shadow-[0_22px_48px_-34px_rgba(56,189,248,0.75)] md:block`}
       >
         <div className="mb-2 flex items-center gap-2 text-xs font-semibold uppercase tracking-[0.12em] text-slate-300 md:hidden">
-          <SlidersHorizontal className="h-3.5 w-3.5 text-emerald-600" />
+          <SlidersHorizontal className="h-3.5 w-3.5 text-red-600" />
           Filter Provider
         </div>
         <div className="grid grid-cols-2 gap-2 xl:grid-cols-5">
@@ -238,7 +238,7 @@ export default function AdminAppProviderTrxPage() {
               applyFilters();
               setMobileFilterOpen(false);
             }}
-            className="h-10 bg-emerald-700 text-white hover:bg-emerald-600"
+            className="h-10 bg-red-700 text-white hover:bg-red-600"
           >
             Terapkan
           </Button>

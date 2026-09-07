@@ -179,7 +179,7 @@ export default function GuestRefundPendingClient({ title }: { title: string }) {
               size="sm"
               disabled={claimingId === x.id}
               onClick={() => void handleClaim(x)}
-              className="h-8 bg-emerald-600 hover:bg-emerald-500"
+              className="h-8 bg-red-600 hover:bg-red-500"
             >
               {claimingId === x.id ? "Memproses..." : "Claim"}
             </Button>
@@ -235,7 +235,7 @@ export default function GuestRefundPendingClient({ title }: { title: string }) {
         </div>
       </div>
 
-      {message ? <div className="rounded-xl border border-emerald-500/30 bg-emerald-500/10 px-4 py-3 text-sm text-emerald-200">{message}</div> : null}
+      {message ? <div className="rounded-xl border border-red-500/30 bg-red-500/10 px-4 py-3 text-sm text-red-200">{message}</div> : null}
       {error ? <div className="rounded-xl border border-rose-500/30 bg-rose-500/10 px-4 py-3 text-sm text-rose-200">{error}</div> : null}
 
       <DataTable<GuestRefundPendingRow>

@@ -160,9 +160,9 @@ export default function DailySuccessfulProductsPage() {
     () => [
       { label: "Grup Harian", value: fmtID(summary.group_count), tone: "text-cyan-100" },
       { label: "SKU Internal", value: fmtID(summary.unique_sku_count), tone: "text-sky-200" },
-      { label: "Trx Sukses", value: fmtID(summary.success_count), tone: "text-emerald-300" },
+      { label: "Trx Sukses", value: fmtID(summary.success_count), tone: "text-red-300" },
       { label: "Nominal", value: `Rp ${fmtID(summary.total_qty)}`, tone: "text-cyan-200" },
-      { label: "Margin", value: `Rp ${fmtID(totalMargin)}`, tone: totalMargin >= 0 ? "text-emerald-300" : "text-rose-300" },
+      { label: "Margin", value: `Rp ${fmtID(totalMargin)}`, tone: totalMargin >= 0 ? "text-red-300" : "text-rose-300" },
     ],
     [summary, totalMargin],
   );
@@ -194,7 +194,7 @@ export default function DailySuccessfulProductsPage() {
     {
       id: "success_count",
       header: "Sukses",
-      tdClassName: "whitespace-nowrap text-emerald-300 text-right",
+      tdClassName: "whitespace-nowrap text-red-300 text-right",
       render: (x) => fmtID(x.success_count),
     },
     {
@@ -221,7 +221,7 @@ export default function DailySuccessfulProductsPage() {
       tdClassName: "whitespace-nowrap text-right",
       render: (x) => {
         const margin = Number(x.total_margin || 0);
-        return <span className={margin >= 0 ? "text-emerald-300" : "text-rose-300"}>Rp {fmtID(margin)}</span>;
+        return <span className={margin >= 0 ? "text-red-300" : "text-rose-300"}>Rp {fmtID(margin)}</span>;
       },
     },
     {

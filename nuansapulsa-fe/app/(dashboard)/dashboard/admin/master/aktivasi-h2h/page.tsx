@@ -281,7 +281,7 @@ export default function AdminH2HActivationPage() {
 
         {loading ? <div className="py-8 text-sm text-white/60">Memuat antrian aktivasi H2H...</div> : null}
         {!loading && filteredItems.length === 0 ? (
-          <div className="rounded-2xl border border-emerald-400/20 bg-emerald-500/10 px-4 py-6 text-sm text-emerald-100">
+          <div className="rounded-2xl border border-red-400/20 bg-red-500/10 px-4 py-6 text-sm text-red-100">
             Tidak ada akun H2H pending. Semua pendaftaran yang masuk sudah aktif atau belum ada permintaan baru.
           </div>
         ) : null}
