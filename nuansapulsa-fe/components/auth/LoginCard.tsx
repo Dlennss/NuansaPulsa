@@ -5,7 +5,7 @@ import Image from "next/image";
 import Link from "next/link";
 import { useSearchParams } from "next/navigation";
 import { getProviders, signIn } from "next-auth/react";
-import { Eye, EyeOff, LockKeyhole, Smartphone } from "lucide-react";
+import { Eye, EyeOff, LockKeyhole, Mail } from "lucide-react";
 import TurnstileWidget from "@/components/TurnstileWidget";
 import { decodeJwt } from "@/lib/jwt";
 
@@ -182,20 +182,20 @@ export function LoginCard() {
 
         <form onSubmit={onSubmit} className="space-y-4">
           <div>
-            <label className="sr-only">Nomor HP</label>
+            <label className="sr-only">Email</label>
             <div className="flex min-h-[72px] items-center gap-4 rounded-[20px] border border-slate-200 bg-white px-4 shadow-[0_10px_22px_rgba(15,23,42,0.04)] transition focus-within:border-[#d70717] focus-within:ring-4 focus-within:ring-rose-100">
               <span className="grid h-11 w-11 shrink-0 place-items-center rounded-2xl bg-rose-50 text-[#d70717]">
-                <Smartphone className="h-5 w-5" />
+                <Mail className="h-5 w-5" />
               </span>
               <div className="min-w-0 flex-1">
-                <span className="block text-xs font-black leading-none text-slate-900">Nomor HP</span>
+                <span className="block text-xs font-black leading-none text-slate-900">Email</span>
                 <input
                   className="mt-1 h-7 w-full min-w-0 bg-transparent text-base font-bold text-slate-900 outline-none placeholder:text-sm placeholder:font-semibold placeholder:text-slate-400"
                   value={email}
                   onChange={(e) => setEmail(e.target.value)}
-                  placeholder="Contoh: 08xxxxxxxxxx"
+                  placeholder="admin@nuansapulsa.com"
                   autoComplete="username"
-                  type="text"
+                  type="email"
                 />
               </div>
             </div>
