@@ -54,13 +54,13 @@ function UserHomeHero({ saldo }: { saldo: number }) {
       </Link>
 
       <div className="absolute inset-x-5 top-[96px]">
-        <div className="max-w-[270px]">
+        <div className="max-w-[190px]">
           <p className="text-[10px] font-black uppercase tracking-[0.14em] text-yellow-200">Satu menu digital</p>
-          <h1 className="mt-1 text-[23px] font-black leading-[1.08] tracking-tight text-white drop-shadow-sm">
-            Isi Pulsa dan Bayar Tagihan Lebih Mudah
+          <h1 className="mt-1 text-[22px] font-black leading-[1.08] tracking-tight text-white drop-shadow-sm">
+            Isi Pulsa, Data & Tagihan
           </h1>
-          <p className="mt-2 max-w-[240px] text-[12px] font-semibold leading-4 text-white/88">
-            Pulsa, data, PLN, e-wallet, game, dan PPOB siap dipilih.
+          <p className="mt-2 max-w-[170px] text-[12px] font-semibold leading-4 text-white/88">
+            Semua kebutuhan digital siap dibayar dari NuansaPulsa.
           </p>
         </div>
 
