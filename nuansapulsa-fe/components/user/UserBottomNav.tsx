@@ -64,7 +64,7 @@ export function UserBottomNav() {
             {menuActive ? <span className={activeIndicatorClass} /> : null}
           </Link>
 
-          <Link href="/user/transaksi" prefetch={false} className={navClass(notificationActive)}>
+          <Link href="/user/notifikasi" prefetch={false} className={navClass(notificationActive)}>
             <span className={iconClass}>
               <Image src="/nuansapulsa-assets/nav_notifikasi.png" alt="" fill sizes="24px" className="object-contain" />
               <span className="absolute -right-0.5 -top-0.5 h-2.5 w-2.5 rounded-full bg-[#d70717] ring-1 ring-white" />

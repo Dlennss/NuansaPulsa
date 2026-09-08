@@ -1,0 +1,136 @@
+import Link from "next/link";
+import { redirect } from "next/navigation";
+import { ArrowUpRight, Bell, CheckCircle2, Clock3, ReceiptText, RotateCcw, XCircle } from "lucide-react";
+import { getAppServerSession } from "@/lib/server-auth";
+import { getUserOrders } from "@/lib/api.transactions";
+import type { UserAppOrder, UserSession } from "@/components/user/types";
+import { UserBottomNav } from "@/components/user/UserBottomNav";
+
+type SessionShape = {
+  user?: UserSession;
+  backendToken?: string;
+};
+
+const statusLabel: Record<string, string> = {
+  pending_payment: "Menunggu Pembayaran",
+  paid: "Pembayaran Diterima",
+  processing_provider: "Sedang Diproses",
+  success: "Transaksi Berhasil",
+  failed: "Transaksi Gagal",
+  expired: "Pembayaran Kedaluwarsa",
+  cancelled: "Transaksi Dibatalkan",
+  refunded: "Dana Dikembalikan",
+};
+
+function formatIDR(value: number) {
+  return `Rp ${Number(value || 0).toLocaleString("id-ID")}`;
+}
+
+function formatDate(value?: string | null) {
+  if (!value) return "";
+  return new Intl.DateTimeFormat("id-ID", {
+    day: "2-digit",
+    month: "short",
+    hour: "2-digit",
+    minute: "2-digit",
+  }).format(new Date(value));
+}
+
+function getNotificationTone(status: string) {
+  if (status === "success") return { icon: CheckCircle2, bg: "bg-emerald-50", text: "text-emerald-600" };
+  if (status === "failed" || status === "cancelled" || status === "expired") return { icon: XCircle, bg: "bg-red-50", text: "text-[#d70717]" };
+  if (status === "refunded") return { icon: RotateCcw, bg: "bg-amber-50", text: "text-amber-600" };
+  return { icon: Clock3, bg: "bg-orange-50", text: "text-orange-600" };
+}
+
+function NotificationItem({ item }: { item: UserAppOrder }) {
+  const tone = getNotificationTone(item.status);
+  const Icon = tone.icon;
+  const title = statusLabel[item.status] || "Update Transaksi";
+  const amount = Number(item.harga_final || item.nominal || 0);
+
+  return (
+    <Link
+      href={`/user/transaksi/${encodeURIComponent(item.invoice_id)}`}
+      prefetch={false}
+      className="flex items-center gap-3 rounded-[20px] bg-white p-3 shadow-[0_12px_28px_rgba(151,14,32,0.08)] ring-1 ring-red-950/[0.06]"
+    >
+      <span className={`grid h-11 w-11 shrink-0 place-items-center rounded-2xl ${tone.bg} ${tone.text}`}>
+        <Icon className="h-5 w-5" strokeWidth={2.5} />
+      </span>
+      <span className="min-w-0 flex-1">
+        <span className="block text-sm font-black leading-4 text-slate-950">{title}</span>
+        <span className="mt-1 block truncate text-[11px] font-semibold leading-4 text-slate-500">
+          {item.produk_nama_snapshot || "Transaksi NuansaPulsa"} • {formatIDR(amount)}
+        </span>
+        <span className="mt-0.5 block text-[10px] font-bold text-slate-400">{formatDate(item.dibuat_pada)}</span>
+      </span>
+      <ArrowUpRight className="h-4 w-4 shrink-0 text-slate-300" strokeWidth={2.5} />
+    </Link>
+  );
+}
+
+function EmptyNotifications() {
+  return (
+    <section className="rounded-[24px] bg-white p-5 text-center shadow-[0_16px_36px_rgba(151,14,32,0.08)] ring-1 ring-red-950/[0.06]">
+      <span className="mx-auto grid h-14 w-14 place-items-center rounded-[20px] bg-red-50 text-[#d70717]">
+        <ReceiptText className="h-7 w-7" strokeWidth={2.4} />
+      </span>
+      <h2 className="mt-3 text-base font-black text-slate-950">Belum ada notifikasi</h2>
+      <p className="mx-auto mt-1 max-w-[260px] text-xs font-semibold leading-5 text-slate-500">
+        Update pembayaran, transaksi, dan saldo akan muncul otomatis di sini.
+      </p>
+      <Link
+        href="/user/kategori"
+        prefetch={false}
+        className="mt-4 inline-flex h-10 items-center justify-center gap-1.5 rounded-full bg-[linear-gradient(135deg,#d70717,#ff6a00)] px-5 text-xs font-black text-white shadow-[0_12px_24px_rgba(151,14,32,0.18)]"
+      >
+        Pilih Layanan
+        <ArrowUpRight className="h-3.5 w-3.5" strokeWidth={2.6} />
+      </Link>
+    </section>
+  );
+}
+
+export default async function UserNotificationPage() {
+  const session = (await getAppServerSession()) as SessionShape | null;
+  if (!session?.backendToken) {
+    redirect("/login");
+  }
+
+  const fetchedItems = await getUserOrders(session.backendToken, undefined, 12, 0);
+  const items = ((fetchedItems as UserAppOrder[]) || []).slice(0, 12);
+  const pendingCount = items.filter((item) => item.status === "pending_payment" || item.status === "processing_provider").length;
+
+  return (
+    <main className="min-h-screen bg-[#fff6f4] px-4 pb-28 pt-5">
+      <div className="mx-auto w-full max-w-md space-y-4">
+        <section className="overflow-hidden rounded-[28px] bg-[linear-gradient(135deg,#e50917_0%,#f42516_58%,#ff7a00_120%)] p-4 text-white shadow-[0_18px_42px_rgba(151,14,32,0.22)]">
+          <div className="flex items-center gap-3">
+            <span className="grid h-12 w-12 shrink-0 place-items-center rounded-[18px] bg-white/15 ring-1 ring-white/20">
+              <Bell className="h-6 w-6" strokeWidth={2.5} />
+            </span>
+            <div className="min-w-0">
+              <p className="text-[10px] font-black uppercase tracking-[0.16em] text-yellow-100">Inbox Aktivitas</p>
+              <h1 className="mt-1 text-2xl font-black leading-none">Notifikasi</h1>
+              <p className="mt-1 text-xs font-semibold leading-4 text-white/82">
+                {pendingCount > 0 ? `${pendingCount} update transaksi perlu dipantau.` : "Semua update akun ada di sini."}
+              </p>
+            </div>
+          </div>
+        </section>
+
+        {items.length > 0 ? (
+          <section className="space-y-2.5">
+            {items.map((item) => (
+              <NotificationItem key={item.id || item.invoice_id} item={item} />
+            ))}
+          </section>
+        ) : (
+          <EmptyNotifications />
+        )}
+      </div>
+      <UserBottomNav />
+    </main>
+  );
+}
