@@ -1,6 +1,6 @@
 import Link from "next/link";
 import { redirect } from "next/navigation";
-import { ArrowUpRight, Bell, CheckCircle2, Clock3, ReceiptText, RotateCcw, XCircle } from "lucide-react";
+import { ArrowUpRight, CheckCircle2, Clock3, ReceiptText, RotateCcw, XCircle } from "lucide-react";
 import { getAppServerSession } from "@/lib/server-auth";
 import { getUserOrders } from "@/lib/api.transactions";
 import type { UserAppOrder, UserSession } from "@/components/user/types";
@@ -78,7 +78,7 @@ function EmptyNotifications() {
       </span>
       <h2 className="mt-3 text-base font-black text-slate-950">Belum ada notifikasi</h2>
       <p className="mx-auto mt-1 max-w-[260px] text-xs font-semibold leading-5 text-slate-500">
-        Update pembayaran, transaksi, dan saldo akan muncul otomatis di sini.
+        Aktivitas transaksi, saldo, password, dan keamanan akun akan muncul otomatis di sini.
       </p>
       <Link
         href="/user/kategori"
@@ -100,26 +100,10 @@ export default async function UserNotificationPage() {
 
   const fetchedItems = await getUserOrders(session.backendToken, undefined, 12, 0);
   const items = ((fetchedItems as UserAppOrder[]) || []).slice(0, 12);
-  const pendingCount = items.filter((item) => item.status === "pending_payment" || item.status === "processing_provider").length;
 
   return (
     <main className="min-h-screen bg-[#fff6f4] px-4 pb-28 pt-5">
-      <div className="mx-auto w-full max-w-md space-y-4">
-        <section className="overflow-hidden rounded-[28px] bg-[linear-gradient(135deg,#e50917_0%,#f42516_58%,#ff7a00_120%)] p-4 text-white shadow-[0_18px_42px_rgba(151,14,32,0.22)]">
-          <div className="flex items-center gap-3">
-            <span className="grid h-12 w-12 shrink-0 place-items-center rounded-[18px] bg-white/15 ring-1 ring-white/20">
-              <Bell className="h-6 w-6" strokeWidth={2.5} />
-            </span>
-            <div className="min-w-0">
-              <p className="text-[10px] font-black uppercase tracking-[0.16em] text-yellow-100">Inbox Aktivitas</p>
-              <h1 className="mt-1 text-2xl font-black leading-none">Notifikasi</h1>
-              <p className="mt-1 text-xs font-semibold leading-4 text-white/82">
-                {pendingCount > 0 ? `${pendingCount} update transaksi perlu dipantau.` : "Semua update akun ada di sini."}
-              </p>
-            </div>
-          </div>
-        </section>
-
+      <div className="mx-auto w-full max-w-md">
         {items.length > 0 ? (
           <section className="space-y-2.5">
             {items.map((item) => (
