@@ -3,6 +3,14 @@
 import Link from "next/link";
 import Image from "next/image";
 import { usePathname } from "next/navigation";
+import { useEffect, useState } from "react";
+
+type NotificationSourceItem = {
+  id?: number | string;
+  invoice_id?: string;
+  dibuat_pada?: string | null;
+  diubah_pada?: string | null;
+};
 
 function navClass(active: boolean) {
   return active
@@ -24,6 +32,86 @@ function NavIcon({ src }: { src: string }) {
   return (
     <span className={iconClass}>
       <Image src={src} alt="" fill sizes="24px" className="object-contain" />
+    </span>
+  );
+}
+
+function getNotificationStorageKey(token: string) {
+  return `nuansapulsa:last_notification_seen:${token.slice(-16)}`;
+}
+
+function getItemTime(item: NotificationSourceItem) {
+  const value = item.diubah_pada || item.dibuat_pada || "";
+  const parsed = Date.parse(value);
+  return Number.isFinite(parsed) ? parsed : 0;
+}
+
+function getLatestTime(items: NotificationSourceItem[]) {
+  return items.reduce((latest, item) => Math.max(latest, getItemTime(item)), 0);
+}
+
+function UserNotificationBadge({ active }: { active: boolean }) {
+  const [unreadCount, setUnreadCount] = useState(0);
+
+  useEffect(() => {
+    let cancelled = false;
+
+    async function syncUnread() {
+      const token = String(localStorage.getItem("auth_token") || "").trim();
+      if (!token) {
+        setUnreadCount(0);
+        return;
+      }
+
+      const storageKey = getNotificationStorageKey(token);
+
+      if (active) {
+        setUnreadCount(0);
+      }
+
+      try {
+        const response = await fetch("/api/app/me/orders?limit=20&offset=0", {
+          headers: { Authorization: `Bearer ${token}` },
+          cache: "no-store",
+        });
+        const payload = await response.json().catch(() => []);
+        const items = (Array.isArray(payload) ? payload : []) as NotificationSourceItem[];
+        const latestTime = getLatestTime(items);
+        const storedSeen = Number(localStorage.getItem(storageKey) || "0");
+
+        if (active) {
+          if (latestTime > 0) localStorage.setItem(storageKey, String(latestTime));
+          if (!cancelled) setUnreadCount(0);
+          return;
+        }
+
+        if (!storedSeen) {
+          if (latestTime > 0) localStorage.setItem(storageKey, String(latestTime));
+          if (!cancelled) setUnreadCount(0);
+          return;
+        }
+
+        const nextUnread = items.filter((item) => getItemTime(item) > storedSeen).length;
+        if (!cancelled) setUnreadCount(Math.min(nextUnread, 99));
+      } catch {
+        if (!cancelled) setUnreadCount(0);
+      }
+    }
+
+    syncUnread();
+    const interval = window.setInterval(syncUnread, 60000);
+
+    return () => {
+      cancelled = true;
+      window.clearInterval(interval);
+    };
+  }, [active]);
+
+  if (unreadCount <= 0) return null;
+
+  return (
+    <span className="absolute -right-1.5 -top-1.5 grid min-h-4 min-w-4 place-items-center rounded-full bg-[#d70717] px-1 text-[9px] font-black leading-none text-white ring-1 ring-white">
+      {unreadCount > 9 ? "9+" : unreadCount}
     </span>
   );
 }
@@ -67,7 +155,7 @@ export function UserBottomNav() {
           <Link href="/user/notifikasi" prefetch={false} className={navClass(notificationActive)}>
             <span className={iconClass}>
               <Image src="/nuansapulsa-assets/nav_notifikasi.png" alt="" fill sizes="24px" className="object-contain" />
-              <span className="absolute -right-0.5 -top-0.5 h-2.5 w-2.5 rounded-full bg-[#d70717] ring-1 ring-white" />
+              <UserNotificationBadge active={notificationActive} />
             </span>
             <span className={textClass}>Notifikasi</span>
             {notificationActive ? <span className={activeIndicatorClass} /> : null}
