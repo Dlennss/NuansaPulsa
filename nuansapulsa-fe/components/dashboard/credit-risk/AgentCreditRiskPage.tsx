@@ -166,15 +166,15 @@ export function AgentCreditRiskPage({ applications, mode }: Props) {
   }
 
   return (
-    <main className="-m-2 min-h-screen bg-[#eef7f2] p-3 text-slate-950 sm:p-5 lg:p-7">
+    <main className="-m-2 min-h-screen bg-[#fff6f4] p-3 text-slate-950 sm:p-5 lg:p-7">
       <section className="mx-auto flex w-full max-w-7xl flex-col gap-5">
-        <div className="overflow-hidden rounded-[28px] border border-emerald-100 bg-white shadow-[0_24px_60px_rgba(15,23,42,0.08)]">
-          <div className="relative isolate overflow-hidden bg-[radial-gradient(circle_at_90%_10%,rgba(190,242,100,0.55),transparent_28%),linear-gradient(135deg,#052e26_0%,#047857_55%,#3bd64a_110%)] px-5 py-7 text-white sm:px-7 lg:px-9">
-            <p className="mb-3 inline-flex rounded-full border border-white/15 bg-white/12 px-3 py-1 text-[11px] font-black uppercase tracking-[0.24em] text-lime-100">
+        <div className="overflow-hidden rounded-[28px] border border-red-950/[0.06] bg-white shadow-[0_24px_60px_rgba(151,14,32,0.1)]">
+          <div className="relative isolate overflow-hidden bg-[radial-gradient(circle_at_90%_10%,rgba(255,196,0,0.34),transparent_28%),linear-gradient(135deg,#b20717_0%,#e50917_56%,#ff6a00_116%)] px-5 py-7 text-white sm:px-7 lg:px-9">
+            <p className="mb-3 inline-flex rounded-full border border-white/20 bg-white/12 px-3 py-1 text-[11px] font-black uppercase tracking-[0.24em] text-yellow-100">
               {mode === "operator" ? "Kontrol Risiko" : "Manajemen Agent"}
             </p>
             <h1 className="text-3xl font-black tracking-normal sm:text-4xl">{mode === "operator" ? "Kenaikan Limit Agent" : "Profil Agent Binaan"}</h1>
-            <p className="mt-3 max-w-2xl text-sm font-medium leading-6 text-emerald-50/90">
+            <p className="mt-3 max-w-2xl text-sm font-medium leading-6 text-white/86">
               {mode === "operator"
                 ? "Operator Kredit memutuskan kenaikan tier berdasarkan aktivitas modal, saldo utama, transaksi, dan catatan marketing."
                 : "Marketing memantau saldo utama dan transaksi agent, lalu memberi rekomendasi tanpa bisa menaikkan limit langsung."}
@@ -191,14 +191,14 @@ export function AgentCreditRiskPage({ applications, mode }: Props) {
               ].map((item) => {
                 const Icon = item.icon;
                 return (
-                  <div key={item.label} className="min-w-0 rounded-3xl border border-slate-200 bg-white p-4 shadow-[0_14px_32px_rgba(15,23,42,0.06)]">
+                  <div key={item.label} className="min-w-0 rounded-3xl border border-red-950/[0.06] bg-white p-4 shadow-[0_14px_32px_rgba(151,14,32,0.06)]">
                     <div className="flex items-center justify-between gap-4">
                       <div className="min-w-0">
                         <p className="truncate text-xs font-bold text-slate-500">{item.label}</p>
                         <p className="mt-1 break-words text-2xl font-black text-slate-950">{item.value}</p>
                         <p className="mt-1 line-clamp-2 text-xs font-semibold leading-4 text-slate-400">{item.hint}</p>
                       </div>
-                      <span className="grid h-12 w-12 place-items-center rounded-2xl bg-emerald-50 text-emerald-700">
+                      <span className="grid h-12 w-12 place-items-center rounded-2xl bg-red-50 text-[#d70717]">
                         <Icon className="h-6 w-6" />
                       </span>
                     </div>
@@ -207,25 +207,25 @@ export function AgentCreditRiskPage({ applications, mode }: Props) {
               })}
             </div>
 
-            <section className="rounded-[26px] border border-slate-200 bg-white p-3 shadow-[0_18px_42px_rgba(15,23,42,0.06)] sm:p-5">
+            <section className="rounded-[26px] border border-red-950/[0.06] bg-white p-3 shadow-[0_18px_42px_rgba(151,14,32,0.06)] sm:p-5">
               <div className="flex flex-col gap-3 lg:flex-row lg:items-center lg:justify-between">
-                <label className="flex h-12 min-w-0 flex-1 items-center gap-2 rounded-2xl border border-slate-200 bg-slate-50 px-4 text-sm font-bold text-slate-500 focus-within:border-emerald-300 focus-within:bg-white">
-                  <Search className="h-4 w-4" />
+                <label className="flex h-12 min-w-0 flex-1 items-center gap-2 rounded-2xl border border-red-950/[0.06] bg-[#fffafa] px-4 text-sm font-bold text-slate-500 shadow-sm focus-within:border-[#d70717] focus-within:bg-white focus-within:ring-4 focus-within:ring-red-100">
+                  <Search className="h-4 w-4 text-[#d70717]" />
                   <input value={query} onChange={(event) => setQuery(event.target.value)} className="w-full bg-transparent outline-none" placeholder="Cari agent, toko, WA, email" />
                 </label>
-                <span className="w-fit rounded-full bg-emerald-100 px-4 py-2 text-xs font-black text-emerald-700">
+                <span className="w-fit rounded-full bg-red-50 px-4 py-2 text-xs font-black text-[#d70717]">
                   {filtered.length} agent tampil
                 </span>
               </div>
 
               {message ? (
-                <div className={message.type === "success" ? "mt-4 rounded-2xl bg-emerald-50 px-4 py-3 text-xs font-black text-emerald-700" : "mt-4 rounded-2xl bg-rose-50 px-4 py-3 text-xs font-black text-rose-600"}>
+                <div className={message.type === "success" ? "mt-4 rounded-2xl bg-red-50 px-4 py-3 text-xs font-black text-[#d70717]" : "mt-4 rounded-2xl bg-rose-50 px-4 py-3 text-xs font-black text-rose-600"}>
                   {message.text}
                 </div>
               ) : null}
 
-              <div className="mt-4 overflow-hidden rounded-2xl border border-slate-200">
-                <div className="hidden grid-cols-[minmax(220px,1.4fr)_140px_145px_145px_120px] gap-3 border-b border-slate-200 bg-slate-50 px-4 py-3 text-[10px] font-black uppercase tracking-[0.12em] text-slate-500 lg:grid">
+              <div className="mt-4 overflow-hidden rounded-2xl border border-red-950/[0.06]">
+                <div className="hidden grid-cols-[minmax(220px,1.4fr)_140px_145px_145px_120px] gap-3 border-b border-red-950/[0.06] bg-[#fff1ed] px-4 py-3 text-[10px] font-black uppercase tracking-[0.12em] text-red-900 lg:grid">
                   <span>Agent</span>
                   <span>Tier</span>
                   <span>Saldo Kredit</span>
@@ -244,7 +244,7 @@ export function AgentCreditRiskPage({ applications, mode }: Props) {
                         </div>
                         <div>
                           <p className="text-sm font-black text-slate-950">{agent.currentLevel}</p>
-                          <p className="mt-1 text-xs font-bold text-emerald-700">{formatIDR(agent.currentLimit)}</p>
+                          <p className="mt-1 text-xs font-bold text-[#d70717]">{formatIDR(agent.currentLimit)}</p>
                         </div>
                         <div>
                           <p className="text-sm font-black text-slate-950">{formatIDR(agent.available)}</p>
@@ -252,12 +252,12 @@ export function AgentCreditRiskPage({ applications, mode }: Props) {
                         </div>
                         <div>
                           <p className="text-sm font-black text-slate-950">{agent.paidCount} selesai</p>
-                          <p className={agent.lateCount ? "mt-1 text-xs font-bold text-rose-600" : "mt-1 text-xs font-bold text-emerald-700"}>{agent.lateCount} telat</p>
+                          <p className={agent.lateCount ? "mt-1 text-xs font-bold text-rose-600" : "mt-1 text-xs font-bold text-[#d70717]"}>{agent.lateCount} telat</p>
                         </div>
                         <button
                           type="button"
                           onClick={() => setOpenId(open ? null : agent.memberId)}
-                          className="inline-flex h-10 items-center justify-center gap-2 rounded-xl border border-slate-200 bg-slate-50 px-3 text-xs font-black text-slate-600 transition hover:border-emerald-200 hover:bg-emerald-50 hover:text-emerald-700"
+                          className="inline-flex h-10 items-center justify-center gap-2 rounded-2xl border border-red-950/[0.06] bg-[#fffafa] px-3 text-xs font-black text-slate-600 transition hover:border-red-100 hover:bg-red-50 hover:text-[#d70717]"
                         >
                           Detail
                           <ChevronDown className={`h-4 w-4 transition ${open ? "rotate-180" : ""}`} />
@@ -265,27 +265,27 @@ export function AgentCreditRiskPage({ applications, mode }: Props) {
                       </div>
 
                       {open ? (
-                        <div className="border-t border-emerald-100 bg-emerald-50/40 p-4">
+                        <div className="border-t border-red-950/[0.06] bg-[#fff7f5] p-4">
                           <div className="grid gap-3 lg:grid-cols-3">
-                            <div className="rounded-2xl bg-white p-4 ring-1 ring-emerald-100">
-                              <p className="text-xs font-black uppercase text-emerald-700">Status Terakhir</p>
+                            <div className="rounded-2xl bg-white p-4 ring-1 ring-red-950/[0.06]">
+                              <p className="text-xs font-black uppercase text-[#d70717]">Status Terakhir</p>
                               <p className="mt-2 text-sm font-black text-slate-950">{agent.latestStatus}</p>
                               <p className="mt-1 text-xs font-semibold text-slate-500">{formatDate(agent.latestUpdatedAt)}</p>
                             </div>
-                            <div className="rounded-2xl bg-white p-4 ring-1 ring-emerald-100">
-                              <p className="text-xs font-black uppercase text-emerald-700">Transaksi Bulan Ini</p>
+                            <div className="rounded-2xl bg-white p-4 ring-1 ring-red-950/[0.06]">
+                              <p className="text-xs font-black uppercase text-[#d70717]">Transaksi Bulan Ini</p>
                               <p className="mt-2 text-sm font-black text-slate-950">{formatIDR(agent.monthlyCredit)}</p>
                               <p className="mt-1 text-xs font-semibold text-slate-500">Dari nominal kredit disetujui</p>
                             </div>
-                            <div className="rounded-2xl bg-white p-4 ring-1 ring-emerald-100">
-                              <p className="text-xs font-black uppercase text-emerald-700">Catatan Marketing</p>
+                            <div className="rounded-2xl bg-white p-4 ring-1 ring-red-950/[0.06]">
+                              <p className="text-xs font-black uppercase text-[#d70717]">Catatan Marketing</p>
                               <p className="mt-2 text-xs font-semibold leading-5 text-slate-600">{agent.latestMarketingNote}</p>
                             </div>
                           </div>
 
                           <div className="mt-3 grid gap-3 lg:grid-cols-[1fr_220px]">
-                            <label className="block rounded-2xl border border-slate-200 bg-white p-3">
-                              <span className="text-[10px] font-black uppercase tracking-[0.12em] text-emerald-700">
+                            <label className="block rounded-2xl border border-red-950/[0.06] bg-white p-3">
+                              <span className="text-[10px] font-black uppercase tracking-[0.12em] text-[#d70717]">
                                 {mode === "operator" ? "Catatan Keputusan Operator" : "Catatan Rekomendasi Marketing"}
                               </span>
                               <textarea
@@ -296,11 +296,11 @@ export function AgentCreditRiskPage({ applications, mode }: Props) {
                                 placeholder={mode === "operator" ? "Contoh: pembayaran lancar, naik ke Nuansa Plus." : "Contoh: agent ramai dan layak diajukan naik limit."}
                               />
                             </label>
-                            <div className="rounded-2xl border border-slate-200 bg-white p-3">
+                            <div className="rounded-2xl border border-red-950/[0.06] bg-white p-3">
                               {mode === "operator" ? (
                                 <>
                                   <label className="block">
-                                    <span className="text-[10px] font-black uppercase tracking-[0.12em] text-emerald-700">Naikkan/Turunkan Limit</span>
+                                    <span className="text-[10px] font-black uppercase tracking-[0.12em] text-[#d70717]">Naikkan/Turunkan Limit</span>
                                     <input
                                       type="number"
                                       min="1"
@@ -308,14 +308,14 @@ export function AgentCreditRiskPage({ applications, mode }: Props) {
                                       value={limitByMember[agent.memberId] || ""}
                                       onChange={(event) => setLimitByMember((current) => ({ ...current, [agent.memberId]: event.target.value }))}
                                       placeholder={String(agent.currentLimit || 500000)}
-                                      className="mt-2 h-11 w-full rounded-2xl border border-slate-200 bg-slate-50 px-3 text-xs font-black text-slate-950 outline-none"
+                                      className="mt-2 h-11 w-full rounded-2xl border border-red-950/[0.08] bg-[#fffafa] px-3 text-xs font-black text-slate-950 outline-none focus:border-[#d70717] focus:ring-4 focus:ring-red-100"
                                     />
                                   </label>
                                   <button
                                     type="button"
                                     onClick={() => void changeLimit(agent)}
                                     disabled={busyId === agent.memberId}
-                                    className="mt-3 inline-flex h-11 w-full items-center justify-center gap-2 rounded-2xl bg-[linear-gradient(135deg,#047857,#84cc16)] text-xs font-black text-white shadow-[0_12px_24px_rgba(4,120,87,0.18)] disabled:opacity-60"
+                                    className="mt-3 inline-flex h-11 w-full items-center justify-center gap-2 rounded-2xl bg-[linear-gradient(135deg,#d70717,#ff6a00)] text-xs font-black text-white shadow-[0_12px_24px_rgba(215,7,23,0.22)] transition hover:brightness-95 disabled:opacity-60"
                                   >
                                     {busyId === agent.memberId ? <Loader2 className="h-4 w-4 animate-spin" /> : <TrendingUp className="h-4 w-4" />}
                                     Simpan Limit
@@ -325,7 +325,7 @@ export function AgentCreditRiskPage({ applications, mode }: Props) {
                                 <button
                                   type="button"
                                   onClick={() => recommend(agent)}
-                                  className="inline-flex h-full min-h-24 w-full items-center justify-center rounded-2xl bg-emerald-800 px-4 text-xs font-black text-white shadow-[0_12px_24px_rgba(4,120,87,0.18)]"
+                                  className="inline-flex h-full min-h-24 w-full items-center justify-center rounded-2xl bg-[linear-gradient(135deg,#d70717,#ff6a00)] px-4 text-xs font-black text-white shadow-[0_12px_24px_rgba(215,7,23,0.22)] transition hover:brightness-95"
                                 >
                                   Ajukan Rekomendasi
                                 </button>
