@@ -700,20 +700,20 @@ export function UserAgentCreditPageContent({ name, email, phone, storeName = "",
   }
 
   return (
-    <form onSubmit={handleSubmit} className="mx-auto w-full max-w-md pb-24">
-      <section className="relative overflow-hidden bg-[linear-gradient(135deg,#b20717_0%,#d70717_58%,#ff6a00_140%)] px-4 pb-7 pt-5 text-white shadow-[0_18px_42px_rgba(215,7,23,0.22)]">
-        <div className="pointer-events-none absolute -right-12 -top-16 h-40 w-40 rounded-full bg-white/10" />
+    <form onSubmit={handleSubmit} className="mx-auto w-full max-w-md bg-[#fff6f4] pb-24">
+      <section className="relative px-4 pb-3 pt-4 text-slate-950">
+        <div className="pointer-events-none absolute inset-x-0 top-0 h-28 bg-[radial-gradient(circle_at_92%_0%,rgba(255,106,0,0.16),transparent_45%),radial-gradient(circle_at_12%_22%,rgba(215,7,23,0.10),transparent_40%)]" />
         <div className="flex items-center gap-3">
-          <Link href="/user/saldo" className="grid h-10 w-10 shrink-0 place-items-center rounded-2xl bg-white/12 text-white ring-1 ring-white/15">
+          <Link href="/user/saldo" className="relative grid h-10 w-10 shrink-0 place-items-center rounded-2xl bg-white text-[#d70717] shadow-[0_12px_24px_rgba(151,14,32,0.10)] ring-1 ring-red-100">
             <ArrowLeft className="h-5 w-5" strokeWidth={2.4} />
           </Link>
-          <div className="min-w-0 flex-1">
-            <h1 className="truncate text-lg font-black tracking-tight">Kredit Saldo Agent</h1>
-            <p className="mt-0.5 truncate text-[11px] font-semibold text-white/75">Ajukan limit saldo untuk operasional</p>
+          <div className="relative min-w-0 flex-1">
+            <p className="text-[10px] font-black uppercase tracking-[0.18em] text-[#d70717]">Nuansa Agent</p>
+            <h1 className="mt-0.5 truncate text-xl font-black tracking-tight">Modal Operasional</h1>
           </div>
           <Link
             href="/user/saldo/kredit-agent/level"
-            className="flex h-12 shrink-0 items-center gap-2 rounded-2xl bg-white px-2.5 text-[#d70717] shadow-[0_10px_22px_rgba(0,0,0,0.08)]"
+            className="relative flex h-12 shrink-0 items-center gap-2 rounded-2xl border border-red-100 bg-white px-2.5 text-slate-950 shadow-[0_12px_24px_rgba(151,14,32,0.10)]"
             aria-label={`Lihat level ${creditLevelName}`}
           >
             <span className="relative h-9 w-9 shrink-0">
@@ -727,41 +727,61 @@ export function UserAgentCreditPageContent({ name, email, phone, storeName = "",
         </div>
       </section>
 
-      <div className="-mt-4 space-y-4 px-3">
-        <section className="overflow-hidden rounded-[28px] border border-red-100 bg-white shadow-[0_20px_48px_rgba(151,14,32,0.12)]">
-          <div className="flex items-center gap-3 border-b border-red-50 p-4">
-            <span className="relative h-16 w-16 shrink-0 rounded-[22px] bg-red-50 p-2 ring-1 ring-red-100">
+      <div className="space-y-4 px-3">
+        <section className="overflow-hidden rounded-[28px] border border-red-950/[0.06] bg-white shadow-[0_20px_48px_rgba(151,14,32,0.10)]">
+          <div className="relative p-4">
+            <div className="absolute inset-x-0 top-0 h-1.5 bg-[linear-gradient(90deg,#d70717,#ff6a00,#ffc400)]" />
+            <div className="flex items-center gap-3">
+            <span className="relative h-16 w-16 shrink-0 rounded-[22px] bg-[#fff6f4] p-2 ring-1 ring-red-100">
               <Image src={creditLevelImage} alt={creditLevelName} fill sizes="64px" className="object-contain p-1" />
             </span>
             <div className="min-w-0 flex-1">
               <p className="truncate text-base font-black text-slate-950">{name || "Agent NuansaPulsa"}</p>
               <p className="mt-1 text-[11px] font-semibold leading-4 text-slate-500">
-                {acceptedApplications} pengajuan diterima
+                {acceptedApplications} pengajuan diterima • {totalApplications} tersimpan
               </p>
               {latestApplication?.id ? <p className="mt-1 text-[10px] font-black tracking-[0.08em] text-red-700">ID KREDIT KRD-{String(latestApplication.id).padStart(8, "0")}</p> : null}
             </div>
-            <span className="rounded-full bg-red-950 px-3 py-1 text-[10px] font-black uppercase tracking-wide text-white">
+            <span className="rounded-full bg-[#fff1ed] px-3 py-1 text-[10px] font-black uppercase tracking-wide text-[#d70717] ring-1 ring-red-100">
               {levelSubtitle}
             </span>
+            </div>
           </div>
 
-          <div className="space-y-3 p-4">
-            <div className="overflow-hidden rounded-[24px] bg-[linear-gradient(135deg,#b20717_0%,#d70717_58%,#ff6a00_145%)] text-white shadow-[0_18px_34px_rgba(215,7,23,0.22)]">
-              <div className="min-w-0 p-4">
-                <p className="truncate text-[10px] font-black uppercase tracking-[0.16em] text-amber-100/85">Saldo Utama</p>
-                <p className="mt-2 truncate text-2xl font-black">{formatIDR(displayMainBalance)}</p>
-                <p className="mt-2 text-[10px] font-semibold leading-4 text-red-50/80">Saldo untuk pembelian produk dan transaksi harian. Kredit yang disetujui operator langsung masuk ke saldo ini.</p>
+          <div className="px-4 pb-4">
+            <div className="grid gap-3 rounded-[24px] border border-red-100 bg-[linear-gradient(135deg,#fffafa_0%,#ffffff_52%,#fff4e3_100%)] p-3">
+              <div className="flex items-center justify-between gap-3">
+                <div className="min-w-0">
+                  <p className="truncate text-[10px] font-black uppercase tracking-[0.16em] text-slate-500">Saldo Siap Transaksi</p>
+                  <p className="mt-1 truncate text-2xl font-black text-slate-950">{formatIDR(displayMainBalance)}</p>
+                </div>
+                <Link
+                  href="/user/saldo"
+                  className="inline-flex h-10 shrink-0 items-center justify-center rounded-full bg-[linear-gradient(135deg,#d70717,#ff6a00)] px-4 text-[11px] font-black text-white shadow-[0_12px_24px_rgba(215,7,23,0.18)]"
+                >
+                  Top Up
+                </Link>
+              </div>
+              <div className="grid grid-cols-2 gap-2">
+                <div className="rounded-2xl bg-white px-3 py-2 ring-1 ring-red-50">
+                  <p className="text-[9px] font-black uppercase tracking-[0.12em] text-slate-400">Status</p>
+                  <p className="mt-0.5 truncate text-xs font-black text-slate-950">{statusBandLabel}</p>
+                </div>
+                <div className="rounded-2xl bg-white px-3 py-2 ring-1 ring-red-50">
+                  <p className="text-[9px] font-black uppercase tracking-[0.12em] text-slate-400">Limit</p>
+                  <p className="mt-0.5 truncate text-xs font-black text-slate-950">{formatIDR(statusAmount)}</p>
+                </div>
               </div>
             </div>
           </div>
         </section>
 
-        <section className="grid grid-cols-2 gap-2 rounded-[24px] border border-red-100 bg-red-50 p-2 shadow-[0_14px_30px_rgba(151,14,32,0.08)]">
+        <section className="grid grid-cols-2 gap-2 rounded-[24px] border border-red-950/[0.06] bg-white p-2 shadow-[0_14px_30px_rgba(151,14,32,0.08)]">
           <button
             type="button"
             onClick={() => setActiveCreditTab("list")}
             className={activeCreditTab === "list"
-              ? "flex min-h-14 items-center gap-3 rounded-[20px] bg-white px-3 text-left text-[#d70717] shadow-[0_12px_22px_rgba(151,14,32,0.10)]"
+              ? "flex min-h-14 items-center gap-3 rounded-[20px] bg-[#fff1ed] px-3 text-left text-[#d70717] ring-1 ring-red-100"
               : "flex min-h-14 items-center gap-3 rounded-[20px] px-3 text-left text-slate-500"}
           >
             <FileText className="h-5 w-5 shrink-0" strokeWidth={2.4} />
@@ -774,7 +794,7 @@ export function UserAgentCreditPageContent({ name, email, phone, storeName = "",
             type="button"
             onClick={() => setActiveCreditTab("new")}
             className={activeCreditTab === "new"
-              ? "flex min-h-14 items-center gap-3 rounded-[20px] bg-white px-3 text-left text-[#d70717] shadow-[0_12px_22px_rgba(151,14,32,0.10)]"
+              ? "flex min-h-14 items-center gap-3 rounded-[20px] bg-[#fff1ed] px-3 text-left text-[#d70717] ring-1 ring-red-100"
               : "flex min-h-14 items-center gap-3 rounded-[20px] px-3 text-left text-slate-500"}
           >
             <UserRound className="h-5 w-5 shrink-0" strokeWidth={2.4} />
