@@ -74,15 +74,15 @@ export default function OperatorAgentTransactionsPage() {
   }, [load]);
 
   return (
-    <div className="space-y-5 p-3 sm:p-5 lg:p-7">
-      <section className="rounded-[28px] bg-[radial-gradient(circle_at_88%_10%,rgba(255,196,0,0.34),transparent_28%),linear-gradient(135deg,#b20717_0%,#e50917_56%,#ff6a00_116%)] p-5 text-white shadow-[0_18px_40px_rgba(151,14,32,0.18)] sm:p-7">
-        <p className="text-[10px] font-black uppercase tracking-[0.2em] text-yellow-100">Monitoring operator</p>
-        <div className="mt-2 flex flex-col justify-between gap-4 sm:flex-row sm:items-end">
-          <div>
-            <h1 className="text-2xl font-black sm:text-3xl">Transaksi Terakhir Agent</h1>
-            <p className="mt-2 max-w-2xl text-sm font-semibold leading-6 text-white/86">Pantau satu aktivitas paling baru dari setiap agent, termasuk pembelian produk dan penarikan saldo.</p>
+    <div className="space-y-5 bg-[#fff6f4] p-3 sm:p-5 lg:p-7">
+      <section className="overflow-hidden rounded-[30px] border border-red-950/[0.06] bg-white shadow-[0_18px_40px_rgba(151,14,32,0.09)]">
+        <div className="grid gap-4 border-l-[10px] border-[#d70717] p-5 sm:p-6 lg:grid-cols-[1fr_auto] lg:items-center">
+          <div className="min-w-0">
+            <p className="text-[10px] font-black uppercase tracking-[0.2em] text-[#d70717]">Monitoring Operator</p>
+            <h1 className="mt-1 text-2xl font-black text-slate-950 sm:text-3xl">Transaksi Terakhir Agent</h1>
+            <p className="mt-2 max-w-2xl text-sm font-semibold leading-6 text-slate-500">Pantau aktivitas terbaru setiap agent dalam bentuk log cepat, termasuk produk, tujuan, nominal, dan status dana.</p>
           </div>
-          <button type="button" onClick={() => void load()} className="inline-flex h-10 items-center justify-center gap-2 rounded-xl border border-white/30 bg-white/10 px-4 text-xs font-black hover:bg-white/20" disabled={loading}>
+          <button type="button" onClick={() => void load()} className="inline-flex h-11 items-center justify-center gap-2 rounded-2xl bg-[linear-gradient(135deg,#d70717,#ff6a00)] px-5 text-xs font-black text-white shadow-[0_12px_24px_rgba(215,7,23,0.22)] hover:brightness-95" disabled={loading}>
             <RefreshCcw className={`h-4 w-4 ${loading ? "animate-spin" : ""}`} /> Muat Ulang
           </button>
         </div>
@@ -95,11 +95,11 @@ export default function OperatorAgentTransactionsPage() {
             <p className="mt-1 text-xs font-semibold text-slate-500">Setiap agent hanya ditampilkan satu kali berdasarkan transaksi terbarunya.</p>
           </div>
           <form onSubmit={(event) => { event.preventDefault(); setSearch(draftSearch.trim()); }} className="flex w-full gap-2 lg:max-w-xl">
-            <label className="flex min-w-0 flex-1 items-center gap-2 rounded-xl border border-red-950/[0.06] bg-[#fffafa] px-3 focus-within:border-red-300">
-              <Search className="h-4 w-4 shrink-0 text-slate-400" />
-              <input value={draftSearch} onChange={(event) => setDraftSearch(event.target.value)} placeholder="Cari agent, produk, tujuan, atau ref ID" className="min-w-0 flex-1 bg-transparent py-2 text-xs font-semibold text-slate-700 outline-none placeholder:text-slate-400" />
+            <label className="flex min-w-0 flex-1 items-center gap-2 rounded-2xl border border-red-950/[0.06] bg-[#fffafa] px-3 focus-within:border-[#d70717] focus-within:ring-4 focus-within:ring-red-100">
+              <Search className="h-4 w-4 shrink-0 text-[#d70717]" />
+              <input value={draftSearch} onChange={(event) => setDraftSearch(event.target.value)} placeholder="Cari agent, produk, tujuan, atau ref ID" className="min-w-0 flex-1 bg-transparent py-3 text-xs font-semibold text-slate-700 outline-none placeholder:text-slate-400" />
             </label>
-            <button type="submit" className="rounded-xl bg-[#d70717] px-4 text-xs font-black text-white hover:bg-[#b20717]">Cari</button>
+            <button type="submit" className="rounded-2xl bg-[#d70717] px-4 text-xs font-black text-white hover:bg-[#b20717]">Cari</button>
           </form>
         </div>
         <div className="mt-4 flex flex-wrap gap-2">

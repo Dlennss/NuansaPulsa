@@ -72,14 +72,20 @@ export default function OperatorInactiveAgentsPage() {
   return (
     <main className="min-h-screen bg-[#fff6f4] p-3 text-slate-950 sm:p-5 lg:p-7">
       <div className="mx-auto w-full max-w-7xl space-y-5">
-        <header className="overflow-hidden rounded-[28px] bg-[radial-gradient(circle_at_88%_10%,rgba(255,196,0,0.34),transparent_28%),linear-gradient(135deg,#b20717_0%,#e50917_56%,#ff6a00_116%)] p-5 text-white shadow-[0_20px_44px_rgba(151,14,32,0.18)] sm:p-7">
-          <div className="flex items-center gap-4">
-            <span className="grid h-14 w-14 shrink-0 place-items-center rounded-2xl bg-amber-400 text-red-950 shadow-lg"><AlertTriangle className="h-7 w-7" /></span>
-            <div><p className="text-[10px] font-black uppercase tracking-[0.22em] text-yellow-100">Monitoring retail</p><h1 className="mt-1 text-2xl font-black sm:text-3xl">Konter Tidak Transaksi</h1><p className="mt-1 text-sm font-semibold text-white/86">Temukan agent yang perlu dihubungi dan bantu marketing melakukan follow-up.</p></div>
+        <header className="overflow-hidden rounded-[30px] border border-amber-200/70 bg-[linear-gradient(135deg,#fff7ed_0%,#fff1f2_58%,#ffffff_118%)] p-5 shadow-[0_18px_40px_rgba(151,14,32,0.08)] sm:p-7">
+          <div className="flex flex-col gap-4 sm:flex-row sm:items-center sm:justify-between">
+            <div className="flex min-w-0 items-center gap-4">
+              <span className="grid h-14 w-14 shrink-0 place-items-center rounded-2xl bg-[linear-gradient(135deg,#d70717,#ff6a00)] text-white shadow-[0_12px_24px_rgba(215,7,23,0.22)]"><AlertTriangle className="h-7 w-7" /></span>
+              <div><p className="text-[10px] font-black uppercase tracking-[0.22em] text-[#d70717]">Daftar Follow-up</p><h1 className="mt-1 text-2xl font-black text-slate-950 sm:text-3xl">Agent Tidak Aktif</h1><p className="mt-1 max-w-2xl text-sm font-semibold text-slate-500">Temukan agent yang perlu dihubungi dan bantu marketing melakukan follow-up.</p></div>
+            </div>
+            <div className="rounded-2xl border border-red-950/[0.06] bg-white px-4 py-3 text-left shadow-sm sm:text-right">
+              <p className="text-[10px] font-black uppercase tracking-[0.14em] text-slate-400">Filter aktif</p>
+              <p className="mt-1 text-lg font-black text-[#d70717]">{days} hari</p>
+            </div>
           </div>
         </header>
 
-        <section className="rounded-3xl border border-red-950/[0.06] bg-white p-4 shadow-[0_12px_30px_rgba(151,14,32,0.07)] sm:p-5">
+        <section className="rounded-[28px] border border-red-950/[0.06] bg-white p-4 shadow-[0_12px_30px_rgba(151,14,32,0.07)] sm:p-5">
           <div className="flex flex-wrap gap-2">
             {periods.map((period) => <button key={period.days} type="button" onClick={() => { setDays(period.days); setCustomDays(period.days); }} className={`min-h-11 rounded-2xl border px-4 text-xs font-black transition ${days === period.days ? "border-[#d70717] bg-[#d70717] text-white shadow-md" : "border-slate-200 bg-white text-slate-700 hover:border-red-200 hover:text-[#d70717]"}`}>{period.label}</button>)}
           </div>
@@ -88,7 +94,7 @@ export default function OperatorInactiveAgentsPage() {
             <label className="flex min-w-0 items-center gap-2 rounded-2xl border border-red-950/[0.06] bg-[#fffafa] px-4 focus-within:border-red-300"><Search className="h-4 w-4 shrink-0 text-[#d70717]" /><input value={draftQuery} onChange={(event) => setDraftQuery(event.target.value)} onKeyDown={(event) => { if (event.key === "Enter") setQuery(draftQuery.trim()); }} placeholder="Cari konter, email, nomor HP, atau marketing" className="min-w-0 flex-1 bg-transparent py-3 text-sm font-semibold outline-none placeholder:text-slate-400" /></label>
             <button type="button" onClick={() => { setQuery(draftQuery.trim()); void load(); }} className="inline-flex min-h-12 items-center justify-center gap-2 rounded-2xl bg-[#d70717] px-5 text-sm font-black text-white hover:bg-[#b20717]"><Search className="h-4 w-4" /> Cari</button>
           </div>
-          <div className="mt-3 flex flex-wrap items-center justify-between gap-3"><p className="text-sm font-semibold text-slate-600">{headline}</p><button type="button" onClick={() => void load()} disabled={loading} className="inline-flex min-h-10 items-center gap-2 rounded-xl border border-red-100 bg-red-50 px-4 text-xs font-black text-[#b20717] hover:bg-red-50"><RefreshCcw className={`h-4 w-4 ${loading ? "animate-spin" : ""}`} /> Muat Ulang</button></div>
+          <div className="mt-3 flex flex-wrap items-center justify-between gap-3 rounded-2xl bg-[#fff7f5] px-4 py-3"><p className="text-sm font-semibold text-slate-600">{headline}</p><button type="button" onClick={() => void load()} disabled={loading} className="inline-flex min-h-10 items-center gap-2 rounded-xl border border-red-100 bg-white px-4 text-xs font-black text-[#b20717] hover:bg-red-50"><RefreshCcw className={`h-4 w-4 ${loading ? "animate-spin" : ""}`} /> Muat Ulang</button></div>
         </section>
 
         {error ? <div className="rounded-2xl border border-rose-300 bg-rose-50 px-4 py-3 text-sm font-bold text-rose-800">{error}</div> : null}

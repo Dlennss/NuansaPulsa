@@ -57,12 +57,21 @@ export function OperatorCreditPaymentsPage({ applications }: { applications: Age
   return (
     <main className="min-h-screen bg-[#fff6f4] p-3 text-slate-950 sm:p-6 lg:p-8">
       <div className="mx-auto w-full max-w-7xl space-y-4 sm:space-y-6">
-        <header className="rounded-[26px] bg-[radial-gradient(circle_at_88%_10%,rgba(255,196,0,0.34),transparent_28%),linear-gradient(135deg,#b20717_0%,#e50917_56%,#ff6a00_116%)] p-5 text-white shadow-[0_22px_50px_rgba(215,7,23,0.22)] sm:p-7">
-          <p className="text-[10px] font-black uppercase tracking-[0.22em] text-yellow-100">Operator Kredit</p>
-          <h1 className="mt-2 text-2xl font-black sm:text-3xl">Pembayaran Kredit</h1>
-          <p className="mt-2 max-w-2xl text-xs font-semibold leading-5 text-white/86 sm:text-sm">
-            Pantau pelunasan sebagian agent dan periksa bukti pembayaran yang tersimpan.
-          </p>
+        <header className="overflow-hidden rounded-[30px] bg-[radial-gradient(circle_at_88%_10%,rgba(255,196,0,0.34),transparent_28%),linear-gradient(135deg,#b20717_0%,#e50917_56%,#ff6a00_116%)] p-5 text-white shadow-[0_22px_50px_rgba(215,7,23,0.22)] sm:p-7">
+          <div className="grid gap-5 lg:grid-cols-[1fr_280px] lg:items-center">
+            <div>
+              <p className="text-[10px] font-black uppercase tracking-[0.22em] text-yellow-100">Operator Kredit</p>
+              <h1 className="mt-2 text-2xl font-black sm:text-3xl">Pembayaran Kredit</h1>
+              <p className="mt-2 max-w-2xl text-xs font-semibold leading-5 text-white/86 sm:text-sm">
+                Pantau pelunasan sebagian agent dan periksa bukti pembayaran yang tersimpan.
+              </p>
+            </div>
+            <div className="rounded-[24px] border border-white/20 bg-white/14 p-4 shadow-[inset_0_1px_0_rgba(255,255,255,0.18)] backdrop-blur">
+              <p className="text-[10px] font-black uppercase tracking-[0.18em] text-yellow-100">Rekap Setoran</p>
+              <p className="mt-2 text-2xl font-black">{formatIDR(totalAmount)}</p>
+              <p className="mt-1 text-xs font-semibold text-white/78">{proofCount} bukti tersimpan dari {rows.length} pembayaran</p>
+            </div>
+          </div>
         </header>
 
         <section className="grid grid-cols-1 gap-3 sm:grid-cols-3">
@@ -73,7 +82,7 @@ export function OperatorCreditPaymentsPage({ applications }: { applications: Age
           ].map((item) => {
             const Icon = item.icon;
             return (
-              <div key={item.label} className="flex min-h-28 items-center justify-between rounded-[22px] border border-red-950/[0.06] bg-white p-4 shadow-[0_14px_34px_rgba(15,23,42,0.06)]">
+              <div key={item.label} className="flex min-h-28 items-center justify-between rounded-[22px] border border-red-950/[0.06] bg-white p-4 shadow-[0_14px_34px_rgba(151,14,32,0.06)]">
                 <div><p className="text-[10px] font-black uppercase text-[#d70717]">{item.label}</p><p className="mt-2 text-2xl font-black">{item.value}</p><p className="mt-1 text-[11px] font-semibold text-slate-500">{item.hint}</p></div>
                 <span className="grid h-12 w-12 place-items-center rounded-2xl bg-red-50 text-[#d70717]"><Icon className="h-6 w-6" /></span>
               </div>
@@ -81,7 +90,7 @@ export function OperatorCreditPaymentsPage({ applications }: { applications: Age
           })}
         </section>
 
-        <section className="overflow-hidden rounded-[24px] border border-red-950/[0.06] bg-white shadow-[0_18px_44px_rgba(15,23,42,0.07)]">
+        <section className="overflow-hidden rounded-[28px] border border-red-950/[0.06] bg-white shadow-[0_18px_44px_rgba(151,14,32,0.07)]">
           <div className="flex flex-col gap-3 border-b border-red-950/[0.06] p-4 sm:flex-row sm:items-center sm:justify-between">
             <div><h2 className="text-lg font-black">Riwayat Pembayaran</h2><p className="mt-1 text-[11px] font-semibold text-slate-500">Urutan terbaru ditampilkan paling atas.</p></div>
             <label className="flex h-11 w-full items-center gap-2 rounded-2xl border border-red-950/[0.06] bg-[#fffafa] px-3 sm:max-w-md">
