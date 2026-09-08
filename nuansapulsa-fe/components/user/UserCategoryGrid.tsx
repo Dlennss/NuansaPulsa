@@ -15,10 +15,15 @@ type CategoryCardProps = {
 };
 
 const DEFAULT_SHORTCUTS = [
-  { href: "/user/pulsa-data", label: "Pulsa & Data", visualName: "pulsa data" },
-  { href: "/game", label: "Game", visualName: "game" },
+  { href: "/user/pulsa-data", label: "Pulsa", visualName: "pulsa" },
+  { href: "/user/pulsa-data", label: "Paket Data", visualName: "paket data" },
+  { href: "/user/kategori", label: "Telepon", visualName: "telepon" },
+  { href: "/user/kategori", label: "SMS", visualName: "sms" },
   { href: "/user/ewallet", label: "E-Wallet", visualName: "e-money" },
-  { href: "/user/listrik", label: "PLN", visualName: "pln" },
+  { href: "/user/listrik", label: "Listrik PLN", visualName: "pln" },
+  { href: "/game", label: "Game", visualName: "game" },
+  { href: "/user/kategori", label: "TV & Streaming", visualName: "tv" },
+  { href: "/user/kategori", label: "Voucher", visualName: "voucher" },
   { href: "/user/kategori", label: "Lainnya", visualName: "lainnya" },
 ];
 
@@ -93,7 +98,7 @@ export function UserCategoryGrid({ items, showAll = false }: UserCategoryGridPro
   return (
     <section>
       <div className="rounded-[24px] border border-red-950/[0.06] bg-[linear-gradient(135deg,#ffffff_0%,#fff3f0_58%,#fff8df_100%)] p-2.5 shadow-[0_18px_38px_rgba(151,14,32,0.11)]">
-        <div className={showAll ? "grid grid-cols-3 gap-2.5" : "grid grid-cols-3 gap-2.5"}>
+        <div className={showAll ? "grid grid-cols-3 gap-2.5" : "grid grid-cols-5 gap-2.5"}>
           {!showAll
             ? DEFAULT_SHORTCUTS.map((item) => (
                 <CategoryShortcutLink

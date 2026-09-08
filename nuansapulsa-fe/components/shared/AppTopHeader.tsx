@@ -19,7 +19,7 @@ export function AppTopHeader({ isLoggedIn = false, userName, saldo, role }: AppT
   void userName;
   void saldo;
 
-  if (pathname === "/") return null;
+  if (pathname === "/" || pathname === "/user") return null;
 
   return (
     <header className="sticky top-0 z-30 overflow-hidden bg-[#e50917] px-3 pb-3 pt-2 text-white shadow-[0_16px_34px_rgba(151,14,32,0.22)]">
