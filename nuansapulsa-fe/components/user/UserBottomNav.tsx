@@ -37,8 +37,8 @@ export function UserBottomNav() {
     isActivePath(pathname, "/user/listrik") ||
     isActivePath(pathname, "/user/ewallet") ||
     isActivePath(pathname, "/game");
-  const saldoActive = isActivePath(pathname, "/user/saldo") || isActivePath(pathname, "/user/account/topup") || isActivePath(pathname, "/user/account/mutasi");
-  const accountActive = isActivePath(pathname, "/user/account") && !saldoActive;
+  const notificationActive = isActivePath(pathname, "/user/notifikasi");
+  const accountActive = isActivePath(pathname, "/user/account");
   const homeActive = pathname === "/user";
 
   return (
@@ -64,10 +64,13 @@ export function UserBottomNav() {
             {menuActive ? <span className={activeIndicatorClass} /> : null}
           </Link>
 
-          <Link href="/user/saldo" prefetch={false} className={navClass(saldoActive)}>
-            <NavIcon src="/nuansapulsa-assets/layanan_e_wallet.png" />
-            <span className={textClass}>Saldo</span>
-            {saldoActive ? <span className={activeIndicatorClass} /> : null}
+          <Link href="/user/transaksi" prefetch={false} className={navClass(notificationActive)}>
+            <span className={iconClass}>
+              <Image src="/nuansapulsa-assets/nav_notifikasi.png" alt="" fill sizes="24px" className="object-contain" />
+              <span className="absolute -right-0.5 -top-0.5 h-2.5 w-2.5 rounded-full bg-[#d70717] ring-1 ring-white" />
+            </span>
+            <span className={textClass}>Notifikasi</span>
+            {notificationActive ? <span className={activeIndicatorClass} /> : null}
           </Link>
 
           <Link href="/user/account" prefetch={false} className={navClass(accountActive)}>
