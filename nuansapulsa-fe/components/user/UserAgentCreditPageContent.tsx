@@ -385,11 +385,11 @@ function hasOperatorDocumentRevision(application?: AgentCreditApplication) {
 }
 
 const levelBadgeByCode: Record<string, string> = {
-  start: "/agent-levels/kilat-start-badge.png",
-  plus: "/agent-levels/kilat-plus-badge.png",
-  pro: "/agent-levels/kilat-pro-badge.png",
-  max: "/agent-levels/kilat-max-badge.png",
-  elite: "/agent-levels/kilat-elite-badge.png",
+  start: "/agent-levels/nuansa-start-badge.png",
+  plus: "/agent-levels/nuansa-plus-badge.png",
+  pro: "/agent-levels/nuansa-plus-badge.png",
+  max: "/agent-levels/nuansa-elite-badge.png",
+  elite: "/agent-levels/nuansa-elite-badge.png",
 };
 
 export function UserAgentCreditPageContent({ name, email, phone, storeName = "", mainBalance = 0, initialApplications = [] }: UserAgentCreditPageContentProps) {
