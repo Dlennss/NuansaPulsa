@@ -3,6 +3,7 @@ import Image from "next/image";
 import Link from "next/link";
 import { ChevronRight } from "lucide-react";
 import { getAppServerSession } from "@/lib/server-auth";
+import { getUserProfile } from "@/lib/api.auth";
 import { getCategories } from "@/lib/api.products";
 import type { UserCategoryItem, UserSession } from "@/components/user/types";
 import { UserCategoryGrid } from "@/components/user/UserCategoryGrid";
@@ -17,7 +18,11 @@ type SessionShape = {
   backendToken?: string;
 };
 
-function UserHomeHero() {
+function formatIDR(value: number) {
+  return `Rp ${Number(value || 0).toLocaleString("id-ID")}`;
+}
+
+function UserHomeHero({ saldo }: { saldo: number }) {
   return (
     <section className="relative isolate h-[300px] overflow-hidden rounded-b-[30px] bg-[#e50917] text-white shadow-[0_18px_42px_rgba(151,14,32,0.24)]">
       <div className="absolute inset-0 -z-20 bg-[linear-gradient(140deg,#ff2115_0%,#ed0b18_48%,#aa0d23_100%)]" />
@@ -58,14 +63,25 @@ function UserHomeHero() {
             Pulsa, data, PLN, e-wallet, game, dan PPOB siap dipilih.
           </p>
         </div>
+
         <Link
-          href="/user/kategori"
+          href="/user/saldo"
           prefetch={false}
-          aria-label="Mulai transaksi sekarang"
-          className="relative z-20 mt-4 inline-flex h-11 min-w-[170px] items-center justify-center gap-1.5 rounded-full bg-[#7a0612] px-5 text-sm font-black leading-none text-white shadow-[0_14px_28px_rgba(99,24,34,0.28)] ring-1 ring-white/25"
+          aria-label="Lihat saldo akun"
+          className="absolute right-0 top-[92px] w-[clamp(178px,51vw,208px)] rounded-[18px] bg-white px-3 py-2.5 text-left text-slate-700 shadow-[0_18px_40px_rgba(90,6,20,0.22)] ring-1 ring-white/80"
         >
-          <span className="whitespace-nowrap text-white">Mulai Sekarang</span>
-          <ChevronRight className="h-4 w-4" strokeWidth={3} />
+          <span className="flex items-start gap-2.5">
+            <span className="relative mt-0.5 h-8 w-8 shrink-0 overflow-hidden rounded-full bg-[#fff1f2]">
+              <Image src="/nuansapulsa-assets/icon_saldo_badge.png" alt="" fill sizes="32px" className="object-contain" />
+            </span>
+            <span className="min-w-0 flex-1">
+              <span className="block text-[11px] font-semibold leading-3 text-slate-500">Saldo Anda</span>
+              <span className="mt-1 block truncate text-base font-black leading-5 text-[#d70717]">{formatIDR(saldo)}</span>
+              <span className="mt-2 inline-flex h-7 w-full items-center justify-center rounded-full bg-[#d70717] px-2.5 text-xs font-black text-white">
+                + Top Up
+              </span>
+            </span>
+          </span>
         </Link>
       </div>
     </section>
@@ -98,14 +114,18 @@ function UserHomeInfoStrip() {
 
 export default async function UserAppHomePage() {
   const session = (await getAppServerSession()) as SessionShape | null;
-  const categories = (await getCategories()) as UserCategoryItem[];
-  const role = String(session?.user?.role || "").trim().toLowerCase();
+  const [categories, profile] = await Promise.all([
+    getCategories() as Promise<UserCategoryItem[]>,
+    session?.backendToken ? getUserProfile(session.backendToken) : Promise.resolve(null),
+  ]);
+  const role = String(profile?.role || session?.user?.role || "").trim().toLowerCase();
   const isAgent = role === "agent";
+  const saldo = Number(profile?.saldo || 0);
 
   return (
     <main className="bg-[#fff6f4]">
       {session?.backendToken ? <UserAuthClientSync backendToken={session.backendToken} /> : null}
-      <UserHomeHero />
+      <UserHomeHero saldo={saldo} />
       <div className="-mt-10 space-y-4 px-4">
         <UserHomeInfoStrip />
         <UserCategoryGrid items={categories} />
