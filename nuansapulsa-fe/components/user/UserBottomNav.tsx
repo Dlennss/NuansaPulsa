@@ -65,7 +65,7 @@ export function UserBottomNav() {
           </Link>
 
           <Link href="/user/saldo" prefetch={false} className={navClass(saldoActive)}>
-            <NavIcon src="/nuansapulsa-assets/icon_saldo_simbol.png" />
+            <NavIcon src="/nuansapulsa-assets/layanan_e_wallet.png" />
             <span className={textClass}>Saldo</span>
             {saldoActive ? <span className={activeIndicatorClass} /> : null}
           </Link>
