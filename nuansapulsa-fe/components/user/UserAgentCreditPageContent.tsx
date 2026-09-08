@@ -806,43 +806,36 @@ export function UserAgentCreditPageContent({ name, email, phone, storeName = "",
         </section>
 
         {activeCreditTab === "list" ? (
-          <section className="rounded-[26px] border border-red-100 bg-white p-4 shadow-[0_18px_42px_rgba(151,14,32,0.10)]">
-            <p className="text-[10px] font-black uppercase tracking-[0.18em] text-[#d70717]">Data Pengajuan Agent</p>
-            <h2 className="mt-1 text-xl font-black leading-6 text-slate-950">Orang yang didaftarkan</h2>
-            <p className="mt-1 text-[11px] font-semibold leading-4 text-slate-500">
-              Semua pengajuan tersimpan rapi di sini. Pilih salah satu untuk melihat status dan detail pengajuan.
-            </p>
+          <section className="rounded-[28px] border border-red-950/[0.06] bg-white p-4 shadow-[0_18px_42px_rgba(151,14,32,0.09)]">
+            <div className="flex items-start justify-between gap-3">
+              <div className="min-w-0">
+                <h2 className="text-lg font-black leading-6 text-slate-950">Pengajuan Agent</h2>
+                <p className="mt-1 text-[11px] font-semibold leading-4 text-slate-500">
+                  Pantau pengajuan modal dan status verifikasi dalam satu tempat.
+                </p>
+              </div>
+              <button
+                type="button"
+                onClick={() => setActiveCreditTab("new")}
+                className="inline-flex h-9 shrink-0 items-center justify-center rounded-full bg-[linear-gradient(135deg,#d70717,#ff6a00)] px-3 text-[10px] font-black text-white shadow-[0_10px_22px_rgba(215,7,23,0.16)]"
+              >
+                Baru
+              </button>
+            </div>
 
-            <div className="mt-4 grid grid-cols-4 overflow-hidden rounded-[22px] border border-red-100 bg-[linear-gradient(135deg,#fff1ee,#ffffff)]">
+            <div className="mt-4 grid grid-cols-2 gap-2">
               {[
                 ["Total", totalApplications],
                 ["Menunggu", pendingApplications],
                 ["Diterima", acceptedApplications],
                 ["Ditolak", rejectedApplications],
               ].map(([label, value]) => (
-                <div key={label} className="border-r border-red-100 px-2 py-3 text-center last:border-r-0">
-                  <p className="text-lg font-black text-slate-950">{value}</p>
-                  <p className="mt-1 text-[9px] font-black text-slate-500">{label}</p>
+                <div key={label} className="rounded-[18px] bg-[#fff8f6] px-3 py-3 ring-1 ring-red-950/[0.05]">
+                  <p className="text-[9px] font-black uppercase tracking-[0.12em] text-slate-400">{label}</p>
+                  <p className="mt-1 text-xl font-black text-slate-950">{value}</p>
                 </div>
               ))}
             </div>
-
-            <div className="mt-4 flex gap-2 overflow-x-auto pb-1">
-              {["Semua", "Menunggu", "Diterima", "Ditolak"].map((filter, index) => (
-                <span
-                  key={filter}
-                  className={index === 0
-                    ? "shrink-0 rounded-full border border-[#d70717] bg-white px-3 py-2 text-[10px] font-black text-[#d70717]"
-                    : "shrink-0 rounded-full border border-slate-200 bg-white px-3 py-2 text-[10px] font-black text-slate-500"}
-                >
-                  {filter}
-                </span>
-              ))}
-            </div>
-
-            <p className="mt-2 text-[10px] font-semibold text-slate-500">
-              Menampilkan {listApplications.length} dari {totalApplications} pengajuan
-            </p>
 
             <div className="mt-4 space-y-3">
               {listApplications.length ? (
@@ -851,8 +844,8 @@ export function UserAgentCreditPageContent({ name, email, phone, storeName = "",
                   const agentName = String(data.agent_name || data.nama_lengkap || `Agent NuansaPulsa ${index + 1}`);
                   const storeName = String(data.store_name || data.nama_toko || "Pengajuan kredit saldo");
                   return (
-                    <div key={item.id || index} className="flex items-center gap-3 rounded-[22px] border border-red-100 bg-white p-3 shadow-[0_10px_24px_rgba(15,23,42,0.04)]">
-                      <span className="grid h-11 w-11 shrink-0 place-items-center rounded-2xl bg-red-50 text-[#d70717]">
+                    <div key={item.id || index} className="flex items-center gap-3 rounded-[22px] bg-[#fffafa] p-3 ring-1 ring-red-950/[0.06]">
+                      <span className="grid h-11 w-11 shrink-0 place-items-center rounded-2xl bg-white text-[#d70717] shadow-[0_10px_22px_rgba(151,14,32,0.08)] ring-1 ring-red-100">
                         <FileText className="h-5 w-5" strokeWidth={2.4} />
                       </span>
                       <div className="min-w-0 flex-1">
@@ -871,7 +864,7 @@ export function UserAgentCreditPageContent({ name, email, phone, storeName = "",
                             setLatestApplication(item);
                             setActiveCreditTab(hasOperatorDocumentRevision(item) ? "new" : "status");
                           }}
-                          className="rounded-full border border-red-100 bg-red-50 px-3 py-2 text-[10px] font-black text-[#d70717]"
+                          className="rounded-full bg-white px-3 py-2 text-[10px] font-black text-[#d70717] shadow-[0_8px_18px_rgba(151,14,32,0.08)] ring-1 ring-red-100"
                         >
                           {hasOperatorDocumentRevision(item) ? "Perbaiki Dokumen" : "Lihat Status"}
                         </button>
@@ -880,10 +873,19 @@ export function UserAgentCreditPageContent({ name, email, phone, storeName = "",
                   );
                 })
               ) : (
-                <div className="rounded-[24px] border border-dashed border-red-200 bg-red-50/40 px-4 py-10 text-center">
-                  <UserRound className="mx-auto h-9 w-9 text-[#d70717]" strokeWidth={2.2} />
+                <div className="rounded-[24px] bg-[linear-gradient(135deg,#fffafa_0%,#ffffff_55%,#fff3e7_100%)] px-4 py-10 text-center ring-1 ring-red-950/[0.06]">
+                  <span className="mx-auto grid h-14 w-14 place-items-center rounded-[20px] bg-white text-[#d70717] shadow-[0_12px_26px_rgba(151,14,32,0.10)] ring-1 ring-red-100">
+                    <UserRound className="h-7 w-7" strokeWidth={2.2} />
+                  </span>
                   <p className="mt-3 text-sm font-black text-slate-950">Belum ada pengajuan</p>
-                  <p className="mt-1 text-[11px] font-semibold text-slate-500">Mulai dari tab Daftar Baru untuk membuat pengajuan kredit saldo.</p>
+                  <p className="mx-auto mt-1 max-w-[230px] text-[11px] font-semibold leading-4 text-slate-500">Tambahkan pengajuan agent pertama untuk mulai proses modal operasional.</p>
+                  <button
+                    type="button"
+                    onClick={() => setActiveCreditTab("new")}
+                    className="mt-4 inline-flex h-10 items-center justify-center rounded-full bg-[linear-gradient(135deg,#d70717,#ff6a00)] px-5 text-xs font-black text-white shadow-[0_12px_24px_rgba(215,7,23,0.16)]"
+                  >
+                    Daftar Baru
+                  </button>
                 </div>
               )}
             </div>
