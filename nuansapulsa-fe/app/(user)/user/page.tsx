@@ -24,7 +24,7 @@ function formatIDR(value: number) {
 
 function UserHomeHero({ saldo }: { saldo: number }) {
   return (
-    <section className="relative isolate h-[300px] overflow-hidden rounded-b-[30px] bg-[#e50917] text-white shadow-[0_18px_42px_rgba(151,14,32,0.24)]">
+    <section className="relative isolate h-[260px] overflow-hidden rounded-b-[30px] bg-[#e50917] text-white shadow-[0_18px_42px_rgba(151,14,32,0.24)]">
       <div className="absolute inset-0 -z-20 bg-[linear-gradient(140deg,#ff2115_0%,#ed0b18_48%,#aa0d23_100%)]" />
       <div className="absolute inset-x-0 bottom-0 -z-10 h-32 bg-[linear-gradient(165deg,transparent_18%,rgba(255,166,0,0.54)_19%,rgba(255,111,0,0.32)_40%,rgba(179,10,28,0.12)_62%,transparent_76%)]" />
       <div className="absolute right-2 top-2 -z-10 h-56 w-44 opacity-22">
@@ -58,7 +58,7 @@ function UserHomeHero({ saldo }: { saldo: number }) {
           href="/user/saldo"
           prefetch={false}
           aria-label="Lihat saldo akun"
-          className="absolute right-0 top-[74px] z-20 w-[clamp(178px,51vw,208px)] rounded-[18px] bg-white px-3 py-2.5 text-left text-slate-700 shadow-[0_18px_40px_rgba(90,6,20,0.22)] ring-1 ring-white/80"
+          className="absolute right-0 top-[52px] z-20 w-[clamp(178px,51vw,208px)] rounded-[18px] bg-white px-3 py-2.5 text-left text-slate-700 shadow-[0_18px_40px_rgba(90,6,20,0.22)] ring-1 ring-white/80"
         >
           <span className="flex items-start gap-2.5">
             <span className="relative mt-0.5 h-8 w-8 shrink-0 overflow-hidden rounded-full bg-[#fff1f2]">
