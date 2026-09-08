@@ -18,7 +18,12 @@ import {
   Home,
   Landmark,
   Loader2,
+  Building2,
+  IdCard,
+  Mail,
+  MapPin,
   PenLine,
+  Phone,
   QrCode,
   RotateCcw,
   SearchCheck,
@@ -49,25 +54,44 @@ type InputProps = {
 };
 
 function Field({ name, label, placeholder, defaultValue = "", className = "", textarea = false }: InputProps) {
+  const fieldIconByName: Record<string, typeof UserRound> = {
+    agent_name: UserRound,
+    store_name: Building2,
+    nik: IdCard,
+    whatsapp: Phone,
+    email: Mail,
+    home_address: MapPin,
+    store_address: Store,
+    family_name: UserRound,
+    family_whatsapp: Phone,
+    family_address: MapPin,
+  };
+  const Icon = fieldIconByName[name] || FileText;
+
   return (
     <label className={`block ${className}`}>
-      <span className="text-[10px] font-black text-slate-950">{label}</span>
+      <span className="text-[11px] font-black text-slate-950">{label}</span>
+      <span className="mt-2 flex gap-3 rounded-[22px] border border-red-950/[0.06] bg-[linear-gradient(135deg,#fffafa_0%,#ffffff_62%,#fff6ee_100%)] px-3 py-3 shadow-[0_10px_22px_rgba(151,14,32,0.055)] transition focus-within:border-red-200 focus-within:ring-4 focus-within:ring-red-100">
+        <span className="grid h-10 w-10 shrink-0 place-items-center rounded-2xl bg-white text-[#d70717] shadow-[0_8px_18px_rgba(151,14,32,0.08)] ring-1 ring-red-100">
+          <Icon className="h-5 w-5" strokeWidth={2.35} />
+        </span>
       {textarea ? (
         <textarea
           name={name}
           defaultValue={defaultValue}
           placeholder={placeholder}
           rows={4}
-          className="mt-2 w-full resize-none rounded-2xl border border-slate-200 bg-[#fffafa] px-4 py-3 text-sm font-bold text-slate-950 outline-none transition placeholder:text-slate-400 focus:border-[#d70717] focus:ring-4 focus:ring-red-100"
+          className="min-h-24 w-full resize-none bg-transparent pt-1 text-sm font-bold leading-5 text-slate-950 outline-none placeholder:text-slate-400"
         />
       ) : (
         <input
           name={name}
           defaultValue={defaultValue}
           placeholder={placeholder}
-          className="mt-2 h-12 w-full rounded-2xl border border-slate-200 bg-[#fffafa] px-4 text-sm font-bold text-slate-950 outline-none transition placeholder:text-slate-400 focus:border-[#d70717] focus:ring-4 focus:ring-red-100"
+          className="h-10 min-w-0 flex-1 bg-transparent text-sm font-bold text-slate-950 outline-none placeholder:text-slate-400"
         />
       )}
+      </span>
     </label>
   );
 }
@@ -75,11 +99,15 @@ function Field({ name, label, placeholder, defaultValue = "", className = "", te
 function SelectField({ name, label, defaultValue = "", className = "", options }: { name: string; label: string; defaultValue?: string; className?: string; options: string[] }) {
   return (
     <label className={`block ${className}`}>
-      <span className="text-[10px] font-black text-slate-950">{label}</span>
+      <span className="text-[11px] font-black text-slate-950">{label}</span>
+      <span className="mt-2 flex gap-3 rounded-[22px] border border-red-950/[0.06] bg-[linear-gradient(135deg,#fffafa_0%,#ffffff_62%,#fff6ee_100%)] px-3 py-3 shadow-[0_10px_22px_rgba(151,14,32,0.055)] focus-within:border-red-200 focus-within:ring-4 focus-within:ring-red-100">
+        <span className="grid h-10 w-10 shrink-0 place-items-center rounded-2xl bg-white text-[#d70717] shadow-[0_8px_18px_rgba(151,14,32,0.08)] ring-1 ring-red-100">
+          <UsersRound className="h-5 w-5" strokeWidth={2.35} />
+        </span>
       <select
         name={name}
         defaultValue={defaultValue}
-        className="mt-2 h-12 w-full rounded-2xl border border-slate-200 bg-[#fffafa] px-4 text-sm font-bold text-slate-950 outline-none transition focus:border-[#d70717] focus:ring-4 focus:ring-red-100"
+        className="h-10 min-w-0 flex-1 bg-transparent text-sm font-bold text-slate-950 outline-none"
       >
         <option value="" disabled>
           Pilih hubungan
@@ -90,6 +118,7 @@ function SelectField({ name, label, defaultValue = "", className = "", options }
           </option>
         ))}
       </select>
+      </span>
     </label>
   );
 }
@@ -1026,15 +1055,15 @@ export function UserAgentCreditPageContent({ name, email, phone, storeName = "",
             </div>
           </div>
 
-          <div className="grid grid-cols-1 gap-3 sm:grid-cols-2">
+          <div className="grid grid-cols-1 gap-3">
             <Field name="agent_name" label="Nama Agent" placeholder="Nama agent" defaultValue={applicantText("agent_name", name)} />
             <Field name="store_name" label="Nama Toko" placeholder="Nama toko/usaha" defaultValue={applicantText("store_name", storeName)} />
             <Field name="nik" label="NIK" placeholder="16 digit NIK" defaultValue={applicantText("nik")} />
             <Field name="whatsapp" label="Nomor WA" placeholder="08xxxxxxxxxx" defaultValue={applicantText("whatsapp", phone !== "-" ? phone : "")} />
             <Field name="email" label="Email" placeholder="email@domain.com" defaultValue={applicantText("email", email !== "-" ? email : "")} />
-            <Field name="home_address" label="Alamat Rumah" placeholder="Alamat lengkap rumah" defaultValue={applicantText("home_address")} textarea className="sm:col-span-2" />
-            <Field name="store_address" label="Alamat Toko" placeholder="Alamat lengkap toko" defaultValue={applicantText("store_address")} textarea className="sm:col-span-2" />
-            <div className="rounded-[22px] border border-red-100 bg-[linear-gradient(135deg,#fff1ee,#ffffff)] p-4 sm:col-span-2">
+            <Field name="home_address" label="Alamat Rumah" placeholder="Alamat lengkap rumah" defaultValue={applicantText("home_address")} textarea />
+            <Field name="store_address" label="Alamat Toko" placeholder="Alamat lengkap toko" defaultValue={applicantText("store_address")} textarea />
+            <div className="rounded-[24px] border border-red-950/[0.06] bg-[linear-gradient(135deg,#fffafa_0%,#ffffff_62%,#fff6ee_100%)] p-4 shadow-[0_10px_22px_rgba(151,14,32,0.055)]">
               <p className="text-[10px] font-black uppercase tracking-[0.16em] text-red-600">Nominal Kredit Saldo</p>
               <label className="mt-3 flex h-14 items-center overflow-hidden rounded-2xl border border-red-200 bg-white focus-within:border-red-500 focus-within:ring-4 focus-within:ring-red-100">
                 <span className="grid h-full shrink-0 place-items-center border-r border-red-100 bg-red-50 px-4 text-sm font-black text-red-700">Rp</span>
@@ -1069,11 +1098,11 @@ export function UserAgentCreditPageContent({ name, email, phone, storeName = "",
               <p className="mt-0.5 text-[11px] font-semibold text-slate-400">Wajib diisi untuk kebutuhan verifikasi.</p>
             </div>
           </div>
-          <div className="grid grid-cols-1 gap-3 sm:grid-cols-2">
+          <div className="grid grid-cols-1 gap-3">
             <Field name="family_name" label="Nama" placeholder="Nama keluarga" defaultValue={applicantText("family_name")} />
             <Field name="family_whatsapp" label="Nomor WA" placeholder="08xxxxxxxxxx" defaultValue={applicantText("family_whatsapp")} />
             <SelectField name="family_relation" label="Hubungan" defaultValue={applicantText("family_relation")} options={["Orang tua", "Saudara", "Pasangan", "Anak", "Kerabat"]} />
-            <Field name="family_address" label="Alamat" placeholder="Alamat keluarga yang dapat dihubungi" defaultValue={applicantText("family_address")} textarea className="sm:col-span-2" />
+            <Field name="family_address" label="Alamat" placeholder="Alamat keluarga yang dapat dihubungi" defaultValue={applicantText("family_address")} textarea />
           </div>
         </section>
 
