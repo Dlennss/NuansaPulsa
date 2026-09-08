@@ -372,7 +372,7 @@ function MarketingSurveyDocumentUploader({ item, onComplete }: { item: AgentCred
         type="button"
         onClick={saveDocuments}
         disabled={!canSave || busy}
-        className="mt-3 inline-flex h-11 w-full items-center justify-center gap-2 rounded-2xl bg-[linear-gradient(135deg,#d70717,#16a34a)] text-xs font-black text-white shadow-[0_12px_22px_rgba(215,7,23,0.16)] transition hover:-translate-y-0.5 disabled:translate-y-0 disabled:bg-none disabled:bg-slate-200 disabled:text-slate-500 disabled:shadow-none"
+        className="mt-3 inline-flex h-11 w-full items-center justify-center gap-2 rounded-2xl bg-[linear-gradient(135deg,#d70717,#ff6a00)] text-xs font-black text-white shadow-[0_12px_22px_rgba(215,7,23,0.16)] transition hover:-translate-y-0.5 disabled:translate-y-0 disabled:bg-none disabled:bg-slate-200 disabled:text-slate-500 disabled:shadow-none"
       >
         {busy ? <Loader2 className="h-4 w-4 animate-spin" /> : <Upload className="h-4 w-4" />}
         {busy ? "Menyimpan Dokumen" : canSave ? "Simpan Dokumen Marketing" : `Lengkapi ${remainingCount} foto lagi`}

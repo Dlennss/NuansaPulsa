@@ -200,8 +200,8 @@ export async function AnalystCreditWorkspace({ view }: { view: AnalystCreditWork
   const totalOutstandingAmount = activeCredits.reduce((total, item) => total + Number(item.outstanding_amount || 0), 0);
 
   const stats = [
-    { label: view === "decision" ? "Berkas Masuk" : "Perlu Keputusan", value: String(analysisItems.length), hint: "Dikirim agent", icon: ShieldCheck, tone: "from-emerald-500 to-lime-400" },
-    { label: "Kredit Diterima", value: String(approvedItems.length), hint: formatIDR(nominalApproved), icon: BadgeCheck, tone: "from-sky-500 to-cyan-400" },
+    { label: view === "decision" ? "Berkas Masuk" : "Perlu Keputusan", value: String(analysisItems.length), hint: "Dikirim agent", icon: ShieldCheck, tone: "from-[#d70717] to-[#ff6a00]" },
+    { label: "Kredit Diterima", value: String(approvedItems.length), hint: formatIDR(nominalApproved), icon: BadgeCheck, tone: "from-[#ff6a00] to-[#ffc400]" },
     { label: "Perlu Follow-up", value: String(followUpCredits.length), hint: "Tidak transaksi 2 hari atau lebih", icon: WalletCards, tone: "from-amber-500 to-orange-400" },
     { label: "Ditolak", value: String(rejectedItems.length), hint: "Perlu catatan", icon: ShieldAlert, tone: "from-rose-500 to-orange-500" },
   ];
@@ -226,37 +226,52 @@ export async function AnalystCreditWorkspace({ view }: { view: AnalystCreditWork
   ];
 
   return (
-    <main className="min-h-screen overflow-x-hidden bg-[#eef7f2] p-0 text-slate-950 sm:p-5 lg:p-7">
+    <main className="min-h-screen overflow-x-hidden bg-[#fff6f4] p-0 text-slate-950 sm:p-5 lg:p-7">
       <section className="mx-auto flex w-full max-w-7xl min-w-0 flex-col gap-3 sm:gap-5">
         {view === "decision" ? (
-          <div className="rounded-[26px] border border-emerald-100 bg-white/80 p-5 shadow-[0_18px_50px_rgba(15,23,42,0.06)] backdrop-blur sm:p-6">
-            <p className="text-[11px] font-black uppercase tracking-[0.26em] text-emerald-700">Operator Kredit</p>
-            <h1 className="mt-2 text-2xl font-black tracking-normal text-slate-950 sm:text-3xl">Keputusan Akhir Kredit Agent</h1>
-            <p className="mt-2 max-w-2xl text-sm font-semibold leading-6 text-slate-500">
-              Operator menjadi pintu akhir. Cek data agent, dokumen, tanda tangan marketing, riwayat pembayaran, lalu putuskan diterima atau ditolak.
-            </p>
+          <div className="overflow-hidden rounded-[26px] border border-red-950/[0.06] bg-white shadow-[0_18px_50px_rgba(151,14,32,0.08)]">
+            <div className="h-1.5 bg-[linear-gradient(90deg,#d70717,#ff6a00,#ffc400)]" />
+            <div className="flex flex-col gap-4 p-5 sm:flex-row sm:items-center sm:justify-between sm:p-6">
+              <div>
+                <p className="text-[11px] font-black uppercase tracking-[0.24em] text-[#d70717]">Operator Kredit</p>
+                <h1 className="mt-2 text-2xl font-black tracking-normal text-slate-950 sm:text-3xl">Pusat Keputusan Agent</h1>
+                <p className="mt-2 max-w-2xl text-sm font-semibold leading-6 text-slate-500">
+                  Cek dokumen, validasi catatan, lalu beri keputusan akhir dengan alur yang rapi.
+                </p>
+              </div>
+              <div className="grid grid-cols-2 gap-2 sm:w-64">
+                <div className="rounded-2xl bg-[#fff6f4] px-3 py-3 ring-1 ring-red-950/[0.06]">
+                  <p className="text-[10px] font-black text-slate-400">Masuk</p>
+                  <p className="mt-1 text-xl font-black text-slate-950">{analysisItems.length}</p>
+                </div>
+                <div className="rounded-2xl bg-[#fff6f4] px-3 py-3 ring-1 ring-red-950/[0.06]">
+                  <p className="text-[10px] font-black text-slate-400">Diterima</p>
+                  <p className="mt-1 text-xl font-black text-[#d70717]">{approvedItems.length}</p>
+                </div>
+              </div>
+            </div>
           </div>
         ) : null}
-        <div className="min-w-0 overflow-hidden border border-emerald-100 bg-white shadow-[0_24px_60px_rgba(15,23,42,0.08)] sm:rounded-[28px]">
-          <div className="relative isolate overflow-hidden bg-[radial-gradient(circle_at_88%_6%,rgba(190,242,100,0.52),transparent_28%),linear-gradient(135deg,#052e26_0%,#047857_56%,#31c653_115%)] px-4 py-5 text-white sm:px-7 lg:px-9 lg:py-8">
+        <div className="min-w-0 overflow-hidden border border-red-950/[0.06] bg-white shadow-[0_24px_60px_rgba(151,14,32,0.10)] sm:rounded-[28px]">
+          <div className="relative isolate overflow-hidden bg-[radial-gradient(circle_at_86%_5%,rgba(255,196,0,0.36),transparent_30%),linear-gradient(135deg,#b20717_0%,#e50917_54%,#ff6a00_118%)] px-4 py-5 text-white sm:px-7 lg:px-9 lg:py-8">
             <div className="absolute -right-14 -top-20 h-56 w-56 rounded-full border border-white/20 bg-white/10" />
             {view === "decision" ? <div className="absolute bottom-0 right-28 h-32 w-32 rounded-full border border-white/15 bg-white/8" /> : null}
             <div className="relative flex flex-col gap-6 lg:flex-row lg:items-center lg:justify-between">
               <div className="max-w-2xl">
-                <p className="mb-3 inline-flex items-center gap-2 rounded-full border border-white/15 bg-white/12 px-3 py-1 text-[11px] font-black uppercase tracking-[0.24em] text-lime-100">
+                <p className="mb-3 inline-flex items-center gap-2 rounded-full border border-white/18 bg-white/14 px-3 py-1 text-[11px] font-black uppercase tracking-[0.24em] text-yellow-100">
                   <Icon className="h-3.5 w-3.5" />
                   {config.eyebrow}
                 </p>
                 <h1 className="text-3xl font-black tracking-normal sm:text-4xl">{config.title}</h1>
-                <p className="mt-3 max-w-xl text-sm font-medium leading-6 text-emerald-50/90 sm:text-base">{config.desc}</p>
+                <p className="mt-3 max-w-xl text-sm font-medium leading-6 text-white/88 sm:text-base">{config.desc}</p>
               </div>
               <div className="rounded-3xl border border-white/20 bg-white/12 p-4 shadow-[inset_0_1px_0_rgba(255,255,255,0.25)] backdrop-blur">
                 <div className="flex items-center gap-3">
-                  <div className="grid h-14 w-14 place-items-center rounded-2xl bg-white text-emerald-700 shadow-lg">
+                  <div className="grid h-14 w-14 place-items-center rounded-2xl bg-white text-[#d70717] shadow-lg">
                     <Icon className="h-7 w-7" />
                   </div>
                   <div>
-                    <p className="text-xs font-bold uppercase tracking-[0.18em] text-lime-100">{view === "decision" ? "Ruang Keputusan" : "Panel Operator"}</p>
+                    <p className="text-xs font-bold uppercase tracking-[0.18em] text-yellow-100">{view === "decision" ? "Ruang Keputusan" : "Panel Operator"}</p>
                     <p className="text-xl font-black">{view === "decision" ? "Final Kredit" : "NuansaPulsa"}</p>
                   </div>
                 </div>
@@ -288,11 +303,11 @@ export async function AnalystCreditWorkspace({ view }: { view: AnalystCreditWork
             ) : null}
 
             {view === "decision" ? (
-              <div className="hidden overflow-hidden rounded-[28px] border border-emerald-200 bg-[linear-gradient(135deg,#ffffff_0%,#f2fff8_62%,#e4f8ee_100%)] p-4 shadow-[0_16px_36px_rgba(6,78,59,0.06)] sm:p-5">
+              <div className="hidden overflow-hidden rounded-[28px] border border-red-100 bg-[linear-gradient(135deg,#ffffff_0%,#fff6f4_62%,#fff3df_100%)] p-4 shadow-[0_16px_36px_rgba(151,14,32,0.06)] sm:p-5">
                 <div className="relative">
-                  <div className="absolute -right-16 -top-20 hidden h-44 w-44 rounded-full bg-emerald-100/70 sm:block" />
+                  <div className="absolute -right-16 -top-20 hidden h-44 w-44 rounded-full bg-orange-100/70 sm:block" />
                   <div className="relative">
-                    <p className="text-[11px] font-black uppercase tracking-[0.26em] text-emerald-700">Meja Keputusan Operator</p>
+                    <p className="text-[11px] font-black uppercase tracking-[0.26em] text-[#d70717]">Meja Keputusan Operator</p>
                     <h2 className="mt-2 text-2xl font-black tracking-normal text-slate-950">Kontrol Kelayakan & Keputusan Akhir</h2>
                     <p className="mt-2 max-w-3xl text-sm font-semibold leading-6 text-slate-500">
                       Semua pengajuan di sini sudah melewati pendampingan marketing. Periksa identitas, dokumen inti, selfie pertemuan, tanda tangan, nominal, dan catatan lapangan sebelum memberi keputusan.
@@ -305,7 +320,7 @@ export async function AnalystCreditWorkspace({ view }: { view: AnalystCreditWork
                     const CardIcon = card.icon;
                     return (
                       <div key={card.label} className="rounded-3xl border border-slate-200 bg-white p-4 shadow-[0_14px_30px_rgba(15,23,42,0.05)]">
-                        <div className="grid h-11 w-11 place-items-center rounded-2xl bg-emerald-50 text-emerald-700">
+                        <div className="grid h-11 w-11 place-items-center rounded-2xl bg-red-50 text-[#d70717]">
                           <CardIcon className="h-5 w-5" />
                         </div>
                         <p className="mt-4 text-xs font-black text-slate-500">{card.label}</p>
@@ -318,14 +333,14 @@ export async function AnalystCreditWorkspace({ view }: { view: AnalystCreditWork
 
                 <div className="mt-6">
                   <div className="mb-3 flex flex-col gap-1 sm:flex-row sm:items-center sm:gap-3">
-                    <p className="text-[11px] font-black uppercase tracking-[0.24em] text-emerald-700">Berkas Prioritas</p>
+                    <p className="text-[11px] font-black uppercase tracking-[0.24em] text-[#d70717]">Berkas Prioritas</p>
                     <p className="text-xs font-semibold text-slate-400">Periksa yang paling siap lebih dulu.</p>
                   </div>
                   <div className="grid grid-cols-1 gap-3 lg:grid-cols-2">
                     <div className="rounded-3xl border border-slate-200 bg-white p-4">
                       <div className="flex items-center justify-between gap-3">
                         <h3 className="text-base font-black text-slate-950">Menunggu keputusan operator</h3>
-                        <span className="rounded-full bg-emerald-50 px-3 py-1 text-xs font-black text-emerald-700">{priorityReviewItems.length} data</span>
+                        <span className="rounded-full bg-red-50 px-3 py-1 text-xs font-black text-[#d70717]">{priorityReviewItems.length} data</span>
                       </div>
                       <div className="mt-4 space-y-2">
                         {priorityReviewItems.length ? (
@@ -335,7 +350,7 @@ export async function AnalystCreditWorkspace({ view }: { view: AnalystCreditWork
                                 <p className="truncate text-sm font-black text-slate-950">{getAgentName(item)}</p>
                                 <p className="truncate text-xs font-semibold text-slate-500">{getAgentStore(item)}</p>
                               </div>
-                              <p className="shrink-0 text-sm font-black text-emerald-700">{formatIDR(Number(item.requested_amount || item.recommended_amount || 0))}</p>
+                              <p className="shrink-0 text-sm font-black text-[#d70717]">{formatIDR(Number(item.requested_amount || item.recommended_amount || 0))}</p>
                             </div>
                           ))
                         ) : (
@@ -347,7 +362,7 @@ export async function AnalystCreditWorkspace({ view }: { view: AnalystCreditWork
                     <div className="rounded-3xl border border-slate-200 bg-white p-4">
                       <div className="flex items-center justify-between gap-3">
                         <h3 className="text-base font-black text-slate-950">Kredit aktif dipantau</h3>
-                        <span className="rounded-full bg-lime-50 px-3 py-1 text-xs font-black text-lime-700">{activePriorityItems.length} aktif</span>
+                        <span className="rounded-full bg-orange-50 px-3 py-1 text-xs font-black text-orange-700">{activePriorityItems.length} aktif</span>
                       </div>
                       <div className="mt-4 space-y-2">
                         {activePriorityItems.length ? (
@@ -373,10 +388,10 @@ export async function AnalystCreditWorkspace({ view }: { view: AnalystCreditWork
               </div>
             ) : view === "queue" ? (
               <div className="space-y-4">
-                <div className="relative overflow-hidden rounded-[28px] border border-emerald-200 bg-[linear-gradient(135deg,#ffffff_0%,#f5fff9_68%,#e6fbef_100%)] p-5 shadow-[0_16px_36px_rgba(6,78,59,0.06)]">
-                  <div className="absolute -right-12 -top-16 h-40 w-40 rounded-full bg-lime-100/70" />
+                <div className="relative overflow-hidden rounded-[28px] border border-red-100 bg-[linear-gradient(135deg,#ffffff_0%,#fff6f4_68%,#fff3df_100%)] p-5 shadow-[0_16px_36px_rgba(151,14,32,0.06)]">
+                  <div className="absolute -right-12 -top-16 h-40 w-40 rounded-full bg-orange-100/70" />
                   <div className="relative">
-                    <p className="text-[11px] font-black uppercase tracking-[0.26em] text-emerald-700">Antrean Berkas</p>
+                    <p className="text-[11px] font-black uppercase tracking-[0.26em] text-[#d70717]">Antrean Berkas</p>
                     <h2 className="mt-2 text-2xl font-black tracking-normal text-slate-950">Berkas Siap Dicek Operator</h2>
                     <p className="mt-2 max-w-3xl text-sm font-semibold leading-6 text-slate-500">
                       Cek antrean dari marketing: data agent, dokumen KTP, foto toko, selfie bersama marketing, tanda tangan, nominal kredit, dan catatan lapangan.
@@ -384,13 +399,13 @@ export async function AnalystCreditWorkspace({ view }: { view: AnalystCreditWork
                   </div>
                 </div>
 
-                <div className="rounded-[26px] border border-emerald-100 bg-slate-50 p-4">
+                <div className="rounded-[26px] border border-red-100 bg-slate-50 p-4">
                   <div className="flex flex-col gap-3 sm:flex-row sm:items-center">
-                    <span className="grid h-14 w-14 shrink-0 place-items-center rounded-2xl bg-emerald-50 text-emerald-700">
+                    <span className="grid h-14 w-14 shrink-0 place-items-center rounded-2xl bg-red-50 text-[#d70717]">
                       <ClipboardList className="h-7 w-7" />
                     </span>
                     <div>
-                      <p className="text-[11px] font-black uppercase tracking-[0.2em] text-emerald-700">Fokus Operator</p>
+                      <p className="text-[11px] font-black uppercase tracking-[0.2em] text-[#d70717]">Fokus Operator</p>
                       <h3 className="text-xl font-black text-slate-950">{analysisItems.length} pengajuan perlu ditangani</h3>
                       <p className="mt-1 text-xs font-semibold leading-5 text-slate-500">
                         Mulai dari pengajuan yang paling lengkap. Setelah dicek, buka detail dan beri keputusan akhir melalui tombol setuju atau tolak.
@@ -410,7 +425,7 @@ export async function AnalystCreditWorkspace({ view }: { view: AnalystCreditWork
                             <p className="mt-1 text-2xl font-black text-slate-950">{card.value}</p>
                             <p className="mt-1 text-xs font-semibold leading-5 text-slate-400">{card.hint}</p>
                           </div>
-                          <span className="grid h-11 w-11 shrink-0 place-items-center rounded-2xl bg-emerald-50 text-emerald-700">
+                          <span className="grid h-11 w-11 shrink-0 place-items-center rounded-2xl bg-red-50 text-[#d70717]">
                             <CardIcon className="h-5 w-5" />
                           </span>
                         </div>
@@ -422,22 +437,22 @@ export async function AnalystCreditWorkspace({ view }: { view: AnalystCreditWork
                 <div className="rounded-[28px] border border-slate-200 bg-white p-4">
                   <div className="mb-3 flex flex-col gap-1 sm:flex-row sm:items-center sm:justify-between">
                     <div>
-                      <p className="text-[11px] font-black uppercase tracking-[0.24em] text-emerald-700">Prioritas Antrean</p>
+                      <p className="text-[11px] font-black uppercase tracking-[0.24em] text-[#d70717]">Prioritas Antrean</p>
                       <h3 className="mt-1 text-lg font-black text-slate-950">Pengajuan paling baru dari marketing</h3>
                     </div>
-                    <span className="w-fit rounded-full bg-emerald-800 px-4 py-2 text-xs font-black uppercase tracking-[0.08em] text-white">Operator</span>
+                    <span className="w-fit rounded-full bg-[#b20717] px-4 py-2 text-xs font-black uppercase tracking-[0.08em] text-white">Operator</span>
                   </div>
                   <div className="space-y-2">
                     {priorityReviewItems.length ? (
                       priorityReviewItems.map((item) => (
                         <div key={item.id} className="flex flex-col gap-3 rounded-3xl border border-slate-100 bg-slate-50 p-4 sm:flex-row sm:items-center sm:justify-between">
                           <div className="min-w-0">
-                            <p className="text-[11px] font-black uppercase tracking-[0.14em] text-emerald-700">KSA-{item.id}</p>
+                            <p className="text-[11px] font-black uppercase tracking-[0.14em] text-[#d70717]">KSA-{item.id}</p>
                             <p className="mt-1 truncate text-base font-black text-slate-950">{getAgentName(item)}</p>
                             <p className="mt-1 truncate text-xs font-semibold text-slate-500">{getAgentStore(item)}</p>
                             <p className="mt-3 text-xs font-bold text-slate-500">Menunggu keputusan operator</p>
                           </div>
-                          <p className="shrink-0 text-lg font-black text-emerald-700">{formatIDR(Number(item.requested_amount || item.recommended_amount || 0))}</p>
+                          <p className="shrink-0 text-lg font-black text-[#d70717]">{formatIDR(Number(item.requested_amount || item.recommended_amount || 0))}</p>
                         </div>
                       ))
                     ) : (
@@ -448,10 +463,10 @@ export async function AnalystCreditWorkspace({ view }: { view: AnalystCreditWork
               </div>
             ) : view === "repayment" ? (
               <div className="space-y-4">
-                <div className="relative overflow-hidden rounded-[28px] border border-emerald-200 bg-[linear-gradient(135deg,#ffffff_0%,#f7fff9_66%,#e8fbef_100%)] p-5 shadow-[0_16px_36px_rgba(6,78,59,0.06)]">
-                  <div className="absolute -right-12 -top-16 h-40 w-40 rounded-full bg-lime-100/80" />
+                <div className="relative overflow-hidden rounded-[28px] border border-red-100 bg-[linear-gradient(135deg,#ffffff_0%,#fff6f4_66%,#fff3df_100%)] p-5 shadow-[0_16px_36px_rgba(151,14,32,0.06)]">
+                  <div className="absolute -right-12 -top-16 h-40 w-40 rounded-full bg-orange-100/80" />
                   <div className="relative">
-                    <p className="text-[11px] font-black uppercase tracking-[0.26em] text-emerald-700">Aktivitas Agent</p>
+                    <p className="text-[11px] font-black uppercase tracking-[0.26em] text-[#d70717]">Aktivitas Agent</p>
                     <h2 className="mt-2 text-2xl font-black tracking-normal text-slate-950">Monitor Aktivitas Modal</h2>
                     <p className="mt-2 max-w-3xl text-sm font-semibold leading-6 text-slate-500">
                       Pantau status aktivitas agent, transaksi terakhir, dan agent yang perlu di-follow-up.
@@ -459,13 +474,13 @@ export async function AnalystCreditWorkspace({ view }: { view: AnalystCreditWork
                   </div>
                 </div>
 
-                <div className="rounded-[28px] border border-emerald-100 bg-slate-50 p-4 sm:p-5">
+                <div className="rounded-[28px] border border-red-100 bg-slate-50 p-4 sm:p-5">
                   <div className="mb-5 flex flex-col gap-3 sm:flex-row sm:items-start">
-                    <span className="grid h-14 w-14 shrink-0 place-items-center rounded-2xl bg-emerald-50 text-emerald-700">
+                    <span className="grid h-14 w-14 shrink-0 place-items-center rounded-2xl bg-red-50 text-[#d70717]">
                       <ReceiptText className="h-7 w-7" />
                     </span>
                     <div>
-                      <p className="text-[11px] font-black uppercase tracking-[0.24em] text-emerald-700">Monitor Saldo Kredit</p>
+                      <p className="text-[11px] font-black uppercase tracking-[0.24em] text-[#d70717]">Monitor Saldo Kredit</p>
                       <h3 className="text-2xl font-black tracking-normal text-slate-950">Aktivitas Agent</h3>
                       <p className="mt-1 max-w-3xl text-sm font-semibold leading-6 text-slate-500">
                         Modal berjalan selama agent aktif menjadi mitra. Buka detail untuk melihat aktivitas dan status agent.
@@ -484,7 +499,7 @@ export async function AnalystCreditWorkspace({ view }: { view: AnalystCreditWork
                               <p className="mt-1 text-2xl font-black text-slate-950">{card.value}</p>
                               <p className="mt-1 text-xs font-semibold leading-5 text-slate-400">{card.hint}</p>
                             </div>
-                            <span className="grid h-11 w-11 shrink-0 place-items-center rounded-2xl bg-emerald-50 text-emerald-700">
+                            <span className="grid h-11 w-11 shrink-0 place-items-center rounded-2xl bg-red-50 text-[#d70717]">
                               <CardIcon className="h-5 w-5" />
                             </span>
                           </div>
@@ -519,9 +534,9 @@ export async function AnalystCreditWorkspace({ view }: { view: AnalystCreditWork
                 </div>
               </div>
             ) : (
-              <div className="rounded-3xl border border-emerald-100 bg-emerald-50/70 p-4">
+              <div className="rounded-3xl border border-red-100 bg-red-50/70 p-4">
                 <div className="flex items-start gap-3">
-                  <span className="grid h-11 w-11 shrink-0 place-items-center rounded-2xl bg-white text-emerald-700 shadow-sm">
+                  <span className="grid h-11 w-11 shrink-0 place-items-center rounded-2xl bg-white text-[#d70717] shadow-sm">
                     <ClipboardList className="h-5 w-5" />
                   </span>
                   <div>
@@ -550,3 +565,4 @@ export async function AnalystCreditWorkspace({ view }: { view: AnalystCreditWork
     </main>
   );
 }
+
