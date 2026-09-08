@@ -68,7 +68,7 @@ function UserHomeHero({ saldo }: { saldo: number }) {
           href="/user/saldo"
           prefetch={false}
           aria-label="Lihat saldo akun"
-          className="absolute right-0 top-[92px] w-[clamp(178px,51vw,208px)] rounded-[18px] bg-white px-3 py-2.5 text-left text-slate-700 shadow-[0_18px_40px_rgba(90,6,20,0.22)] ring-1 ring-white/80"
+          className="absolute right-0 top-[74px] z-20 w-[clamp(178px,51vw,208px)] rounded-[18px] bg-white px-3 py-2.5 text-left text-slate-700 shadow-[0_18px_40px_rgba(90,6,20,0.22)] ring-1 ring-white/80"
         >
           <span className="flex items-start gap-2.5">
             <span className="relative mt-0.5 h-8 w-8 shrink-0 overflow-hidden rounded-full bg-[#fff1f2]">
@@ -126,7 +126,7 @@ export default async function UserAppHomePage() {
     <main className="bg-[#fff6f4]">
       {session?.backendToken ? <UserAuthClientSync backendToken={session.backendToken} /> : null}
       <UserHomeHero saldo={saldo} />
-      <div className="-mt-10 space-y-4 px-4">
+      <div className="-mt-6 space-y-4 px-4">
         <UserHomeInfoStrip />
         <UserCategoryGrid items={categories} />
         <Suspense fallback={<GuestAdsCarouselSkeleton />}>
