@@ -72,15 +72,12 @@ export default function OperatorInactiveAgentsPage() {
   return (
     <main className="min-h-screen bg-[#fff6f4] p-3 text-slate-950 sm:p-5 lg:p-7">
       <div className="mx-auto w-full max-w-7xl space-y-5">
-        <header className="overflow-hidden rounded-[30px] border border-amber-200/70 bg-[linear-gradient(135deg,#fff7ed_0%,#fff1f2_58%,#ffffff_118%)] p-5 shadow-[0_18px_40px_rgba(151,14,32,0.08)] sm:p-7">
-          <div className="flex flex-col gap-4 sm:flex-row sm:items-center sm:justify-between">
-            <div className="flex min-w-0 items-center gap-4">
-              <span className="grid h-14 w-14 shrink-0 place-items-center rounded-2xl bg-[linear-gradient(135deg,#d70717,#ff6a00)] text-white shadow-[0_12px_24px_rgba(215,7,23,0.22)]"><AlertTriangle className="h-7 w-7" /></span>
-              <div><p className="text-[10px] font-black uppercase tracking-[0.22em] text-[#d70717]">Daftar Follow-up</p><h1 className="mt-1 text-2xl font-black text-slate-950 sm:text-3xl">Agent Tidak Aktif</h1><p className="mt-1 max-w-2xl text-sm font-semibold text-slate-500">Temukan agent yang perlu dihubungi dan bantu marketing melakukan follow-up.</p></div>
-            </div>
-            <div className="rounded-2xl border border-red-950/[0.06] bg-white px-4 py-3 text-left shadow-sm sm:text-right">
-              <p className="text-[10px] font-black uppercase tracking-[0.14em] text-slate-400">Filter aktif</p>
-              <p className="mt-1 text-lg font-black text-[#d70717]">{days} hari</p>
+        <header className="overflow-hidden rounded-[28px] bg-[radial-gradient(circle_at_88%_8%,rgba(255,196,0,0.36),transparent_30%),linear-gradient(135deg,#b20717_0%,#e50917_54%,#ff6a00_118%)] text-white shadow-[0_18px_42px_rgba(151,14,32,0.22)]">
+          <div className="flex flex-col gap-5 p-5 sm:flex-row sm:items-center sm:justify-between sm:p-7">
+            <div className="flex items-start gap-4"><span className="grid h-12 w-12 shrink-0 place-items-center rounded-2xl bg-white text-[#d70717] shadow-[0_12px_24px_rgba(0,0,0,0.12)]"><AlertTriangle className="h-6 w-6" /></span><div><p className="text-[10px] font-black uppercase tracking-[0.2em] text-yellow-100">Daftar Follow-up</p><h1 className="mt-1 text-2xl font-black sm:text-3xl">Agent Tidak Aktif</h1><p className="mt-2 max-w-2xl text-xs font-semibold leading-5 text-white/82 sm:text-sm">Temukan agent yang perlu dihubungi dan bantu marketing melakukan follow-up.</p></div></div>
+            <div className="rounded-2xl bg-white px-5 py-3 text-[#d70717] shadow-[0_12px_24px_rgba(0,0,0,0.12)]">
+              <p className="text-[10px] font-black uppercase tracking-[0.14em] text-slate-400">Filter Aktif</p>
+              <p className="mt-1 text-lg font-black">{days} hari</p>
             </div>
           </div>
         </header>

@@ -75,14 +75,10 @@ export default function OperatorAgentTransactionsPage() {
 
   return (
     <div className="space-y-5 bg-[#fff6f4] p-3 sm:p-5 lg:p-7">
-      <section className="overflow-hidden rounded-[30px] border border-red-950/[0.06] bg-white shadow-[0_18px_40px_rgba(151,14,32,0.09)]">
-        <div className="grid gap-4 border-l-[10px] border-[#d70717] p-5 sm:p-6 lg:grid-cols-[1fr_auto] lg:items-center">
-          <div className="min-w-0">
-            <p className="text-[10px] font-black uppercase tracking-[0.2em] text-[#d70717]">Monitoring Operator</p>
-            <h1 className="mt-1 text-2xl font-black text-slate-950 sm:text-3xl">Transaksi Terakhir Agent</h1>
-            <p className="mt-2 max-w-2xl text-sm font-semibold leading-6 text-slate-500">Pantau aktivitas terbaru setiap agent dalam bentuk log cepat, termasuk produk, tujuan, nominal, dan status dana.</p>
-          </div>
-          <button type="button" onClick={() => void load()} className="inline-flex h-11 items-center justify-center gap-2 rounded-2xl bg-[linear-gradient(135deg,#d70717,#ff6a00)] px-5 text-xs font-black text-white shadow-[0_12px_24px_rgba(215,7,23,0.22)] hover:brightness-95" disabled={loading}>
+      <section className="overflow-hidden rounded-[28px] bg-[radial-gradient(circle_at_88%_8%,rgba(255,196,0,0.36),transparent_30%),linear-gradient(135deg,#b20717_0%,#e50917_54%,#ff6a00_118%)] text-white shadow-[0_18px_42px_rgba(151,14,32,0.22)]">
+        <div className="flex flex-col gap-5 p-5 sm:flex-row sm:items-center sm:justify-between sm:p-7">
+          <div className="flex items-start gap-4"><span className="grid h-12 w-12 shrink-0 place-items-center rounded-2xl bg-white text-[#d70717] shadow-[0_12px_24px_rgba(0,0,0,0.12)]"><ReceiptText className="h-6 w-6" /></span><div><p className="text-[10px] font-black uppercase tracking-[0.2em] text-yellow-100">Monitoring Operator</p><h1 className="mt-1 text-2xl font-black sm:text-3xl">Transaksi Terakhir Agent</h1><p className="mt-2 max-w-2xl text-xs font-semibold leading-5 text-white/82 sm:text-sm">Pantau aktivitas terbaru setiap agent dalam bentuk log cepat, termasuk produk, tujuan, nominal, dan status dana.</p></div></div>
+          <button type="button" onClick={() => void load()} className="inline-flex h-11 shrink-0 items-center justify-center gap-2 rounded-2xl bg-white px-5 text-xs font-black text-[#d70717] shadow-[0_12px_24px_rgba(0,0,0,0.12)] transition hover:-translate-y-0.5 hover:bg-yellow-50" disabled={loading}>
             <RefreshCcw className={`h-4 w-4 ${loading ? "animate-spin" : ""}`} /> Muat Ulang
           </button>
         </div>

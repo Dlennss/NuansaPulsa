@@ -57,19 +57,12 @@ export function OperatorCreditPaymentsPage({ applications }: { applications: Age
   return (
     <main className="min-h-screen bg-[#fff6f4] p-3 text-slate-950 sm:p-6 lg:p-8">
       <div className="mx-auto w-full max-w-7xl space-y-4 sm:space-y-6">
-        <header className="overflow-hidden rounded-[30px] bg-[radial-gradient(circle_at_88%_10%,rgba(255,196,0,0.34),transparent_28%),linear-gradient(135deg,#b20717_0%,#e50917_56%,#ff6a00_116%)] p-5 text-white shadow-[0_22px_50px_rgba(215,7,23,0.22)] sm:p-7">
-          <div className="grid gap-5 lg:grid-cols-[1fr_280px] lg:items-center">
-            <div>
-              <p className="text-[10px] font-black uppercase tracking-[0.22em] text-yellow-100">Operator Kredit</p>
-              <h1 className="mt-2 text-2xl font-black sm:text-3xl">Pembayaran Kredit</h1>
-              <p className="mt-2 max-w-2xl text-xs font-semibold leading-5 text-white/86 sm:text-sm">
-                Pantau pelunasan sebagian agent dan periksa bukti pembayaran yang tersimpan.
-              </p>
-            </div>
-            <div className="rounded-[24px] border border-white/20 bg-white/14 p-4 shadow-[inset_0_1px_0_rgba(255,255,255,0.18)] backdrop-blur">
-              <p className="text-[10px] font-black uppercase tracking-[0.18em] text-yellow-100">Rekap Setoran</p>
-              <p className="mt-2 text-2xl font-black">{formatIDR(totalAmount)}</p>
-              <p className="mt-1 text-xs font-semibold text-white/78">{proofCount} bukti tersimpan dari {rows.length} pembayaran</p>
+        <header className="overflow-hidden rounded-[28px] bg-[radial-gradient(circle_at_88%_8%,rgba(255,196,0,0.36),transparent_30%),linear-gradient(135deg,#b20717_0%,#e50917_54%,#ff6a00_118%)] text-white shadow-[0_18px_42px_rgba(151,14,32,0.22)]">
+          <div className="flex flex-col gap-5 p-5 sm:flex-row sm:items-center sm:justify-between sm:p-7">
+            <div className="flex items-start gap-4"><span className="grid h-12 w-12 shrink-0 place-items-center rounded-2xl bg-white text-[#d70717] shadow-[0_12px_24px_rgba(0,0,0,0.12)]"><ReceiptText className="h-6 w-6" /></span><div><p className="text-[10px] font-black uppercase tracking-[0.2em] text-yellow-100">Operator Kredit</p><h1 className="mt-1 text-2xl font-black sm:text-3xl">Pembayaran Kredit</h1><p className="mt-2 max-w-2xl text-xs font-semibold leading-5 text-white/82 sm:text-sm">Pantau pelunasan sebagian agent dan periksa bukti pembayaran yang tersimpan.</p></div></div>
+            <div className="rounded-2xl bg-white px-5 py-3 text-[#d70717] shadow-[0_12px_24px_rgba(0,0,0,0.12)]">
+              <p className="text-[10px] font-black uppercase tracking-[0.14em] text-slate-400">Rekap Setoran</p>
+              <p className="mt-1 text-lg font-black">{formatIDR(totalAmount)}</p>
             </div>
           </div>
         </header>
