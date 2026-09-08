@@ -1,21 +1,32 @@
 "use client";
 
 import Link from "next/link";
+import Image from "next/image";
 import { usePathname } from "next/navigation";
-import { Grid2X2, History, House, UserRound, WalletCards } from "lucide-react";
 
 function navClass(active: boolean) {
   return active
-    ? "flex min-w-0 flex-col items-center gap-1.5 py-1 text-[#d70717]! visited:text-[#d70717]!"
-    : "flex min-w-0 flex-col items-center gap-1.5 py-1 text-slate-400! transition visited:text-slate-400! hover:text-[#b20717]!";
+    ? "relative flex min-w-0 flex-col items-center justify-center gap-1 text-[#d70717]! visited:text-[#d70717]!"
+    : "relative flex min-w-0 flex-col items-center justify-center gap-1 text-slate-400! transition visited:text-slate-400! hover:text-[#8f1023]!";
 }
 
 function isActivePath(pathname: string, basePath: string) {
   return pathname === basePath || pathname.startsWith(`${basePath}/`);
 }
 
-const iconClass = "h-5 w-5";
-const textClass = "text-[11px] font-bold leading-none";
+const iconClass = "relative h-6 w-6";
+const textClass = "max-w-full truncate text-[10px] font-black leading-none min-[380px]:text-[11px]";
+const activeIndicatorClass = "absolute bottom-1 left-1/2 h-1 w-7 -translate-x-1/2 rounded-full bg-[#d70717]";
+const navShellClass = "h-[72px] pb-2 min-[380px]:h-[78px]";
+const navSafeSpaceClass = "pointer-events-none h-[calc(112px+env(safe-area-inset-bottom))]";
+
+function NavIcon({ src }: { src: string }) {
+  return (
+    <span className={iconClass}>
+      <Image src={src} alt="" fill sizes="24px" className="object-contain" />
+    </span>
+  );
+}
 
 export function UserBottomNav() {
   const pathname = usePathname() || "";
@@ -28,36 +39,44 @@ export function UserBottomNav() {
     isActivePath(pathname, "/game");
   const saldoActive = isActivePath(pathname, "/user/saldo") || isActivePath(pathname, "/user/account/topup") || isActivePath(pathname, "/user/account/mutasi");
   const accountActive = isActivePath(pathname, "/user/account") && !saldoActive;
-  const homeActive = isActivePath(pathname, "/user") && !trxActive && !menuActive && !accountActive && !saldoActive;
+  const homeActive = pathname === "/user";
 
   return (
-    <section className="fixed bottom-0 left-1/2 z-[90] w-full max-w-md -translate-x-1/2 overflow-hidden rounded-t-[24px] border-t border-red-950/[0.06] bg-white/96 shadow-[0_-14px_34px_rgba(151,14,32,0.10)] backdrop-blur-xl md:bottom-0 md:w-97.5 md:max-w-none">
-      <div className="grid grid-cols-5 px-4 pb-[calc(0.55rem+env(safe-area-inset-bottom))] pt-2.5">
-        <Link href="/user" className={navClass(homeActive)}>
-          <House className={iconClass} strokeWidth={1.65} />
-          <span className={textClass}>Beranda</span>
-        </Link>
+    <>
+      <div aria-hidden="true" className={navSafeSpaceClass} />
+      <section className="fixed inset-x-0 bottom-0 z-[90] mx-auto w-full max-w-md bg-linear-to-t from-[#f7f7f7] via-[#f7f7f7] to-transparent px-3 pb-[calc(0.75rem+env(safe-area-inset-bottom))] pt-4 sm:px-4 md:w-97.5">
+        <div className={`grid grid-cols-5 items-stretch overflow-hidden rounded-[24px] border border-red-950/[0.06] bg-white px-2 pt-2 shadow-[0_-10px_28px_rgba(99,24,34,0.14)] ring-1 ring-white min-[380px]:px-3 ${navShellClass}`}>
+          <Link href="/user" prefetch={false} className={navClass(homeActive)}>
+            <NavIcon src="/nuansapulsa-assets/nav_beranda.png" />
+            <span className={textClass}>Beranda</span>
+            {homeActive ? <span className={activeIndicatorClass} /> : null}
+          </Link>
 
-        <Link href="/user/transaksi" className={navClass(trxActive)}>
-          <History className={iconClass} strokeWidth={1.65} />
-          <span className={textClass}>Riwayat</span>
-        </Link>
+          <Link href="/user/transaksi" prefetch={false} className={navClass(trxActive)}>
+            <NavIcon src="/nuansapulsa-assets/nav_riwayat.png" />
+            <span className={textClass}>Riwayat</span>
+            {trxActive ? <span className={activeIndicatorClass} /> : null}
+          </Link>
 
-        <Link href="/user/kategori" className={navClass(menuActive)}>
-          <Grid2X2 className={iconClass} strokeWidth={1.65} />
-          <span className={textClass}>Menu</span>
-        </Link>
+          <Link href="/user/kategori" prefetch={false} className={navClass(menuActive)}>
+            <NavIcon src="/nuansapulsa-assets/layanan_lainnya.png" />
+            <span className={textClass}>Menu</span>
+            {menuActive ? <span className={activeIndicatorClass} /> : null}
+          </Link>
 
-        <Link href="/user/saldo" className={navClass(saldoActive)}>
-          <WalletCards className={iconClass} strokeWidth={1.65} />
-          <span className={textClass}>Saldo</span>
-        </Link>
+          <Link href="/user/saldo" prefetch={false} className={navClass(saldoActive)}>
+            <NavIcon src="/nuansapulsa-assets/icon_saldo_simbol.png" />
+            <span className={textClass}>Saldo</span>
+            {saldoActive ? <span className={activeIndicatorClass} /> : null}
+          </Link>
 
-        <Link href="/user/account" className={navClass(accountActive)}>
-          <UserRound className={iconClass} strokeWidth={1.65} />
-          <span className={textClass}>Akun</span>
-        </Link>
-      </div>
-    </section>
+          <Link href="/user/account" prefetch={false} className={navClass(accountActive)}>
+            <NavIcon src="/nuansapulsa-assets/nav_akun.png" />
+            <span className={textClass}>Akun</span>
+            {accountActive ? <span className={activeIndicatorClass} /> : null}
+          </Link>
+        </div>
+      </section>
+    </>
   );
 }
