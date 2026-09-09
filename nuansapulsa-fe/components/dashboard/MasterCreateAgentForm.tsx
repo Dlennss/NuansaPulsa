@@ -47,7 +47,7 @@ function Field({
   return (
     <label className="block min-w-0">
       <span className="mb-2 flex items-center gap-2 text-[10px] font-black uppercase tracking-[0.12em] text-slate-600">
-        <Icon className="h-4 w-4 shrink-0 text-emerald-600" strokeWidth={2.2} />
+        <Icon className="h-4 w-4 shrink-0 text-[#d70717]" strokeWidth={2.2} />
         {label}
       </span>
       {children}
@@ -116,26 +116,26 @@ export function MasterCreateAgentForm({ useRetailEndpoint = false }: { useRetail
 
   return (
     <form onSubmit={submit} className="w-full min-w-0">
-      <section className="w-full min-w-0 overflow-hidden rounded-[24px] border border-emerald-100 bg-white p-5 shadow-[0_18px_42px_rgba(6,78,59,0.08)] sm:p-6">
-        <div className="flex items-start justify-between gap-4 border-b border-slate-100 pb-5">
+      <section className="w-full min-w-0 overflow-hidden rounded-[28px] border border-red-950/[0.06] bg-white shadow-[0_18px_42px_rgba(151,14,32,0.09)]">
+        <div className="flex flex-col gap-4 border-b border-red-950/[0.06] bg-[linear-gradient(180deg,#fffafa_0%,#ffffff_100%)] p-5 sm:flex-row sm:items-start sm:justify-between sm:p-6">
           <div className="min-w-0">
-            <p className="text-[10px] font-black uppercase tracking-[0.18em] text-emerald-700">Form Agent</p>
+            <p className="text-[10px] font-black uppercase tracking-[0.18em] text-[#d70717]">Form Agent</p>
             <h2 className="mt-1 text-2xl font-black leading-[1.15] tracking-normal text-slate-950 sm:text-[28px]">Identitas Agent Baru</h2>
-            <p className="mt-2 max-w-xl text-xs font-semibold leading-5 text-slate-500 sm:text-sm">Akun baru langsung aktif sebagai agent NuansaPulsa.</p>
+            <p className="mt-2 max-w-xl text-xs font-semibold leading-5 text-slate-500 sm:text-sm">Akun baru langsung aktif sebagai agent NuansaPulsa dan bisa digunakan login setelah disimpan.</p>
           </div>
-          <span className="grid h-12 w-12 shrink-0 place-items-center rounded-2xl bg-emerald-50 text-emerald-700 ring-1 ring-inset ring-emerald-200 sm:h-14 sm:w-14">
+          <span className="grid h-12 w-12 shrink-0 place-items-center rounded-2xl bg-red-50 text-[#d70717] ring-1 ring-inset ring-red-100 sm:h-14 sm:w-14">
             <UserPlus className="h-6 w-6" strokeWidth={2.2} />
           </span>
         </div>
 
-        <div className="mt-5 grid min-w-0 grid-cols-[repeat(auto-fit,minmax(min(100%,280px),1fr))] gap-x-4 gap-y-5">
+        <div className="grid min-w-0 grid-cols-1 gap-x-4 gap-y-5 p-5 sm:grid-cols-2 sm:p-6">
           <Field label="Nama Agent" icon={UserRound}>
             <input
               value={name}
               onChange={(event) => setName(event.target.value)}
               placeholder="Contoh: Agent NuansaPulsa 1"
               autoComplete="name"
-              className="h-12 w-full rounded-2xl border border-slate-200 bg-slate-50 px-4 text-sm font-bold text-slate-950 outline-none transition placeholder:font-semibold placeholder:text-slate-400 focus:border-emerald-500 focus:bg-white focus:ring-4 focus:ring-emerald-100"
+              className="h-12 w-full rounded-2xl border border-red-950/[0.08] bg-[#fffafa] px-4 text-sm font-bold text-slate-950 outline-none transition placeholder:font-semibold placeholder:text-slate-400 focus:border-[#d70717] focus:bg-white focus:ring-4 focus:ring-red-100"
             />
           </Field>
           <Field label="Email Login" icon={Mail}>
@@ -145,7 +145,7 @@ export function MasterCreateAgentForm({ useRetailEndpoint = false }: { useRetail
               placeholder="agent@nuansapulsa.local"
               type="email"
               autoComplete="email"
-              className="h-12 w-full rounded-2xl border border-slate-200 bg-slate-50 px-4 text-sm font-bold text-slate-950 outline-none transition placeholder:font-semibold placeholder:text-slate-400 focus:border-emerald-500 focus:bg-white focus:ring-4 focus:ring-emerald-100"
+              className="h-12 w-full rounded-2xl border border-red-950/[0.08] bg-[#fffafa] px-4 text-sm font-bold text-slate-950 outline-none transition placeholder:font-semibold placeholder:text-slate-400 focus:border-[#d70717] focus:bg-white focus:ring-4 focus:ring-red-100"
             />
           </Field>
           <Field label="Nomor WA" icon={Phone} helper="Nomor yang dapat dihubungi oleh marketing dan operator.">
@@ -155,7 +155,7 @@ export function MasterCreateAgentForm({ useRetailEndpoint = false }: { useRetail
               placeholder="08xxxxxxxxxx"
               inputMode="tel"
               autoComplete="tel"
-              className="h-12 w-full rounded-2xl border border-slate-200 bg-slate-50 px-4 text-sm font-bold text-slate-950 outline-none transition placeholder:font-semibold placeholder:text-slate-400 focus:border-emerald-500 focus:bg-white focus:ring-4 focus:ring-emerald-100"
+              className="h-12 w-full rounded-2xl border border-red-950/[0.08] bg-[#fffafa] px-4 text-sm font-bold text-slate-950 outline-none transition placeholder:font-semibold placeholder:text-slate-400 focus:border-[#d70717] focus:bg-white focus:ring-4 focus:ring-red-100"
             />
           </Field>
           <Field label="Nama Toko" icon={Store} helper="Nama konter akan tersimpan pada profil agent.">
@@ -164,7 +164,7 @@ export function MasterCreateAgentForm({ useRetailEndpoint = false }: { useRetail
               onChange={(event) => setStoreName(event.target.value)}
               placeholder="Nama konter/toko"
               autoComplete="organization"
-              className="h-12 w-full rounded-2xl border border-slate-200 bg-slate-50 px-4 text-sm font-bold text-slate-950 outline-none transition placeholder:font-semibold placeholder:text-slate-400 focus:border-emerald-500 focus:bg-white focus:ring-4 focus:ring-emerald-100"
+              className="h-12 w-full rounded-2xl border border-red-950/[0.08] bg-[#fffafa] px-4 text-sm font-bold text-slate-950 outline-none transition placeholder:font-semibold placeholder:text-slate-400 focus:border-[#d70717] focus:bg-white focus:ring-4 focus:ring-red-100"
             />
           </Field>
           <div className="min-w-0 [grid-column:1/-1]">
@@ -174,12 +174,12 @@ export function MasterCreateAgentForm({ useRetailEndpoint = false }: { useRetail
                   value={password}
                   onChange={(event) => setPassword(event.target.value)}
                   autoComplete="new-password"
-                  className="h-12 min-w-0 flex-1 rounded-2xl border border-slate-200 bg-slate-50 px-3 text-sm font-bold text-slate-950 outline-none transition focus:border-emerald-500 focus:bg-white focus:ring-4 focus:ring-emerald-100 sm:px-4"
+                  className="h-12 min-w-0 flex-1 rounded-2xl border border-red-950/[0.08] bg-[#fffafa] px-3 text-sm font-bold text-slate-950 outline-none transition focus:border-[#d70717] focus:bg-white focus:ring-4 focus:ring-red-100 sm:px-4"
                 />
                 <button
                   type="button"
                   onClick={() => setPassword(makePassword())}
-                  className="grid h-12 w-12 shrink-0 place-items-center rounded-2xl bg-emerald-50 text-emerald-700 ring-1 ring-inset ring-emerald-200 transition hover:bg-emerald-100"
+                  className="grid h-12 w-12 shrink-0 place-items-center rounded-2xl bg-red-50 text-[#d70717] ring-1 ring-inset ring-red-100 transition hover:bg-red-100"
                   aria-label="Buat password baru"
                   title="Buat password baru"
                 >
@@ -199,20 +199,22 @@ export function MasterCreateAgentForm({ useRetailEndpoint = false }: { useRetail
           </div>
         </div>
 
-        {message ? (
-          <div className={message.type === "success" ? "mt-5 rounded-2xl border border-emerald-200 bg-emerald-50 px-4 py-3 text-sm font-black text-emerald-700" : "mt-5 rounded-2xl border border-rose-200 bg-rose-50 px-4 py-3 text-sm font-black text-rose-600"}>
-            {message.text}
-          </div>
-        ) : null}
+        <div className="border-t border-red-950/[0.06] bg-[#fffafa] p-5 sm:p-6">
+          {message ? (
+            <div className={message.type === "success" ? "mb-4 rounded-2xl border border-red-100 bg-red-50 px-4 py-3 text-sm font-black text-[#d70717]" : "mb-4 rounded-2xl border border-rose-200 bg-rose-50 px-4 py-3 text-sm font-black text-rose-600"}>
+              {message.text}
+            </div>
+          ) : null}
 
-        <button
-          type="submit"
-          disabled={!canSubmit}
-          className="mt-5 flex h-12 w-full items-center justify-center gap-2 rounded-2xl bg-emerald-700 px-4 text-sm font-black text-white shadow-[0_14px_28px_rgba(4,120,87,0.22)] transition hover:bg-emerald-800 disabled:cursor-not-allowed disabled:bg-slate-300 disabled:shadow-none"
-        >
-          {loading ? <Loader2 className="h-5 w-5 animate-spin" /> : <BadgeCheck className="h-5 w-5" />}
-          {loading ? "Membuat Agent..." : "Buat Akun Agent"}
-        </button>
+          <button
+            type="submit"
+            disabled={!canSubmit}
+            className="flex h-12 w-full items-center justify-center gap-2 rounded-2xl bg-[linear-gradient(135deg,#d70717,#ff6a00)] px-4 text-sm font-black text-white shadow-[0_14px_28px_rgba(215,7,23,0.24)] transition hover:brightness-95 disabled:cursor-not-allowed disabled:bg-none disabled:bg-slate-300 disabled:shadow-none"
+          >
+            {loading ? <Loader2 className="h-5 w-5 animate-spin" /> : <BadgeCheck className="h-5 w-5" />}
+            {loading ? "Membuat Agent..." : "Buat Akun Agent"}
+          </button>
+        </div>
       </section>
 
     </form>
