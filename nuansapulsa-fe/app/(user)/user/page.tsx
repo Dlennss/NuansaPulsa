@@ -7,7 +7,7 @@ import { getUserProfile } from "@/lib/api.auth";
 import { getCategories } from "@/lib/api.products";
 import type { UserCategoryItem, UserSession } from "@/components/user/types";
 import { UserCategoryGrid } from "@/components/user/UserCategoryGrid";
-import { UserFavoriteTransactions, UserMonthlyBills, UserRecentActivity } from "@/components/user/UserMainSections";
+import { UserHomeSummary } from "@/components/user/UserMainSections";
 import { UserBottomNav } from "@/components/user/UserBottomNav";
 import { UserAuthClientSync } from "@/components/user/UserAuthClientSync";
 import { GuestAdsSection } from "@/components/guest/GuestAdsSection";
@@ -122,10 +122,9 @@ export default async function UserAppHomePage() {
         <Suspense fallback={<GuestAdsCarouselSkeleton />}>
           <GuestAdsSection />
         </Suspense>
-        <UserRecentActivity href="/user/kategori" />
-        <UserFavoriteTransactions href="/user/kategori" />
-        <UserMonthlyBills
-          href="/user/listrik/tagihan"
+        <UserHomeSummary
+          href="/user/kategori"
+          billsHref="/user/listrik/tagihan"
           variant={isAgent ? "agent" : "user"}
           agentBills={[]}
         />

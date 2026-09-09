@@ -1,9 +1,6 @@
 import Link from "next/link";
-import { ArrowUpRight, BookOpen, CalendarClock, Code2, Gamepad2, PlugZap, ReceiptText, Smartphone, Wifi, Zap } from "lucide-react";
+import { ArrowUpRight, Bell, BookOpen, Clock3, Code2, Heart, PlugZap, ReceiptText, Smartphone, WalletCards } from "lucide-react";
 import type { AgentCreditApplication } from "@/lib/api.auth";
-
-const accessibleActionButtonClass =
-  "inline-flex h-10 shrink-0 items-center justify-center gap-1.5 rounded-2xl border border-[#d70717] bg-[linear-gradient(135deg,#d70717,#ff6a00)] px-3.5 text-[11px] font-black text-white! shadow-[0_10px_20px_rgba(151,14,32,0.18)] transition visited:text-white! hover:-translate-y-0.5 hover:brightness-105 hover:text-white! focus-visible:outline-none focus-visible:ring-4 focus-visible:ring-red-200 active:translate-y-0";
 
 export function UserPulsaDataShortcut() {
   return (
@@ -100,86 +97,9 @@ export function UserWeeklyPromo() {
   );
 }
 
-type UserRecentActivityProps = {
+type UserHomeSummaryProps = {
   href?: string;
-};
-
-export function UserRecentActivity({ href = "/kategori" }: UserRecentActivityProps) {
-  return (
-    <section className="space-y-3">
-      <h2 className="px-0.5 text-lg font-black tracking-tight text-slate-950">Aktivitas Terakhir</h2>
-      <div className="rounded-[22px] border border-red-950/10 bg-white p-4 shadow-[0_12px_30px_rgba(151,14,32,0.08)]">
-        <div className="flex items-center gap-3">
-          <div className="relative grid h-12 w-12 shrink-0 place-items-center rounded-[18px] bg-red-50 text-[#d70717] ring-1 ring-red-100">
-            <span className="absolute -right-1 -top-1 h-4 w-4 rounded-full bg-amber-300 ring-2 ring-white" />
-            <ReceiptText className="h-6 w-6" strokeWidth={2.2} />
-          </div>
-
-          <div className="min-w-0 flex-1">
-            <p className="text-sm font-black text-slate-950">Belum ada aktivitas</p>
-            <p className="mt-1 text-[11px] font-semibold leading-4 text-slate-500">
-              Transaksi pertamamu akan tercatat otomatis di sini.
-            </p>
-          </div>
-
-          <Link href={href} prefetch={false} className={accessibleActionButtonClass}>
-            Pilih Layanan
-            <ArrowUpRight className="h-3.5 w-3.5" strokeWidth={2.6} />
-          </Link>
-        </div>
-      </div>
-    </section>
-  );
-}
-
-type UserFavoriteTransactionsProps = {
-  href?: string;
-};
-
-export function UserFavoriteTransactions({ href = "/kategori" }: UserFavoriteTransactionsProps) {
-  return (
-    <section className="space-y-3">
-      <div className="px-0.5">
-        <h2 className="text-lg font-black tracking-tight text-slate-950">Transaksi Favorit</h2>
-        <p className="mt-0.5 text-[11px] font-semibold text-slate-500">Terbentuk otomatis dari transaksimu</p>
-      </div>
-
-      <div className="rounded-[22px] border border-red-950/10 bg-white p-4 shadow-[0_12px_30px_rgba(151,14,32,0.08)]">
-        <div className="flex items-center gap-3">
-          <div className="grid h-12 w-12 shrink-0 grid-cols-2 gap-1 rounded-[18px] bg-red-50 p-2 ring-1 ring-red-100">
-            <span className="grid place-items-center rounded-lg bg-linear-to-br from-[#d70717] to-[#ff6a00] text-white">
-              <Smartphone className="h-3.5 w-3.5" strokeWidth={2.5} />
-            </span>
-            <span className="grid place-items-center rounded-lg bg-linear-to-br from-[#ff6a00] to-[#ffc400] text-white">
-              <Wifi className="h-3.5 w-3.5" strokeWidth={2.5} />
-            </span>
-            <span className="grid place-items-center rounded-lg bg-linear-to-br from-[#b20717] to-[#f43f5e] text-white">
-              <Zap className="h-3.5 w-3.5" strokeWidth={2.5} />
-            </span>
-            <span className="grid place-items-center rounded-lg bg-linear-to-br from-[#d70717] to-[#f97316] text-white">
-              <Gamepad2 className="h-3.5 w-3.5" strokeWidth={2.5} />
-            </span>
-          </div>
-
-          <div className="min-w-0 flex-1">
-            <p className="text-sm font-black text-slate-950">Belum ada transaksi favorit</p>
-            <p className="mt-1 text-[11px] font-semibold leading-4 text-slate-500">
-              Layanan yang sering kamu gunakan akan muncul otomatis.
-            </p>
-          </div>
-
-          <Link href={href} prefetch={false} className={accessibleActionButtonClass}>
-            Mulai Transaksi
-            <ArrowUpRight className="h-3.5 w-3.5" strokeWidth={2.6} />
-          </Link>
-        </div>
-      </div>
-    </section>
-  );
-}
-
-type UserMonthlyBillsProps = {
-  href?: string;
+  billsHref?: string;
   variant?: "user" | "agent";
   agentBills?: AgentCreditApplication[];
 };
@@ -188,50 +108,90 @@ function formatIDR(value: number) {
   return `Rp ${new Intl.NumberFormat("id-ID").format(Number(value || 0))}`;
 }
 
-export function UserMonthlyBills({ href = "/kategori", variant = "user", agentBills = [] }: UserMonthlyBillsProps) {
-  // Agent credit is an operating capital cycle, not a recurring bill.
-  // Settlement is controlled by the operator when the partnership ends.
-  if (variant === "agent") return null;
-
-  const isAgentBill = false;
-  const billHref = href;
+export function UserHomeSummary({ href = "/kategori", billsHref = "/listrik/tagihan", variant = "user" }: UserHomeSummaryProps) {
   const outstanding = 0;
-  const approved = 0;
+  const summaryItems = [
+    {
+      label: "Aktivitas",
+      value: "0",
+      note: "Hari ini",
+      icon: Clock3,
+      className: "bg-red-50 text-[#d70717] ring-red-100",
+    },
+    {
+      label: "Favorit",
+      value: "0",
+      note: "Otomatis",
+      icon: Heart,
+      className: "bg-amber-50 text-[#f97316] ring-amber-100",
+    },
+    {
+      label: variant === "agent" ? "Kredit" : "Tagihan",
+      value: variant === "agent" ? formatIDR(outstanding) : "0",
+      note: variant === "agent" ? "Limit aktif" : "Tersimpan",
+      icon: variant === "agent" ? WalletCards : ReceiptText,
+      className: "bg-emerald-50 text-emerald-700 ring-emerald-100",
+    },
+  ];
 
   return (
-    <section className="space-y-3">
-      <div className="px-0.5">
-        <h2 className="text-lg font-black tracking-tight text-slate-950">Tagihan Bulan Ini</h2>
-        <p className="mt-0.5 text-[11px] font-semibold text-slate-500">
-          {isAgentBill ? "Tagihan kredit agent yang sudah terpakai" : "Tagihan aktif milik akunmu"}
-        </p>
-      </div>
-
-      <div className="rounded-[22px] border border-red-950/10 bg-white p-4 shadow-[0_12px_30px_rgba(151,14,32,0.08)]">
-        <div className="flex items-center gap-3">
-          <div className="relative grid h-12 w-12 shrink-0 place-items-center rounded-[18px] bg-red-50 text-[#d70717] ring-1 ring-red-100">
-            <span className="absolute -right-1 -top-1 grid h-5 w-5 place-items-center rounded-full bg-amber-300 text-[#b20717] ring-2 ring-white">
-              <CalendarClock className="h-3 w-3" strokeWidth={2.5} />
-            </span>
-            <ReceiptText className="h-6 w-6" strokeWidth={2.2} />
-          </div>
-
-          <div className="min-w-0 flex-1">
-            <p className="text-sm font-black text-slate-950">
-              {isAgentBill ? "Tagihan Kredit Agent" : "Belum ada tagihan"}
-            </p>
-            <p className="mt-1 text-[11px] font-semibold leading-4 text-slate-500">
-              {isAgentBill
-                ? `Sisa ${formatIDR(outstanding)} dari limit ${formatIDR(approved)}.`
-                : "Tagihan yang kamu cek atau simpan nanti akan tampil di sini."}
+    <section className="overflow-hidden rounded-[24px] border border-red-950/10 bg-white shadow-[0_14px_34px_rgba(151,14,32,0.08)]">
+      <div className="relative overflow-hidden bg-[linear-gradient(135deg,#fff7f6_0%,#ffffff_58%,#fff4de_100%)] px-4 py-4">
+        <div className="flex items-start justify-between gap-3">
+          <div className="min-w-0">
+            <p className="text-[10px] font-black uppercase tracking-[0.18em] text-[#d70717]">Ringkasan Hari Ini</p>
+            <h2 className="mt-1 text-xl leading-6 font-black tracking-tight text-slate-950">Pantau akun tanpa ribet</h2>
+            <p className="mt-1.5 max-w-[260px] text-xs leading-5 font-semibold text-slate-500">
+              Aktivitas, favorit, dan tagihan akan terisi otomatis setelah kamu mulai transaksi.
             </p>
           </div>
-
-          <Link href={billHref} prefetch={false} className={accessibleActionButtonClass}>
-            {isAgentBill ? "Bayar" : "Cek Tagihan"}
-            <ArrowUpRight className="h-3.5 w-3.5" strokeWidth={2.6} />
+          <Link
+            href={href}
+            prefetch={false}
+            className="hidden h-11 shrink-0 items-center justify-center gap-1.5 rounded-[16px] bg-[linear-gradient(135deg,#d70717,#ff6a00)] px-4 text-xs font-black text-white! shadow-[0_12px_24px_rgba(215,7,23,0.18)] transition visited:text-white! hover:-translate-y-0.5 hover:brightness-105 hover:text-white! sm:inline-flex"
+          >
+            Mulai Transaksi
+            <ArrowUpRight className="h-3.5 w-3.5" strokeWidth={2.7} />
           </Link>
         </div>
+
+        <div className="mt-4 grid grid-cols-3 gap-2">
+          {summaryItems.map((item) => {
+            const Icon = item.icon;
+
+            return (
+              <div key={item.label} className="min-w-0 rounded-[18px] border border-slate-200/80 bg-white px-2.5 py-3 shadow-[0_10px_22px_rgba(15,23,42,0.04)]">
+                <span className={`grid h-9 w-9 place-items-center rounded-[14px] ring-1 ${item.className}`}>
+                  <Icon className="h-4.5 w-4.5" strokeWidth={2.4} />
+                </span>
+                <p className="mt-2 truncate text-lg font-black leading-5 text-slate-950">{item.value}</p>
+                <p className="mt-0.5 truncate text-[10px] font-black text-slate-700">{item.label}</p>
+                <p className="mt-0.5 truncate text-[10px] font-semibold text-slate-400">{item.note}</p>
+              </div>
+            );
+          })}
+        </div>
+      </div>
+
+      <div className="flex items-center gap-3 px-4 py-3">
+        <span className="relative grid h-11 w-11 shrink-0 place-items-center rounded-[16px] bg-[#fff1f2] text-[#d70717] ring-1 ring-red-100">
+          <Bell className="h-5 w-5" strokeWidth={2.4} />
+          <span className="absolute -right-0.5 -top-0.5 h-3.5 w-3.5 rounded-full bg-amber-300 ring-2 ring-white" />
+        </span>
+        <span className="min-w-0 flex-1">
+          <span className="block text-sm font-black leading-4 text-slate-950">Belum ada riwayat baru</span>
+          <span className="mt-1 block text-[11px] font-semibold leading-4 text-slate-500">
+            Transaksi dan update akun nanti masuk ke aktivitas serta notifikasi.
+          </span>
+        </span>
+        <Link
+          href={variant === "agent" ? href : billsHref}
+          prefetch={false}
+          className="grid h-11 w-11 shrink-0 place-items-center rounded-[15px] bg-[linear-gradient(135deg,#ffb000,#ff6a00)] text-white shadow-[0_12px_24px_rgba(255,106,0,0.20)] transition hover:-translate-y-0.5 hover:brightness-105"
+          aria-label={variant === "agent" ? "Mulai transaksi" : "Cek tagihan"}
+        >
+          <ArrowUpRight className="h-5 w-5" strokeWidth={2.6} />
+        </Link>
       </div>
     </section>
   );
