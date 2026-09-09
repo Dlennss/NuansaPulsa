@@ -135,7 +135,7 @@ if (isGoogleLoginEnabled() && isGoogleProviderConfigured()) {
 }
 
 export const authOptions: NextAuthOptions = {
-  secret: process.env.AUTH_SECRET,
+  secret: process.env.AUTH_SECRET || process.env.NEXTAUTH_SECRET,
   providers,
   pages: {
     signIn: "/login",

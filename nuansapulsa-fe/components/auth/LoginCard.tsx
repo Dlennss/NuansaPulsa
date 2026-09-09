@@ -289,8 +289,8 @@ export function LoginCard() {
 
           <button
             type="button"
-            className="flex h-[56px] w-full items-center justify-center gap-3 rounded-[18px] border border-slate-200 bg-white text-base font-black text-slate-800 shadow-[0_8px_20px_rgba(15,23,42,0.05)] transition-all hover:border-slate-300 hover:bg-slate-50 hover:shadow-sm active:scale-[0.98] disabled:cursor-wait disabled:opacity-70"
-            disabled={loading}
+            className="flex h-[56px] w-full items-center justify-center gap-3 rounded-[18px] border border-slate-200 bg-white text-base font-black text-slate-800 shadow-[0_8px_20px_rgba(15,23,42,0.05)] transition-all hover:border-slate-300 hover:bg-slate-50 hover:shadow-sm active:scale-[0.98] disabled:cursor-not-allowed disabled:opacity-60"
+            disabled={!canUseGoogleLogin}
             onClick={() => {
               if (!canUseGoogleLogin) {
                 setErr(GOOGLE_LOGIN_ENABLED ? "Login Google belum dikonfigurasi." : "Login Google belum aktif.");
@@ -300,7 +300,7 @@ export function LoginCard() {
             }}
           >
             <Image src="/google.svg" alt="" width={22} height={22} aria-hidden="true" />
-            Masuk dengan Google
+            {googleAvailable ? "Masuk dengan Google" : "Google belum dikonfigurasi"}
           </button>
         </form>
 
