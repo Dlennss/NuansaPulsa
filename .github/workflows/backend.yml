@@ -44,7 +44,11 @@ jobs:
         shell: bash
         run: |
           set -euo pipefail
-          (sudo grep -rl "dl.google.com/linux/chrome" /etc/apt/sources.list /etc/apt/sources.list.d 2>/dev/null || true) | xargs -r sudo sed -i 's/^[[:space:]]*deb /# deb /'
+          sudo mkdir -p /tmp/disabled-apt-sources
+          for source_file in $(sudo grep -rl "dl.google.com/linux/chrome" /etc/apt/sources.list.d 2>/dev/null || true); do
+            sudo mv "$source_file" "/tmp/disabled-apt-sources/$(basename "$source_file").disabled"
+          done
+          sudo sed -i '/dl.google.com\/linux\/chrome/s/^[[:space:]]*deb /# deb /' /etc/apt/sources.list 2>/dev/null || true
           sudo apt-get clean
           sudo rm -rf /var/lib/apt/lists/*
           sudo apt-get -o Acquire::Retries=3 update
