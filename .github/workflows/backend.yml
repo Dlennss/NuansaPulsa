@@ -44,7 +44,7 @@ jobs:
         shell: bash
         run: |
           set -euo pipefail
-          sudo grep -rl "dl.google.com/linux/chrome" /etc/apt/sources.list /etc/apt/sources.list.d 2>/dev/null | xargs -r sudo sed -i 's/^[[:space:]]*deb /# deb /'
+          (sudo grep -rl "dl.google.com/linux/chrome" /etc/apt/sources.list /etc/apt/sources.list.d 2>/dev/null || true) | xargs -r sudo sed -i 's/^[[:space:]]*deb /# deb /'
           sudo apt-get clean
           sudo rm -rf /var/lib/apt/lists/*
           sudo apt-get -o Acquire::Retries=3 update
