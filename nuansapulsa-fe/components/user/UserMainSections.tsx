@@ -1,6 +1,5 @@
 import Link from "next/link";
-import { ArrowUpRight, BookOpen, Clock3, Code2, Heart, PlugZap, ReceiptText, Smartphone, WalletCards } from "lucide-react";
-import type { AgentCreditApplication } from "@/lib/api.auth";
+import { ArrowUpRight, BookOpen, Code2, PlugZap, ReceiptText, Smartphone } from "lucide-react";
 
 export function UserPulsaDataShortcut() {
   return (
@@ -99,82 +98,31 @@ export function UserWeeklyPromo() {
 
 type UserHomeSummaryProps = {
   href?: string;
-  billsHref?: string;
   variant?: "user" | "agent";
-  agentBills?: AgentCreditApplication[];
 };
 
-function formatIDR(value: number) {
-  return `Rp ${new Intl.NumberFormat("id-ID").format(Number(value || 0))}`;
-}
-
-export function UserHomeSummary({ href = "/kategori", billsHref = "/listrik/tagihan", variant = "user" }: UserHomeSummaryProps) {
-  const outstanding = 0;
-  const summaryItems = [
-    {
-      label: "Aktivitas",
-      value: "0",
-      icon: Clock3,
-      className: "bg-red-50 text-[#d70717] ring-red-100",
-    },
-    {
-      label: "Favorit",
-      value: "0",
-      icon: Heart,
-      className: "bg-amber-50 text-[#f97316] ring-amber-100",
-    },
-    {
-      label: variant === "agent" ? "Kredit" : "Tagihan",
-      value: variant === "agent" ? formatIDR(outstanding) : "0",
-      icon: variant === "agent" ? WalletCards : ReceiptText,
-      className: "bg-emerald-50 text-emerald-700 ring-emerald-100",
-    },
-  ];
-
+export function UserHomeSummary({ href = "/kategori", variant = "user" }: UserHomeSummaryProps) {
   return (
-    <section className="rounded-[22px] border border-red-950/10 bg-white p-4 shadow-[0_12px_28px_rgba(151,14,32,0.07)]">
-      <div className="flex items-center justify-between gap-3">
-        <div className="min-w-0">
-          <h2 className="text-lg font-black tracking-tight text-slate-950">Ringkasan Hari Ini</h2>
-          <p className="mt-0.5 text-xs font-semibold text-slate-500">Belum ada aktivitas baru</p>
+    <section className="rounded-[22px] border border-red-950/10 bg-white px-4 py-3.5 shadow-[0_12px_28px_rgba(151,14,32,0.07)]">
+      <div className="flex items-center gap-3">
+        <span className="grid h-11 w-11 shrink-0 place-items-center rounded-[16px] bg-[#fff1f2] text-[#d70717] ring-1 ring-red-100">
+          <ReceiptText className="h-5 w-5" strokeWidth={2.4} />
+        </span>
+        <div className="min-w-0 flex-1">
+          <h2 className="text-base font-black leading-5 text-slate-950">
+            {variant === "agent" ? "Mulai Transaksi Agent" : "Transaksi Kamu"}
+          </h2>
+          <p className="mt-1 text-xs font-semibold leading-4 text-slate-500">
+            Belum ada transaksi baru.
+          </p>
         </div>
         <Link
           href={href}
           prefetch={false}
-          className="inline-flex h-10 shrink-0 items-center justify-center gap-1.5 rounded-[15px] bg-[linear-gradient(135deg,#d70717,#ff6a00)] px-3.5 text-[11px] font-black text-white! shadow-[0_10px_20px_rgba(215,7,23,0.16)] transition visited:text-white! hover:-translate-y-0.5 hover:brightness-105 hover:text-white!"
+          className="grid h-11 w-11 shrink-0 place-items-center rounded-[15px] bg-[linear-gradient(135deg,#d70717,#ff6a00)] text-white shadow-[0_12px_24px_rgba(215,7,23,0.18)] transition hover:-translate-y-0.5 hover:brightness-105"
+          aria-label="Mulai transaksi"
         >
-          Mulai
-          <ArrowUpRight className="h-3.5 w-3.5" strokeWidth={2.7} />
-        </Link>
-      </div>
-
-      <div className="mt-4 grid grid-cols-3 divide-x divide-red-950/10 rounded-[18px] border border-red-950/10 bg-[#fffaf9]">
-        {summaryItems.map((item) => {
-          const Icon = item.icon;
-
-          return (
-            <div key={item.label} className="min-w-0 px-3 py-3">
-              <span className={`mb-2 grid h-8 w-8 place-items-center rounded-[12px] ring-1 ${item.className}`}>
-                <Icon className="h-4 w-4" strokeWidth={2.4} />
-              </span>
-              <p className="truncate text-lg font-black leading-5 text-slate-950">{item.value}</p>
-              <p className="mt-0.5 truncate text-[10px] font-black text-slate-600">{item.label}</p>
-            </div>
-          );
-        })}
-      </div>
-
-      <div className="mt-3 flex items-center justify-between gap-3 rounded-[16px] bg-red-50/70 px-3 py-2.5">
-        <p className="min-w-0 text-[11px] font-semibold leading-4 text-slate-500">
-          Riwayat, favorit, dan tagihan akan muncul otomatis.
-        </p>
-        <Link
-          href={variant === "agent" ? href : billsHref}
-          prefetch={false}
-          className="inline-flex h-8 shrink-0 items-center justify-center gap-1 rounded-full px-2.5 text-[10px] font-black text-[#d70717] transition hover:bg-white"
-        >
-          {variant === "agent" ? "Transaksi" : "Tagihan"}
-          <ArrowUpRight className="h-3 w-3" strokeWidth={2.6} />
+          <ArrowUpRight className="h-5 w-5" strokeWidth={2.6} />
         </Link>
       </div>
     </section>

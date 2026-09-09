@@ -124,9 +124,7 @@ export default async function UserAppHomePage() {
         </Suspense>
         <UserHomeSummary
           href="/user/kategori"
-          billsHref="/user/listrik/tagihan"
           variant={isAgent ? "agent" : "user"}
-          agentBills={[]}
         />
       </div>
 
