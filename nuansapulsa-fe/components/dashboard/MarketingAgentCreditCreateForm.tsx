@@ -75,8 +75,8 @@ function Field({ label, children }: { label: string; children: ReactNode }) {
   return <label className="block min-w-0"><span className="mb-1.5 block text-[10px] font-black text-slate-600">{label}</span>{children}</label>;
 }
 
-const inputClassName = "h-11 w-full rounded-lg border border-slate-200 bg-[#fbfffd] px-3 text-sm font-bold text-slate-950 outline-none placeholder:text-slate-400 focus:border-emerald-400 focus:ring-2 focus:ring-emerald-100";
-const textAreaClassName = "w-full resize-none rounded-lg border border-slate-200 bg-[#fbfffd] px-3 py-3 text-sm font-bold text-slate-950 outline-none placeholder:text-slate-400 focus:border-emerald-400 focus:ring-2 focus:ring-emerald-100";
+const inputClassName = "h-11 w-full rounded-2xl border border-red-950/[0.08] bg-[#fffafa] px-3 text-sm font-bold text-slate-950 outline-none placeholder:text-slate-400 focus:border-[#d70717] focus:ring-4 focus:ring-red-100";
+const textAreaClassName = "w-full resize-none rounded-2xl border border-red-950/[0.08] bg-[#fffafa] px-3 py-3 text-sm font-bold text-slate-950 outline-none placeholder:text-slate-400 focus:border-[#d70717] focus:ring-4 focus:ring-red-100";
 
 export function MarketingAgentCreditCreateForm({ defaultOpen = false }: MarketingAgentCreditCreateFormProps) {
   const router = useRouter();
@@ -240,14 +240,14 @@ export function MarketingAgentCreditCreateForm({ defaultOpen = false }: Marketin
   }
 
   return (
-    <section className="overflow-hidden rounded-lg border border-emerald-200 bg-white shadow-[0_18px_42px_rgba(6,78,59,0.08)]">
-      <header className="flex flex-col gap-4 bg-[linear-gradient(135deg,#052e26,#047857)] px-4 py-5 text-white sm:flex-row sm:items-center sm:justify-between sm:px-6">
-        <div><p className="text-[9px] font-black uppercase tracking-[0.18em] text-lime-200">Operasional Lapangan</p><h1 className="mt-1 text-2xl font-black">Pengajuan & Dokumen Kredit</h1><p className="mt-1 text-xs font-semibold text-emerald-100/75">Isi data agent dan ambil dokumen langsung saat kunjungan marketing.</p></div>
-        <span className="grid h-11 w-11 shrink-0 place-items-center rounded-lg bg-white text-emerald-700"><FileSignature className="h-5 w-5" /></span>
+    <section className="overflow-hidden rounded-[28px] border border-red-950/[0.06] bg-white shadow-[0_18px_42px_rgba(151,14,32,0.09)]">
+      <header className="flex flex-col gap-4 bg-[radial-gradient(circle_at_88%_8%,rgba(255,196,0,0.36),transparent_30%),linear-gradient(135deg,#b20717_0%,#e50917_54%,#ff6a00_118%)] px-4 py-5 text-white sm:flex-row sm:items-center sm:justify-between sm:px-6">
+        <div><p className="text-[9px] font-black uppercase tracking-[0.18em] text-yellow-100">Operasional Lapangan</p><h1 className="mt-1 text-2xl font-black">Pengajuan & Dokumen Kredit</h1><p className="mt-1 text-xs font-semibold text-white/82">Isi data agent dan ambil dokumen langsung saat kunjungan marketing.</p></div>
+        <span className="grid h-11 w-11 shrink-0 place-items-center rounded-2xl bg-white text-[#d70717] shadow-[0_12px_24px_rgba(0,0,0,0.12)]"><FileSignature className="h-5 w-5" /></span>
       </header>
 
       <div className="p-3 sm:p-4">
-        <button type="button" onClick={() => setOpen((value) => !value)} className="inline-flex h-11 items-center gap-2 rounded-lg bg-emerald-700 px-4 text-xs font-black text-white transition hover:bg-emerald-800">
+        <button type="button" onClick={() => setOpen((value) => !value)} className="inline-flex h-11 items-center gap-2 rounded-2xl bg-[linear-gradient(135deg,#d70717,#ff6a00)] px-4 text-xs font-black text-white shadow-[0_12px_24px_rgba(215,7,23,0.18)] transition hover:brightness-95">
           {open ? <X className="h-4 w-4" /> : <PlusCircle className="h-4 w-4" />}{open ? "Tutup Form Pengajuan" : "Buka Form Pengajuan"}
         </button>
 
@@ -272,32 +272,33 @@ export function MarketingAgentCreditCreateForm({ defaultOpen = false }: Marketin
                 <Field label="Alamat Toko"><textarea value={applicant.storeAddress} onChange={(event) => updateApplicant("storeAddress", event.target.value)} rows={4} placeholder="Alamat toko atau usaha" className={textAreaClassName} /></Field>
               </div>
 
-              <fieldset className="rounded-lg border border-emerald-200 bg-emerald-50/35 p-3">
+              <fieldset className="rounded-3xl border border-red-100 bg-red-50/40 p-3 sm:p-4">
                 <legend className="px-2 text-xs font-black text-slate-950">Dokumen Survei Marketing</legend>
                 <p className="mb-3 text-[11px] font-semibold leading-5 text-slate-500">Foto wajib diambil langsung saat kunjungan dan harus terlihat jelas.</p>
                 <div className="grid gap-2 sm:grid-cols-2">
                   {documentOptions.map((item) => {
                     const saved = documents[item.key];
-                    return <label key={item.key} className={saved ? "flex min-h-20 cursor-pointer items-center gap-2 overflow-hidden rounded-lg border border-emerald-300 bg-white p-2" : "flex min-h-20 cursor-pointer items-center gap-3 rounded-lg border border-dashed border-emerald-300 bg-white p-3 transition hover:bg-emerald-50"}>
+                    return <label key={item.key} className={saved ? "flex min-h-20 cursor-pointer items-center gap-2 overflow-hidden rounded-2xl border border-red-200 bg-white p-2 shadow-sm" : "flex min-h-20 cursor-pointer items-center gap-3 rounded-2xl border border-dashed border-red-200 bg-white p-3 transition hover:bg-red-50"}>
                       <input type="file" accept="image/*" capture={item.key === "selfie_ktp" || item.key === "selfie_marketing" ? "user" : "environment"} className="sr-only" onChange={(event) => void captureDocument(item.key, event)} />
-                      {saved ? <img src={saved.data_url} alt={`Preview ${item.label}`} className="h-16 w-20 shrink-0 rounded-lg bg-slate-100 object-contain" /> : <span className="grid h-9 w-9 shrink-0 place-items-center rounded-lg bg-emerald-50 text-emerald-700"><Camera className="h-4 w-4" /></span>}
-                      <span className="min-w-0 flex-1"><span className="block text-xs font-black text-slate-950">{item.label}</span><span className="mt-1 block text-[10px] font-semibold text-slate-500">{saved ? "Foto siap disimpan" : item.helper}</span><span className="mt-1 block text-[10px] font-black text-emerald-700">{saved ? "Ketuk untuk ganti" : "Buka kamera"}</span></span>
-                      {saved ? <Check className="h-4 w-4 shrink-0 text-emerald-700" /> : null}
+                      {saved ? <img src={saved.data_url} alt={`Preview ${item.label}`} className="h-16 w-20 shrink-0 rounded-2xl bg-slate-100 object-contain" /> : <span className="grid h-9 w-9 shrink-0 place-items-center rounded-2xl bg-red-50 text-[#d70717]"><Camera className="h-4 w-4" /></span>}
+                      <span className="min-w-0 flex-1"><span className="block text-xs font-black text-slate-950">{item.label}</span><span className="mt-1 block text-[10px] font-semibold text-slate-500">{saved ? "Foto siap disimpan" : item.helper}</span><span className="mt-1 block text-[10px] font-black text-[#d70717]">{saved ? "Ketuk untuk ganti" : "Buka kamera"}</span></span>
+                      {saved ? <Check className="h-4 w-4 shrink-0 text-[#d70717]" /> : null}
                     </label>;
                   })}
                 </div>
-                <div className="mt-3 flex flex-col gap-2 rounded-lg border border-emerald-200 bg-white p-3 sm:flex-row sm:items-center sm:justify-between">
-                  <div className="flex min-w-0 items-center gap-2"><MapPin className="h-4 w-4 shrink-0 text-emerald-700" /><div className="min-w-0"><p className="text-[10px] font-black text-slate-700">Lokasi kunjungan (opsional)</p><p className="truncate text-[9px] font-semibold text-slate-500">{surveyLocation ? `${surveyLocation.latitude.toFixed(6)}, ${surveyLocation.longitude.toFixed(6)} · akurasi ${Math.round(surveyLocation.accuracy)} m` : "Belum diambil"}</p></div></div>
-                  <button type="button" onClick={captureLocation} disabled={locating} className="inline-flex h-9 shrink-0 items-center justify-center gap-2 rounded-lg bg-emerald-50 px-3 text-[10px] font-black text-emerald-800 disabled:opacity-50">{locating ? <Loader2 className="h-3.5 w-3.5 animate-spin" /> : <LocateFixed className="h-3.5 w-3.5" />}{surveyLocation ? "Ambil Ulang" : "Ambil Lokasi"}</button>
+                <div className="mt-3 flex flex-col gap-2 rounded-2xl border border-red-100 bg-white p-3 sm:flex-row sm:items-center sm:justify-between">
+                  <div className="flex min-w-0 items-center gap-2"><MapPin className="h-4 w-4 shrink-0 text-[#d70717]" /><div className="min-w-0"><p className="text-[10px] font-black text-slate-700">Lokasi kunjungan (opsional)</p><p className="truncate text-[9px] font-semibold text-slate-500">{surveyLocation ? `${surveyLocation.latitude.toFixed(6)}, ${surveyLocation.longitude.toFixed(6)} · akurasi ${Math.round(surveyLocation.accuracy)} m` : "Belum diambil"}</p></div></div>
+                  <button type="button" onClick={captureLocation} disabled={locating} className="inline-flex h-9 shrink-0 items-center justify-center gap-2 rounded-2xl bg-red-50 px-3 text-[10px] font-black text-[#b20717] disabled:opacity-50">{locating ? <Loader2 className="h-3.5 w-3.5 animate-spin" /> : <LocateFixed className="h-3.5 w-3.5" />}{surveyLocation ? "Ambil Ulang" : "Ambil Lokasi"}</button>
                 </div>
               </fieldset>
             </div>
 
-            {message ? <div className={message.type === "success" ? "rounded-lg border border-emerald-200 bg-emerald-50 px-4 py-3 text-xs font-black text-emerald-700" : "rounded-lg border border-rose-200 bg-rose-50 px-4 py-3 text-xs font-black text-rose-600"}>{message.text}</div> : null}
-            <button type="submit" disabled={busy || loadingAgents} className="inline-flex h-12 w-full items-center justify-center gap-2 rounded-lg bg-[linear-gradient(135deg,#047857,#65a30d)] text-sm font-black text-white shadow-[0_14px_28px_rgba(5,150,105,0.20)] disabled:opacity-50">{busy ? <Loader2 className="h-4 w-4 animate-spin" /> : <Save className="h-4 w-4" />}{busy ? "Menyimpan Pengajuan..." : "Simpan Pengajuan & Dokumen"}</button>
+            {message ? <div className={message.type === "success" ? "rounded-2xl border border-red-100 bg-red-50 px-4 py-3 text-xs font-black text-[#d70717]" : "rounded-2xl border border-rose-200 bg-rose-50 px-4 py-3 text-xs font-black text-rose-600"}>{message.text}</div> : null}
+            <button type="submit" disabled={busy || loadingAgents} className="inline-flex h-12 w-full items-center justify-center gap-2 rounded-2xl bg-[linear-gradient(135deg,#d70717,#ff6a00)] text-sm font-black text-white shadow-[0_14px_28px_rgba(215,7,23,0.24)] transition hover:brightness-95 disabled:opacity-50">{busy ? <Loader2 className="h-4 w-4 animate-spin" /> : <Save className="h-4 w-4" />}{busy ? "Menyimpan Pengajuan..." : "Simpan Pengajuan & Dokumen"}</button>
           </form>
         ) : null}
       </div>
     </section>
   );
 }
+

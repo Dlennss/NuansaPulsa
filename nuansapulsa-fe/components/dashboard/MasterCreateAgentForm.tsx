@@ -121,7 +121,6 @@ export function MasterCreateAgentForm({ useRetailEndpoint = false }: { useRetail
           <div className="min-w-0">
             <p className="text-[10px] font-black uppercase tracking-[0.18em] text-[#d70717]">Form Agent</p>
             <h2 className="mt-1 text-2xl font-black leading-[1.15] tracking-normal text-slate-950 sm:text-[28px]">Identitas Agent Baru</h2>
-            <p className="mt-2 max-w-xl text-xs font-semibold leading-5 text-slate-500 sm:text-sm">Akun baru langsung aktif sebagai agent NuansaPulsa dan bisa digunakan login setelah disimpan.</p>
           </div>
           <span className="grid h-12 w-12 shrink-0 place-items-center rounded-2xl bg-red-50 text-[#d70717] ring-1 ring-inset ring-red-100 sm:h-14 sm:w-14">
             <UserPlus className="h-6 w-6" strokeWidth={2.2} />
@@ -133,7 +132,7 @@ export function MasterCreateAgentForm({ useRetailEndpoint = false }: { useRetail
             <input
               value={name}
               onChange={(event) => setName(event.target.value)}
-              placeholder="Contoh: Agent NuansaPulsa 1"
+              placeholder="nama agent"
               autoComplete="name"
               className="h-12 w-full rounded-2xl border border-red-950/[0.08] bg-[#fffafa] px-4 text-sm font-bold text-slate-950 outline-none transition placeholder:font-semibold placeholder:text-slate-400 focus:border-[#d70717] focus:bg-white focus:ring-4 focus:ring-red-100"
             />
@@ -142,13 +141,13 @@ export function MasterCreateAgentForm({ useRetailEndpoint = false }: { useRetail
             <input
               value={email}
               onChange={(event) => setEmail(event.target.value)}
-              placeholder="agent@nuansapulsa.local"
+              placeholder="nama@gmail.com"
               type="email"
               autoComplete="email"
               className="h-12 w-full rounded-2xl border border-red-950/[0.08] bg-[#fffafa] px-4 text-sm font-bold text-slate-950 outline-none transition placeholder:font-semibold placeholder:text-slate-400 focus:border-[#d70717] focus:bg-white focus:ring-4 focus:ring-red-100"
             />
           </Field>
-          <Field label="Nomor WA" icon={Phone} helper="Nomor yang dapat dihubungi oleh marketing dan operator.">
+          <Field label="Nomor WA" icon={Phone}>
             <input
               value={phone}
               onChange={(event) => setPhone(event.target.value)}
@@ -158,7 +157,7 @@ export function MasterCreateAgentForm({ useRetailEndpoint = false }: { useRetail
               className="h-12 w-full rounded-2xl border border-red-950/[0.08] bg-[#fffafa] px-4 text-sm font-bold text-slate-950 outline-none transition placeholder:font-semibold placeholder:text-slate-400 focus:border-[#d70717] focus:bg-white focus:ring-4 focus:ring-red-100"
             />
           </Field>
-          <Field label="Nama Toko" icon={Store} helper="Nama konter akan tersimpan pada profil agent.">
+          <Field label="Nama Toko" icon={Store}>
             <input
               value={storeName}
               onChange={(event) => setStoreName(event.target.value)}

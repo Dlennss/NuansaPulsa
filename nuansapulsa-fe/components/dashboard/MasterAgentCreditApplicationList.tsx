@@ -737,10 +737,10 @@ export function MasterAgentCreditApplicationList({
   }
 
   return (
-    <section className="min-w-0 overflow-hidden rounded-[22px] border border-slate-200 bg-white p-3 shadow-[0_18px_42px_rgba(15,23,42,0.06)] sm:rounded-[28px] sm:p-5">
-      <div className="flex min-w-0 flex-col items-start gap-3">
+    <section className="min-w-0 overflow-hidden rounded-[28px] border border-red-950/[0.06] bg-white shadow-[0_18px_42px_rgba(151,14,32,0.09)]">
+      <div className="flex min-w-0 flex-col items-start gap-3 border-b border-red-950/[0.06] bg-[linear-gradient(180deg,#fffafa_0%,#ffffff_100%)] p-4 sm:p-5">
         <div className="min-w-0 max-w-2xl">
-          <p className="text-[11px] font-black uppercase tracking-[0.2em] text-red-600">{eyebrow || (showActions ? "Meja Review" : "Arsip Kredit")}</p>
+          <p className="text-[11px] font-black uppercase tracking-[0.2em] text-[#d70717]">{eyebrow || (showActions ? "Meja Review" : "Arsip Kredit")}</p>
           <h2 className="mt-1 text-xl font-black text-slate-950">{title || (showActions ? "Pengajuan Kredit Terbaru" : "Riwayat Pinjaman Agent")}</h2>
           <p className="mt-1 max-w-2xl text-xs font-semibold leading-5 text-slate-500">
             {mode === "admin"
@@ -750,14 +750,14 @@ export function MasterAgentCreditApplicationList({
                 : "Tugas marketing: dampingi agent, lengkapi selfie pertemuan, tanda tangan verifikasi, lalu kirim data ke operator."}
           </p>
         </div>
-        <span className="inline-flex w-fit items-center rounded-full bg-[linear-gradient(135deg,#d70717,#8bdc24)] px-4 py-2 text-[10px] font-black uppercase tracking-[0.12em] text-white shadow-[0_12px_28px_rgba(151,14,32,0.18)]">
+        <span className="inline-flex w-fit items-center rounded-full bg-[linear-gradient(135deg,#d70717,#ff6a00)] px-4 py-2 text-[10px] font-black uppercase tracking-[0.12em] text-white shadow-[0_12px_28px_rgba(151,14,32,0.18)]">
           {mode === "admin" ? "Admin" : mode === "analyst" ? "Operator" : "Marketing"}
         </span>
       </div>
 
-      <div className="mt-4 flex min-w-0 flex-col gap-3 sm:mt-5">
-        <label className="flex h-12 min-w-0 flex-1 items-center gap-2 rounded-2xl border border-slate-200 bg-slate-50 px-4 text-sm font-bold text-slate-500 focus-within:border-red-300 focus-within:bg-white focus-within:ring-2 focus-within:ring-red-100">
-          <Search className="h-4 w-4" />
+      <div className="flex min-w-0 flex-col gap-3 p-4 sm:p-5">
+        <label className="flex h-12 min-w-0 flex-1 items-center gap-2 rounded-2xl border border-red-950/[0.08] bg-[#fffafa] px-4 text-sm font-bold text-slate-500 focus-within:border-[#d70717] focus-within:bg-white focus-within:ring-4 focus-within:ring-red-100">
+          <Search className="h-4 w-4 text-[#d70717]" />
           <input
             value={query}
             onChange={(event) => { setQuery(event.target.value); setPage(1); setOpenId(null); }}
@@ -766,7 +766,7 @@ export function MasterAgentCreditApplicationList({
           />
         </label>
         <div className="flex min-w-0 items-center gap-2 overflow-x-auto pb-1 [scrollbar-width:none] [&::-webkit-scrollbar]:hidden">
-          <span className="grid h-10 w-10 shrink-0 place-items-center rounded-2xl border border-slate-200 bg-white text-red-700">
+          <span className="grid h-10 w-10 shrink-0 place-items-center rounded-2xl border border-red-100 bg-red-50 text-[#d70717]">
             <SlidersHorizontal className="h-4 w-4" strokeWidth={2.5} />
           </span>
           {applicationFilters.map((item) => {
@@ -778,8 +778,8 @@ export function MasterAgentCreditApplicationList({
                 onClick={() => { setFilter(item.key); setPage(1); setOpenId(null); }}
                 className={
                   active
-                    ? "h-10 shrink-0 rounded-2xl bg-red-800 px-4 text-xs font-black text-white shadow-[0_10px_22px_rgba(151,14,32,0.18)]"
-                    : "h-10 shrink-0 rounded-2xl border border-slate-200 bg-white px-4 text-xs font-black text-slate-600 transition hover:border-red-200 hover:bg-red-50 hover:text-red-800"
+                    ? "h-10 shrink-0 rounded-2xl bg-[#d70717] px-4 text-xs font-black text-white shadow-[0_10px_22px_rgba(151,14,32,0.18)]"
+                    : "h-10 shrink-0 rounded-2xl border border-red-950/[0.08] bg-white px-4 text-xs font-black text-slate-600 transition hover:border-red-200 hover:bg-red-50 hover:text-[#d70717]"
                 }
               >
                 {item.label}
@@ -822,7 +822,7 @@ export function MasterAgentCreditApplicationList({
                 type="button"
                 disabled={!canExportReport}
                 onClick={() => void exportXlsxReport()}
-                className="inline-flex h-11 items-center justify-center gap-2 rounded-2xl bg-[linear-gradient(135deg,#d70717,#84cc16)] px-3 text-[11px] font-black text-white shadow-[0_12px_24px_rgba(215,7,23,0.18)] transition disabled:cursor-not-allowed disabled:opacity-50"
+                className="inline-flex h-11 items-center justify-center gap-2 rounded-2xl bg-[linear-gradient(135deg,#d70717,#ff6a00)] px-3 text-[11px] font-black text-white shadow-[0_12px_24px_rgba(215,7,23,0.18)] transition disabled:cursor-not-allowed disabled:opacity-50"
               >
                 <Download className="h-4 w-4" strokeWidth={2.4} />
                 XLSX
@@ -844,7 +844,7 @@ export function MasterAgentCreditApplicationList({
         </div>
       ) : null}
 
-      <div className={useCompactTable ? "mt-0 min-w-0 space-y-0 lg:overflow-hidden lg:rounded-b-2xl lg:border-x lg:border-b lg:border-slate-200" : "mt-4 min-w-0 space-y-3 sm:mt-5"}>
+      <div className={useCompactTable ? "mt-0 min-w-0 space-y-0 lg:overflow-hidden lg:rounded-b-2xl lg:border-x lg:border-b lg:border-red-950/[0.06]" : "min-w-0 space-y-3 px-4 pb-4 sm:px-5 sm:pb-5"}>
         {filteredApplications.length ? (
           pagedApplications.map((item) => {
             const agentName = getApplicantText(item, "agent_name", item.member_name || "Agent");
@@ -900,7 +900,7 @@ export function MasterAgentCreditApplicationList({
               >
                 <div className={useCompactTable ? "grid gap-3 lg:grid-cols-[minmax(220px,1.45fr)_150px_130px_145px_110px] lg:items-center lg:px-4 lg:py-3" : "grid gap-3 lg:grid-cols-[minmax(260px,1fr)_130px_120px] lg:items-center"}>
                   <div className="flex min-w-0 items-center gap-3">
-                    <div className="grid h-12 w-12 shrink-0 place-items-center rounded-2xl bg-[linear-gradient(145deg,#053b2f,#08764f)] text-xs font-black text-amber-200 shadow-[0_8px_16px_rgba(5,59,47,0.16)]">
+                    <div className="grid h-12 w-12 shrink-0 place-items-center rounded-2xl bg-[linear-gradient(145deg,#b20717,#ff6a00)] text-xs font-black text-white shadow-[0_8px_16px_rgba(151,14,32,0.16)]">
                       {agentName.slice(0, 2).toUpperCase()}
                     </div>
                     <div className="min-w-0">
@@ -975,7 +975,7 @@ export function MasterAgentCreditApplicationList({
                 ) : null}
 
                 {openId === item.id ? (
-                  <div className="mt-3 min-w-0 rounded-3xl border border-red-200 bg-[linear-gradient(135deg,#fff7f5_0%,#ffffff_58%,#effcf5_100%)] p-3 shadow-[0_12px_28px_rgba(151,14,32,0.06)] sm:p-5">
+                  <div className="mt-3 min-w-0 rounded-3xl border border-red-200 bg-[linear-gradient(135deg,#fff7f5_0%,#ffffff_58%,#fffafa_100%)] p-3 shadow-[0_12px_28px_rgba(151,14,32,0.06)] sm:p-5">
                     {showActions && mode !== "marketing" && useCompactTable ? (
                       <div className="mb-3 space-y-3">
                         <MasterAgentCreditDecisionControls
@@ -1107,7 +1107,7 @@ export function MasterAgentCreditApplicationList({
             );
           })
         ) : (
-          <div className="grid min-h-[260px] place-items-center rounded-[26px] border border-dashed border-red-200 bg-[linear-gradient(135deg,#fff7f5_0%,#eefbf4_100%)] px-5 py-10 text-center">
+          <div className="grid min-h-[260px] place-items-center rounded-[26px] border border-dashed border-red-200 bg-[linear-gradient(135deg,#fff7f5_0%,#fffafa_58%,#ffffff_100%)] px-5 py-10 text-center">
             <div>
               <div className="mx-auto grid h-16 w-16 place-items-center rounded-3xl bg-white text-red-700 shadow-[0_14px_32px_rgba(151,14,32,0.10)] ring-1 ring-red-100">
                 <FileSignature className="h-8 w-8" strokeWidth={2.3} />
