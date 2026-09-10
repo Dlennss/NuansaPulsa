@@ -451,10 +451,13 @@ func (a *Pulsa24JamAdapter) trxURL() string {
 	if strings.HasSuffix(base, "/trx") {
 		return base
 	}
+	if strings.HasSuffix(base, "/v2") {
+		return base + "/trx"
+	}
 	if strings.HasSuffix(base, "/v1") {
 		return base + "/trx"
 	}
-	return base + "/v1/trx"
+	return base + "/v2/trx"
 }
 
 func firstNonEmpty(values ...string) string {

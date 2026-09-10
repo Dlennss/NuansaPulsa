@@ -10,7 +10,7 @@ import (
 
 func TestPulsa24JamProducts(t *testing.T) {
 	server := httptest.NewServer(http.HandlerFunc(func(w http.ResponseWriter, r *http.Request) {
-		if r.Method != http.MethodPost || r.URL.Path != "/v1/trx" {
+		if r.Method != http.MethodPost || r.URL.Path != "/v2/trx" {
 			t.Fatalf("unexpected request %s %s", r.Method, r.URL.Path)
 		}
 		if got := r.Header.Get("X-Api-Key"); got != "api-key" {
