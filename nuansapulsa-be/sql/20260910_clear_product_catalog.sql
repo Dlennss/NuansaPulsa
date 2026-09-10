@@ -6,12 +6,27 @@ CREATE TABLE IF NOT EXISTS public.app_runtime_flag (
   updated_at TIMESTAMPTZ NOT NULL DEFAULT now()
 );
 
-DELETE FROM public.member_fee_produk;
-DELETE FROM public.produk_fee_provider;
-DELETE FROM public.produk_provider_map;
-DELETE FROM public.produk_app_pricing;
-DELETE FROM public.kategori_fee_app;
-DELETE FROM public.yuscom_produk_snapshot;
+DO $$
+BEGIN
+  IF to_regclass('public.member_fee_produk') IS NOT NULL THEN
+    DELETE FROM public.member_fee_produk;
+  END IF;
+  IF to_regclass('public.produk_fee_provider') IS NOT NULL THEN
+    DELETE FROM public.produk_fee_provider;
+  END IF;
+  IF to_regclass('public.produk_provider_map') IS NOT NULL THEN
+    DELETE FROM public.produk_provider_map;
+  END IF;
+  IF to_regclass('public.produk_app_pricing') IS NOT NULL THEN
+    DELETE FROM public.produk_app_pricing;
+  END IF;
+  IF to_regclass('public.kategori_fee_app') IS NOT NULL THEN
+    DELETE FROM public.kategori_fee_app;
+  END IF;
+  IF to_regclass('public.yuscom_produk_snapshot') IS NOT NULL THEN
+    DELETE FROM public.yuscom_produk_snapshot;
+  END IF;
+END $$;
 
 UPDATE public.produk
 SET aktif = false,
@@ -19,13 +34,18 @@ SET aktif = false,
     brand_id = NULL,
     diubah_pada = now();
 
-DELETE FROM public.produk p
-WHERE NOT EXISTS (
-  SELECT 1 FROM public.app_order o WHERE o.produk_id = p.id
-)
-AND NOT EXISTS (
-  SELECT 1 FROM public.app_billing_check b WHERE b.produk_id = p.id
-);
+DO $$
+BEGIN
+  IF to_regclass('public.app_order') IS NOT NULL AND to_regclass('public.app_billing_check') IS NOT NULL THEN
+    DELETE FROM public.produk p
+    WHERE NOT EXISTS (
+      SELECT 1 FROM public.app_order o WHERE o.produk_id = p.id
+    )
+    AND NOT EXISTS (
+      SELECT 1 FROM public.app_billing_check b WHERE b.produk_id = p.id
+    );
+  END IF;
+END $$;
 
 DELETE FROM public.brand;
 DELETE FROM public.kategori;
