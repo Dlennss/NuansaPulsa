@@ -189,5 +189,5 @@ func parseBillingInquiryFromCheck(row *repository.AppBillingCheckRow) *repositor
 }
 
 func buildAppBillingCheckRefID() string {
-	return fmt.Sprintf("BILCHK-%s-%s", time.Now().Format("20060102150405"), strings.ToUpper(helper.RandHex(4)))
+	return fmt.Sprintf("BC%s%s", time.Now().Format("060102150405"), strings.ToUpper(helper.RandHex(3)))
 }

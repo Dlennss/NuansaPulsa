@@ -134,6 +134,9 @@ func appOrderProviderLooksLikeAccepted(provider, body string) bool {
 	case "gemilang":
 		return helper.LooksLikeGemilangAccepted(body) || helper.LooksLikeGemilangSuccess(body)
 	case "pulsa24jam":
+		if appOrderProviderImmediateReject(provider, body) {
+			return false
+		}
 		upper := strings.ToUpper(strings.TrimSpace(body))
 		return strings.Contains(upper, "SUKSES") ||
 			strings.Contains(upper, "SUCCESS") ||

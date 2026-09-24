@@ -38,6 +38,19 @@ func TestAppOrderProviderImmediateRejectPulsa24Jam(t *testing.T) {
 	}
 }
 
+func TestAppOrderProviderPulsa24JamRejectIsNotAccepted(t *testing.T) {
+	rejectedBodies := []string{
+		`{"message":"saldo tidak cukup","ok":true,"success":false,"refid":"NP260924120000ABCDEF","status":3}`,
+		`{"message":"produk tidak ditemukan","ok":true,"refid":"NP260924120000ABCDEF","status":3}`,
+		`{"ok":false,"message":"PIN salah"}`,
+	}
+	for _, body := range rejectedBodies {
+		if appOrderProviderLooksLikeAccepted("Pulsa24Jam", body) {
+			t.Fatalf("rejected Pulsa24Jam body must not be accepted: %s", body)
+		}
+	}
+}
+
 func TestAppOrderProviderProductUnavailable(t *testing.T) {
 	if !appOrderProviderProductUnavailable("Pulsa24Jam", `{"message":"Produk kehabisan stok","status":3}`) {
 		t.Fatal("out-of-stock response should quarantine the product")

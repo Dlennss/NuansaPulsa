@@ -10,6 +10,121 @@ const BRAND_LOGOS: Record<string, BrandLogoMeta> = {
     alt: "Logo DANA",
     sourcePage: "https://commons.wikimedia.org/wiki/File:Logo_Dana_Wiki.svg",
   },
+  bca: {
+    src: "/images/banks/bca.jpeg",
+    alt: "Logo BCA",
+    sourcePage: "local:/public/images/banks/bca.jpeg",
+  },
+  "bank bca": {
+    src: "/images/banks/bca.jpeg",
+    alt: "Logo BCA",
+    sourcePage: "local:/public/images/banks/bca.jpeg",
+  },
+  bni: {
+    src: "/images/banks/bni.jpg",
+    alt: "Logo BNI",
+    sourcePage: "local:/public/images/banks/bni.jpg",
+  },
+  "bank bni": {
+    src: "/images/banks/bni.jpg",
+    alt: "Logo BNI",
+    sourcePage: "local:/public/images/banks/bni.jpg",
+  },
+  bri: {
+    src: "/images/banks/bri.jpg",
+    alt: "Logo BRI",
+    sourcePage: "local:/public/images/banks/bri.jpg",
+  },
+  "bank bri": {
+    src: "/images/banks/bri.jpg",
+    alt: "Logo BRI",
+    sourcePage: "local:/public/images/banks/bri.jpg",
+  },
+  mandiri: {
+    src: "/images/banks/mandiri.jpeg",
+    alt: "Logo Mandiri",
+    sourcePage: "local:/public/images/banks/mandiri.jpeg",
+  },
+  "bank mandiri": {
+    src: "/images/banks/mandiri.jpeg",
+    alt: "Logo Mandiri",
+    sourcePage: "local:/public/images/banks/mandiri.jpeg",
+  },
+  bsi: {
+    src: "/images/banks/bsi.jpg",
+    alt: "Logo BSI",
+    sourcePage: "local:/public/images/banks/bsi.jpg",
+  },
+  "bank syariah indonesia": {
+    src: "/images/banks/bsi.jpg",
+    alt: "Logo BSI",
+    sourcePage: "local:/public/images/banks/bsi.jpg",
+  },
+  danamon: {
+    src: "/images/banks/danamon.png",
+    alt: "Logo Danamon",
+    sourcePage: "local:/public/images/banks/danamon.png",
+  },
+  "bank danamon": {
+    src: "/images/banks/danamon.png",
+    alt: "Logo Danamon",
+    sourcePage: "local:/public/images/banks/danamon.png",
+  },
+  jago: {
+    src: "/images/banks/jago.jpg",
+    alt: "Logo Bank Jago",
+    sourcePage: "local:/public/images/banks/jago.jpg",
+  },
+  "bank jago": {
+    src: "/images/banks/jago.jpg",
+    alt: "Logo Bank Jago",
+    sourcePage: "local:/public/images/banks/jago.jpg",
+  },
+  permata: {
+    src: "/images/banks/permatabank.jpeg",
+    alt: "Logo PermataBank",
+    sourcePage: "local:/public/images/banks/permatabank.jpeg",
+  },
+  "bank permata": {
+    src: "/images/banks/permatabank.jpeg",
+    alt: "Logo PermataBank",
+    sourcePage: "local:/public/images/banks/permatabank.jpeg",
+  },
+  seabank: {
+    src: "/images/banks/seabank.jpeg",
+    alt: "Logo SeaBank",
+    sourcePage: "local:/public/images/banks/seabank.jpeg",
+  },
+  "sea bank": {
+    src: "/images/banks/seabank.jpeg",
+    alt: "Logo SeaBank",
+    sourcePage: "local:/public/images/banks/seabank.jpeg",
+  },
+  pln: {
+    src: "/images/pln/logo_pln.png",
+    alt: "Logo PLN",
+    sourcePage: "local:/public/images/pln/logo_pln.png",
+  },
+  "bpjs kesehatan": {
+    src: "/images/bpjs/icon_bpjs_kesehatan.png",
+    alt: "Logo BPJS Kesehatan",
+    sourcePage: "local:/public/images/bpjs/icon_bpjs_kesehatan.png",
+  },
+  "bpjs ketenagakerjaan": {
+    src: "/images/bpjs/icon_bpjs_ketenagakerjaan.png",
+    alt: "Logo BPJS Ketenagakerjaan",
+    sourcePage: "local:/public/images/bpjs/icon_bpjs_ketenagakerjaan.png",
+  },
+  "bpjs tenaga kerja": {
+    src: "/images/bpjs/icon_bpjs_ketenagakerjaan.png",
+    alt: "Logo BPJS Ketenagakerjaan",
+    sourcePage: "local:/public/images/bpjs/icon_bpjs_ketenagakerjaan.png",
+  },
+  pdam: {
+    src: "/images/pdam/logo_pdam.png",
+    alt: "Logo PDAM",
+    sourcePage: "local:/public/images/pdam/logo_pdam.png",
+  },
   telkomsel: {
     src: "/images/providers/logo_telkomsel.webp",
     alt: "Logo Telkomsel",

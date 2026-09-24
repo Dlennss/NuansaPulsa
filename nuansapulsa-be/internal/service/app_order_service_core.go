@@ -3,6 +3,7 @@ package service
 import (
 	"context"
 	"fmt"
+	"os"
 	"strings"
 	"time"
 	"unicode"
@@ -31,6 +32,12 @@ func (s *AppOrderService) validatePulsa24JamProduct(ctx context.Context, product
 	if s.Pulsa24JamClient == nil || !s.Pulsa24JamClient.Configured() {
 		return nil, fmt.Errorf("koneksi katalog Pulsa24Jam belum dikonfigurasi")
 	}
+	if !pulsa24JamLiveProductCheckEnabled() {
+		return &provider.Pulsa24JamProduct{
+			SKU:    strings.ToUpper(strings.TrimSpace(productCode)),
+			Active: true,
+		}, nil
+	}
 	items, err := s.Pulsa24JamClient.Products(ctx, productCode)
 	if err != nil {
 		return nil, fmt.Errorf("gagal memeriksa produk Pulsa24Jam: %w", err)
@@ -43,6 +50,14 @@ func (s *AppOrderService) validatePulsa24JamProduct(ctx context.Context, product
 		return nil, fmt.Errorf("produk sedang tidak aktif di Pulsa24Jam")
 	}
 	return &item, nil
+}
+
+func pulsa24JamLiveProductCheckEnabled() bool {
+	value := strings.TrimSpace(os.Getenv("PULSA24JAM_LIVE_PRODUCT_CHECK_ENABLED"))
+	if value == "" {
+		value = strings.TrimSpace(os.Getenv("Pulsa24Jam_LIVE_PRODUCT_CHECK_ENABLED"))
+	}
+	return strings.EqualFold(value, "true") || value == "1" || strings.EqualFold(value, "yes")
 }
 
 const appOrderPaymentFeeBps int64 = 7
@@ -205,5 +220,5 @@ func isAppCheckProduct(produk *repository.ProdukRow) bool {
 }
 
 func buildAppOrderInvoiceID() string {
-	return fmt.Sprintf("INV-%s-%s", time.Now().Format("20060102150405"), strings.ToUpper(helper.RandHex(4)))
+	return fmt.Sprintf("NP%s%s", time.Now().Format("060102150405"), strings.ToUpper(helper.RandHex(3)))
 }

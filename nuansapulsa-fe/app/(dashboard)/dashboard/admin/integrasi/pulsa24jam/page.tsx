@@ -48,7 +48,7 @@ const envItems = [
     key: "PULSA24JAM_BASE_URL",
     label: "Base URL",
     value: process.env.PULSA24JAM_BASE_URL,
-    desc: "Isi https://api.pulsa24jam.net atau base URL resmi provider.",
+    desc: "Isi base URL https://api.pulsa24jam.net. Backend otomatis mengirim ke /v2/trx.",
   },
   {
     key: "PULSA24JAM_API_KEY",
@@ -122,8 +122,8 @@ const commandRows = [
 
 export default function Pulsa24JamIntegrationPage() {
   const readyCount = envItems.filter((item) => configured(item.value)).length;
-  const callbackURL = `${backendBaseURL()}/v1/webhook/pulsa24jam`;
-  const trxURL = `${String(process.env.PULSA24JAM_BASE_URL || "https://api.pulsa24jam.net").replace(/\/$/, "")}/v1/trx`;
+  const callbackURL = `${backendBaseURL()}/api/v1/webhooks/pulsa24jam`;
+  const trxURL = `${String(process.env.PULSA24JAM_BASE_URL || "https://api.pulsa24jam.net").replace(/\/$/, "")}/v2/trx`;
   const isReady = readyCount >= 4;
   const steps = [
     {
@@ -148,7 +148,7 @@ export default function Pulsa24JamIntegrationPage() {
     },
     {
       title: "5. Kirim Transaksi",
-      desc: "Backend mengirim command ke /v1/trx dengan refid unik, lalu menunggu callback final.",
+      desc: "Backend mengirim command ke /v2/trx dengan refid unik, lalu menunggu callback final.",
       icon: MapPinned,
     },
   ];
@@ -174,7 +174,7 @@ export default function Pulsa24JamIntegrationPage() {
                   Provider: Pulsa24Jam
                 </span>
                 <span className="rounded-full border border-white bg-[#b20717] px-3 py-1.5 text-xs font-black text-white">
-                  Endpoint: POST /v1/trx
+                  Endpoint: POST /v2/trx
                 </span>
               </div>
             </div>

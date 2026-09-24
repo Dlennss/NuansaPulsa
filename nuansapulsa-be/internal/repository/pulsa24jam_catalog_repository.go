@@ -50,10 +50,25 @@ ON CONFLICT (nama) DO UPDATE SET aktif = true, diubah_pada = now()
 `); err != nil {
 		return nil, err
 	}
-	if _, err := tx.ExecContext(ctx, `UPDATE public.produk_app_pricing SET aktif = false, updated_at = now() WHERE LOWER(TRIM(provider)) = 'pulsa24jam'`); err != nil {
+	if _, err := tx.ExecContext(ctx, `
+CREATE TABLE IF NOT EXISTS public.app_runtime_flag (
+  key TEXT PRIMARY KEY,
+  value TEXT NOT NULL,
+  updated_at TIMESTAMPTZ NOT NULL DEFAULT now()
+)
+`); err != nil {
 		return nil, err
 	}
-	if _, err := tx.ExecContext(ctx, `UPDATE public.produk_provider_map SET aktif = false, diubah_pada = now() WHERE LOWER(TRIM(provider)) = 'pulsa24jam'`); err != nil {
+	if _, err := tx.ExecContext(ctx, `DELETE FROM public.app_runtime_flag WHERE key = 'product_catalog_cleared'`); err != nil {
+		return nil, err
+	}
+	if _, err := tx.ExecContext(ctx, `UPDATE public.produk SET aktif = false, diubah_pada = now()`); err != nil {
+		return nil, err
+	}
+	if _, err := tx.ExecContext(ctx, `UPDATE public.produk_app_pricing SET aktif = false, updated_at = now()`); err != nil {
+		return nil, err
+	}
+	if _, err := tx.ExecContext(ctx, `UPDATE public.produk_provider_map SET aktif = false, diubah_pada = now()`); err != nil {
 		return nil, err
 	}
 
@@ -144,6 +159,26 @@ ON CONFLICT (produk_id, provider, kode_provider) DO UPDATE SET
 	}
 	if synced == 0 {
 		return nil, fmt.Errorf("tidak ada produk Pulsa24Jam valid; sinkronisasi dibatalkan")
+	}
+	if _, err := tx.ExecContext(ctx, `
+UPDATE public.kategori k
+SET aktif = EXISTS (
+  SELECT 1 FROM public.produk p
+  WHERE p.kategori_id = k.id
+    AND p.aktif = true
+), diubah_pada = now()
+`); err != nil {
+		return nil, err
+	}
+	if _, err := tx.ExecContext(ctx, `
+UPDATE public.brand b
+SET aktif = EXISTS (
+  SELECT 1 FROM public.produk p
+  WHERE p.brand_id = b.id
+    AND p.aktif = true
+), diubah_pada = now()
+`); err != nil {
+		return nil, err
 	}
 	if err := tx.Commit(); err != nil {
 		return nil, err

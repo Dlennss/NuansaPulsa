@@ -8,6 +8,8 @@ import (
 	"nuansapulsa/internal/helper"
 )
 
+const pulsa24JamRefIDMaxLength = 20
+
 func (h *MemberTrxService) Handle(ctx context.Context, apiKey, clientIP string, in trxmemberdto.TrxRequest) (any, *ServiceError) {
 	in.Commands = strings.TrimSpace(strings.ToUpper(in.Commands))
 	in.Product = helper.NormalizeInternalProductCode(in.Product)
@@ -59,6 +61,9 @@ func (h *MemberTrxService) Handle(ctx context.Context, apiKey, clientIP string, 
 		}
 	default:
 		return nil, &ServiceError{Kind: ErrBadRequest, Message: "commands tidak didukung (hanya PAY/INQ/STATUS-PAY/PRODUK/SALDO/DEPOSIT)"}
+	}
+	if err := validatePulsa24JamRefIDLength(in.Commands, in.RefID); err != nil {
+		return nil, err
 	}
 
 	handleTimeout := defaultHandleTimeout
@@ -218,4 +223,14 @@ func (h *MemberTrxService) Handle(ctx context.Context, apiKey, clientIP string, 
 		return trxmemberdto.MapBusinessStatusResponse(in.RefID, 3, out.Err.Message), nil
 	}
 	return out.Body, nil
+}
+
+func validatePulsa24JamRefIDLength(command, refID string) *ServiceError {
+	switch strings.TrimSpace(strings.ToUpper(command)) {
+	case "PAY", "INQ", "STATUS-PAY", "DEPOSIT":
+		if len(strings.TrimSpace(refID)) > pulsa24JamRefIDMaxLength {
+			return &ServiceError{Kind: ErrBadRequest, Message: "refid maksimal 20 karakter"}
+		}
+	}
+	return nil
 }
