@@ -369,6 +369,7 @@ export function GuestPulsaQuickOrder({ kategoriId, brands, authToken, buyerRole,
                     setSelectedProduct(found);
                   }}
                   variant="pulsa"
+                  brandName={detectedBrand.nama}
                 />
               ) : (
                 <div className="grid min-h-28 place-items-center rounded-2xl border border-dashed border-red-200 bg-red-50/60 px-4 text-center text-sm font-semibold text-slate-500">
