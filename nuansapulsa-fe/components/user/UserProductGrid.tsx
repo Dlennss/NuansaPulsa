@@ -30,6 +30,11 @@ function isPackageStyleItem(item: UserProductItem) {
   return upper.includes("PAKET DATA") || upper.includes("PAKET TELEPON") || upper.includes("PAKET SMS");
 }
 
+function isOperatorCatalogItem(item: UserProductItem) {
+  const upper = String(`${item.kategori_nama || ""} ${item.nama || ""}`).toUpperCase();
+  return upper.includes("PULSA") || upper.includes("PAKET DATA") || upper.includes("PAKET TELEPON") || upper.includes("PAKET SMS");
+}
+
 function isEMoneyItem(item: UserProductItem) {
   const category = String(item.kategori_nama || "").toUpperCase();
   return category.includes("E-MONEY") || category.includes("E-WALLET");
@@ -78,6 +83,21 @@ function extractLargeNominalLabel(item: UserProductItem) {
   return new Intl.NumberFormat("id-ID").format(Number(item.nominal || 0));
 }
 
+function getOperatorAccent(item: UserProductItem) {
+  const key = normalizeProductThemeKey(`${item.brand_nama || ""} ${item.nama || ""}`);
+  if (key.includes("axis")) return "bg-[#7b1fd1]";
+  if (key.includes("indosat") || key.includes("im3") || key.includes("mentari")) return "bg-[#ffc400]";
+  if (key.includes("xl")) return "bg-[#0057b8]";
+  if (key.includes("tri") || /\b3\b/.test(key)) return "bg-[#5c2d91]";
+  if (key.includes("smartfren") || key.includes("smart")) return "bg-[#db001b]";
+  if (key.includes("by u") || key.includes("byu")) return "bg-[#5f5bff]";
+  return "bg-[#ff6a00]";
+}
+
+function normalizeProductThemeKey(value: string) {
+  return value.toLowerCase().replace(/[^a-z0-9]+/g, " ").trim();
+}
+
 function UserProductCard({
   item,
   isLoggedIn,
@@ -103,8 +123,10 @@ function UserProductCard({
   const fixedPrice = isFixed ? getDisplayedFixedPrice(item, effectiveRole) : null;
   const finalPrice = Number(fixedPrice || feeActive || 0);
   const packageStyle = isPackageStyleItem(item);
+  const operatorStyle = isOperatorCatalogItem(item);
   const emoneyStyle = isEMoneyItem(item);
   const displayName = getDisplayProductName(item);
+  const operatorAccent = getOperatorAccent(item);
 
   if (emoneyStyle) {
     const nominalLabel = getEMoneyCardTitle(item);
@@ -140,6 +162,39 @@ function UserProductCard({
             </div>
             <span className="inline-flex h-8 w-full items-center justify-center rounded-2xl bg-[#b20717] px-3 text-xs font-black text-white shadow-[0_10px_20px_rgba(151,14,32,0.18)] transition group-hover:bg-[#d70717]">
               {canBuy ? (buyLabel || "Top Up") : (buyBlockedLabel || "Lengkapi dulu")}
+            </span>
+          </div>
+        </div>
+      </button>
+    );
+  }
+
+  if (operatorStyle) {
+    return (
+      <button
+        type="button"
+        onClick={() => {
+          if (!canBuy) return;
+          onBuy(item);
+        }}
+        disabled={!canBuy}
+        className="group relative min-h-30 overflow-hidden rounded-2xl bg-[linear-gradient(135deg,#b20717_0%,#d70717_54%,#ff6a00_125%)] px-4 py-4 text-left text-white shadow-[0_14px_30px_rgba(151,14,32,0.18)] ring-1 ring-white/20 transition-all duration-300 hover:-translate-y-0.5 hover:shadow-[0_18px_38px_rgba(151,14,32,0.26)] disabled:cursor-not-allowed disabled:opacity-60"
+      >
+        <div className="pointer-events-none absolute inset-0 bg-[radial-gradient(circle_at_0%_0%,rgba(255,255,255,0.25),transparent_34%),linear-gradient(160deg,rgba(255,255,255,0.13),rgba(255,255,255,0.02))]" />
+        <div className="pointer-events-none absolute -bottom-14 -left-12 h-32 w-32 rounded-full border border-white/12" />
+        <div className="pointer-events-none absolute -bottom-8 -left-6 h-24 w-24 rounded-full border border-white/10" />
+        <div className={`pointer-events-none absolute right-0 top-0 h-1.5 w-full ${operatorAccent} opacity-90`} />
+
+        <div className="relative flex min-h-22 flex-col justify-between gap-4">
+          <h2 className={packageStyle ? "line-clamp-3 text-[13px] font-black leading-tight" : "line-clamp-3 text-[14px] font-black leading-tight"}>
+            {displayName}
+          </h2>
+          <div className="flex items-end justify-between gap-3">
+            <span className="h-7 min-w-0 rounded-full bg-white/12 px-3 text-[10px] font-black leading-7 text-white/90 ring-1 ring-white/18">
+              {item.brand_nama || "NuansaPulsa"}
+            </span>
+            <span className="shrink-0 text-right text-[11px] font-black text-white/82">
+              {hidePrice ? "Cek harga" : isFixed && fixedPrice !== null ? formatRupiah(fixedPrice).replace("Rp ", "Rp") : `+${formatRupiah(feeActive).replace("Rp ", "Rp")}`}
             </span>
           </div>
         </div>
