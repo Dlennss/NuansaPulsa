@@ -167,9 +167,17 @@ func (r *ProviderCallbackRepository) ResolvePulsa24JamWalletNominalProduct(ctx c
 
 	wallet := ""
 	switch {
-	case strings.Contains(productName, "GOPAY") || internalSKU == "GOPAY":
+	case strings.Contains(productName, "NOMINAL@NOHP") && strings.Contains(productName, "GOPAY"):
+		return r.resolvePulsa24JamActiveCode(ctx, []string{"PPOBGOPAY"})
+	case strings.Contains(productName, "NOMINAL @ NOHP") && strings.Contains(productName, "GOPAY"):
+		return r.resolvePulsa24JamActiveCode(ctx, []string{"PPOBGOPAY"})
+	case strings.Contains(productName, "NOMINAL@NOHP") && strings.Contains(productName, "DANA"):
+		return r.resolvePulsa24JamActiveCode(ctx, []string{"PPOBDANA", "DANA"})
+	case strings.Contains(productName, "NOMINAL @ NOHP") && strings.Contains(productName, "DANA"):
+		return r.resolvePulsa24JamActiveCode(ctx, []string{"PPOBDANA", "DANA"})
+	case strings.HasPrefix(internalSKU, "GPC") || strings.HasPrefix(internalSKU, "GPCH"):
 		wallet = "GOPAY"
-	case strings.Contains(productName, "DANA") || internalSKU == "DANA" || internalSKU == "PPOBDANA" || internalSKU == "DANAPLUS":
+	case strings.HasPrefix(internalSKU, "DANA") && internalSKU != "DANA":
 		wallet = "DANA"
 	default:
 		return "", nil
@@ -187,6 +195,14 @@ func (r *ProviderCallbackRepository) ResolvePulsa24JamWalletNominalProduct(ctx c
 	case "DANA":
 		exactCodes = []string{fmt.Sprintf("DANA%dH", unit), fmt.Sprintf("DANA%d", unit)}
 	}
+	if len(exactCodes) == 0 {
+		return "", nil
+	}
+
+	return r.resolvePulsa24JamActiveCode(ctx, exactCodes)
+}
+
+func (r *ProviderCallbackRepository) resolvePulsa24JamActiveCode(ctx context.Context, exactCodes []string) (string, error) {
 	if len(exactCodes) == 0 {
 		return "", nil
 	}

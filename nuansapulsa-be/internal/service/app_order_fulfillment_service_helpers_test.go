@@ -87,14 +87,19 @@ func TestResolvePulsa24JamAppRequest(t *testing.T) {
 			wantProduct: "UDGD15", wantQty: 1, wantDest: "08571187308",
 		},
 		{
-			name:        "generic dana open amount uses provider destination format",
+			name:        "generic dana open amount keeps qty field",
 			order:       repository.AppOrderRow{ProdukSKUSnapshot: "DANA", ProdukNamaSnapshot: "Dana Bebas Nominal", Dest: "08571187308", Qty: 25000, HargaDasar: 26000},
-			wantProduct: "DANA", wantQty: 0, wantDest: "25000@08571187308",
+			wantProduct: "DANA", wantQty: 25000, wantDest: "08571187308",
 		},
 		{
-			name:        "gopay h2hr open amount uses provider destination format",
+			name:        "gopay h2hr open amount keeps qty field",
 			order:       repository.AppOrderRow{ProdukSKUSnapshot: "GOPAY", ProdukNamaSnapshot: "E-WALLET 2.500 GOPAY OPEN AMOUNT", Dest: "08571187308", Qty: 100000, HargaDasar: 101200},
-			wantProduct: "GOPAY", wantQty: 0, wantDest: "100000@08571187308",
+			wantProduct: "GOPAY", wantQty: 100000, wantDest: "08571187308",
+		},
+		{
+			name:        "gopay ppob nominal at phone product uses destination format",
+			order:       repository.AppOrderRow{ProdukSKUSnapshot: "PPOBGOPAY", ProdukNamaSnapshot: "GOPAY CUSTOMER DENOM BEBAS 1.250 (FORMAT: NOMINAL@NOHP)", Dest: "08571187308", Qty: 100000, HargaDasar: 101200},
+			wantProduct: "PPOBGOPAY", wantQty: 0, wantDest: "100000@08571187308",
 		},
 		{
 			name:        "unknown open amount remains unchanged",

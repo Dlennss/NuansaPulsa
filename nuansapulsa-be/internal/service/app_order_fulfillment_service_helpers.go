@@ -155,10 +155,10 @@ func pulsa24JamUsesNominalAtPhoneFormat(providerProductCode string, order *repos
 	if strings.Contains(name, "NOMINAL@NOHP") || strings.Contains(name, "NOMINAL @ NOHP") {
 		return true
 	}
-	if code == "GOPAY" || code == "DANA" || code == "PPOBDANA" {
+	if code == "PPOBGOPAY" || code == "PPOBDANA" {
 		return true
 	}
-	if sku == "GOPAY" || sku == "DANA" || sku == "PPOBDANA" {
+	if sku == "PPOBGOPAY" || sku == "PPOBDANA" {
 		return true
 	}
 	return false
