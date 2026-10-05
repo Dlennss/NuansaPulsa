@@ -119,11 +119,12 @@ RETURNING id
 			return nil, err
 		}
 
+		appActive := !pulsa24JamProductHiddenFromApp(item)
 		var catalogActive bool
 		if err := tx.QueryRowContext(ctx, `
 INSERT INTO public.produk_app_pricing
   (produk_id, provider, harga, harga_dasar, yuscom_group, yuscom_category, yuscom_sku, yuscom_name, yuscom_status, yuscom_display_brand, aktif, fetched_at, created_at, updated_at, dibuat_pada, diubah_pada)
-VALUES ($1,'Pulsa24Jam',$2,$2,$3,$4,$5,$6,'ACTIVE',$7,true,now(),now(),now(),now(),now())
+VALUES ($1,'Pulsa24Jam',$2,$2,$3,$4,$5,$6,$8,$7,$9,now(),now(),now(),now(),now())
 ON CONFLICT (produk_id) DO UPDATE SET
   provider = 'Pulsa24Jam',
   harga = EXCLUDED.harga,
@@ -132,14 +133,14 @@ ON CONFLICT (produk_id) DO UPDATE SET
   yuscom_category = EXCLUDED.yuscom_category,
   yuscom_sku = EXCLUDED.yuscom_sku,
   yuscom_name = EXCLUDED.yuscom_name,
-  yuscom_status = 'ACTIVE',
+  yuscom_status = EXCLUDED.yuscom_status,
   yuscom_display_brand = EXCLUDED.yuscom_display_brand,
-  aktif = true,
+  aktif = EXCLUDED.aktif,
   fetched_at = now(),
   updated_at = now(),
   diubah_pada = now()
 RETURNING aktif
-`, productID, item.Price, item.GroupName, item.CategoryName, item.SKU, item.Name, item.BrandName).Scan(&catalogActive); err != nil {
+`, productID, item.Price, item.GroupName, item.CategoryName, item.SKU, item.Name, item.BrandName, pulsa24JamAppStatus(appActive), appActive).Scan(&catalogActive); err != nil {
 			return nil, err
 		}
 
@@ -262,6 +263,24 @@ func onlyDigitsString(value string) string {
 		}
 	}
 	return b.String()
+}
+
+func pulsa24JamProductHiddenFromApp(item Pulsa24JamCatalogItem) bool {
+	if item.PriceType != "FIXED" {
+		return false
+	}
+	name := strings.ToUpper(strings.TrimSpace(item.Name))
+	group := strings.ToUpper(strings.TrimSpace(item.GroupName))
+	category := strings.ToUpper(strings.TrimSpace(item.CategoryName))
+	return strings.Contains(name, "TRANSFER PULSA") &&
+		(strings.Contains(name, "PULSA") || strings.Contains(group, "PULSA") || strings.Contains(category, "PULSA"))
+}
+
+func pulsa24JamAppStatus(active bool) string {
+	if active {
+		return "ACTIVE"
+	}
+	return "HIDDEN_TRANSFER_PULSA"
 }
 
 func ensureCatalogMaster(ctx context.Context, tx *sql.Tx, table, name string) (int64, error) {

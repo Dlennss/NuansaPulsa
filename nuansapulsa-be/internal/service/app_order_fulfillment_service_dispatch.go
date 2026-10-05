@@ -125,11 +125,12 @@ func (s *AppOrderFulfillmentService) DispatchPaidOrder(ctx context.Context, orde
 		return err
 	}
 
-	hs, body, price, sn, callErr := s.callAppOrderProvider(ctx, provider, providerProductCode, providerQty, providerDest, order)
+	hs, body, price, sn, requestRaw, callErr := s.callAppOrderProvider(ctx, provider, providerProductCode, providerQty, providerDest, order)
 
 	rawRespJSON, _ := json.Marshal(map[string]any{
 		"http_status": hs,
 		"body":        body,
+		"request_raw": requestRaw,
 		"error": func() any {
 			if callErr != nil {
 				return callErr.Error()
@@ -245,14 +246,14 @@ func (s *AppOrderFulfillmentService) DispatchPaidOrder(ctx context.Context, orde
 	return nil
 }
 
-func (s *AppOrderFulfillmentService) callAppOrderProvider(ctx context.Context, provider, providerProductCode string, providerQty int64, providerDest string, order *repository.AppOrderRow) (hs int, body string, price int64, sn string, callErr error) {
+func (s *AppOrderFulfillmentService) callAppOrderProvider(ctx context.Context, provider, providerProductCode string, providerQty int64, providerDest string, order *repository.AppOrderRow) (hs int, body string, price int64, sn string, requestRaw any, callErr error) {
 	if strings.TrimSpace(providerDest) == "" && order != nil {
 		providerDest = order.Dest
 	}
 	switch {
 	case strings.EqualFold(provider, "gemilang"):
 		if s.gmClient == nil {
-			return 0, "", 0, "", fmt.Errorf("gemilang client belum tersedia")
+			return 0, "", 0, "", nil, fmt.Errorf("gemilang client belum tersedia")
 		}
 		acc, nextHS, nextBody, nextErr := s.gmClient.TrxNoSign(ctx, providerProductCode, order.Qty, providerDest, order.InvoiceID)
 		hs, body, callErr = nextHS, nextBody, nextErr
@@ -264,7 +265,7 @@ func (s *AppOrderFulfillmentService) callAppOrderProvider(ctx context.Context, p
 	case strings.EqualFold(provider, providerpkg.Pulsa24JamProviderName):
 		client := s.providerClients[providerpkg.Pulsa24JamProviderName]
 		if client == nil {
-			return 0, "", 0, "", fmt.Errorf("Pulsa24Jam client belum tersedia")
+			return 0, "", 0, "", nil, fmt.Errorf("Pulsa24Jam client belum tersedia")
 		}
 		resp, nextErr := client.Pay(ctx, providerpkg.PayRequest{
 			Command: "PAY",
@@ -279,13 +280,14 @@ func (s *AppOrderFulfillmentService) callAppOrderProvider(ctx context.Context, p
 			body = resp.Body
 			price = resp.Price
 			sn = strings.TrimSpace(resp.ProviderRef)
+			requestRaw = resp.RequestRaw
 			if sn == "" {
 				sn = strings.TrimSpace(resp.Message)
 			}
 		}
 	default:
 		if s.ysClient == nil {
-			return 0, "", 0, "", fmt.Errorf("yuscom client belum tersedia")
+			return 0, "", 0, "", nil, fmt.Errorf("yuscom client belum tersedia")
 		}
 		acc, nextHS, nextBody, nextErr := s.ysClient.TrxNoSign(ctx, providerProductCode, order.Qty, order.Dest, order.InvoiceID)
 		hs, body, callErr = nextHS, nextBody, nextErr
