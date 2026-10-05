@@ -69,33 +69,44 @@ func TestResolvePulsa24JamAppRequest(t *testing.T) {
 		order       repository.AppOrderRow
 		wantProduct string
 		wantQty     int64
+		wantDest    string
 	}{
 		{
 			name:        "fixed dana uses open amount route",
-			order:       repository.AppOrderRow{ProdukSKUSnapshot: "UDDND10", ProdukNamaSnapshot: "Dana 10.000", Qty: 1, HargaDasar: 11055},
-			wantProduct: "DANA", wantQty: 10000,
+			order:       repository.AppOrderRow{ProdukSKUSnapshot: "UDDND10", ProdukNamaSnapshot: "Dana 10.000", Dest: "08571187308", Qty: 1, HargaDasar: 11055},
+			wantProduct: "DANA", wantQty: 0, wantDest: "10000@08571187308",
 		},
 		{
 			name:        "fixed gopay uses open amount route",
-			order:       repository.AppOrderRow{ProdukSKUSnapshot: "UDGP10", ProdukNamaSnapshot: "Gopay 10.000", Qty: 1, HargaDasar: 11650},
-			wantProduct: "GOPAY", wantQty: 10000,
+			order:       repository.AppOrderRow{ProdukSKUSnapshot: "UDGP10", ProdukNamaSnapshot: "Gopay 10.000", Dest: "08571187308", Qty: 1, HargaDasar: 11650},
+			wantProduct: "GOPAY", wantQty: 0, wantDest: "10000@08571187308",
 		},
 		{
 			name:        "gopay driver keeps dedicated route",
-			order:       repository.AppOrderRow{ProdukSKUSnapshot: "UDGD15", ProdukNamaSnapshot: "Gopay Driver 15.000", Qty: 1, HargaDasar: 16450},
-			wantProduct: "UDGD15", wantQty: 1,
+			order:       repository.AppOrderRow{ProdukSKUSnapshot: "UDGD15", ProdukNamaSnapshot: "Gopay Driver 15.000", Dest: "08571187308", Qty: 1, HargaDasar: 16450},
+			wantProduct: "UDGD15", wantQty: 1, wantDest: "08571187308",
 		},
 		{
-			name:        "open amount remains unchanged",
-			order:       repository.AppOrderRow{ProdukSKUSnapshot: "DANA", ProdukNamaSnapshot: "Dana Bebas Nominal", Qty: 25000, HargaDasar: 26000},
-			wantProduct: "DANA", wantQty: 25000,
+			name:        "generic dana open amount uses provider destination format",
+			order:       repository.AppOrderRow{ProdukSKUSnapshot: "DANA", ProdukNamaSnapshot: "Dana Bebas Nominal", Dest: "08571187308", Qty: 25000, HargaDasar: 26000},
+			wantProduct: "DANA", wantQty: 0, wantDest: "25000@08571187308",
+		},
+		{
+			name:        "gopay h2hr open amount uses provider destination format",
+			order:       repository.AppOrderRow{ProdukSKUSnapshot: "GOPAY", ProdukNamaSnapshot: "E-WALLET 2.500 GOPAY OPEN AMOUNT", Dest: "08571187308", Qty: 100000, HargaDasar: 101200},
+			wantProduct: "GOPAY", wantQty: 0, wantDest: "100000@08571187308",
+		},
+		{
+			name:        "unknown open amount remains unchanged",
+			order:       repository.AppOrderRow{ProdukSKUSnapshot: "XYZ", ProdukNamaSnapshot: "Produk Bebas Nominal", Dest: "08571187308", Qty: 25000, HargaDasar: 26000},
+			wantProduct: "XYZ", wantQty: 25000, wantDest: "08571187308",
 		},
 	}
 	for _, tt := range tests {
 		t.Run(tt.name, func(t *testing.T) {
-			product, qty := resolvePulsa24JamAppRequest(tt.order.ProdukSKUSnapshot, &tt.order)
-			if product != tt.wantProduct || qty != tt.wantQty {
-				t.Fatalf("got product=%s qty=%d, want product=%s qty=%d", product, qty, tt.wantProduct, tt.wantQty)
+			got := resolvePulsa24JamAppRequest(tt.order.ProdukSKUSnapshot, &tt.order)
+			if got.Product != tt.wantProduct || got.Qty != tt.wantQty || got.Dest != tt.wantDest {
+				t.Fatalf("got product=%s qty=%d dest=%s, want product=%s qty=%d dest=%s", got.Product, got.Qty, got.Dest, tt.wantProduct, tt.wantQty, tt.wantDest)
 			}
 		})
 	}

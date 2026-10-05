@@ -79,15 +79,19 @@ func (s *AppOrderFulfillmentService) DispatchPaidOrder(ctx context.Context, orde
 		return fmt.Errorf("%s", msg)
 	}
 	providerQty := order.Qty
-	if provider == providerpkg.Pulsa24JamProviderName {
-		providerProductCode, providerQty = resolvePulsa24JamAppRequest(providerProductCode, order)
+	providerDest := order.Dest
+	if strings.EqualFold(provider, providerpkg.Pulsa24JamProviderName) {
+		p24Req := resolvePulsa24JamAppRequest(providerProductCode, order)
+		providerProductCode = p24Req.Product
+		providerQty = p24Req.Qty
+		providerDest = p24Req.Dest
 	}
 
 	reqPayload := map[string]any{
 		"provider": provider,
 		"product":  providerProductCode,
 		"qty":      providerQty,
-		"dest":     order.Dest,
+		"dest":     providerDest,
 		"refid":    order.InvoiceID,
 	}
 	reqJSON, _ := json.Marshal(reqPayload)
@@ -108,7 +112,7 @@ func (s *AppOrderFulfillmentService) DispatchPaidOrder(ctx context.Context, orde
 		return err
 	}
 
-	hs, body, price, sn, callErr := s.callAppOrderProvider(ctx, provider, providerProductCode, providerQty, order)
+	hs, body, price, sn, callErr := s.callAppOrderProvider(ctx, provider, providerProductCode, providerQty, providerDest, order)
 
 	rawRespJSON, _ := json.Marshal(map[string]any{
 		"http_status": hs,
@@ -228,28 +232,31 @@ func (s *AppOrderFulfillmentService) DispatchPaidOrder(ctx context.Context, orde
 	return nil
 }
 
-func (s *AppOrderFulfillmentService) callAppOrderProvider(ctx context.Context, provider, providerProductCode string, providerQty int64, order *repository.AppOrderRow) (hs int, body string, price int64, sn string, callErr error) {
-	switch provider {
-	case "gemilang":
+func (s *AppOrderFulfillmentService) callAppOrderProvider(ctx context.Context, provider, providerProductCode string, providerQty int64, providerDest string, order *repository.AppOrderRow) (hs int, body string, price int64, sn string, callErr error) {
+	if strings.TrimSpace(providerDest) == "" && order != nil {
+		providerDest = order.Dest
+	}
+	switch {
+	case strings.EqualFold(provider, "gemilang"):
 		if s.gmClient == nil {
 			return 0, "", 0, "", fmt.Errorf("gemilang client belum tersedia")
 		}
-		acc, nextHS, nextBody, nextErr := s.gmClient.TrxNoSign(ctx, providerProductCode, order.Qty, order.Dest, order.InvoiceID)
+		acc, nextHS, nextBody, nextErr := s.gmClient.TrxNoSign(ctx, providerProductCode, order.Qty, providerDest, order.InvoiceID)
 		hs, body, callErr = nextHS, nextBody, nextErr
 		price = acc.Price
 		_, sn = providersn.ParseGemilangSNRefFromMsg(body)
 		if strings.TrimSpace(sn) == "" {
 			sn = strings.TrimSpace(acc.Ticket)
 		}
-	case "Pulsa24Jam":
-		client := s.providerClients["Pulsa24Jam"]
+	case strings.EqualFold(provider, providerpkg.Pulsa24JamProviderName):
+		client := s.providerClients[providerpkg.Pulsa24JamProviderName]
 		if client == nil {
 			return 0, "", 0, "", fmt.Errorf("Pulsa24Jam client belum tersedia")
 		}
 		resp, nextErr := client.Pay(ctx, providerpkg.PayRequest{
 			Command: "PAY",
 			Product: providerProductCode,
-			Dest:    order.Dest,
+			Dest:    providerDest,
 			Qty:     providerQty,
 			RefID:   order.InvoiceID,
 		})

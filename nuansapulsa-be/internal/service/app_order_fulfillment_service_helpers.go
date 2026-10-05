@@ -16,6 +16,12 @@ import (
 
 var Pulsa24JamFixedWalletAmountPattern = regexp.MustCompile(`([0-9]+)$`)
 
+type pulsa24JamAppRequest struct {
+	Product string
+	Qty     int64
+	Dest    string
+}
+
 func (s *AppOrderFulfillmentService) handleFailedOrder(ctx context.Context, order *repository.AppOrderRow, providerTrxID int64, msg, reasonPrefix string) error {
 	if order == nil {
 		return fmt.Errorf("order not found")
@@ -89,17 +95,25 @@ func appOrderProviderProductUnavailable(provider, body string) bool {
 		strings.Contains(upper, "PRODUCT OUT OF STOCK")
 }
 
-func resolvePulsa24JamAppRequest(providerProductCode string, order *repository.AppOrderRow) (string, int64) {
+func resolvePulsa24JamAppRequest(providerProductCode string, order *repository.AppOrderRow) pulsa24JamAppRequest {
 	providerProductCode = strings.ToUpper(strings.TrimSpace(providerProductCode))
 	if order == nil {
-		return providerProductCode, 0
+		return pulsa24JamAppRequest{Product: providerProductCode}
 	}
 	qty := order.Qty
 	if qty <= 0 {
 		qty = 1
 	}
+	dest := strings.TrimSpace(order.Dest)
 	if qty != 1 {
-		return providerProductCode, qty
+		if pulsa24JamUsesNominalAtPhoneFormat(providerProductCode, order) {
+			return pulsa24JamAppRequest{
+				Product: providerProductCode,
+				Qty:     0,
+				Dest:    fmt.Sprintf("%d@%s", qty, dest),
+			}
+		}
+		return pulsa24JamAppRequest{Product: providerProductCode, Qty: qty, Dest: dest}
 	}
 
 	sku := strings.ToUpper(strings.TrimSpace(order.ProdukSKUSnapshot))
@@ -111,22 +125,43 @@ func resolvePulsa24JamAppRequest(providerProductCode string, order *repository.A
 	case (strings.HasPrefix(sku, "UDGP") || strings.HasPrefix(sku, "UDGY")) && strings.Contains(name, "GOPAY") && !strings.Contains(name, "DRIVER"):
 		genericCode = "GOPAY"
 	default:
-		return providerProductCode, qty
+		return pulsa24JamAppRequest{Product: providerProductCode, Qty: qty, Dest: dest}
 	}
 
 	match := Pulsa24JamFixedWalletAmountPattern.FindStringSubmatch(sku)
 	if len(match) != 2 {
-		return providerProductCode, qty
+		return pulsa24JamAppRequest{Product: providerProductCode, Qty: qty, Dest: dest}
 	}
 	thousands, err := strconv.ParseInt(match[1], 10, 64)
 	if err != nil || thousands <= 0 {
-		return providerProductCode, qty
+		return pulsa24JamAppRequest{Product: providerProductCode, Qty: qty, Dest: dest}
 	}
 	amount := thousands * 1000
 	if amount <= 0 || (order.HargaDasar > 0 && amount >= order.HargaDasar) {
-		return providerProductCode, qty
+		return pulsa24JamAppRequest{Product: providerProductCode, Qty: qty, Dest: dest}
 	}
-	return genericCode, amount
+	return pulsa24JamAppRequest{
+		Product: genericCode,
+		Qty:     0,
+		Dest:    fmt.Sprintf("%d@%s", amount, dest),
+	}
+}
+
+func pulsa24JamUsesNominalAtPhoneFormat(providerProductCode string, order *repository.AppOrderRow) bool {
+	code := strings.ToUpper(strings.TrimSpace(providerProductCode))
+	name := strings.ToUpper(strings.TrimSpace(order.ProdukNamaSnapshot))
+	sku := strings.ToUpper(strings.TrimSpace(order.ProdukSKUSnapshot))
+
+	if strings.Contains(name, "NOMINAL@NOHP") || strings.Contains(name, "NOMINAL @ NOHP") {
+		return true
+	}
+	if code == "GOPAY" || code == "DANA" || code == "PPOBDANA" {
+		return true
+	}
+	if sku == "GOPAY" || sku == "DANA" || sku == "PPOBDANA" {
+		return true
+	}
+	return false
 }
 
 func appOrderProviderLooksLikeAccepted(provider, body string) bool {
