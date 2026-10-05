@@ -4,6 +4,8 @@ import (
 	"context"
 	"database/sql"
 	"fmt"
+	"regexp"
+	"strconv"
 	"strings"
 )
 
@@ -14,6 +16,7 @@ type Pulsa24JamCatalogItem struct {
 	CategoryName   string
 	BrandName      string
 	PriceType      string
+	Nominal        *int64
 	Price          int64
 	MaximumNominal *int64
 }
@@ -99,18 +102,19 @@ ON CONFLICT (kategori_id) DO NOTHING
 		err = tx.QueryRowContext(ctx, `
 INSERT INTO public.produk
   (sku, nama, group_name, kategori_id, brand_id, tipe_harga, nominal, maksimal_nominal, jam_buka, jam_tutup, aktif, dibuat_pada, diubah_pada)
-VALUES ($1,$2,$3,$4,$5,$6,NULL,$7,'00:00','23:59',true,now(),now())
+VALUES ($1,$2,$3,$4,$5,$6,$7,$8,'00:00','23:59',true,now(),now())
 ON CONFLICT (sku) DO UPDATE SET
   nama = EXCLUDED.nama,
   group_name = EXCLUDED.group_name,
   kategori_id = EXCLUDED.kategori_id,
   brand_id = EXCLUDED.brand_id,
   tipe_harga = EXCLUDED.tipe_harga,
+  nominal = EXCLUDED.nominal,
   maksimal_nominal = EXCLUDED.maksimal_nominal,
   aktif = true,
   diubah_pada = now()
 RETURNING id
-`, item.SKU, item.Name, item.GroupName, categoryID, brandID, item.PriceType, item.MaximumNominal).Scan(&productID)
+`, item.SKU, item.Name, item.GroupName, categoryID, brandID, item.PriceType, item.Nominal, item.MaximumNominal).Scan(&productID)
 		if err != nil {
 			return nil, err
 		}
@@ -205,7 +209,59 @@ func normalizePulsa24JamCatalogItem(item Pulsa24JamCatalogItem) Pulsa24JamCatalo
 	if item.PriceType != "OPEN_AMOUNT" {
 		item.PriceType = "FIXED"
 	}
+	if item.PriceType == "FIXED" && item.Nominal == nil {
+		if nominal := parsePulsa24JamFixedNominal(item.SKU, item.Name); nominal > 0 {
+			item.Nominal = &nominal
+		}
+	}
 	return item
+}
+
+var pulsa24JamNominalPattern = regexp.MustCompile(`\d{1,3}(?:[.\s]\d{3})+|\d{4,}`)
+
+func parsePulsa24JamFixedNominal(sku, name string) int64 {
+	upperName := strings.ToUpper(strings.TrimSpace(name))
+	if !pulsa24JamFixedNameUsuallyCarriesNominal(upperName) {
+		return 0
+	}
+	matches := pulsa24JamNominalPattern.FindAllString(upperName, -1)
+	if len(matches) > 0 {
+		n, _ := strconv.ParseInt(onlyDigitsString(matches[len(matches)-1]), 10, 64)
+		if n >= 1000 {
+			return n
+		}
+	}
+
+	match := regexp.MustCompile(`([0-9]+)$`).FindStringSubmatch(strings.ToUpper(strings.TrimSpace(sku)))
+	if len(match) != 2 {
+		return 0
+	}
+	n, _ := strconv.ParseInt(match[1], 10, 64)
+	if n <= 0 {
+		return 0
+	}
+	if n < 1000 {
+		n *= 1000
+	}
+	return n
+}
+
+func pulsa24JamFixedNameUsuallyCarriesNominal(upperName string) bool {
+	return strings.Contains(upperName, "PULSA") ||
+		strings.Contains(upperName, "SALDO") ||
+		strings.Contains(upperName, "E-WALLET") ||
+		strings.Contains(upperName, "TRANSFER") ||
+		strings.Contains(upperName, "VOUCHER")
+}
+
+func onlyDigitsString(value string) string {
+	var b strings.Builder
+	for _, r := range value {
+		if r >= '0' && r <= '9' {
+			b.WriteRune(r)
+		}
+	}
+	return b.String()
 }
 
 func ensureCatalogMaster(ctx context.Context, tx *sql.Tx, table, name string) (int64, error) {

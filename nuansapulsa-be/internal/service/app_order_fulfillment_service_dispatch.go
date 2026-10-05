@@ -95,6 +95,9 @@ func (s *AppOrderFulfillmentService) DispatchPaidOrder(ctx context.Context, orde
 			providerQty = p24Req.Qty
 			providerDest = p24Req.Dest
 		}
+		if pulsa24JamFixedPulsaShouldOmitQty(providerQty, order) {
+			providerQty = 0
+		}
 	}
 
 	reqPayload := map[string]any{

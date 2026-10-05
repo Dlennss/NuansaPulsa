@@ -184,6 +184,9 @@ func resolveOrderNominal(produk *repository.ProdukRow, qty int64, hargaDasar int
 		if isCheckProduct {
 			return 0, 1, nil
 		}
+		if produk.Nominal != nil && *produk.Nominal > 0 {
+			return *produk.Nominal, 1, nil
+		}
 		if hargaDasar <= 0 {
 			return 0, 0, fmt.Errorf("harga dasar produk FIXED belum valid")
 		}

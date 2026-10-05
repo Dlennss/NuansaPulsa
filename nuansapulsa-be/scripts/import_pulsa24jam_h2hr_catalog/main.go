@@ -19,6 +19,7 @@ import (
 )
 
 var priceRE = regexp.MustCompile(`(?i)(?:\+\s*)?rp\s*([0-9.\s]+)`)
+var nominalRE = regexp.MustCompile(`\d{1,3}(?:[.\s]\d{3})+|\d{4,}`)
 
 func main() {
 	filePath := flag.String("file", "", "path file hasil copy/paste Produk H2HR Pulsa24Jam")
@@ -123,10 +124,13 @@ func ParsePulsa24JamH2HRCatalogLines(lines []string) []repository.Pulsa24JamCata
 				priceType = "FIXED"
 			}
 			var maxNominal *int64
+			var nominal *int64
 			if priceType == "OPEN_AMOUNT" {
 				if max := parseMaxNominal(name); max > 0 {
 					maxNominal = &max
 				}
+			} else if n := parseFixedNominal(sku, name); n > 0 {
+				nominal = &n
 			}
 			if _, ok := seen[sku]; ok {
 				continue
@@ -139,6 +143,7 @@ func ParsePulsa24JamH2HRCatalogLines(lines []string) []repository.Pulsa24JamCata
 				CategoryName:   currentCategory,
 				BrandName:      brand,
 				PriceType:      priceType,
+				Nominal:        nominal,
 				Price:          price,
 				MaximumNominal: maxNominal,
 			})
@@ -186,7 +191,7 @@ func parseMaxNominal(name string) int64 {
 	if !strings.Contains(upper, "MAKS") && !strings.Contains(upper, "MAX") {
 		return 0
 	}
-	matches := regexp.MustCompile(`\d{1,3}(?:[.\s]\d{3})+|\d{6,}`).FindAllString(name, -1)
+	matches := nominalRE.FindAllString(name, -1)
 	var max int64
 	for _, raw := range matches {
 		n, _ := strconv.ParseInt(onlyDigits(raw), 10, 64)
@@ -195,6 +200,42 @@ func parseMaxNominal(name string) int64 {
 		}
 	}
 	return max
+}
+
+func parseFixedNominal(sku, name string) int64 {
+	upperName := strings.ToUpper(strings.TrimSpace(name))
+	if !fixedProductNameUsuallyCarriesNominal(upperName) {
+		return 0
+	}
+	matches := nominalRE.FindAllString(upperName, -1)
+	if len(matches) > 0 {
+		n, _ := strconv.ParseInt(onlyDigits(matches[len(matches)-1]), 10, 64)
+		if n >= 1000 {
+			return n
+		}
+	}
+
+	upperSKU := strings.ToUpper(strings.TrimSpace(sku))
+	match := regexp.MustCompile(`([0-9]+)$`).FindStringSubmatch(upperSKU)
+	if len(match) != 2 {
+		return 0
+	}
+	n, _ := strconv.ParseInt(match[1], 10, 64)
+	if n <= 0 {
+		return 0
+	}
+	if n < 1000 {
+		n *= 1000
+	}
+	return n
+}
+
+func fixedProductNameUsuallyCarriesNominal(upperName string) bool {
+	return strings.Contains(upperName, "PULSA") ||
+		strings.Contains(upperName, "SALDO") ||
+		strings.Contains(upperName, "E-WALLET") ||
+		strings.Contains(upperName, "TRANSFER") ||
+		strings.Contains(upperName, "VOUCHER")
 }
 
 func onlyDigits(value string) string {
