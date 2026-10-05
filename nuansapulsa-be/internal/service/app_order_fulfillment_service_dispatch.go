@@ -95,8 +95,8 @@ func (s *AppOrderFulfillmentService) DispatchPaidOrder(ctx context.Context, orde
 			providerQty = p24Req.Qty
 			providerDest = p24Req.Dest
 		}
-		if pulsa24JamFixedPulsaShouldOmitQty(providerQty, order) {
-			providerQty = 0
+		if fixedPulsaQty := pulsa24JamFixedPulsaQty(providerQty, order); fixedPulsaQty > 0 {
+			providerQty = fixedPulsaQty
 		}
 	}
 

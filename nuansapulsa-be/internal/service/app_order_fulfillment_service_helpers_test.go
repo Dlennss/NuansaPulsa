@@ -117,18 +117,24 @@ func TestResolvePulsa24JamAppRequest(t *testing.T) {
 	}
 }
 
-func TestPulsa24JamFixedPulsaShouldOmitQty(t *testing.T) {
-	if !pulsa24JamFixedPulsaShouldOmitQty(1, &repository.AppOrderRow{
+func TestPulsa24JamFixedPulsaQty(t *testing.T) {
+	if got := pulsa24JamFixedPulsaQty(1, &repository.AppOrderRow{
+		ProdukNamaSnapshot: "INDOSAT PULSA 5.000",
+		Nominal:            5000,
+	}); got != 5000 {
+		t.Fatalf("fixed pulsa should send nominal qty to Pulsa24Jam, got %d", got)
+	}
+	if got := pulsa24JamFixedPulsaQty(1, &repository.AppOrderRow{
 		ProdukNamaSnapshot: "INDOSAT TRANSFER PULSA 5500",
 		Nominal:            5500,
-	}) {
-		t.Fatal("fixed pulsa should omit qty for Pulsa24Jam")
+	}); got != 5500 {
+		t.Fatalf("fixed transfer pulsa should send nominal qty to Pulsa24Jam when routed, got %d", got)
 	}
-	if pulsa24JamFixedPulsaShouldOmitQty(100000, &repository.AppOrderRow{
+	if got := pulsa24JamFixedPulsaQty(100000, &repository.AppOrderRow{
 		ProdukNamaSnapshot: "E-WALLET 2.500 GOPAY OPEN AMOUNT",
 		Nominal:            100000,
-	}) {
-		t.Fatal("open amount wallet must keep qty")
+	}); got != 0 {
+		t.Fatalf("open amount wallet must keep qty, got override %d", got)
 	}
 }
 

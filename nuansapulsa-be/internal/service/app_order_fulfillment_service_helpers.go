@@ -164,18 +164,21 @@ func pulsa24JamUsesNominalAtPhoneFormat(providerProductCode string, order *repos
 	return false
 }
 
-func pulsa24JamFixedPulsaShouldOmitQty(providerQty int64, order *repository.AppOrderRow) bool {
+func pulsa24JamFixedPulsaQty(providerQty int64, order *repository.AppOrderRow) int64 {
 	if order == nil || providerQty != 1 || order.Nominal <= 0 {
-		return false
+		return 0
 	}
 	name := strings.ToUpper(strings.TrimSpace(order.ProdukNamaSnapshot))
 	if !strings.Contains(name, "PULSA") {
-		return false
+		return 0
 	}
-	return !strings.Contains(name, "OPEN AMOUNT") &&
+	if !strings.Contains(name, "OPEN AMOUNT") &&
 		!strings.Contains(name, "NOMINAL BEBAS") &&
 		!strings.Contains(name, "NOMINAL@NOHP") &&
-		!strings.Contains(name, "NOMINAL @ NOHP")
+		!strings.Contains(name, "NOMINAL @ NOHP") {
+		return order.Nominal
+	}
+	return 0
 }
 
 func appOrderProviderLooksLikeAccepted(provider, body string) bool {
