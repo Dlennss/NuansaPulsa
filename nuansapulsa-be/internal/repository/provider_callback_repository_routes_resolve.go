@@ -4,7 +4,10 @@ import (
 	"context"
 	"database/sql"
 	"errors"
+	"fmt"
 	"strings"
+
+	"github.com/lib/pq"
 )
 
 func (r *ProviderCallbackRepository) ResolveProviderProductCode(ctx context.Context, provider string, internalSKU string) (string, error) {
@@ -153,6 +156,69 @@ LIMIT 1
 		}
 	}
 	return r.ResolveProviderProductCode(ctx, provider, internalSKU)
+}
+
+func (r *ProviderCallbackRepository) ResolvePulsa24JamWalletNominalProduct(ctx context.Context, internalSKU, productName string, nominal int64) (string, error) {
+	internalSKU = strings.ToUpper(strings.TrimSpace(internalSKU))
+	productName = strings.ToUpper(strings.TrimSpace(productName))
+	if nominal <= 0 || nominal%1000 != 0 {
+		return "", nil
+	}
+
+	wallet := ""
+	switch {
+	case strings.Contains(productName, "GOPAY") || internalSKU == "GOPAY":
+		wallet = "GOPAY"
+	case strings.Contains(productName, "DANA") || internalSKU == "DANA" || internalSKU == "PPOBDANA" || internalSKU == "DANAPLUS":
+		wallet = "DANA"
+	default:
+		return "", nil
+	}
+
+	unit := nominal / 1000
+	if unit <= 0 {
+		return "", nil
+	}
+
+	var exactCodes []string
+	switch wallet {
+	case "GOPAY":
+		exactCodes = []string{fmt.Sprintf("GPC%d", unit)}
+	case "DANA":
+		exactCodes = []string{fmt.Sprintf("DANA%dH", unit), fmt.Sprintf("DANA%d", unit)}
+	}
+	if len(exactCodes) == 0 {
+		return "", nil
+	}
+
+	var mapped sql.NullString
+	err := r.db.QueryRowContext(ctx, `
+SELECT ppm.kode_provider
+FROM public.produk_provider_map ppm
+JOIN public.produk p ON p.id = ppm.produk_id
+JOIN public.provider pr ON LOWER(TRIM(pr.nama)) = LOWER(TRIM(ppm.provider))
+WHERE LOWER(TRIM(ppm.provider)) = 'pulsa24jam'
+  AND pr.aktif = true
+  AND ppm.aktif = true
+  AND p.aktif = true
+  AND UPPER(TRIM(ppm.kode_provider)) = ANY($1::text[])
+  AND (
+    p.jam_buka IS NULL OR p.jam_tutup IS NULL
+    OR (CURRENT_TIME AT TIME ZONE 'Asia/Jakarta')::time BETWEEN p.jam_buka AND p.jam_tutup
+  )
+ORDER BY array_position($1::text[], UPPER(TRIM(ppm.kode_provider))) ASC, ppm.id DESC
+LIMIT 1
+`, pq.Array(exactCodes)).Scan(&mapped)
+	if err == nil && mapped.Valid {
+		v := strings.ToUpper(strings.TrimSpace(mapped.String))
+		if v != "" {
+			return v, nil
+		}
+	}
+	if err != nil && err != sql.ErrNoRows {
+		return "", err
+	}
+	return "", nil
 }
 
 func (r *ProviderCallbackRepository) GetProviderFeeByProduct(ctx context.Context, provider string, kodeProduk string, produkProviderMapID *int64, kodeProvider string) (int64, string, error) {

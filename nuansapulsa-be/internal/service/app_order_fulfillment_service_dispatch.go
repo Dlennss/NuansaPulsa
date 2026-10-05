@@ -81,10 +81,20 @@ func (s *AppOrderFulfillmentService) DispatchPaidOrder(ctx context.Context, orde
 	providerQty := order.Qty
 	providerDest := order.Dest
 	if strings.EqualFold(provider, providerpkg.Pulsa24JamProviderName) {
-		p24Req := resolvePulsa24JamAppRequest(providerProductCode, order)
-		providerProductCode = p24Req.Product
-		providerQty = p24Req.Qty
-		providerDest = p24Req.Dest
+		exactWalletCode, exactErr := s.callbackRepo.ResolvePulsa24JamWalletNominalProduct(ctx, providerProductCode, order.ProdukNamaSnapshot, order.Nominal)
+		if exactErr != nil {
+			return exactErr
+		}
+		if strings.TrimSpace(exactWalletCode) != "" {
+			providerProductCode = exactWalletCode
+			providerQty = 1
+			providerDest = order.Dest
+		} else {
+			p24Req := resolvePulsa24JamAppRequest(providerProductCode, order)
+			providerProductCode = p24Req.Product
+			providerQty = p24Req.Qty
+			providerDest = p24Req.Dest
+		}
 	}
 
 	reqPayload := map[string]any{
