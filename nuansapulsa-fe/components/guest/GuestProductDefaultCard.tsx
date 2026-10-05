@@ -1,5 +1,6 @@
 "use client";
 
+import Image from "next/image";
 import type { GuestProductCardCommonProps } from "@/components/guest/product-card-shared";
 import {
   extractLargeNominalLabel,
@@ -9,6 +10,7 @@ import {
   isEMoneyFixedItem,
   isPackageStyleItem,
 } from "@/components/guest/product-card-shared";
+import { getBrandLogo } from "@/lib/brand-logos";
 
 export function GuestProductDefaultCard({
   item,
@@ -25,6 +27,7 @@ export function GuestProductDefaultCard({
     || String(item.brand_nama || "").toUpperCase() === "PLN"
     || String(item.sku || "").toUpperCase().includes("PLN");
   const displayName = getDisplayProductName(item);
+  const brandLogo = getBrandLogo(item.brand_nama || item.nama);
   const priceLabel = isFixed && fixedPrice !== null
     ? formatRupiah(fixedPrice).replace("Rp ", "Rp")
     : `+${formatRupiah((openAmountPrice ?? feeActive)).replace("Rp ", "Rp")}`;
@@ -72,10 +75,11 @@ export function GuestProductDefaultCard({
         onBuy(item);
       }}
       disabled={!canBuy}
-      className="relative w-full overflow-hidden rounded-md bg-[#1491db] px-4 py-4 text-left text-white shadow-[0_14px_30px_rgba(0,132,209,0.22)] transition-transform duration-200 hover:-translate-y-0.5 disabled:cursor-not-allowed disabled:opacity-60"
+      className="group relative w-full overflow-hidden rounded-[22px] bg-[linear-gradient(135deg,#b20717_0%,#d70717_58%,#ff6a00_130%)] px-4 py-4 text-left text-white shadow-[0_14px_30px_rgba(151,14,32,0.18)] ring-1 ring-white/20 transition-transform duration-200 hover:-translate-y-0.5 hover:shadow-[0_18px_38px_rgba(151,14,32,0.25)] disabled:cursor-not-allowed disabled:opacity-60"
     >
-      <div className="absolute inset-0 bg-[radial-gradient(circle_at_top_left,rgba(255,255,255,0.22),transparent_30%),linear-gradient(180deg,rgba(255,255,255,0.06),rgba(255,255,255,0.02))]" />
-      <div className="absolute inset-0 opacity-30 bg-[repeating-radial-gradient(circle_at_0_100%,rgba(255,255,255,0.35)_0,rgba(255,255,255,0.35)_2px,transparent_2px,transparent_12px)] bg-size-[170%_130%]" />
+      <div className="absolute inset-0 bg-[radial-gradient(circle_at_top_left,rgba(255,255,255,0.24),transparent_32%),linear-gradient(180deg,rgba(255,255,255,0.09),rgba(255,255,255,0.02))]" />
+      <div className="absolute -right-8 -top-8 h-22 w-22 rounded-full bg-amber-300/28 blur-xl" />
+      <div className="absolute inset-x-0 top-0 h-1 bg-amber-300/80" />
 
       <div
         className={`relative flex ${
@@ -83,10 +87,15 @@ export function GuestProductDefaultCard({
         }`}
       >
         <div className={`min-w-0 text-white ${emoneyStyle ? "flex flex-1 items-center justify-center text-center" : ""}`}>
+          {brandLogo ? (
+            <span className="absolute right-0 top-0 grid h-9 w-9 place-items-center rounded-2xl bg-white/92 p-1.5 shadow-[0_8px_18px_rgba(88,10,18,0.16)]">
+              <Image src={brandLogo.src} alt={brandLogo.alt} width={28} height={28} className="h-full w-full object-contain" />
+            </span>
+          ) : null}
           {emoneyStyle ? (
             <p className="text-xl font-bold tracking-tight text-white">{extractLargeNominalLabel(item)}</p>
           ) : (
-            <h2 className={packageStyle ? "line-clamp-2 text-[13px] font-bold leading-tight text-white" : "line-clamp-3 text-[13px] font-bold leading-tight text-white"}>
+            <h2 className={packageStyle ? "line-clamp-2 pr-10 text-[13px] font-bold leading-tight text-white" : "line-clamp-3 pr-10 text-[13px] font-bold leading-tight text-white"}>
               {displayName}
             </h2>
           )}

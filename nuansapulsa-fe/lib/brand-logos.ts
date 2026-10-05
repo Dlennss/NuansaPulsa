@@ -387,15 +387,123 @@ const BRAND_LOGOS: Record<string, BrandLogoMeta> = {
   },
 };
 
+const GENERATED_BRAND_LOGOS: Record<string, string> = {
+  axis: "AXIS",
+  "by-u": "by.U",
+  bizznet: "Biznet",
+  bpjs: "BPJS",
+  dana: "DANA",
+  "free-fire": "Free Fire",
+  gopay: "GoPay",
+  grab: "Grab",
+  iconnet: "Iconnet",
+  indosat: "Indosat",
+  indovision: "Indovision",
+  isaku: "i.Saku",
+  "k-vision": "K-Vision",
+  kaspro: "KasPro",
+  linkaja: "LinkAja",
+  maxim: "Maxim",
+  "mnc-play": "MNC Play",
+  "mobile-legend": "Mobile Legend",
+  "my-republik": "MyRepublic",
+  "nex-parabola": "Nex Parabola",
+  okevision: "Okevision",
+  ovo: "OVO",
+  pgn: "PGN",
+  pln: "PLN",
+  "point-blank": "Point Blank",
+  "pubg-mobile": "PUBG Mobile",
+  roblox: "Roblox",
+  shopeepay: "ShopeePay",
+  smartfren: "Smartfren",
+  "speedy-dan-indihome": "Speedy dan IndiHome",
+  telkomsel: "Telkomsel",
+  telkomvision: "Telkomvision",
+  "top-tv": "Top TV",
+  transvision: "Transvision",
+  tri: "Tri",
+  "yes-tv": "YES TV",
+  xl: "XL",
+};
+
+const GENERATED_BRAND_ALIASES: Record<string, string> = {
+  "by u": "by-u",
+  byu: "by-u",
+  "by u telkomsel": "by-u",
+  biznet: "bizznet",
+  bizznet: "bizznet",
+  bpjs: "bpjs",
+  "bpjs kesehatan": "bpjs",
+  "bpjs ketenagakerjaan": "bpjs",
+  "free fire": "free-fire",
+  "free fire max": "free-fire",
+  "mnc play": "mnc-play",
+  "mnc vision": "mnc-play",
+  "mobile legend": "mobile-legend",
+  "mobile legends": "mobile-legend",
+  "my republic": "my-republik",
+  myrepublic: "my-republik",
+  "nex parabola": "nex-parabola",
+  "point blank": "point-blank",
+  "point blank cash": "point-blank",
+  "pubg mobile": "pubg-mobile",
+  "pubg mobile lite": "pubg-mobile",
+  "pubg new state mobile": "pubg-mobile",
+  shopee: "shopeepay",
+  shopeepay: "shopeepay",
+  "shopee pay": "shopeepay",
+  "shopee food driver": "shopeepay",
+  speedy: "speedy-dan-indihome",
+  indihome: "speedy-dan-indihome",
+  "speedy dan indihome": "speedy-dan-indihome",
+  telkom: "speedy-dan-indihome",
+  "top tv": "top-tv",
+  "yes tv": "yes-tv",
+};
+
 function normalizeBrandName(name: string) {
   return name
     .trim()
     .toLowerCase()
     .replace(/\./g, "")
+    .replace(/[()/:_-]+/g, " ")
     .replace(/\s+/g, " ");
+}
+
+function generatedLogo(slug: string, label?: string): BrandLogoMeta {
+  const alt = label || GENERATED_BRAND_LOGOS[slug] || slug;
+  return {
+    src: `/yuscom-display-brand-logos-generated/${slug}.svg`,
+    alt: `Logo ${alt}`,
+    sourcePage: `local:/public/yuscom-display-brand-logos-generated/${slug}.svg`,
+  };
 }
 
 export function getBrandLogo(name: string): BrandLogoMeta | null {
   const key = normalizeBrandName(name);
-  return BRAND_LOGOS[key] ?? null;
+  const exact = BRAND_LOGOS[key];
+  if (exact) return exact;
+
+  const generatedAlias = GENERATED_BRAND_ALIASES[key];
+  if (generatedAlias) return generatedLogo(generatedAlias);
+
+  const generatedExact = GENERATED_BRAND_LOGOS[key];
+  if (generatedExact) return generatedLogo(key, generatedExact);
+
+  if (key.startsWith("pdam") || key.includes(" pdam ")) {
+    return BRAND_LOGOS.pdam;
+  }
+
+  if (key.includes("pln")) {
+    return BRAND_LOGOS.pln;
+  }
+
+  const containsAlias = Object.entries(GENERATED_BRAND_ALIASES).find(([alias]) => {
+    if (alias.length < 4) return false;
+    return key === alias || key.startsWith(`${alias} `) || key.includes(` ${alias} `);
+  });
+  if (containsAlias) return generatedLogo(containsAlias[1]);
+
+  return null;
 }

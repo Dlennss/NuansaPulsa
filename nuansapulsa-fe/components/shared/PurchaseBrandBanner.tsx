@@ -17,15 +17,15 @@ export function PurchaseBrandBanner({ title, logoSrc, logoAlt, fallbackText, ico
     .toUpperCase();
 
   return (
-    <div className="bg-linear-to-r from-sky-50 via-white to-cyan-50 px-4 py-4">
+    <div className="bg-linear-to-r from-rose-50 via-white to-orange-50 px-4 py-4">
       <div className="flex items-center gap-3">
-        <div className="grid h-11 w-11 place-items-center overflow-hidden rounded-2xl bg-white text-sky-600 shadow-[0_8px_20px_rgba(14,165,233,0.16)] ring-1 ring-sky-100">
+        <div className="grid h-11 w-11 place-items-center overflow-hidden rounded-2xl bg-white text-[#d70717] shadow-[0_8px_20px_rgba(151,14,32,0.12)] ring-1 ring-red-100">
           {logoSrc ? (
             <Image src={logoSrc} alt={logoAlt || title} width={44} height={44} className="h-7 w-7 object-contain" />
           ) : Icon ? (
             <Icon className="h-5 w-5" />
           ) : (
-            <span className="text-[10px] font-black uppercase text-sky-700">{initials || "PJ"}</span>
+            <span className="text-[10px] font-black uppercase text-[#d70717]">{initials || "NP"}</span>
           )}
         </div>
         <div className="min-w-0">

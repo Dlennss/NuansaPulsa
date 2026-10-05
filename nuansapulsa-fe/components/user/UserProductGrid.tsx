@@ -1,12 +1,14 @@
 "use client";
 
 import * as React from "react";
+import Image from "next/image";
 import Link from "next/link";
 import { X } from "lucide-react";
 import type { UserProductItem } from "@/components/user/types";
 import { UserCheckoutModal } from "@/components/user/UserCheckoutModal";
 import { getDisplayProductName, getDisplayedFixedPrice } from "@/components/guest/product-card-shared";
 import { getRetailFeeForProduct } from "@/lib/retailRoles";
+import { getBrandLogo } from "@/lib/brand-logos";
 
 type UserProductGridProps = {
   items: UserProductItem[];
@@ -127,6 +129,7 @@ function UserProductCard({
   const emoneyStyle = isEMoneyItem(item);
   const displayName = getDisplayProductName(item);
   const operatorAccent = getOperatorAccent(item);
+  const brandLogo = getBrandLogo(item.brand_nama || item.nama);
 
   if (emoneyStyle) {
     const nominalLabel = getEMoneyCardTitle(item);
@@ -151,6 +154,11 @@ function UserProductCard({
                 {nominalLabel}
               </p>
             </div>
+            {brandLogo ? (
+              <span className="grid h-10 w-10 shrink-0 place-items-center rounded-2xl bg-white p-1.5 shadow-[0_8px_18px_rgba(151,14,32,0.12)] ring-1 ring-red-100">
+                <Image src={brandLogo.src} alt={brandLogo.alt} width={32} height={32} className="h-full w-full object-contain" />
+              </span>
+            ) : null}
           </div>
 
           <div className="space-y-2">
@@ -186,9 +194,16 @@ function UserProductCard({
         <div className={`pointer-events-none absolute right-0 top-0 h-1.5 w-full ${operatorAccent} opacity-90`} />
 
         <div className="relative flex min-h-22 flex-col justify-between gap-4">
-          <h2 className={packageStyle ? "line-clamp-3 text-[13px] font-black leading-tight" : "line-clamp-3 text-[14px] font-black leading-tight"}>
-            {displayName}
-          </h2>
+          <div className="flex items-start justify-between gap-3">
+            <h2 className={packageStyle ? "line-clamp-3 text-[13px] font-black leading-tight" : "line-clamp-3 text-[14px] font-black leading-tight"}>
+              {displayName}
+            </h2>
+            {brandLogo ? (
+              <span className="grid h-9 w-9 shrink-0 place-items-center rounded-2xl bg-white/92 p-1.5 shadow-[0_8px_18px_rgba(88,10,18,0.16)]">
+                <Image src={brandLogo.src} alt={brandLogo.alt} width={28} height={28} className="h-full w-full object-contain" />
+              </span>
+            ) : null}
+          </div>
           <div className="flex items-end justify-between gap-3">
             <span className="h-7 min-w-0 rounded-full bg-white/12 px-3 text-[10px] font-black leading-7 text-white/90 ring-1 ring-white/18">
               {item.brand_nama || "NuansaPulsa"}
