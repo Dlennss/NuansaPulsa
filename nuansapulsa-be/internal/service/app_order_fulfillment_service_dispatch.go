@@ -228,6 +228,39 @@ func (s *AppOrderFulfillmentService) DispatchPaidOrder(ctx context.Context, orde
 		return fmt.Errorf("respons %s tidak dikenali: %s", provider, msg)
 	}
 
+	if strings.EqualFold(provider, providerpkg.Pulsa24JamProviderName) && helper.ProviderResponseStateOf(provider, "", body) == helper.ProviderResponseSuccess {
+		harga := price
+		if err := s.providerTrxRepo.UpdateResult(ctx, repository.AppOrderProviderTrxUpdateInput{
+			ID:            row.ID,
+			HargaProvider: &harga,
+			Status:        "success",
+			Pesan:         strings.TrimSpace(body),
+			SN:            strings.TrimSpace(sn),
+			RawCallback:   string(rawRespJSON),
+		}); err != nil {
+			return err
+		}
+		if price > 0 {
+			appProviderID := row.ID
+			if _, _, err := s.callbackRepo.ApplyProviderWalletTx(ctx, repository.CallbackProviderWalletTxIn{
+				Provider:              providerpkg.Pulsa24JamProviderName,
+				RefID:                 order.InvoiceID,
+				Arah:                  "debit",
+				Jumlah:                price,
+				Alasan:                "APP_TRX_SUCCESS_COST",
+				Catatan:               "auto debit by initial Pulsa24Jam success response",
+				AppOrderProviderTrxID: &appProviderID,
+			}); err != nil {
+				helper.AppendProviderServiceLog("provider_wallet.log", "provider wallet debit app initial success failed provider=Pulsa24Jam refid=%s app_provider_id=%d err=%v", order.InvoiceID, row.ID, err)
+			}
+		}
+		if err := s.orderRepo.UpdateStatusByID(ctx, order.ID, "success"); err != nil {
+			return err
+		}
+		helper.AppendProviderServiceLog("provider_callback_service.log", "app_order_fulfillment initial success invoice=%s provider=%s app_order_id=%d provider_trx_id=%d", order.InvoiceID, provider, order.ID, row.ID)
+		return nil
+	}
+
 	harga := price
 	if err := s.providerTrxRepo.UpdateResult(ctx, repository.AppOrderProviderTrxUpdateInput{
 		ID:            row.ID,

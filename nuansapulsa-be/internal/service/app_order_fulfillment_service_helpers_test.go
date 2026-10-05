@@ -131,3 +131,24 @@ func TestPulsa24JamFixedPulsaShouldOmitQty(t *testing.T) {
 		t.Fatal("open amount wallet must keep qty")
 	}
 }
+
+func TestPulsa24JamFinalStatus(t *testing.T) {
+	tests := []struct {
+		name string
+		data Pulsa24JamCallbackData
+		want string
+	}{
+		{name: "numeric success", data: Pulsa24JamCallbackData{rc: "2", status: "2", msg: "2"}, want: "success"},
+		{name: "clear success message", data: Pulsa24JamCallbackData{rc: "00", msg: "Transaksi berhasil"}, want: "success"},
+		{name: "accepted request stays pending", data: Pulsa24JamCallbackData{msg: `{"ok":true,"message":"Transaksi sedang diproses","status":"pending"}`}, want: "pending"},
+		{name: "numeric failed", data: Pulsa24JamCallbackData{rc: "3", status: "3", msg: "3"}, want: "failed"},
+		{name: "numeric pending", data: Pulsa24JamCallbackData{rc: "68", status: "68", msg: "68"}, want: "pending"},
+	}
+	for _, tt := range tests {
+		t.Run(tt.name, func(t *testing.T) {
+			if got := Pulsa24JamFinalStatus(tt.data); got != tt.want {
+				t.Fatalf("Pulsa24JamFinalStatus() = %s, want %s", got, tt.want)
+			}
+		})
+	}
+}

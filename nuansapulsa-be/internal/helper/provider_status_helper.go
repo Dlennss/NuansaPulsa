@@ -188,11 +188,11 @@ func ProviderResponseStateOf(provider, rc, msg string) ProviderResponseState {
 		}
 	case "pulsa24jam":
 		switch {
-		case upper == "SUCCESS" || upper == "SUKSES" || strings.Contains(upper, "TRANSAKSI BERHASIL") || (strings.Contains(upper, `"STATUS"`) && strings.Contains(upper, "SUCCESS")) || (strings.Contains(upper, `"STATUS"`) && strings.Contains(upper, "SUKSES")) || strings.Contains(upper, `"OK":TRUE`) || strings.Contains(upper, `"OK": TRUE`):
+		case rc == "2" || rc == "20" || rc == "00" || upper == "2" || upper == "20" || upper == "00" || upper == "SUCCESS" || upper == "SUKSES" || strings.Contains(upper, "TRANSAKSI BERHASIL") || strings.Contains(upper, "PAYSUKSES") || (strings.Contains(upper, `"STATUS"`) && (strings.Contains(upper, ":2") || strings.Contains(upper, ": 2"))) || (strings.Contains(upper, `"STATUS"`) && strings.Contains(upper, "SUCCESS")) || (strings.Contains(upper, `"STATUS"`) && strings.Contains(upper, "SUKSES")):
 			return ProviderResponseSuccess
-		case upper == "FAILED" || upper == "FAIL" || upper == "GAGAL" || strings.Contains(upper, "NOMOR TUJUAN SALAH") || (strings.Contains(upper, `"STATUS"`) && strings.Contains(upper, "FAILED")) || (strings.Contains(upper, `"STATUS"`) && strings.Contains(upper, "GAGAL")) || strings.Contains(upper, `"OK":FALSE`) || strings.Contains(upper, `"OK": FALSE`):
+		case rc == "3" || upper == "3" || upper == "FAILED" || upper == "FAIL" || upper == "GAGAL" || strings.Contains(upper, "NOMOR TUJUAN SALAH") || (strings.Contains(upper, `"STATUS"`) && (strings.Contains(upper, ":3") || strings.Contains(upper, ": 3"))) || (strings.Contains(upper, `"STATUS"`) && strings.Contains(upper, "FAILED")) || (strings.Contains(upper, `"STATUS"`) && strings.Contains(upper, "GAGAL")) || strings.Contains(upper, `"OK":FALSE`) || strings.Contains(upper, `"OK": FALSE`):
 			return ProviderResponseFailed
-		case upper == "PENDING" || (strings.Contains(upper, `"STATUS"`) && strings.Contains(upper, "PENDING")) || strings.Contains(upper, "SEDANG DIPROSES"):
+		case rc == "0" || rc == "1" || rc == "68" || rc == "0068" || upper == "0" || upper == "1" || upper == "68" || upper == "0068" || upper == "PENDING" || (strings.Contains(upper, `"STATUS"`) && strings.Contains(upper, "PENDING")) || strings.Contains(upper, "SEDANG DIPROSES"):
 			return ProviderResponsePending
 		}
 	default:
