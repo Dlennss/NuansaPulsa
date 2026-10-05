@@ -329,16 +329,12 @@ export function UserCheckoutModal({
 
     const prevBodyOverflow = document.body.style.overflow;
     const prevHtmlOverflow = document.documentElement.style.overflow;
-    const prevBodyTouchAction = document.body.style.touchAction;
-
     document.body.style.overflow = "hidden";
     document.documentElement.style.overflow = "hidden";
-    document.body.style.touchAction = "none";
 
     return () => {
       document.body.style.overflow = prevBodyOverflow;
       document.documentElement.style.overflow = prevHtmlOverflow;
-      document.body.style.touchAction = prevBodyTouchAction;
     };
   }, [open, initialDest]);
 
@@ -904,8 +900,8 @@ export function UserCheckoutModal({
 
 
   return (
-    <div className="fixed inset-0 z-50 flex items-center justify-center overflow-y-auto bg-slate-950/40 px-4 py-6">
-      <div className="max-h-[88vh] w-full max-w-md overflow-y-auto rounded-[28px] bg-white p-5 shadow-[0_18px_46px_rgba(15,23,42,0.24)] md:w-97.5 md:max-w-none">
+    <div className="fixed inset-0 z-50 flex items-end justify-center overflow-hidden bg-slate-950/40 px-0 py-0 sm:items-center sm:px-4 sm:py-6">
+      <div className="max-h-[100dvh] w-full max-w-md overflow-y-auto overscroll-contain rounded-t-[28px] bg-white p-5 shadow-[0_18px_46px_rgba(15,23,42,0.24)] touch-pan-y sm:max-h-[92vh] sm:rounded-[28px] md:w-97.5 md:max-w-none">
         <div className="flex items-start justify-between gap-3">
           <div>
             <p className="text-xs font-semibold tracking-wide text-slate-500 uppercase">Checkout</p>
@@ -1285,7 +1281,7 @@ export function UserCheckoutModal({
                   onClose();
                   router.push(`/user/account/topup?amount=${Math.ceil(estimatedQrisAmount)}`);
                 }}
-                className="inline-flex h-13 w-full items-center justify-center rounded-2xl bg-[#d70717] px-5 text-xs font-black text-white shadow-[0_10px_20px_rgba(215,7,23,0.22)] transition hover:bg-[#b80616]"
+                className="sticky bottom-0 z-20 inline-flex h-13 w-full items-center justify-center rounded-2xl bg-[#d70717] px-5 text-xs font-black text-white shadow-[0_10px_20px_rgba(215,7,23,0.22)] transition hover:bg-[#b80616]"
               >
                 Isi Saldo
               </button>
@@ -1293,7 +1289,7 @@ export function UserCheckoutModal({
               <button
                 type="submit"
                 disabled={loading}
-                className="inline-flex h-13 w-full items-center justify-center rounded-2xl bg-[#b20717] px-11 text-xs font-black text-white shadow-[0_10px_20px_rgba(151,14,32,0.18)] transition group-hover:bg-[#d70717]"
+                className="sticky bottom-0 z-20 inline-flex h-13 w-full items-center justify-center gap-2 rounded-2xl bg-[#b20717] px-11 text-xs font-black text-white shadow-[0_10px_20px_rgba(151,14,32,0.18)] transition hover:bg-[#d70717] disabled:cursor-not-allowed disabled:opacity-70"
               >
                 {loading ? <LoaderCircle className="h-4 w-4 animate-spin" /> : null}
                 {loading ? "Memproses..." : "Bayar"}
