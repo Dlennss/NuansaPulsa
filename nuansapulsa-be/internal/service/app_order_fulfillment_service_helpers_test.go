@@ -125,6 +125,13 @@ func TestPulsa24JamFixedPulsaQty(t *testing.T) {
 		t.Fatalf("fixed pulsa should send nominal qty to Pulsa24Jam, got %d", got)
 	}
 	if got := pulsa24JamFixedPulsaQty(1, &repository.AppOrderRow{
+		ProdukSKUSnapshot:  "ISAT5",
+		ProdukNamaSnapshot: "INDOSAT PULSA 5.000",
+		Nominal:            7735,
+	}); got != 5000 {
+		t.Fatalf("fixed pulsa should parse nominal from product name, got %d", got)
+	}
+	if got := pulsa24JamFixedPulsaQty(1, &repository.AppOrderRow{
 		ProdukNamaSnapshot: "INDOSAT TRANSFER PULSA 5500",
 		Nominal:            5500,
 	}); got != 5500 {
@@ -135,6 +142,20 @@ func TestPulsa24JamFixedPulsaQty(t *testing.T) {
 		Nominal:            100000,
 	}); got != 0 {
 		t.Fatalf("open amount wallet must keep qty, got override %d", got)
+	}
+}
+
+func TestResolveOrderNominalParsesFixedNominalBeforePrice(t *testing.T) {
+	nominal, qty, err := resolveOrderNominal(&repository.ProdukRow{
+		SKU:       "ISAT5",
+		Nama:      "INDOSAT PULSA 5.000",
+		TipeHarga: "FIXED",
+	}, 1, 7735, false)
+	if err != nil {
+		t.Fatal(err)
+	}
+	if nominal != 5000 || qty != 1 {
+		t.Fatalf("got nominal=%d qty=%d, want nominal=5000 qty=1", nominal, qty)
 	}
 }
 

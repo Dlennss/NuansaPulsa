@@ -15,6 +15,7 @@ import (
 )
 
 var Pulsa24JamFixedWalletAmountPattern = regexp.MustCompile(`([0-9]+)$`)
+var appFixedProductNominalPattern = regexp.MustCompile(`\d{1,3}(?:[.\s]\d{3})+|\d{4,}`)
 
 type pulsa24JamAppRequest struct {
 	Product string
@@ -176,9 +177,57 @@ func pulsa24JamFixedPulsaQty(providerQty int64, order *repository.AppOrderRow) i
 		!strings.Contains(name, "NOMINAL BEBAS") &&
 		!strings.Contains(name, "NOMINAL@NOHP") &&
 		!strings.Contains(name, "NOMINAL @ NOHP") {
+		if nominal := parseAppFixedProductNominal(order.ProdukSKUSnapshot, order.ProdukNamaSnapshot); nominal > 0 {
+			return nominal
+		}
 		return order.Nominal
 	}
 	return 0
+}
+
+func parseAppFixedProductNominal(sku, name string) int64 {
+	upperName := strings.ToUpper(strings.TrimSpace(name))
+	if !appFixedProductNameUsuallyCarriesNominal(upperName) {
+		return 0
+	}
+	matches := appFixedProductNominalPattern.FindAllString(upperName, -1)
+	if len(matches) > 0 {
+		n, _ := strconv.ParseInt(onlyDigitsForAppNominal(matches[len(matches)-1]), 10, 64)
+		if n >= 1000 {
+			return n
+		}
+	}
+
+	match := Pulsa24JamFixedWalletAmountPattern.FindStringSubmatch(strings.ToUpper(strings.TrimSpace(sku)))
+	if len(match) != 2 {
+		return 0
+	}
+	n, _ := strconv.ParseInt(match[1], 10, 64)
+	if n <= 0 {
+		return 0
+	}
+	if n < 1000 {
+		n *= 1000
+	}
+	return n
+}
+
+func appFixedProductNameUsuallyCarriesNominal(upperName string) bool {
+	return strings.Contains(upperName, "PULSA") ||
+		strings.Contains(upperName, "SALDO") ||
+		strings.Contains(upperName, "E-WALLET") ||
+		strings.Contains(upperName, "TRANSFER") ||
+		strings.Contains(upperName, "VOUCHER")
+}
+
+func onlyDigitsForAppNominal(value string) string {
+	var b strings.Builder
+	for _, r := range value {
+		if r >= '0' && r <= '9' {
+			b.WriteRune(r)
+		}
+	}
+	return b.String()
 }
 
 func appOrderProviderLooksLikeAccepted(provider, body string) bool {
